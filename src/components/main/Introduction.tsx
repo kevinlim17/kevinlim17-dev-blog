@@ -28,9 +28,9 @@ const SubTitle = styled.div`
 `
 
 const Title = styled.div`
-  margin-top: 5px;
+  margin-top: 10px;
   font-size: 35px;
-  font-weight: 700;
+  font-weight: 900;
 `
 
 const Introduction: FunctionComponent = function () {

@@ -2,19 +2,13 @@ import React, { FunctionComponent } from 'react'
 import { Global, css } from '@emotion/react'
 
 const defaultStyle = css`
-  @font-face {
-    font-family: 'NanumSquareNeo';
-    src: url('../../../static/fonts/NanumSquareNeoTTF-Variable.woff')
-      format('truetype-variations');
-    font-weight: 500;
-    font-style: normal;
-  }
+  @import url('https://webfontworld.github.io/NanumSquareNeo/NanumSquareNeo.css');
 
   * {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
-    font-family: 'NanumSquareNeo', serif;
+    font-family: 'NanumSquareNeo', sans-serif;
   }
 
   html,

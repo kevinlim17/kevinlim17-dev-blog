@@ -11,11 +11,23 @@ const FooterWrapper = styled.div`
   line-height: 1.5;
 `
 
+const FontUsageFooterWrapper = styled.div`
+  margin-top: 10px;
+  color: #135220a8;
+`
+
 const Footer: FunctionComponent = function () {
   return (
     <FooterWrapper>
-      We are native wherever it belongs to.
+      We are all native wherever it belongs to.
       <br /> © 2023 Designed by Seung Hyeon Lim, Powered by Gatsby.
+      <br />{' '}
+      <FontUsageFooterWrapper>
+        <a href="https://campaign.naver.com/nanumsquare_neo/">
+          {' '}
+          This site uses NanumSquare Neo, producted by Naver Corp.
+        </a>
+      </FontUsageFooterWrapper>
     </FooterWrapper>
   )
 }

@@ -9,11 +9,19 @@ const FooterWrapper = styled.div`
   font-size: 15px;
   text-align: center;
   line-height: 1.5;
+
+  @media (max-width: 768px) {
+    font-size: 13px;
+  }
 `
 
 const FontUsageFooterWrapper = styled.div`
   margin-top: 10px;
   color: #135220a8;
+
+  @media (max-width: 768px) {
+    font-size: 8px;
+  }
 `
 
 const Footer: FunctionComponent = function () {

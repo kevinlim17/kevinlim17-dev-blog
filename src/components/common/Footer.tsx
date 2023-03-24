@@ -19,7 +19,9 @@ const FontUsageFooterWrapper = styled.div`
 const Footer: FunctionComponent = function () {
   return (
     <FooterWrapper>
-      We are all native wherever it belongs to.
+      <i>
+        <b>We are all native wherever it belongs to.</b>
+      </i>
       <br /> © 2023 Designed by Seung Hyeon Lim, Powered by Gatsby.
       <br />{' '}
       <FontUsageFooterWrapper>

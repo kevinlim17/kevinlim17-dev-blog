@@ -8,7 +8,7 @@ const ProfileImageWrapper = styled.img`
   width: 120px;
   height: 120px;
   margin-bottom: 30px;
-  border-radius: 30%;
+  border-radius: 8px;
 `
 
 const ProfileImage: FunctionComponent = function () {

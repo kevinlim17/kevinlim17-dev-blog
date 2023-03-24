@@ -49,7 +49,6 @@ const CategoryItem = styled(({ active, ...props }: GatsbyLinkProps) => (
     rgba(0, 0, 0, 0.14) 0 2px 2px 0, rgba(0, 0, 0, 0.12) 0 1px 5px 0;
   border-radius: 8px;
   cursor: pointer;
-  pointer-events: none;
 
   /** Text Properties */
   color: ${({ active }) => (active ? 'white' : 'black')};

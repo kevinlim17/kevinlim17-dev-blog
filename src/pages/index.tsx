@@ -4,6 +4,7 @@ import styled from '@emotion/styled'
 import Introduction from '../components/main/Introduction'
 import Footer from 'components/common/Footer'
 import CategoryList from 'components/main/CategoryList'
+import PostList from 'components/main/PostList'
 
 const CATEGORY_LIST = {
   All: 5,
@@ -23,6 +24,7 @@ const IndexPage: FunctionComponent = function () {
       <GlobalStyle />
       <Introduction />
       <CategoryList selectedCategory="Android" categoryList={CATEGORY_LIST} />
+      <PostList />
       <Footer />
     </Container>
   )

@@ -3,6 +3,13 @@ import GlobalStyle from 'components/common/GlobalStyle'
 import styled from '@emotion/styled'
 import Introduction from '../components/main/Introduction'
 import Footer from 'components/common/Footer'
+import CategoryList from 'components/main/CategoryList'
+
+const CATEGORY_LIST = {
+  All: 5,
+  Android: 3,
+  Kotlin: 2,
+}
 
 const Container = styled.div`
   display: flex;
@@ -15,6 +22,7 @@ const IndexPage: FunctionComponent = function () {
     <Container>
       <GlobalStyle />
       <Introduction />
+      <CategoryList selectedCategory="Android" categoryList={CATEGORY_LIST} />
       <Footer />
     </Container>
   )

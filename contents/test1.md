@@ -1,9 +1,9 @@
 ---
 date: '2023-03-24'
 title: 'Android에서 MVVM 패턴이 중요한 이유'
-categories: ['Android', 'MVVM']
+categories: ['Android', 'Architecture']
 summary: '수많은 아키텍처 패턴 중 그대 단 하나'
-thumbnail: './test.png'
+thumbnail: './test1.png'
 ---
 
 # Android에서 MVVM 패턴이 중요한 이유

@@ -6,12 +6,18 @@ import Footer from 'components/common/Footer'
 import CategoryList from 'components/main/CategoryList'
 import PostList from 'components/main/PostList'
 import { graphql } from 'gatsby'
+import { IGatsbyImageData } from 'gatsby-plugin-image'
 import { PostListItemType } from 'types/PostItem.types'
 
 type IndexPageProps = {
   data: {
     allMarkdownRemark: {
       edges: PostListItemType[]
+    }
+    file: {
+      childImageSharp: {
+        gatsbyImageData: IGatsbyImageData
+      }
     }
   }
 }
@@ -31,12 +37,15 @@ const Container = styled.div`
 const IndexPage: FunctionComponent<IndexPageProps> = function ({
   data: {
     allMarkdownRemark: { edges },
+    file: {
+      childImageSharp: { gatsbyImageData },
+    },
   },
 }) {
   return (
     <Container>
       <GlobalStyle />
-      <Introduction />
+      <Introduction profileImage={gatsbyImageData} />
       <CategoryList selectedCategory="Android" categoryList={CATEGORY_LIST} />
       <PostList posts={edges} />
       <Footer />
@@ -66,6 +75,11 @@ export const getPostList = graphql`
             }
           }
         }
+      }
+    }
+    file(name: { eq: "profile-image" }) {
+      childImageSharp {
+        gatsbyImageData(width: 120, height: 120)
       }
     }
   }

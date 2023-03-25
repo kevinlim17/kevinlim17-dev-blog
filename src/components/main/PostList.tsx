@@ -44,7 +44,6 @@ const PostList: FunctionComponent<PostListProps> = function ({ posts }) {
           key={id}
         />
       ))}
-      ,
     </PostListWrapper>
   )
 }

@@ -1,7 +1,9 @@
 import React, { FunctionComponent } from 'react'
 import styled from '@emotion/styled'
 import PostItem from './PostItem'
+import { PostListItemType } from 'types/PostItem.types'
 
+/** Dummy Data
 const POST_ITEM_DATA = {
   title: 'Android에서 MVVM 패턴이 중요한 이유',
   date: '2023.03.24.',
@@ -10,6 +12,11 @@ const POST_ITEM_DATA = {
   thumbnail:
     'https://github.com/Dcom-KHU/dcom-tech-interview/raw/master/Frontend/Android/images/mvvm-design-pattern-04.png',
   link: 'https://github.com/Dcom-KHU/dcom-tech-interview/blob/master/Frontend/Android/mvvm-design-pattern.md',
+}
+ */
+
+type PostListProps = {
+  posts: PostListItemType[]
 }
 
 const PostListWrapper = styled.div`
@@ -27,13 +34,17 @@ const PostListWrapper = styled.div`
   }
 `
 
-const PostList: FunctionComponent = function () {
+const PostList: FunctionComponent<PostListProps> = function ({ posts }) {
   return (
     <PostListWrapper>
-      <PostItem {...POST_ITEM_DATA} />
-      <PostItem {...POST_ITEM_DATA} />
-      <PostItem {...POST_ITEM_DATA} />
-      <PostItem {...POST_ITEM_DATA} />
+      {posts.map(({ node: { id, frontmatter } }: PostListItemType) => (
+        <PostItem
+          {...frontmatter}
+          link="https://github.com/Dcom-KHU/dcom-tech-interview/blob/master/Frontend/Android/mvvm-design-pattern.md"
+          key={id}
+        />
+      ))}
+      ,
     </PostListWrapper>
   )
 }

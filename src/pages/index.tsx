@@ -1,15 +1,27 @@
-import React, { FunctionComponent } from 'react'
+import React, { FunctionComponent, useMemo } from 'react'
 import GlobalStyle from 'components/common/GlobalStyle'
 import styled from '@emotion/styled'
 import Introduction from '../components/main/Introduction'
 import Footer from 'components/common/Footer'
-import CategoryList from 'components/main/CategoryList'
+import CategoryList, { CategoryListProps } from 'components/main/CategoryList'
 import PostList from 'components/main/PostList'
 import { graphql } from 'gatsby'
 import { IGatsbyImageData } from 'gatsby-plugin-image'
 import { PostListItemType } from 'types/PostItem.types'
+import queryString, { ParsedQuery } from 'query-string'
+
+/** Dummy Data
+const CATEGORY_LIST = {
+  All: 5,
+  Android: 3,
+  Kotlin: 2,
+}
+*/
 
 type IndexPageProps = {
+  location: {
+    search: string
+  }
   data: {
     allMarkdownRemark: {
       edges: PostListItemType[]
@@ -22,12 +34,6 @@ type IndexPageProps = {
   }
 }
 
-const CATEGORY_LIST = {
-  All: 5,
-  Android: 3,
-  Kotlin: 2,
-}
-
 const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -35,6 +41,7 @@ const Container = styled.div`
 `
 
 const IndexPage: FunctionComponent<IndexPageProps> = function ({
+  location: { search },
   data: {
     allMarkdownRemark: { edges },
     file: {
@@ -42,11 +49,45 @@ const IndexPage: FunctionComponent<IndexPageProps> = function ({
     },
   },
 }) {
+  const parsed: ParsedQuery<string> = queryString.parse(search)
+  const selectedCategory: string =
+    typeof parsed.category !== 'string' || !parsed.category
+      ? 'All'
+      : parsed.category
+
+  const categoryList = useMemo(
+    () =>
+      edges.reduce(
+        (
+          list: CategoryListProps['categoryList'],
+          {
+            node: {
+              frontmatter: { categories },
+            },
+          }: PostListItemType,
+        ) => {
+          categories.forEach(category => {
+            if (list[category] === undefined) list[category] = 1
+            else list[category]++
+          })
+
+          list['All']++
+
+          return list
+        },
+        { All: 0 },
+      ),
+    [],
+  )
+
   return (
     <Container>
       <GlobalStyle />
       <Introduction profileImage={gatsbyImageData} />
-      <CategoryList selectedCategory="Android" categoryList={CATEGORY_LIST} />
+      <CategoryList
+        selectedCategory={selectedCategory}
+        categoryList={categoryList}
+      />
       <PostList posts={edges} />
       <Footer />
     </Container>

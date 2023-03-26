@@ -1,7 +1,12 @@
 import React, { FunctionComponent } from 'react'
 import styled from '@emotion/styled'
 import PostItem from './PostItem'
+import { PostListItemType } from 'types/PostItem.types'
+import useInfiniteScroll, {
+  useInfiniteScrollType,
+} from '../../hooks/useInfiniteScroll'
 
+/** Dummy Data
 const POST_ITEM_DATA = {
   title: 'Android에서 MVVM 패턴이 중요한 이유',
   date: '2023.03.24.',
@@ -10,6 +15,12 @@ const POST_ITEM_DATA = {
   thumbnail:
     'https://github.com/Dcom-KHU/dcom-tech-interview/raw/master/Frontend/Android/images/mvvm-design-pattern-04.png',
   link: 'https://github.com/Dcom-KHU/dcom-tech-interview/blob/master/Frontend/Android/mvvm-design-pattern.md',
+}
+ */
+
+type PostListProps = {
+  selectedCategory: string
+  posts: PostListItemType[]
 }
 
 const PostListWrapper = styled.div`
@@ -27,13 +38,24 @@ const PostListWrapper = styled.div`
   }
 `
 
-const PostList: FunctionComponent = function () {
+const PostList: FunctionComponent<PostListProps> = function ({
+  selectedCategory,
+  posts,
+}) {
+  const { containerRef, postList }: useInfiniteScrollType = useInfiniteScroll(
+    selectedCategory,
+    posts,
+  )
+
   return (
-    <PostListWrapper>
-      <PostItem {...POST_ITEM_DATA} />
-      <PostItem {...POST_ITEM_DATA} />
-      <PostItem {...POST_ITEM_DATA} />
-      <PostItem {...POST_ITEM_DATA} />
+    <PostListWrapper ref={containerRef}>
+      {postList.map(({ node: { id, frontmatter } }: PostListItemType) => (
+        <PostItem
+          {...frontmatter}
+          link="https://github.com/Dcom-KHU/dcom-tech-interview/blob/master/Frontend/Android/mvvm-design-pattern.md"
+          key={id}
+        />
+      ))}
     </PostListWrapper>
   )
 }

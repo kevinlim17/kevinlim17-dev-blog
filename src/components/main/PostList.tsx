@@ -2,6 +2,9 @@ import React, { FunctionComponent, useMemo } from 'react'
 import styled from '@emotion/styled'
 import PostItem from './PostItem'
 import { PostListItemType } from 'types/PostItem.types'
+import useInfiniteScroll, {
+  useInfiniteScrollType,
+} from '../../hooks/useInfiniteScroll'
 
 /** Dummy Data
 const POST_ITEM_DATA = {
@@ -54,9 +57,14 @@ const PostList: FunctionComponent<PostListProps> = function ({
     [selectedCategory],
   )
 
+  const { containerRef, postList }: useInfiniteScrollType = useInfiniteScroll(
+    selectedCategory,
+    posts,
+  )
+
   return (
     <PostListWrapper>
-      {postListData.map(({ node: { id, frontmatter } }: PostListItemType) => (
+      {postList.map(({ node: { id, frontmatter } }: PostListItemType) => (
         <PostItem
           {...frontmatter}
           link="https://github.com/Dcom-KHU/dcom-tech-interview/blob/master/Frontend/Android/mvvm-design-pattern.md"

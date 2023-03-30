@@ -35,6 +35,7 @@ const PostTemplate: FunctionComponent<PostTemplateProps> = function ({
     <Template>
       <PostHead
         title={title}
+        summary={summary}
         date={date}
         categories={categories}
         thumbnail={gatsbyImageData}

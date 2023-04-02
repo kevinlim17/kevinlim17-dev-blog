@@ -9,14 +9,12 @@ type PostContainerProps = {
 }
 
 const PostContainerWrapper = styled.div`
-  /*
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
   justify-content: flex-start;
-  */
   position: relative;
-  margin: 0 auto;
+  margin: 0 0 0 5vw;
 `
 
 const PostContainer: FunctionComponent<PostContainerProps> = function ({

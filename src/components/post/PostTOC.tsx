@@ -5,21 +5,13 @@ type PostTOCProps = {
   tableOfContents: any
 }
 
-const PostTOCContainer = styled.div`
-  position: absolute;
-  top: 10px;
-  height: 100%;
-  left: 840px;
-  width: 15vw;
-`
-
 const PostTOCWrapper = styled.div`
   display: none;
-  @media screen and (min-width: 1300px) {
+  @media screen and (min-width: 1200px) {
     position: sticky;
     display: inline-block;
     font-size: 12px;
-    margin: 50px 0 0 0;
+    margin: 5vh 0 0 2vw;
     padding: 16px 8px;
     height: fit-content;
     max-height: calc(100vh - 200px);
@@ -58,11 +50,9 @@ const PostTOC: FunctionComponent<PostTOCProps> = function ({
   tableOfContents,
 }) {
   return (
-    <PostTOCContainer>
-      <PostTOCWrapper>
-        <PostTOCContent dangerouslySetInnerHTML={{ __html: tableOfContents }} />
-      </PostTOCWrapper>
-    </PostTOCContainer>
+    <PostTOCWrapper>
+      <PostTOCContent dangerouslySetInnerHTML={{ __html: tableOfContents }} />
+    </PostTOCWrapper>
   )
 }
 

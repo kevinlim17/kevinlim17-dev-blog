@@ -3,7 +3,7 @@ import { graphql } from 'gatsby'
 import { PostPageItemType } from 'types/PostItem.types'
 import Template from 'components/common/Template'
 import PostHead from '../components/post/PostHead'
-import PostContent from 'components/post/PostContent'
+import PostContainer from 'components/post/PostContainer'
 
 type PostTemplateProps = {
   data: {
@@ -21,6 +21,7 @@ const PostTemplate: FunctionComponent<PostTemplateProps> = function ({
   const {
     node: {
       html,
+      tableOfContents,
       frontmatter: {
         title,
         summary,
@@ -41,7 +42,7 @@ const PostTemplate: FunctionComponent<PostTemplateProps> = function ({
         categories={categories}
         thumbnail={gatsbyImageData}
       />
-      <PostContent html={html} />
+      <PostContainer html={html} tableOfContents={tableOfContents} />
     </Template>
   )
 }
@@ -54,6 +55,7 @@ export const queryMarkdownDataBySlug = graphql`
       edges {
         node {
           html
+          tableOfContents
           frontmatter {
             title
             summary

@@ -6,42 +6,37 @@ type PostTOCProps = {
 }
 
 const PostTOCContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
   position: absolute;
   top: 10px;
   height: 100%;
-  left: 850px;
-  width: 500px;
-`
-
-const PostTOCBorder = styled.div`
-  margin: 60px 0 0 30px;
-  border-left: thick solid rgba(2, 0, 36, 0.3);
-  max-height: calc(100vh - 200px);
+  left: 840px;
+  width: 15vw;
 `
 
 const PostTOCWrapper = styled.div`
   display: none;
-  @media screen and (min-width: 1200px) {
+  @media screen and (min-width: 1300px) {
     position: sticky;
     display: inline-block;
-    font-size: 14px;
-    margin: 60px 60px 0 10px;
+    font-size: 12px;
+    margin: 50px 0 0 0;
+    padding: 16px 8px;
+    height: fit-content;
     max-height: calc(100vh - 200px);
-    overflow: auto;
+    overflow-wrap: break-word;
+    border-radius: 8px;
+    background-color: rgba(2, 0, 36, 0.1);
   }
 `
 
 const PostTOCContent = styled.div`
   ul {
     margin: 3px 3px;
-    padding: 5px;
+    padding: 3px 5px;
     font-weight: 500;
 
     li {
-      color: black;
+      color: rgba(2, 0, 36, 1);
       padding: 2px;
       margin-left: 10px;
       margin-bottom: 5px;
@@ -54,7 +49,7 @@ const PostTOCContent = styled.div`
 
     :only-child {
       font-weight: 800;
-      padding: 1px;
+      padding: 0px;
     }
   }
 `
@@ -64,7 +59,6 @@ const PostTOC: FunctionComponent<PostTOCProps> = function ({
 }) {
   return (
     <PostTOCContainer>
-      <PostTOCBorder />
       <PostTOCWrapper>
         <PostTOCContent dangerouslySetInnerHTML={{ __html: tableOfContents }} />
       </PostTOCWrapper>

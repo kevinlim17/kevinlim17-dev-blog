@@ -11,8 +11,15 @@ const MarkdownRenderer = styled.div`
   flex-direction: column;
   width: 50vw;
   margin: 0 0 0 15vw;
-  padding: 50px 0;
+  padding: 50px 40px;
   word-break: break-all;
+  border-left: 0.5px solid rgba(2, 0, 36, 0.2);
+  border-right: 0.5px solid rgba(2, 0, 36, 0.2);
+
+  @media screen and (max-width: 1200px) {
+    width: 60vw;
+    border: 0px;
+  }
 
   // Markdown Style
   line-height: 1.8;

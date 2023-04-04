@@ -1,5 +1,6 @@
 import React, { FunctionComponent, useEffect, useState } from 'react'
 import styled from '@emotion/styled'
+import useHeadsObserver from '../../hooks/useHeadsObserver'
 
 type PostTOCProps = {
   tableOfContents: any
@@ -8,6 +9,10 @@ type PostTOCProps = {
 type PostTOCScrollActiveProps = {
   isScrollActive: boolean
   currentTOCOffsetY: number
+}
+
+type PostCurrentHeaderProps = {
+  currentHeader: string | null
 }
 
 const PostTOCWrapper = styled.div<PostTOCScrollActiveProps>`
@@ -29,7 +34,7 @@ const PostTOCWrapper = styled.div<PostTOCScrollActiveProps>`
   }
 `
 
-const PostTOCContent = styled.div`
+const PostTOCContent = styled.div<PostCurrentHeaderProps>`
   ul {
     margin: 3px 3px;
     padding: 3px 5px;
@@ -49,17 +54,19 @@ const PostTOCContent = styled.div`
         text-decoration: none;
       }
 
-      a:hover {
+      a[href='${props => props.currentHeader}'] {
         text-decoration: underline;
-        text-underline-offset: 5px;
-        background-color: rgba(2, 0, 36, 0.1);
+        text-underline-offset: 3px;
+        background-color: rgba(2, 0, 36, 0.02);
         color: green;
+        font-size: 13px;
+        margin-bottom: 2px;
+        font-weight: 700;
       }
     }
 
     :only-child {
       font-size: 12px;
-      font-weight: 800;
       padding: 0px;
     }
 
@@ -75,6 +82,12 @@ const PostTOC: FunctionComponent<PostTOCProps> = function ({
   const [currentScrollY, setScrollY] = useState(0)
   const [isScrollActive, setScrollActive] = useState(false)
 
+  const PostContent = document.getElementById('post-content')
+  const ToC = document.getElementById('table-of-contents')
+  const postHeaderElements = PostContent?.querySelectorAll('h2, h3, h4') ?? []
+
+  const { activeId } = useHeadsObserver(postHeaderElements)
+
   const handleScroll = () => {
     if (currentScrollY > 300) {
       setScrollY(window.scrollY)
@@ -86,11 +99,6 @@ const PostTOC: FunctionComponent<PostTOCProps> = function ({
   }
 
   useEffect(() => {
-    const ToC = document.getElementById('table-of-contents')
-
-    const PostContent = document.getElementById('post-content')
-    const postHeaderElements = PostContent?.querySelectorAll('h2, h3, h4') ?? []
-
     postHeaderElements.forEach((headerElement, idx) => {
       const { top } = headerElement.getBoundingClientRect()
       const elementTop = top + currentScrollY
@@ -102,6 +110,8 @@ const PostTOC: FunctionComponent<PostTOCProps> = function ({
         window.scroll({ top: elementTop, behavior: 'smooth' })
       })
     })
+
+    console.log(activeId)
 
     const scrollListener = () => {
       window.addEventListener('scroll', handleScroll)
@@ -121,6 +131,7 @@ const PostTOC: FunctionComponent<PostTOCProps> = function ({
       <PostTOCContent
         id="table-of-contents"
         dangerouslySetInnerHTML={{ __html: tableOfContents }}
+        currentHeader={activeId}
       />
     </PostTOCWrapper>
   )

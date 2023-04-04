@@ -9,9 +9,9 @@ const MarkdownRenderer = styled.div`
   //Renderer style
   display: flex;
   flex-direction: column;
-  width: 50vw;
-  margin: 0 0 0 15vw;
-  padding: 50px 40px;
+  max-width: 58vw;
+  margin: 0 0 0 10vw;
+  padding: 50px 40px 0 40px;
   word-break: break-all;
   border-left: 0.5px solid rgba(2, 0, 36, 0.2);
   border-right: 0.5px solid rgba(2, 0, 36, 0.2);
@@ -23,7 +23,7 @@ const MarkdownRenderer = styled.div`
 
   // Markdown Style
   line-height: 1.8;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 400;
 
   // Apply Padding Attribute to All Elements
@@ -158,7 +158,12 @@ const MarkdownRenderer = styled.div`
 `
 
 const PostContent: FunctionComponent<PostContentProps> = function ({ html }) {
-  return <MarkdownRenderer dangerouslySetInnerHTML={{ __html: html }} />
+  return (
+    <MarkdownRenderer
+      id="post-content"
+      dangerouslySetInnerHTML={{ __html: html }}
+    />
+  )
 }
 
 export default PostContent

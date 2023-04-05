@@ -16,7 +16,11 @@ type PostCurrentHeaderProps = {
 }
 
 const PostTOCWrapper = styled.div<PostTOCScrollActiveProps>`
-  display: none;
+  @media screen and (max-width: 1199px) {
+    display: none;
+    max-width: 0%;
+    margin-left: 0;
+  }
   @media screen and (min-width: 1200px) {
     position: fixed;
     display: inline-block;
@@ -24,13 +28,14 @@ const PostTOCWrapper = styled.div<PostTOCScrollActiveProps>`
     margin-top: ${props =>
       props.isScrollActive ? '0' : `${420 - props.currentTOCOffsetY}px`};
     margin-left: 70vw;
-    padding: 16px 8px;
+    padding: 8px 8px;
     height: fit-content;
     max-height: calc(100vh - 200px);
     max-width: 20vw;
     overflow-wrap: break-word;
     border-radius: 8px;
-    background-color: rgba(2, 0, 36, 0.03);
+    //background-color: rgba(2, 0, 36, 0.03);
+    border-left: 6px solid rgba(2, 0, 36, 0.1);
   }
 `
 

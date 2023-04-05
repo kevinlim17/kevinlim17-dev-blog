@@ -16,7 +16,7 @@ const PostContainerWrapper = styled.div`
   position: relative;
   margin: 0 0 0 5vw;
   padding-bottom: 10vw;
-  border-bottom: 1px solid rgba(2, 0, 36, 0.1);
+  //border-bottom: 1px solid rgba(2, 0, 36, 0.1);
 `
 
 const PostContainer: FunctionComponent<PostContainerProps> = function ({

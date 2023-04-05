@@ -10,13 +10,13 @@ const MarkdownRenderer = styled.div`
   display: flex;
   flex-direction: column;
   max-width: 58vw;
-  margin: 0 0 0 10vw;
+  margin: 0 0 0 9vw;
   padding: 50px 40px 0 40px;
   word-break: break-all;
   border-left: 0.5px solid rgba(2, 0, 36, 0.2);
   border-right: 0.5px solid rgba(2, 0, 36, 0.2);
 
-  @media screen and (max-width: 1200px) {
+  @media screen and (max-width: 1200px) and (min-width: 769px) {
     width: 60vw;
     border: 0px;
   }
@@ -154,6 +154,37 @@ const MarkdownRenderer = styled.div`
     background-color: rgba(2, 0, 36, 1);
     color: rgba(0, 255, 109, 0.8);
     margin-right: 2px;
+  }
+
+  @media screen and (max-width: 768px) {
+    width: 100%;
+    padding: 80px 20px;
+    line-height: 1.6;
+    font-size: 14px;
+
+    h1 {
+      font-size: 23px;
+    }
+
+    h2 {
+      font-size: 20px;
+    }
+
+    h3 {
+      font-size: 17px;
+    }
+
+    h4 {
+      font-size: 17px;
+    }
+
+    img {
+      width: 100%;
+    }
+
+    hr {
+      margin: 50px 0;
+    }
   }
 `
 

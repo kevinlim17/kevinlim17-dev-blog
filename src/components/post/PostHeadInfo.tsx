@@ -18,6 +18,11 @@ const PostHeadInfoWrapper = styled.div`
   margin: 0 auto;
   padding: 30px 0;
   color: #ffffff;
+
+  @media (max-width: 768px) {
+    width: 90vw;
+    //padding: 40px 20px;
+  }
 `
 
 const PrevPageIcon = styled.div`
@@ -31,6 +36,12 @@ const PrevPageIcon = styled.div`
   font-size: 22px;
   cursor: pointer;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+
+  @media (max-width: 768px) {
+    width: 30px;
+    height: 30px;
+    font-size: 18px;
+  }
 `
 
 const Title = styled.div`
@@ -45,6 +56,10 @@ const Title = styled.div`
   font-size: 28px;
   font-weight: 800;
   line-height: 1.2;
+
+  @media (max-width: 768px) {
+    font-size: 24px;
+  }
 `
 
 const Summary = styled.div`
@@ -59,6 +74,10 @@ const Summary = styled.div`
   font-size: 17px;
   font-weight: 700;
   color: rgba(184, 184, 184, 1);
+
+  @media (max-width: 768px) {
+    font-size: 14px;
+  }
 `
 
 const Border = styled.h1`
@@ -67,6 +86,10 @@ const Border = styled.h1`
   border-bottom: 0.5px solid rgba(184, 184, 184, 1);
   margin: 0px;
   padding: 20px;
+
+  @media (max-width: 768px) {
+    padding: 10px;
+  }
 `
 
 const PostData = styled.div`
@@ -92,6 +115,10 @@ const PostCategoryItem = styled.div`
   text-align: center;
   margin-right: 10px;
   padding: 8px 12px;
+
+  @media (max-width: 768px) {
+    font-size: 14px;
+  }
 `
 
 const PostDateBox = styled.div`
@@ -107,6 +134,10 @@ const PostDateBox = styled.div`
     rgba(0, 0, 0, 0.14) 0 2px 2px 0, rgba(0, 0, 0, 0.12) 0 1px 5px 0;
   border-radius: 8px;
   color: white;
+
+  @media (max-width: 768px) {
+    font-size: 14px;
+  }
 `
 
 const PostHeadInfo: FunctionComponent<PostHeadInfoProps> = function ({

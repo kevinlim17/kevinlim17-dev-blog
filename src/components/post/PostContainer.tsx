@@ -1,11 +1,12 @@
-import React, { FunctionComponent } from 'react'
+import React, { FunctionComponent, useState, useEffect } from 'react'
 import styled from '@emotion/styled'
 import PostContent from './PostContent'
 import PostTOC from './PostTOC'
+import { debounce } from 'lodash'
 
 type PostContainerProps = {
   html: string
-  tableOfContents: any
+  tableOfContents: string
 }
 
 const PostContainerWrapper = styled.div`
@@ -23,10 +24,29 @@ const PostContainer: FunctionComponent<PostContainerProps> = function ({
   html,
   tableOfContents,
 }) {
-  return (
+  const [windowWidth, setWindowWidth] = useState<number>(window.innerWidth)
+
+  //handleResize 함수를 debounce로 감싸고, 시간(1000ms = 1sec)을 설정
+  const handleResizeWidth = debounce(() => {
+    setWindowWidth(window.innerWidth)
+  }, 500)
+
+  useEffect(() => {
+    window.addEventListener('resize', handleResizeWidth)
+    return () => {
+      window.removeEventListener('resize', handleResizeWidth)
+    }
+  })
+
+  // width가 1200 이하면 TOC를 Rendering하지 않음.
+  return windowWidth >= 1200 ? (
     <PostContainerWrapper>
       <PostContent html={html} />
       <PostTOC tableOfContents={tableOfContents} />
+    </PostContainerWrapper>
+  ) : (
+    <PostContainerWrapper>
+      <PostContent html={html} />
     </PostContainerWrapper>
   )
 }

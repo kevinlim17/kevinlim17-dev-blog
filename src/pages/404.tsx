@@ -55,29 +55,21 @@ const NotFoundDescriptionCameraIcon = styled.div`
 `
 
 const NotFoundDescriptionText = styled.div`
-  font-size: 100px;
+  font-size: 12vh;
   font-weight: 800;
   text-align: center;
   margin-top: 20vh;
   color: rgba(2, 0, 36, 0.8);
   text-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-
-  @media screen and (max-width: 768px) {
-    font-size: 80px;
-  }
 `
 
 const NotFoundDescriptionInfo = styled.div`
   margin-top: 3vh;
-  font-size: 20px;
+  font-size: 2.5vh;
   font-weight: 600;
   text-align: center;
   line-height: 1.4;
   color: rgba(2, 0, 36, 0.8);
-
-  @media screen and (max-width: 768px) {
-    font-size: 15px;
-  }
 `
 
 const LinkButtonWrapper = styled.div`
@@ -85,32 +77,27 @@ const LinkButtonWrapper = styled.div`
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
+  width: 90%;
   padding: 30px 0;
-  margin-top: 14vh;
+  margin: 14vh;
   border-top: 1px solid rgba(2, 0, 36, 0.8);
 `
 
 const LinkIconButton = styled(Link)`
   display: grid;
   place-items: center;
-  width: 60px;
-  height: 60px;
+  width: 7vh;
+  height: 7vh;
   border-radius: 50%;
   margin: auto 15px;
   background: rgba(0, 255, 109, 1);
   color: rgba(2, 0, 36, 1);
-  font-size: 27px;
+  font-size: 3vh;
   cursor: pointer;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 
   &:hover {
     box-shadow: 0 0 40px rgba(0, 0, 0, 0.3);
-  }
-
-  @media (max-width: 768px) {
-    width: 50px;
-    height: 50px;
-    font-size: 23px;
   }
 `
 
@@ -132,10 +119,10 @@ const NonFoundPage: FunctionComponent = function () {
               <FontAwesomeIcon icon={faHouse} />
             </LinkIconButton>
             <LinkIconButton to="/brunch_stories">
-              <FontAwesomeIcon icon={faAddressCard} />
+              <FontAwesomeIcon icon={faPen} />
             </LinkIconButton>
             <LinkIconButton to="/profile">
-              <FontAwesomeIcon icon={faPen} />
+              <FontAwesomeIcon icon={faAddressCard} />
             </LinkIconButton>
           </LinkButtonWrapper>
         </NotFoundDescriptionWrapper>

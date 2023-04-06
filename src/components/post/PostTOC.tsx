@@ -3,7 +3,7 @@ import styled from '@emotion/styled'
 import useHeadsObserver from '../../hooks/useHeadsObserver'
 
 type PostTOCProps = {
-  tableOfContents: any
+  tableOfContents: string
 }
 
 type PostTOCScrollActiveProps = {

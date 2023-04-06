@@ -17,7 +17,8 @@ const MarkdownRenderer = styled.div`
   border-right: 0.5px solid rgba(2, 0, 36, 0.2);
 
   @media screen and (max-width: 1200px) and (min-width: 769px) {
-    width: 60vw;
+    max-width: 80vw;
+    margin-left: 5vw;
     border: 0px;
   }
 
@@ -157,10 +158,11 @@ const MarkdownRenderer = styled.div`
   }
 
   @media screen and (max-width: 768px) {
-    width: 100%;
+    max-width: 90vw;
     padding: 80px 20px;
     line-height: 1.6;
     font-size: 14px;
+    margin-left: 0;
 
     h1 {
       font-size: 23px;

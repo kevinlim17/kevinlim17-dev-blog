@@ -1,42 +1,34 @@
-import React, { FunctionComponent, useEffect, useState } from 'react'
+import React, { FunctionComponent, useEffect } from 'react'
 import styled from '@emotion/styled'
 import useHeadsObserver from '../../hooks/useHeadsObserver'
+import Sticky, { getScrollTop } from 'components/common/Sticky'
 
 type PostTOCProps = {
   tableOfContents: string
-}
-
-type PostTOCScrollActiveProps = {
-  isScrollActive: boolean
-  currentTOCOffsetY: number
 }
 
 type PostCurrentHeaderProps = {
   currentHeader: string | null
 }
 
-const PostTOCWrapper = styled.div<PostTOCScrollActiveProps>`
+const PostTOCPositioner = styled.div`
+  position: absolute;
+  margin-left: 73%;
+  margin-top: 2rem;
+
   @media screen and (max-width: 1199px) {
     display: none;
-    max-width: 0%;
-    margin-left: 0;
   }
-  @media screen and (min-width: 1200px) {
-    position: fixed;
-    display: inline-block;
-    top: 50px;
-    margin-top: ${props =>
-      props.isScrollActive ? '0' : `${420 - props.currentTOCOffsetY}px`};
-    margin-left: 70vw;
-    padding: 8px 8px;
-    height: fit-content;
-    max-height: calc(100vh - 200px);
-    max-width: 20vw;
-    overflow-wrap: break-word;
-    border-radius: 8px;
-    //background-color: rgba(2, 0, 36, 0.03);
-    border-left: 6px solid rgba(2, 0, 36, 0.1);
-  }
+`
+
+const PostTOCBlock = styled(Sticky)`
+  padding: 8px 8px;
+  height: fit-content;
+  max-height: calc(100vh - 200px);
+  overflow-wrap: break-word;
+  border-radius: 8px;
+  //background-color: rgba(2, 0, 36, 0.03);
+  border-left: 6px solid rgba(2, 0, 36, 0.1);
 `
 
 const PostTOCContent = styled.div<PostCurrentHeaderProps>`
@@ -84,29 +76,16 @@ const PostTOCContent = styled.div<PostCurrentHeaderProps>`
 const PostTOC: FunctionComponent<PostTOCProps> = function ({
   tableOfContents,
 }) {
-  const [currentScrollY, setScrollY] = useState(0)
-  const [isScrollActive, setScrollActive] = useState(false)
-
   const PostContent = document.getElementById('post-content')
   const ToC = document.getElementById('table-of-contents')
   const postHeaderElements = PostContent?.querySelectorAll('h2, h3, h4') ?? []
 
   const { activeId } = useHeadsObserver(postHeaderElements)
 
-  const handleScroll = () => {
-    if (currentScrollY > 300) {
-      setScrollY(window.scrollY)
-      setScrollActive(true)
-    } else {
-      setScrollY(window.scrollY)
-      setScrollActive(false)
-    }
-  }
-
   useEffect(() => {
     postHeaderElements.forEach((headerElement, idx) => {
       const { top } = headerElement.getBoundingClientRect()
-      const elementTop = top + currentScrollY
+      const elementTop = top + getScrollTop()
 
       const ToCLinkElement = ToC?.getElementsByTagName('a').item(idx)
 
@@ -117,28 +96,18 @@ const PostTOC: FunctionComponent<PostTOCProps> = function ({
     })
 
     console.log(activeId)
-
-    const scrollListener = () => {
-      window.addEventListener('scroll', handleScroll)
-    }
-    scrollListener()
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll)
-    }
   })
 
   return (
-    <PostTOCWrapper
-      isScrollActive={isScrollActive}
-      currentTOCOffsetY={currentScrollY}
-    >
-      <PostTOCContent
-        id="table-of-contents"
-        dangerouslySetInnerHTML={{ __html: tableOfContents }}
-        currentHeader={activeId}
-      />
-    </PostTOCWrapper>
+    <PostTOCPositioner>
+      <PostTOCBlock top={50}>
+        <PostTOCContent
+          id="table-of-contents"
+          dangerouslySetInnerHTML={{ __html: tableOfContents }}
+          currentHeader={activeId}
+        />
+      </PostTOCBlock>
+    </PostTOCPositioner>
   )
 }
 

@@ -14,12 +14,12 @@ const useHeadsObserver = (elements: NodeListOf<Element> | never[]) => {
           }
         })
       },
-      { rootMargin: '0% 0% -70% 0%' },
+      { rootMargin: '0% 0% -80% 0%' },
     )
 
     elements.forEach(elem => observer.observe(elem))
     return () => observer.disconnect()
-  }, [])
+  })
 
   return { activeId }
 }

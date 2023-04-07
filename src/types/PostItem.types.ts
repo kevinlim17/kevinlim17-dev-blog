@@ -25,7 +25,7 @@ export type PostListItemType = {
 export type PostPageItemType = {
   node: {
     html: string
-    tableOfContents: any
+    tableOfContents: string
     frontmatter: PostFrontmatterType
   }
 }

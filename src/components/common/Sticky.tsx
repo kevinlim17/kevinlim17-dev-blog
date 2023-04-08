@@ -7,15 +7,7 @@ import React, {
   ReactNode,
 } from 'react'
 import styled from '@emotion/styled'
-
-export const getScrollTop = () => {
-  if (!document.body) return 0
-  const scrollTop = document.documentElement
-    ? document.documentElement.scrollTop || document.body.scrollTop
-    : document.body.scrollTop
-  return scrollTop
-}
-
+import { getScrollTop } from 'components/utils/GetScrollTop'
 export interface StickyProps {
   top: number
   className?: string
@@ -65,7 +57,7 @@ const Sticky: FunctionComponent<StickyProps> = ({
       className={className}
       style={{
         position: fixed ? 'fixed' : undefined,
-        top: fixed ? top : undefined,
+        top: fixed ? top : 50,
       }}
     >
       {children}

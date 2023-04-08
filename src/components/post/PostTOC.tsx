@@ -1,7 +1,8 @@
 import React, { FunctionComponent, useEffect } from 'react'
 import styled from '@emotion/styled'
 import useHeadsObserver from '../../hooks/useHeadsObserver'
-import Sticky, { getScrollTop } from 'components/common/Sticky'
+import Sticky from 'components/common/Sticky'
+import { getScrollTop } from 'components/utils/GetScrollTop'
 
 type PostTOCProps = {
   tableOfContents: string
@@ -36,7 +37,7 @@ const PostTOCContent = styled.div<PostCurrentHeaderProps>`
     margin: 3px 3px;
     padding: 3px 5px;
     font-weight: 500;
-    font-size: 11px;
+    font-size: 10px;
 
     border-left: 3px solid rgba(2, 0, 36, 0.1);
 
@@ -56,7 +57,7 @@ const PostTOCContent = styled.div<PostCurrentHeaderProps>`
         text-underline-offset: 3px;
         background-color: rgba(2, 0, 36, 0.02);
         color: green;
-        font-size: 13px;
+        font-size: 12px;
         margin-bottom: 2px;
         font-weight: 700;
       }

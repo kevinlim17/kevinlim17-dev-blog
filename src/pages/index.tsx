@@ -73,7 +73,7 @@ const IndexPage: FunctionComponent<IndexPageProps> = function ({
   )
 
   return (
-    <Template>
+    <Template headerTitle="🧑🏻‍💻 kevinlim17.dev">
       <Introduction profileImage={gatsbyImageData} />
       <CategoryList
         selectedCategory={selectedCategory}

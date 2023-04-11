@@ -6,6 +6,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useScrollEvent } from 'hooks/useScrollEvent'
 import { toFit } from 'hooks/toFit'
 
+type HeaderTitleProps = {
+  titleText: string
+}
+
 const Wrapper = styled.div<{ isScroll: boolean }>`
   display: flex;
   flex-direction: row;
@@ -75,7 +79,7 @@ const SectionItem = styled(Link)<{ description: string; isScroll: boolean }>`
   }
 `
 
-const Header: FunctionComponent = function () {
+const Header: FunctionComponent<HeaderTitleProps> = function ({ titleText }) {
   const [isScroll, setIsScroll] = useState<boolean>(false)
 
   const onScroll = useCallback(() => {
@@ -90,7 +94,7 @@ const Header: FunctionComponent = function () {
 
   return (
     <Wrapper isScroll={isScroll}>
-      <Title to="/">🧑🏻‍💻 kevinlim17.dev</Title>
+      <Title to="/">{titleText}</Title>
       <SectionItem to="/" description="Developer's Space" isScroll={isScroll}>
         <FontAwesomeIcon icon={faCode} />
       </SectionItem>

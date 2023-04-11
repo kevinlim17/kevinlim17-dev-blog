@@ -6,6 +6,7 @@ import Header from './Header'
 
 type TemplateProps = {
   children: ReactNode
+  headerTitle: string
 }
 
 const Container = styled.div`
@@ -13,11 +14,14 @@ const Container = styled.div`
   flex-direction: column;
   height: 100%;
 `
-const Template: FunctionComponent<TemplateProps> = function ({ children }) {
+const Template: FunctionComponent<TemplateProps> = function ({
+  children,
+  headerTitle,
+}) {
   return (
     <Container>
       <GlobalStyle />
-      <Header />
+      <Header titleText={headerTitle} />
       {children}
       <Footer />
     </Container>

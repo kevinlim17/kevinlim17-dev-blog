@@ -14,7 +14,7 @@ const Wrapper = styled.div<{ isScroll: boolean }>`
 
   width: 100%;
   height: 7.5vh;
-  z-index: 1;
+  z-index: 4;
   position: fixed;
   padding: 0 14vw;
 
@@ -45,27 +45,31 @@ const Title = styled(Link)`
   }
 `
 
-const SectionItem = styled(Link)<{ description: string }>`
+const SectionItem = styled(Link)<{ description: string; isScroll: boolean }>`
   display: grid;
   place-items: center;
-  width: 2.4rem;
-  height: 2.4rem;
+  width: 4.5vh;
+  height: 4.5vh;
   border-radius: 50%;
-  margin: auto 1.2rem;
-  background: rgba(0, 255, 109, 1);
-  color: rgba(2, 0, 36, 1);
-  font-size: 1.2rem;
+  margin: auto 1vw;
+  font-size: 2vh;
+
+  background: ${({ isScroll }) =>
+    isScroll ? 'rgba(0, 255, 109, 1)' : 'rgba(2, 0, 36, 1)'};
+  color: ${({ isScroll }) => (isScroll ? 'rgba(2, 0, 36, 1)' : 'white')};
+
   cursor: pointer;
   box-shadow: rgba(0, 0, 0, 0.12) 0 3px 1px -2px,
     rgba(0, 0, 0, 0.14) 0 2px 2px 0, rgba(0, 0, 0, 0.12) 0 1px 5px 0;
 
   &:hover {
-    box-shadow: 0 0 40px rgba(255, 255, 255, 0.3);
+    box-shadow: 0 0 100px rgba(255, 255, 255, 0.7);
+    color: ${({ isScroll }) => (isScroll ? 'white' : 'rgba(0, 255, 109, 1)')};
   }
 
   @media (max-width: 768px) {
-    width: 2rem;
-    height: 2rem;
+    width: 2.5rem;
+    height: 2.5rem;
     margin: auto 0.7rem;
     font-size: 1rem;
   }
@@ -87,13 +91,17 @@ const Header: FunctionComponent = function () {
   return (
     <Wrapper isScroll={isScroll}>
       <Title to="/">🧑🏻‍💻 kevinlim17.dev</Title>
-      <SectionItem to="/" description="Developer's Space">
+      <SectionItem to="/" description="Developer's Space" isScroll={isScroll}>
         <FontAwesomeIcon icon={faCode} />
       </SectionItem>
-      <SectionItem to="/brunch_stories" description="Writer's Space">
+      <SectionItem
+        to="/brunch_stories"
+        description="Writer's Space"
+        isScroll={isScroll}
+      >
         <FontAwesomeIcon icon={faPen} />
       </SectionItem>
-      <SectionItem to="/profile" description="Profile">
+      <SectionItem to="/profile" description="Profile" isScroll={isScroll}>
         <FontAwesomeIcon icon={faAddressCard} />
       </SectionItem>
     </Wrapper>

@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react'
 import styled from '@emotion/styled'
 import { IGatsbyImageData } from 'gatsby-plugin-image'
-import ProfileImage from './ProfileImage'
+import ProfileImage from '../common/ProfileImage'
 import { faCircleDot } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { keyframes } from '@emotion/react'
@@ -10,6 +10,18 @@ import TypeWriter from 'typewriter-effect'
 type IntroductionProps = {
   profileImage: IGatsbyImageData
 }
+
+const GradientAnimation = keyframes`
+  0% {
+		background-position: 0% 25%;
+	}
+	50% {
+		background-position: 50% 25%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+`
 
 const Background = styled.div`
   z-index: 2;
@@ -21,11 +33,14 @@ const Background = styled.div`
     rgba(0, 255, 109, 1) 100%
   );
   color: #ffffff;
+  animation: ${GradientAnimation} 15s ease-out infinite;
+  background-size: 400%;
 
   border-radius: 0 0 1% 1%;
   box-shadow: rgba(0, 0, 0, 0.12) 0 3px 1px -2px,
     rgba(0, 0, 0, 0.14) 0 2px 2px 0, rgba(0, 0, 0, 0.12) 0 1px 5px 0;
 `
+
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -110,6 +125,8 @@ const SubTitle = styled.div`
   font-weight: 600;
   line-height: 1.4;
   margin-bottom: 3vh;
+
+  height: 8vh;
   @media (max-width: 768px) {
     font-size: 1.4rem;
   }
@@ -166,37 +183,21 @@ const Introduction: FunctionComponent<IntroductionProps> = function ({
                   onInit={typewriter => {
                     typewriter
                       .pauseFor(2000)
-                      .typeString('Developing Stories')
-                      .pauseFor(2500)
-                      .deleteAll()
-                      .pauseFor(1500)
-                      .typeString('Writing Codes')
-                      .pauseFor(3000)
-                      .deleteAll()
-                      .pauseFor(1500)
-                      .typeString('Work Hard')
-                      .pauseFor(5000)
-                      .deleteAll()
-                      .start()
-                  }}
-                />
-                <TypeWriter
-                  options={{
-                    loop: true,
-                  }}
-                  onInit={typewriter => {
-                    typewriter
-                      .pauseFor(2000)
+                      .typeString('Developing Stories <br />')
+                      .pauseFor(1000)
                       .typeString('for Better Community.')
-                      .pauseFor(1500)
                       .deleteAll()
-                      .pauseFor(1500)
+                      .pauseFor(500)
+                      .typeString('Writing Codes <br />')
+                      .pauseFor(1000)
                       .typeString('for Open Source Contribution.')
-                      .pauseFor(1500)
                       .deleteAll()
+                      .pauseFor(500)
+                      .typeString('Implement Applications <br />')
+                      .pauseFor(1000)
                       .typeString('for Barrier-Free Society.')
-                      .pauseFor(2500)
                       .deleteAll()
+                      .pauseFor(500)
                       .start()
                   }}
                 />

@@ -6,22 +6,11 @@ import { faCircleDot } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { keyframes } from '@emotion/react'
 import TypeWriter from 'typewriter-effect'
+import { GradientAnimation } from 'components/lib/GradientAnimation'
 
 type IntroductionProps = {
   profileImage: IGatsbyImageData
 }
-
-const GradientAnimation = keyframes`
-  0% {
-		background-position: 0% 25%;
-	}
-	50% {
-		background-position: 50% 25%;
-	}
-	100% {
-		background-position: 0% 50%;
-	}
-`
 
 const Background = styled.div`
   z-index: 2;

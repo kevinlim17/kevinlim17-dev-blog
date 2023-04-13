@@ -1,9 +1,9 @@
 import React, { FunctionComponent } from 'react'
 import Template from 'components/common/Template'
 import styled from '@emotion/styled'
-import { keyframes } from '@emotion/react'
 import { IGatsbyImageData } from 'gatsby-plugin-image'
 import { graphql } from 'gatsby'
+import { GradientAnimation } from 'components/lib/GradientAnimation'
 import TabletShapedContainer from 'components/profile/TabletShapeContainer'
 
 type ProfileProps = {
@@ -15,18 +15,6 @@ type ProfileProps = {
     }
   }
 }
-
-const GradientAnimation = keyframes`
-  0% {
-		background-position: 0% 25%;
-	}
-	50% {
-		background-position: 50% 25%;
-	}
-	100% {
-		background-position: 0% 50%;
-	}
-`
 
 const ProfilePageWrapper = styled.div`
   display: flex;

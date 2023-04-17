@@ -38,6 +38,16 @@ module.exports = {
         path: `${__dirname}/static`,
       },
     },
+    `gatsby-transformer-json`,
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `writings`,
+        path: `${__dirname}/contents/writings`,
+
+        ignore: [`**/\.*`], // ignore files starting with a dot
+      },
+    },
     {
       resolve: `gatsby-transformer-remark`,
       options: {

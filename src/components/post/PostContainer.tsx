@@ -32,7 +32,9 @@ const PostContainer: FunctionComponent<PostContainerProps> = function ({
   }, 500)
 
   useEffect(() => {
+    setWindowWidth(window.innerWidth)
     window.addEventListener('resize', handleResizeWidth)
+
     return () => {
       window.removeEventListener('resize', handleResizeWidth)
     }

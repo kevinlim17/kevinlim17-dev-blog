@@ -26,7 +26,7 @@ type PostListProps = {
 const PostListWrapper = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  grid-gap: 30px;
+  grid-gap: 30px 20px;
   width: 70vw;
   margin: 0 auto;
   padding: 50px 0 100px;

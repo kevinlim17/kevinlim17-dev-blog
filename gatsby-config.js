@@ -9,10 +9,10 @@
  */
 module.exports = {
   siteMetadata: {
-    title: `Gatsby Default Starter`,
-    description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
-    author: `@gatsbyjs`,
-    siteUrl: `https://gatsbystarterdefaultsource.gatsbyjs.io/`,
+    title: `Kevinlim17's Blog `,
+    description: `코드를 쓰고 이야기를 개발합니다.`,
+    author: `Seung Hyeon Lim`,
+    siteUrl: `https://gatsbystarterdefaultsource.gatsbyjs.io/`, //배포 후 변경 예정
   },
   plugins: [
     {
@@ -113,5 +113,19 @@ module.exports = {
     },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-image`,
+    {
+      resolve: `gatsby-plugin-canonical-urls`,
+      options: {
+        siteUrl: '<https://kevinlim17.com>',
+        stripQueryString: true,
+      },
+    },
+    `gatsby-plugin-sitemap`,
+    {
+      resolve: 'gatsby-plugin-robots-txt',
+      options: {
+        policy: [{ userAgent: '*', allow: '/' }],
+      },
+    },
   ],
 }

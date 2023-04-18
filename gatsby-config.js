@@ -9,7 +9,7 @@
  */
 module.exports = {
   siteMetadata: {
-    title: `Kevinlim17's Blog `,
+    title: `kevinlim17-blog`,
     description: `코드를 쓰고 이야기를 개발합니다.`,
     author: `Seung Hyeon Lim`,
     siteUrl: `https://gatsbystarterdefaultsource.gatsbyjs.io/`, //배포 후 변경 예정
@@ -125,6 +125,12 @@ module.exports = {
       resolve: 'gatsby-plugin-robots-txt',
       options: {
         policy: [{ userAgent: '*', allow: '/' }],
+      },
+    },
+    {
+      resolve: 'gatsby-plugin-manifest',
+      options: {
+        icon: 'static/favicon.png',
       },
     },
   ],

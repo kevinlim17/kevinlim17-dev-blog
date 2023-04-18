@@ -29,3 +29,18 @@ export type PostPageItemType = {
     frontmatter: PostFrontmatterType
   }
 }
+
+export type BrunchPostItemType = {
+  node: {
+    title: string
+    description: string
+    date: string
+    thumbnail: {
+      childImageSharp: {
+        gatsbyImageData: IGatsbyImageData
+      }
+    }
+    genre: string
+    url: string
+  }
+}

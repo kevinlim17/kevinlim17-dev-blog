@@ -130,7 +130,7 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-manifest',
       options: {
-        icon: 'static/favicon.png',
+        icon: 'static/notion-avatar.png',
       },
     },
   ],

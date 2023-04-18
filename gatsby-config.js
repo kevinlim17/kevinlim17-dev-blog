@@ -113,5 +113,12 @@ module.exports = {
     },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-image`,
+    {
+      resolve: `gatsby-plugin-canonical-urls`,
+      options: {
+        siteUrl: '<https://kevinlim17.com>',
+        stripQueryString: true,
+      },
+    },
   ],
 }

@@ -120,5 +120,6 @@ module.exports = {
         stripQueryString: true,
       },
     },
+    `gatsby-plugin-sitemap`,
   ],
 }

@@ -24,7 +24,7 @@ const PostContainer: FunctionComponent<PostContainerProps> = function ({
   html,
   tableOfContents,
 }) {
-  const [windowWidth, setWindowWidth] = useState<number>(window.innerWidth)
+  const [windowWidth, setWindowWidth] = useState<number>(0)
 
   //handleResize 함수를 debounce로 감싸고, 시간(1000ms = 1sec)을 설정
   const handleResizeWidth = debounce(() => {

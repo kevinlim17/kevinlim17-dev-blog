@@ -101,7 +101,7 @@ const PostTOC: FunctionComponent<PostTOCProps> = function ({
 
   return (
     <PostTOCPositioner>
-      <PostTOCBlock top={50}>
+      <PostTOCBlock top={100}>
         <PostTOCContent
           id="table-of-contents"
           dangerouslySetInnerHTML={{ __html: tableOfContents }}

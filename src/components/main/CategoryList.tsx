@@ -33,11 +33,11 @@ export type CategoryListProps = {
 const CategoryListWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
-  width: 768px;
+  width: 70vw;
   margin: 50px auto 10px;
 
   @media (max-width: 768px) {
-    width: 100%;
+    width: 90vw;
     margin-top: 50px;
     padding: 0 20px;
   }

@@ -1,0 +1,18 @@
+[
+  {
+    "title": "에세이 01: 아침의 향기",
+    "description": "기억에 색을 입히는 수만 가지의 향.",
+    "date": "2023-01-02",
+    "thumbnail": "scent.jpg",
+    "genre": "✒️ 에세이",
+    "url": "https://brunch.co.kr/@kevinlim17/1"
+  },
+  {
+    "title": "동시대 예술 01: 히토 슈타이얼",
+    "description": "Between Atom and Bit, 경계를 가로지르는 통섭의 아티스트",
+    "date": "2023-01-03",
+    "thumbnail": "steyerl.jpg",
+    "genre": "🎨 현대미술",
+    "url": "https://brunch.co.kr/@kevinlim17/3"
+  }
+]

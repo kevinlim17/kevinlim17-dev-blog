@@ -25,15 +25,19 @@ type PostListProps = {
 
 const PostListWrapper = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-gap: 30px;
-  width: 768px;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 30px 20px;
+  width: 70vw;
   margin: 0 auto;
   padding: 50px 0 100px;
 
+  @media (max-width: 1200px) {
+    grid-template-columns: 1fr 1fr;
+  }
+
   @media (max-width: 768px) {
     grid-template-columns: 1fr;
-    width: 100%;
+    width: 90vw;
     padding: 50px 20px;
   }
 `

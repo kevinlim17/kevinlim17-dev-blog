@@ -35,7 +35,7 @@ const PostTemplate: FunctionComponent<PostTemplateProps> = function ({
     },
   } = edges[0]
   return (
-    <Template>
+    <Template headerTitle="🧑🏻‍💻 kevinlim17.dev">
       <PostHead
         title={title}
         summary={summary}

@@ -12,7 +12,7 @@ module.exports = {
     title: `kevinlim17-blog`,
     description: `코드를 쓰고 이야기를 개발합니다.`,
     author: `Seung Hyeon Lim`,
-    siteUrl: `https://gatsbystarterdefaultsource.gatsbyjs.io/`, //배포 후 변경 예정
+    siteUrl: `https://kevinlim17.com/`, //배포 후 변경 예정
   },
   plugins: [
     {
@@ -116,7 +116,7 @@ module.exports = {
     {
       resolve: `gatsby-plugin-canonical-urls`,
       options: {
-        siteUrl: '<https://kevinlim17.com>',
+        siteUrl: 'https://kevinlim17.com/',
         stripQueryString: true,
       },
     },

@@ -16,23 +16,58 @@
 
 
 ## 🧑🏻‍💻 Introduction
-
+**A Blog to share development stories and posts released at [brunch-stories](https://brunch.co.kr/@kevinlim17)**
 
 
 ## 🧭 Feature
 
-- **Static Site Built with Gatsby**
-- **Using Github Utterances**
-- **ToC(Table of Contents) in Post Pages**
-- **Continuous Deployment by Github Actions**
+- 📦&nbsp; : **Static Site Built with Gatsby**
+- 💬&nbsp; : **Comment Component powered by [Github Utterances](https://github.com/utterance/utterances)**
+- 🧮&nbsp; : **Use GraphQL to parse and process .md / .json data**
+- 🧩&nbsp; : **ToC(Table of Contents) in Post Pages**
+- 🔁&nbsp; : **Impl Continuous Deployment using [Github Actions](https://docs.github.com/en/actions)**
 
 ## 🌐 Structure
-
-
+```
+src
+ ┣ components
+ ┃ ┣ common // Generally-used components
+ ┃ ┃ ┣ Sticky.tsx /** Ref: velopert/velog-client Repo */
+ ┃ ┃
+ ┃ ┣ lib // Generally-used keyframes, styled-component, and etc.
+ ┃ ┃ ┗ GradientAnimation.tsx
+ ┃ ┃
+ ┃ ┣ main 
+ ┃ ┃
+ ┃ ┣ post 
+ ┃ ┃ ┣ CommentWidget.tsx /** Github Utterances */
+ ┃ ┃
+ ┃ ┣ profile
+ ┃ ┃
+ ┃ ┣ utils // Generally-used functions
+ ┃ ┃ ┗ GetScrollTop.tsx
+ ┃ ┃
+ ┃ ┗ writer
+ ┃
+ ┣ hooks // To impl infinite scroll, optimize scroll events, and observe html header
+ ┃
+ ┣ pages
+ ┃
+ ┣ templates 
+ ┃ ┗ post_template.tsx
+ ┃
+ ┗ types // Generally-used types
+ ┃ ┗ PostItem.types.ts
+```
 
 ## 📑 References
-
+- [Inflearn: React 기반 Gatsby로 기술 블로그 개발하기](https://www.inflearn.com/course/lecture?courseSlug=gatsby-%EA%B8%B0%EC%88%A0%EB%B8%94%EB%A1%9C%EA%B7%B8)
+- [Github Repo: FacerAin/facerain-blog](https://github.com/FacerAin/facerain-blog)
+- [Github Repo: velopert/velog-client](https://github.com/velopert/velog-client)
+- [Gatsby Official Reference](https://www.gatsbyjs.com/)
+- More on [Pull Requests](https://github.com/kevinlim17/kevinlim17-dev-blog/pulls)
 
 
 ## 📲 Contact
-
+- [📧 E-Mail : kevinlsh17@khu.ac.kr](mailto:kevinlsh17@khu.ac.kr)
+- Bug Report : [Use 'Fix Bug' Issue Template](https://github.com/kevinlim17/kevinlim17-dev-blog/issues/new/choose)

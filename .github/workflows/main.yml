@@ -1,0 +1,17 @@
+name: Deploy Gatsby Site
+on: 
+  push:
+    branches:
+      - main
+      
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🧑🏻‍💻 Checkout Source Code
+        uses: actions/checkout@v3
+        
+      - name: 🌐 Gatsby GH Pages Action
+        with:
+          access-token: ${{ secrets.GATSBY_DEPLOY_API_KEY }}
+          deploy-branch: release

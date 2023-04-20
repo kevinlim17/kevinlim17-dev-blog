@@ -95,8 +95,6 @@ const PostTOC: FunctionComponent<PostTOCProps> = function ({
         window.scroll({ top: elementTop, behavior: 'smooth' })
       })
     })
-
-    console.log(activeId)
   })
 
   return (

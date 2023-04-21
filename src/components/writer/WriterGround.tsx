@@ -1,8 +1,8 @@
 import React, { FunctionComponent, ReactNode } from 'react'
 import styled from '@emotion/styled'
 import { GradientAnimation } from 'components/lib/GradientAnimation'
-import { keyframes } from '@emotion/react'
 import TypeWriter from 'typewriter-effect'
+import { ContainerShapedAnimation } from 'components/lib/ContainerShapedAnimation'
 
 type WriterGroundProps = {
   children: ReactNode
@@ -42,12 +42,6 @@ const Wrapper = styled.div`
   }
 `
 
-const PaperShapedAnimation = keyframes`
-  0% { margin-left: -10vh; opacity: 0; }
-  50% { margin-left: -5vh; opacity: 0; }
-  100% { margin-left: 0vh; opacity: 1; }
-`
-
 const PaperShapedWrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -65,7 +59,7 @@ const PaperShapedWrapper = styled.div`
   border-bottom: 0px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 
-  animation-name: ${PaperShapedAnimation};
+  animation-name: ${ContainerShapedAnimation};
   animation-duration: 2.5s;
 
   @media (max-width: 1200px) {

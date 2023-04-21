@@ -16,3 +16,4 @@ jobs:
         with:
           access-token: ${{ secrets.GATSBY_DEPLOY_API_KEY }}
           deploy-branch: release
+          gatsby-args: --prefix-paths

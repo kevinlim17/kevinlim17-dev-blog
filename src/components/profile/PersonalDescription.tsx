@@ -27,6 +27,16 @@ const PersonalDescriptionWrapper = styled.div`
 
   animation-name: ${BoxAnimation};
   animation-duration: 2.5s;
+
+  @media (max-width: 1200px) {
+    width: 95%;
+    height: auto;
+    padding: 3vw;
+  }
+
+  @media (max-width: 768px) {
+    padding: 4vw;
+  }
 `
 
 const Slogan = styled.div`
@@ -37,6 +47,10 @@ const Slogan = styled.div`
 
   color: rgba(2, 0, 36, 0.8);
   margin-bottom: 2.5vh;
+
+  @media (max-width: 768px) {
+    font-size: 2.8vh;
+  }
 `
 
 const Border = styled.h1`
@@ -55,7 +69,7 @@ const SectionWrapper = styled.div`
 `
 
 const SectionTitle = styled.div`
-  font-size: 2.5vh;
+  font-size: 1.3rem;
   font-weight: 800;
   line-height: 1.4;
 
@@ -64,7 +78,15 @@ const SectionTitle = styled.div`
   padding-right: 1vw;
 
   color: rgba(2, 0, 36, 0.8);
-  
+
+  @media (max-width: 1200px) {
+    width: 17vw;
+  }
+
+  @media (max-width: 768px) {
+    width: 25vw;
+    font-size: 1.2rem;
+  }
 `
 
 const SectionDetail = styled.div`
@@ -85,6 +107,10 @@ const SectionDetail = styled.div`
     font-weight: 900;
     text-decoration: underline;
     text-underline-offset: 5px;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 0.9rem;
   }
 `
 

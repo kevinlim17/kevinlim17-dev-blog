@@ -1,21 +1,15 @@
 import React, { FunctionComponent } from 'react'
 import styled from '@emotion/styled'
-import { keyframes } from '@emotion/react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircleDot } from '@fortawesome/free-solid-svg-icons'
 import { IGatsbyImageData } from 'gatsby-plugin-image'
 import PersonalInfo from './PersonalInfo'
 import PersonalDescription from './PersonalDescription'
+import { ContainerShapedAnimation } from 'components/lib/ContainerShapedAnimation'
 
 type TabletContainerProps = {
   profileImage: IGatsbyImageData
 }
-
-const TabletShapedAnimation = keyframes`
-  0% { margin-bottom: -10vh; opacity: 0; }
-  50% { margin-bottom: -7vh; opacity: 0;}
-  100% { margin-bottom: 6vh; opacity: 1; }
-`
 
 const TabletShapedWrapper = styled.div`
   display: flex;
@@ -33,11 +27,20 @@ const TabletShapedWrapper = styled.div`
   border-radius: 25px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 
-  animation-name: ${TabletShapedAnimation};
+  animation-name: ${ContainerShapedAnimation};
   animation-duration: 2.5s;
 
   @media (max-width: 1200px) {
-    width: 90vw;
+    flex-direction: column;
+
+    width: 70vw;
+    height: 80%;
+
+    margin-top: 12vh;
+  }
+
+  @media (max-width: 768px) {
+    width: 90%;
   }
 `
 
@@ -50,6 +53,14 @@ const PhoneShapeCameraIcon = styled.div`
   color: rgba(255, 255, 255, 0.7);
   box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.3);
   border-radius: 50%;
+
+  @media (max-width: 1200px) {
+    margin: 0vh 1vh 2vh 1vh;
+  }
+
+  @media (max-width: 768px) {
+    margin: 0vh 1vh 4vh 1vh;
+  }
 `
 
 const TabletShapeContainer: FunctionComponent<TabletContainerProps> =

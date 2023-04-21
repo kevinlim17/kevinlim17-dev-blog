@@ -34,6 +34,10 @@ const ProfilePageWrapper = styled.div`
 
   animation: ${GradientAnimation} 15s ease-out infinite;
   background-size: 400%;
+
+  @media (max-width: 1200px) {
+    height: 150%;
+  }
 `
 
 const ProfilePage: FunctionComponent<ProfileProps> = function ({

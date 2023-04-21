@@ -30,7 +30,7 @@ const PersonalInfoBox = styled.div`
 
   width: 35%;
   height: 72vh;
-  margin-left: 1.5vw;
+  margin: 0 0 0 1.5vw;
   padding: 3vw 2vw;
 
   background: rgba(255, 255, 255, 0.6);
@@ -39,18 +39,54 @@ const PersonalInfoBox = styled.div`
 
   animation-name: ${BoxAnimation};
   animation-duration: 2.5s;
+
+  @media (max-width: 1200px) {
+    flex-direction: row;
+
+    width: 95%;
+    height: auto;
+
+    margin-bottom: 1.5vh;
+  }
+`
+
+const PersonalInfoNameWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+  height: auto;
+
+  @media (max-width: 1200px) {
+    margin-top: 1vh;
+    margin-left: 2vw;
+    margin-right: 1vw;
+    padding-right: 1vw;
+
+    width: 25%;
+    height: 100%;
+  }
 `
 
 const PersonalInfoName = styled.div`
-  font-size: 2vw;
+  font-size: 1.7rem;
   font-weight: 900;
   line-height: 1.4;
 
   color: rgba(2, 0, 36, 0.8);
+
+  @media (max-width: 1200px) {
+    width: 20%;
+    margin-bottom: 1rem;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 1.4rem;
+  }
 `
 
 const PersonalInfoNickname = styled.div`
-  font-size: 3vh;
+  font-size: 1.4rem;
   font-weight: 600;
   line-height: 1.4;
   margin-top: 0.1rem;
@@ -61,6 +97,10 @@ const PersonalInfoNickname = styled.div`
     text-decoration: underline;
     text-underline-offset: 5px;
   }
+
+  @media (max-width: 768px) {
+    font-size: 0.9rem;
+  }
 `
 
 const PersonalInfoBorder = styled.h1`
@@ -69,6 +109,10 @@ const PersonalInfoBorder = styled.h1`
   width: 100%;
 
   margin: 2vh 0 1vh 0;
+
+  @media (max-width: 1200px) {
+    display: none;
+  }
 `
 
 const PersonalInfoContact = styled.div`
@@ -79,6 +123,11 @@ const PersonalInfoContact = styled.div`
   place-items: start;
 
   margin-top: 1vh;
+
+  @media (max-width: 1200px) {
+    border-left: 3px solid rgba(2, 0, 36, 0.1);
+    padding-left: 1vw;
+  }
 `
 
 const PersonalInfoContactIcon = styled.div`
@@ -94,10 +143,18 @@ const PersonalInfoContactIcon = styled.div`
   font-size: 2.5vh;
   margin: 0.3rem 0.4vw 0.3rem 0.1rem;
   color: rgba(2, 0, 36, 1);
+
+  @media (max-width: 768px) {
+    width: 2.2vh;
+    height: 2.2vh;
+    font-size: 1.4vh;
+
+    margin: 0.4rem 0rem 0.3rem 0.1rem;
+  }
 `
 
 const PersonalInfoContactText = styled.div`
-  font-size: 2.2vh;
+  font-size: 1.1rem;
   font-weight: 700;
   line-height: 1.2;
   margin: 0.6rem 0;
@@ -111,6 +168,11 @@ const PersonalInfoContactText = styled.div`
     text-decoration: underline;
     text-underline-offset: 5px;
   }
+
+  @media (max-width: 768px) {
+    font-size: 0.9rem;
+    margin: 0.4rem 0;
+  }
 `
 
 const PersonalInfo: FunctionComponent<PersonalInfoProps> = function ({
@@ -120,10 +182,12 @@ const PersonalInfo: FunctionComponent<PersonalInfoProps> = function ({
     <PersonalInfoBox>
       <ProfileImage profileImage={profileImage} />
 
-      <PersonalInfoName>Seung Hyeon Lim</PersonalInfoName>
-      <PersonalInfoNickname>
-        <a href="https://github.com/kevinlim17">🧑🏻‍💻kevinlim17 </a>
-      </PersonalInfoNickname>
+      <PersonalInfoNameWrapper>
+        <PersonalInfoName>Seung Hyeon Lim</PersonalInfoName>
+        <PersonalInfoNickname>
+          <a href="https://github.com/kevinlim17">🧑🏻‍💻kevinlim17 </a>
+        </PersonalInfoNickname>
+      </PersonalInfoNameWrapper>
 
       <PersonalInfoBorder />
 

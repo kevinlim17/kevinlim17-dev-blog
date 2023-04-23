@@ -134,5 +134,6 @@ module.exports = {
         icon: 'static/notion-avatar.png',
       },
     },
+    `gatsby-plugin-cname`,
   ],
 }

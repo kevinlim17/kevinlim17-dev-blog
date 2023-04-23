@@ -35,19 +35,18 @@ src
  ┃ ┃ ┣ Sticky.tsx /** Ref: velopert/velog-client Repo */
  ┃ ┃
  ┃ ┣ lib // Generally-used keyframes, styled-component, and etc.
- ┃ ┃ ┗ GradientAnimation.tsx
  ┃ ┃
- ┃ ┣ main 
+ ┃ ┣ main // Index Page Components
  ┃ ┃
- ┃ ┣ post 
+ ┃ ┣ post // Post Page Components
  ┃ ┃ ┣ CommentWidget.tsx /** Github Utterances */
  ┃ ┃
- ┃ ┣ profile
+ ┃ ┣ profile // Profile Page Components
  ┃ ┃
  ┃ ┣ utils // Generally-used functions
  ┃ ┃ ┗ GetScrollTop.tsx
  ┃ ┃
- ┃ ┗ writer
+ ┃ ┗ writer // Writer's Ground Components
  ┃
  ┣ hooks // To impl infinite scroll, optimize scroll events, and observe html header
  ┃

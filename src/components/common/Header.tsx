@@ -5,6 +5,7 @@ import { faCode, faPen, faAddressCard } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useScrollEvent } from 'hooks/useScrollEvent'
 import { toFit } from 'hooks/toFit'
+import CustomToolTip from './ToolTip'
 
 type HeaderTitleProps = {
   titleText: string
@@ -95,19 +96,27 @@ const Header: FunctionComponent<HeaderTitleProps> = function ({ titleText }) {
   return (
     <Wrapper isScroll={isScroll}>
       <Title to="/">{titleText}</Title>
-      <SectionItem to="/" description="Developer's Space" isScroll={isScroll}>
-        <FontAwesomeIcon icon={faCode} />
-      </SectionItem>
-      <SectionItem
-        to="/brunch_stories"
-        description="Writer's Space"
-        isScroll={isScroll}
-      >
-        <FontAwesomeIcon icon={faPen} />
-      </SectionItem>
-      <SectionItem to="/profile" description="Profile" isScroll={isScroll}>
-        <FontAwesomeIcon icon={faAddressCard} />
-      </SectionItem>
+      <CustomToolTip title="Developer's Space">
+        <SectionItem to="/" description="Developer's Space" isScroll={isScroll}>
+          <FontAwesomeIcon icon={faCode} />
+        </SectionItem>
+      </CustomToolTip>
+
+      <CustomToolTip title="Writer's Space">
+        <SectionItem
+          to="/brunch_stories"
+          description="Writer's Space"
+          isScroll={isScroll}
+        >
+          <FontAwesomeIcon icon={faPen} />
+        </SectionItem>
+      </CustomToolTip>
+
+      <CustomToolTip title="Profile">
+        <SectionItem to="/profile" description="Profile" isScroll={isScroll}>
+          <FontAwesomeIcon icon={faAddressCard} />
+        </SectionItem>
+      </CustomToolTip>
     </Wrapper>
   )
 }

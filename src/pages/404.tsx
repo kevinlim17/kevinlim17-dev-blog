@@ -10,6 +10,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Footer from 'components/common/Footer'
+import CustomToolTip from 'components/common/ToolTip'
 
 const NotFoundPageContainer = styled.div`
   display: flex;
@@ -115,15 +116,23 @@ const NonFoundPage: FunctionComponent = function () {
             찾을 수 없는 페이지입니다. <br /> 다른 콘텐츠를 보시려면 👇
           </NotFoundDescriptionInfo>
           <LinkButtonWrapper>
-            <LinkIconButton to="/">
-              <FontAwesomeIcon icon={faHouse} />
-            </LinkIconButton>
-            <LinkIconButton to="/brunch_stories">
-              <FontAwesomeIcon icon={faPen} />
-            </LinkIconButton>
-            <LinkIconButton to="/profile">
-              <FontAwesomeIcon icon={faAddressCard} />
-            </LinkIconButton>
+            <CustomToolTip title="Developer's Space" placement="top">
+              <LinkIconButton to="/">
+                <FontAwesomeIcon icon={faHouse} />
+              </LinkIconButton>
+            </CustomToolTip>
+
+            <CustomToolTip title="Writer's Space" placement="top">
+              <LinkIconButton to="/brunch_stories">
+                <FontAwesomeIcon icon={faPen} />
+              </LinkIconButton>
+            </CustomToolTip>
+
+            <CustomToolTip title="Profile" placement="top">
+              <LinkIconButton to="/profile">
+                <FontAwesomeIcon icon={faAddressCard} />
+              </LinkIconButton>
+            </CustomToolTip>
           </LinkButtonWrapper>
         </NotFoundDescriptionWrapper>
       </NotFoundPageWrapper>

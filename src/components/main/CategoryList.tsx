@@ -59,7 +59,7 @@ const CategoryItem = styled(({ active, ...props }: GatsbyLinkProps) => (
   /** Text Properties */
   color: ${({ active }) => (active ? 'white' : 'black')};
   text-align: center;
-  margin-right: 20px;
+  margin: 10px 20px 0 0;
   padding: 8px 12px;
   font-size: 18px;
   font-weight: ${({ active }) => (active ? '800' : '400')};

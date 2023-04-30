@@ -39,10 +39,12 @@ const Title = styled.div`
   text-overflow: ellipsis;
   white-space: normal;
   overflow-wrap: break-word;
+  word-break: keep-all;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   font-size: 20px;
   font-weight: 800;
+  line-height: 1.3;
 `
 
 const Date = styled.div`
@@ -60,7 +62,7 @@ const Category = styled.div`
 
 const CategoryItem = styled.div`
   margin: 2.5px 5px;
-  padding: 3px 5px;
+  padding: 5px 7px;
   border-radius: 3px;
   background: rgba(3, 0, 51, 0.8);
   font-size: 14px;

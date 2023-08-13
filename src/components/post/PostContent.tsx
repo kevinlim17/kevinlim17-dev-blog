@@ -20,6 +20,7 @@ const MarkdownRenderer = styled.div`
     max-width: 80vw;
     margin-left: 5vw;
     border: 0px;
+    line-height: 2;
   }
 
   // Markdown Style
@@ -87,8 +88,9 @@ const MarkdownRenderer = styled.div`
   // Adjust Quotation Element Style
   blockquote {
     margin: 30px 0;
-    padding: 5px 15px;
+    padding: 30px 15px;
     border-left: 2px solid rgba(184, 184, 184, 0.5);
+    background: rgba(184, 184, 184, 0.1);
   }
 
   // Adjust List Element Style

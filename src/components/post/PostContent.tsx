@@ -33,6 +33,10 @@ const MarkdownRenderer = styled.div`
     padding: 3px 0;
   }
 
+  img {
+    margin: 10px 0;
+  }
+
   // Adjust Heading Element Style
   h1 {
     font-weight: 900;
@@ -60,7 +64,7 @@ const MarkdownRenderer = styled.div`
   }
 
   h1 {
-    font-size: 30px;
+    font-size: 40px;
   }
 
   h2 {
@@ -87,8 +91,8 @@ const MarkdownRenderer = styled.div`
 
   // Adjust Quotation Element Style
   blockquote {
-    margin: 30px 0;
-    padding: 30px 15px;
+    margin: 10px 0;
+    padding: 10px 15px;
     border-left: 2px solid rgba(184, 184, 184, 0.5);
     background: rgba(184, 184, 184, 0.1);
   }

@@ -44,7 +44,8 @@ thumbnail: './blog_intro.png'
 (자세한 포스트 로드맵은 **📝 앞으로의 계획** 에서...) 브런치 스토리에 남긴 글들이 책이 될 수 있듯(실제로 작가 지원 프로젝트의 일환으로 가능한 일입니다), **이 블로그도 하나의 책이 될 것입니다.** 그리고 책의 제본에는 작가의 각인이 남기 마련입니다. 그렇게 주인장이 생산해낸 텍스트는  그 어떤 필터도 거치지 않고 온전히 주인장 자신의 책임으로 남겨집니다. 
 
 **개발자와 글쓴이으로서의 정체성을 동시에 지닌 하나의 개인이,**
-**웹의 세계에서, 직업 윤리와 창작자의 양심을 꿋꿋이 지켜내며, 써내려 간 뒤 배포하는 것 그리고 공유하는 것.**
+**웹의 세계에서, 직업 윤리와 창작자의 양심을 꿋꿋이 지켜내며,** 
+**써내려 간 뒤 배포하는 것 그리고 공유하는 것.**
 
 이 블로그가 지닌, 그리고 주인장이 지켜나가야 할 가장 중요한 가치입니다.
 
@@ -56,8 +57,8 @@ thumbnail: './blog_intro.png'
 ### TypeScript & React
 
 <p align="left">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Typescript_logo_2020.svg/1200px-Typescript_logo_2020.svg.png" width="25%">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/1200px-React-icon.svg.png" width="25%"/>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Typescript_logo_2020.svg/1200px-Typescript_logo_2020.svg.png" width="15%">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/1200px-React-icon.svg.png" width="15%"/>
 </p>
 
 > Image Reference: Wikipedia
@@ -87,19 +88,99 @@ Array에 Boolean을 더했는데, 짜잔(?!) String이 되었습니다!
 ### Gatsby & GraphQL
 
 <p align="left">
-    <img src="https://upload.wikimedia.org/wikipedia/en/d/d0/Gatsby_Logo.png" width="25%">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/GraphQL_Logo.svg/1024px-GraphQL_Logo.svg.png" width="25%"/>
+    <img src="https://upload.wikimedia.org/wikipedia/en/d/d0/Gatsby_Logo.png" width="15%">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/GraphQL_Logo.svg/1024px-GraphQL_Logo.svg.png" width="15%"/>
 </p>
 
 > Image Reference: Wikipedia
+> 이 문단의 GraphQL 관련 내용은 **99CORN**님의 [**[간단정리] GraphQL이란? (REST api와 차이점)**](https://hahahoho5915.tistory.com/63)을 참고해 작성하였음을 밝힙니다.
 
 > **Gatsby** is an open-source static site generator <br/>
 > built on top of Node.js using **React and GraphQL.**
 
 [위키피디아](https://en.wikipedia.org/wiki/Gatsby_(JavaScript_framework))의 설명에서 쉽게 알 수 있듯이, Gastby는 정적 웹 사이트 개발을 지원하는 JavaScript 프레임워크입니다. React라는 프론트엔드 라이브러리와 GraphQL라는 데이터 쿼리 언어를 활용하지요. 기본적으로, '**정적(Static)**'이므로, 백엔드 프레임워크를 필요로 하지 않습니다. (물론 백엔드가 구현되어 있는 경우에만 제작할 수 있는 기능을 구현하는 데 제약이 있다는 의미입니다.) **웹사이트를 방문하는 사람과 UI 간의 상호작용이 극히 제한된 형태로만 필요한 경우** -댓글 기능을 제외한 블로그 혹은 포트폴리오 사이트가 이에 해당됩니다- 에 Gatsby는 매우 좋은 선택지입니다. 지금 이 포스트를 읽는 여러분이 방문한 웹의 '무인도'도, [Github Utterances](https://github.com/utterance)를 활용한 댓글 기능을 제외하면, 바로 그러한 상황에 해당되기에 기꺼이 '블로그 건설 방법론'으로 택했음을 밝힙니다. 
 
-### Github Action
+**Gatsby**가 방법론이었다면, **GraphQL**은 새로 지을 건물에 어떻게 '데이터'라는 물자를 공급할 것인지에 대한 해답입니다. 백엔드에서 API를 설계한다고 하면, **REST API**를 작성하는 것이 일반적입니다. 
 
+이런 식의 관계형 데이터베이스가 존재한다고 가정해 봅시다. (출처는 개인 Notion입니다.)
+<p align="left">
+    <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/519710e7-0629-40c0-84f3-23794856ab60" width="100%">
+    
+</p>
+
+위를 바탕으로 구성한 REST API는 다음과 같은 엔드포인트(Endpoint)를 가질 수 있습니다.
+```
+
+-> 장르를 기준으로 작성하는 경우
+phrases-database.dev/api/sf
+phrases-database.dev/api/sf/{reading_status}
+
+// reading_status는 시작전 / 읽는중 / 완료에 따라 각각 0 / 1 / 2의 값을 가짐.
+
+-> 상태를 기준으로 작성하는 경우
+phrases-database.dev/api/done
+phrases-database.dev/api/in_progress
+phrases-database.dev/api/in_progress/{genre} 
+
+```
+
+아래는 특정 책의 정보에 대한 request와 response의 예시입니다.
+(실제 안드로이드 네이티브에서 사용하는 Api Client 코드와 유사한 형태입니다. 비약이 많으니 안드로이드 개발자분들의 너른 양해🙏를 부탁드립니다.)
+
+```kotlin
+data class Book {
+    val title: String,
+    val genre: String,
+    val status: Int,
+    val writer: String,
+    val phrases: List<String>,
+    val summary: String,
+    val pros: String,
+    val cons: String
+}
+
+interface APIClient {
+
+    // REST API Request
+    @GET("sf/{reading_status}")
+    suspended fun getSFBookDetailbyStatus(@Path{reading_status} reading_status: Int): List<Book>
+
+    ...
+
+    companion object {
+
+        private const val baseUrl = "https://phrases-database.dev/api"
+
+        fun create(): ApiClient {
+
+            ...
+        }
+    }
+}
+
+```
+```json
+[
+    {
+        name: "멋진 신세계",
+        genre: "sf",
+        status: 0,
+        writer: "올더스 헉슬리",
+        phrases: [],
+        summary: "",
+        pros: "",
+        cons: "",
+    }
+]
+```
+
+### Github Action
+<p align="left">
+    <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/2fca0b4b-66f0-4560-ad99-2808d2cd14df" width="15%">
+    
+</p>
+
+> Image Reference: [Github Group: action](https://github.com/actions)
 
 ---
 

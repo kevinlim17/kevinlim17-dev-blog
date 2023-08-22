@@ -25,7 +25,7 @@ const MarkdownRenderer = styled.div`
 
   // Markdown Style
   line-height: 1.8;
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 400;
 
   // Apply Padding Attribute to All Elements
@@ -159,8 +159,11 @@ const MarkdownRenderer = styled.div`
     padding: 3px 8px;
     font-size: 14px;
     background-color: rgba(2, 0, 36, 1);
-    color: rgba(0, 255, 109, 0.8);
+    color: rgba(0, 255, 109, 0.6);
     margin-right: 2px;
+    border-radius: 0.5rem;
+    box-shadow: rgba(0, 0, 0, 0.12) 0 3px 1px -2px,
+    rgba(0, 0, 0, 0.14) 0 2px 2px 0, rgba(0, 0, 0, 0.12) 0 1px 5px 0;
   }
 
   @media screen and (max-width: 768px) {

@@ -22,5 +22,14 @@
     "thumbnail":"school.jpg",
     "genre":"✒️ 에세이",
     "url": "https://brunch.co.kr/@kevinlim17/5"
+  },
+  {
+    "title": "OneWord 01 : 정치(1)",
+    "description": "당신이 몸담는 공동체가 작동하는 방식",
+    "date": "2023-08-20",
+    "thumbnail": "politics.png",
+    "genre": "1️⃣ OneWord",
+    "url": "https://brunch.co.kr/@kevinlim17/2"
   }
+
 ]

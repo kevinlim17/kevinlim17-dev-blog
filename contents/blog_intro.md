@@ -43,7 +43,7 @@ thumbnail: './blog_intro.png'
 브런치 스토리에는 예술, 사회, 문학, 과학에 대한 이야기, 그리고 여러 분야를 통섭하는 모험담을 써내려 갈 예정이라면, 이곳에는 오롯이 **Code**에 대한 글을 남길 예정입니다.
 (자세한 포스트 로드맵은 **📝 앞으로의 계획** 에서...) 브런치 스토리에 남긴 글들이 책이 될 수 있듯(실제로 작가 지원 프로젝트의 일환으로 가능한 일입니다), **이 블로그도 하나의 책이 될 것입니다.** 그리고 책의 제본에는 작가의 각인이 남기 마련입니다. 그렇게 주인장이 생산해낸 텍스트는  그 어떤 필터도 거치지 않고 온전히 주인장 자신의 책임으로 남겨집니다. 
 
-**개발자와 글쓴이으로서의 정체성을 동시에 지닌 하나의 개인이,**
+**개발자와 글쓴이으로서의 정체성을 동시에 지닌 하나의 개인이,** </br>
 **웹의 세계에서, 직업 윤리와 창작자의 양심을 꿋꿋이 지켜내며,** 
 **써내려 간 뒤 배포하는 것 그리고 공유하는 것.**
 
@@ -92,7 +92,7 @@ Array에 Boolean을 더했는데, 짜잔(?!) String이 되었습니다!
     <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/GraphQL_Logo.svg/1024px-GraphQL_Logo.svg.png" width="15%"/>
 </p>
 
-> Image Reference: Wikipedia
+> Image Reference: Wikipedia </br>
 > 이 문단의 GraphQL 관련 내용은 **99CORN**님의 [**[간단정리] GraphQL이란? (REST api와 차이점)**](https://hahahoho5915.tistory.com/63)을 참고해 작성하였음을 밝힙니다.
 
 > **Gatsby** is an open-source static site generator <br/>
@@ -100,7 +100,7 @@ Array에 Boolean을 더했는데, 짜잔(?!) String이 되었습니다!
 
 [위키피디아](https://en.wikipedia.org/wiki/Gatsby_(JavaScript_framework))의 설명에서 쉽게 알 수 있듯이, Gastby는 정적 웹 사이트 개발을 지원하는 JavaScript 프레임워크입니다. React라는 프론트엔드 라이브러리와 GraphQL라는 데이터 쿼리 언어를 활용하지요. 기본적으로, '**정적(Static)**'이므로, 백엔드 프레임워크를 필요로 하지 않습니다. (물론 백엔드가 구현되어 있는 경우에만 제작할 수 있는 기능을 구현하는 데 제약이 있다는 의미입니다.) **웹사이트를 방문하는 사람과 UI 간의 상호작용이 극히 제한된 형태로만 필요한 경우** -댓글 기능을 제외한 블로그 혹은 포트폴리오 사이트가 이에 해당됩니다- 에 Gatsby는 매우 좋은 선택지입니다. 지금 이 포스트를 읽는 여러분이 방문한 웹의 '무인도'도, [Github Utterances](https://github.com/utterance)를 활용한 댓글 기능을 제외하면, 바로 그러한 상황에 해당되기에 기꺼이 '블로그 건설 방법론'으로 택했음을 밝힙니다. 
 
-**Gatsby**가 방법론이었다면, **GraphQL**은 새로 지을 건물에 어떻게 '데이터'라는 물자를 공급할 것인지에 대한 해답입니다. 백엔드에서 API를 설계한다고 하면, **REST API**를 작성하는 것이 일반적입니다. 
+**Gatsby**가 방법론이었다면, **GraphQL**은 새로 지을 건물에 어떻게 '데이터'라는 물자를 공급할 것인지에 대한 해답입니다. 사용자가 보는 '뷰(View)'에 데이터를 나르는, 백엔드에서 API를 설계한다고 하면, **REST API**를 작성하는 것이 일반적입니다. 
 
 이런 식의 관계형 데이터베이스가 존재한다고 가정해 봅시다. (출처는 개인 Notion입니다.)
 <p align="left">
@@ -122,12 +122,18 @@ phrases-database.dev/api/done
 phrases-database.dev/api/in_progress
 phrases-database.dev/api/in_progress/{genre} 
 
+
 ```
 
-아래는 특정 책의 정보에 대한 request와 response의 예시입니다.
+아래는 특정 책의 정보에 대한 request와 response의 예시입니다. </br>
 (실제 안드로이드 네이티브에서 사용하는 Api Client 코드와 유사한 형태입니다. 비약이 많으니 안드로이드 개발자분들의 너른 양해🙏를 부탁드립니다.)
 
+</br>
+
+**Data Request from Client(Android Native)**
+
 ```kotlin
+
 data class Book {
     val title: String,
     val genre: String,
@@ -158,7 +164,11 @@ interface APIClient {
     }
 }
 
+
 ```
+
+**Data Response**
+
 ```json
 [
     {

@@ -297,7 +297,7 @@ Gatsby는 또 한 번 해냅니다. 배포하기도 굉장히 쉽습니다. [**G
 
 
 <p align="left">
-    <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/b3e6ce82-6b68-48c6-8ef9-2ef07aa54e1b" width="30%", height="10%">
+    <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/b3e6ce82-6b68-48c6-8ef9-2ef07aa54e1b" width="30%">
     
 </p>
 
@@ -311,7 +311,7 @@ Gatsby는 또 한 번 해냅니다. 배포하기도 굉장히 쉽습니다. [**G
 
 
 <p align="left">
-    <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/bf95eb17-8901-4535-895e-893f8509f44d" width="30%", height="10%", border="1px">
+    <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/bf95eb17-8901-4535-895e-893f8509f44d" width="30%", border="1px">
 </p>
 
 > **모바일 사용자 여러분, ToC가 여기 있습니다!**

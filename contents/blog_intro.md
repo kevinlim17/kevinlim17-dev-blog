@@ -122,6 +122,7 @@ phrases-database.dev/api/done
 phrases-database.dev/api/in_progress
 phrases-database.dev/api/in_progress/{genre} 
 
+
 ```
 
 아래는 특정 책의 정보에 대한 request와 response의 예시입니다. </br>
@@ -195,6 +196,7 @@ interface APIClient {
 **Execute Query**
 
 ```graphql
+
 query BookQuery($id: String!) {
   book(id: $id) {
     name
@@ -202,8 +204,10 @@ query BookQuery($id: String!) {
     writer
   }
 }
+
 ```
 ```kotlin
+
  // Create Client
   val apolloClient = ApolloClient.Builder()
       .serverUrl("https://phrases-database.dev/graphql")
@@ -211,11 +215,13 @@ query BookQuery($id: String!) {
 
   // Execute your query. This will suspend until the response is received.
   val response = apolloClient.query(BookQuery(id = "1")).execute()
+
 ```
 
 **GraphQL Response**
 
 ```graphql
+
 {
     "data": {
         "book": {
@@ -225,6 +231,7 @@ query BookQuery($id: String!) {
         }
     }
 }
+
 ```
 
 GraphQL이 가지는 이점을 위의 세 코드로 다시 정리해 보았습니다. 
@@ -246,6 +253,7 @@ GraphQL과 안드로이드에 대한 자세한 이야기는 추후에 다른 포
 마지막으로, 배포입니다. 페이지를 수정하거나 포스트를 올릴 때마다 매번 `gatsby build` 명령어를 입력하기는... 귀찮았습니다. (개발 완료 시점에서) **앞으로 제한된 환경**에서 블로그에 글을 쓰게 될 텐데, 미리 배포를 자동화시켜 놓으면, 불확실성을 조금이나마 줄일 수 있을 것이라 생각했습니다. (물론 그 제한된 환경이라 함은.. 네 맞습니다. 군대입니다.)
 
 ```yml
+
 name: Deploy kevinlim17-blog
 on:
   push:
@@ -264,6 +272,7 @@ jobs:
         with:
           access-token: ${{ secrets.GATSBY_DEPLOY_API_KEY }}
           deploy-branch: release
+
 ```
 
 Gatsby는 또 한 번 해냅니다. 배포하기도 굉장히 쉽습니다. [**Gatsby Publish**](https://github.com/enriikke/gatsby-gh-pages-action)를 활용하면 위와 같이 간단한 `.yml` 파일 작성으로 간단히 자동화 프로세스을 구현할 수 있습니다. 
@@ -276,17 +285,50 @@ Gatsby는 또 한 번 해냅니다. 배포하기도 굉장히 쉽습니다. [**G
 4. 제공된 Action을 사용해 release branch에 deploy합니다.
 
 이렇게 구성하면, 로컬에서 `git push origin main`만 입력하면 (조금 기다린 뒤에) </br>
-짜잔(?!) 여러분이 보고 계신 포스트가 나타납니다. 
+**짜잔(?!) 여러분이 보고 계신 포스트가 나타납니다.**
 
 ---
 
 ## 📈 개선 사항
 
+이 글을 읽는 블로그의 사용자인 여러분이, 체감하셨을 지 모르겠지만, 이 사이트는 아직 온전한 형태가 아닙니다. 이 공간이 가진 문제점 중 굵직굵직한 부분만 추려서 짧게 언급해 보도록 하겠습니다.
+
 ### Mobile UI 
+
+
+<p align="left">
+    <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/b3e6ce82-6b68-48c6-8ef9-2ef07aa54e1b" width="30%", height="10%">
+    
+</p>
+
+> **이 문단을 사진 한 장으로 요약한 결과..**
+
+어떻게든 군입대 전에 배포하려는 나름의 과욕 때문에 벌어진 참사입니다. 위의 이미지가 그 대표적인 예시이며, 눈에 띄는 것들도, 조금은 덜 보이는 '깨짐'들도 수두룩합니다. (방문자가 개발자이든 아니든 간에)페이지에 대한 접근성을 높이려면, 모바일 환경의 UI 개선은 필수적입니다. 당장 눈에 보이는 것부터 하나하나씩 고쳐 나가는 게 1차적인 개선 목표입니다. 
 
 ### ToC(Table of Contents)
 
+지금의 ToC는 [**Velog**](https://velog.io/)의 그것처럼, 화면의 좌우 폭이 1200px를 넘지 않으면, 아예 사용 자체가 불가능하도록(정확히는 Unvisible 처리되도록) 되어 있습니다. (실제로 ToC 구현에 [Velog-Client 오픈소스](https://github.com/velopert/velog-client)가 많은 도움을 주었습니다. 이 자리를 빌어 깊은 감사를 드립니다.) 모바일에서 사용할 때는 물론이거니와, 일반적인 모니터 화면의 2/3 이하로만 폭이 줄어도 ToC를 활용하기 어려워집니다. 
+
+
+<p align="left">
+    <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/bf95eb17-8901-4535-895e-893f8509f44d" width="30%", height="10%", border="1px">
+</p>
+
+> **모바일 사용자 여러분, ToC가 여기 있습니다!**
+
+그래서 화면 폭 1200px 이하에서는 ToC의 숨김-펼침 처리가 가능하도록 수정하는 것이 목표입니다. 일종의 웹 위의 위젯을 만드는 것인데요. 아무래도 관련 예제가 많이 없다 보니...(일단 ToC 관련 포스트가 많이 없습니다.) 이 글을 쓰는 사이버지식정보방 특성을 충분히 감안하더라도, 구현하려면 시간이 조금 걸릴 듯 합니다. 핑계가 어떻게 되었든, 이 블로그의 지속가능성을 높이기 위한 두 번째 미션에 걸맞는 목표인 것은 확실합니다.
+
 ### Categorize
+
+<p align="left">
+    <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/1e7c5632-3212-4889-aa8f-86ddd6437ba5" width="50%", border="1px">
+</p>
+
+현재는 글의 수가 고작 3개 뿐인 상황이라, 위와 같은 해시태그 방식으로 글을 분류해도 크게 상관이 없지만, 시리즈 단위 연재를 하게 되고, 글의 수가 많아지면(특히 해시태그가 무분별하게 많아지면), 위와 같은 방식은 <i>**"개발자가 코드로 하여금 웹에 공간을 빚어내고 글을 올려내니, 독자들이 보기에 좋지"**</i> 않을 수 있습니다.  
+
+시리즈 별로 하위 페이지를 분리시키는 게 "사용자가 보기에 좋을" 것입니다. 긴 호흡을 가진 글일수록 더욱 말이죠. 이 계획은 글이 충분히 쌓인 뒤에 찬찬히 실행될 예정이니, 이 블로그에 올라탄 독자 여러분은, 당분간은, 큰 기대를 하지 않는 편이 좋겠습니다. 
+
+
 ---
 
 ## 📝 앞으로의 계획

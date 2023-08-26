@@ -122,7 +122,6 @@ phrases-database.dev/api/done
 phrases-database.dev/api/in_progress
 phrases-database.dev/api/in_progress/{genre} 
 
-
 ```
 
 아래는 특정 책의 정보에 대한 request와 response의 예시입니다. </br>
@@ -184,6 +183,58 @@ interface APIClient {
 ]
 ```
 
+예시가 길었지만, 말하고자 하는 이야기는 단순합니다. 
+위에 언급된 데이터베이스는 적은 양의 정보만을 담고 있으나, 책이 수천-수만 권이 쌓이고, 필터에 적용되는 조건들이 많아질수록 엔드포인트도 늘어납니다. 서비스에서 필요한 응답마다 엔드포인트를 새로 구성해야 하기 때문이죠. 그만큼 필요한 HTTP 요청도 증가합니다. 그렇다면 **GraphQL이 가지는 이점**에는 무엇이 있을까요?
+
+1. HTTP 요청 횟수를 줄일 수 있다.
+2. 응답 사이즈를 임의로 조정할 수 있다.
+3. 프론트엔드 개발자와 백엔드 개발자의 소통 부담이 줄어든다.
+
+[Apollo Kotlin](https://github.com/apollographql/apollo-kotlin)의 예시를 살펴 보면서, 조금만 더 이야기 나누어 보겠습니다. (어째 글이 다른 길로 새고 있는 듯하지만... )
+
+**Execute Query**
+
+```graphql
+query BookQuery($id: String!) {
+  book(id: $id) {
+    name
+    genre
+    writer
+  }
+}
+```
+```kotlin
+ // Create Client
+  val apolloClient = ApolloClient.Builder()
+      .serverUrl("https://phrases-database.dev/graphql")
+      .build()
+
+  // Execute your query. This will suspend until the response is received.
+  val response = apolloClient.query(BookQuery(id = "1")).execute()
+```
+
+**GraphQL Response**
+
+```graphql
+{
+    "data": {
+        "book": {
+            "name": "멋진 신세계",
+            "genre": "sf",
+            "writer": "올디스 헉슬리"
+        }
+    }
+}
+```
+
+GraphQL이 가지는 이점을 위의 세 코드로 다시 정리해 보았습니다. 
+임의로 쿼리를 구성하여 그때그때 필요한 데이터만을 가져올 수 있다는 것(첫 번째 그리고 세 번째 예시), 그러므로 필요한 엔드포인트가 줄어들고, 당연하게도 HTTP 요청 횟수도 감소한다는 것(두 번째 예시)이 자명합니다. 
+
+사실 Meta(구 Facebook)에서 위와 같은 쿼리 언어를 개발하고 사용하기 시작한 이유도, Data Request 부담을 줄여 모바일 환경에서도 쾌적한 사용자 경험을 제공하기 위함이었습니다. 어떻게 보면, Gatsby로 개발하며 GraphQL을 공부할 수 밖에 없었던 상황 자체가, 모바일 개발자인 저로서는 행운이었다고 할 수 있겠네요.
+
+GraphQL과 안드로이드에 대한 자세한 이야기는 추후에 다른 포스트로 찾아뵙겠습니다.
+
+
 ### Github Action
 <p align="left">
     <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/2fca0b4b-66f0-4560-ad99-2808d2cd14df" width="15%">
@@ -191,6 +242,41 @@ interface APIClient {
 </p>
 
 > Image Reference: [Github Group: action](https://github.com/actions)
+
+마지막으로, 배포입니다. 페이지를 수정하거나 포스트를 올릴 때마다 매번 `gatsby build` 명령어를 입력하기는... 귀찮았습니다. (개발 완료 시점에서) **앞으로 제한된 환경**에서 블로그에 글을 쓰게 될 텐데, 미리 배포를 자동화시켜 놓으면, 불확실성을 조금이나마 줄일 수 있을 것이라 생각했습니다. (물론 그 제한된 환경이라 함은.. 네 맞습니다. 군대입니다.)
+
+```yml
+name: Deploy kevinlim17-blog
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Source Code
+        uses: actions/checkout@v3
+
+      - name: Gatsby GH Pages Action
+        uses: enriikke/gatsby-gh-pages-action@v2
+        with:
+          access-token: ${{ secrets.GATSBY_DEPLOY_API_KEY }}
+          deploy-branch: release
+```
+
+Gatsby는 또 한 번 해냅니다. 배포하기도 굉장히 쉽습니다. [**Gatsby Publish**](https://github.com/enriikke/gatsby-gh-pages-action)를 활용하면 위와 같이 간단한 `.yml` 파일 작성으로 간단히 자동화 프로세스을 구현할 수 있습니다. 
+
+위 코드를 간단하게 설명해 보자면,
+
+1. main branch에 `push`가 이루어지면, (`on: push: branches`)
+2. ubuntu 최신 환경에서
+3. Source Code를 Checkout하고,
+4. 제공된 Action을 사용해 release branch에 deploy합니다.
+
+이렇게 구성하면, 로컬에서 `git push origin main`만 입력하면 (조금 기다린 뒤에) </br>
+짜잔(?!) 여러분이 보고 계신 포스트가 나타납니다. 
 
 ---
 

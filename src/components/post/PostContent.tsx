@@ -169,7 +169,7 @@ const MarkdownRenderer = styled.div`
   @media screen and (max-width: 768px) {
     max-width: 90vw;
     padding: 80px 20px;
-    line-height: 1.6;
+    line-height: 1.8;
     font-size: 14px;
     margin-left: 0;
 

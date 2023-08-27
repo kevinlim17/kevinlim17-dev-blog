@@ -46,7 +46,7 @@ const Title = styled(Link)`
   }
 
   @media (max-width: 768px) {
-    font-size: 3vh;
+    font-size: 2.5vh;
   }
 `
 
@@ -73,9 +73,9 @@ const SectionItem = styled(Link)<{ description: string; isScroll: boolean }>`
   }
 
   @media (max-width: 768px) {
-    width: 2.5rem;
-    height: 2.5rem;
-    margin: auto 0.7rem;
+    width: 2rem;
+    height: 2rem;
+    margin: 0.5rem;
     font-size: 1rem;
   }
 `

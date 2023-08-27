@@ -21,7 +21,7 @@ const PostHeadInfoWrapper = styled.div`
 
   @media (max-width: 768px) {
     width: 90vw;
-    padding: 8vh 0 20px 20px;
+    padding: 10vh 5vw 2vh;
   }
 `
 

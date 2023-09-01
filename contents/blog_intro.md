@@ -85,6 +85,8 @@ Array에 Boolean을 더했는데, 짜잔(?!) String이 되었습니다!
 
 그리고 TypeScript는, 웹 개발을 시작하는 모든 이에게 기꺼이 추천할 만한, 최고의 개발 인플루언서, [**노마드 코더(Nomad Coder)의 강의**](https://nomadcoders.co/typescript-for-beginners/)로 기초를 쌓았습니다. 이미 Java 등의 객체지향(Object-Oriented) 언어를 접해보신 분들에게는 TypeScript에서 Class와 Interface를 어떤 방식으로 다루는지 비교하면서 공부하시는 것도 추천드립니다.
 
+---
+
 ### Gatsby & GraphQL
 
 <p align="left">
@@ -245,6 +247,7 @@ GraphQL이 가지는 이점을 위의 세 코드로 다시 정리해 보았습�
 
 GraphQL과 안드로이드에 대한 자세한 이야기는 추후에 다른 포스트로 찾아뵙겠습니다.
 
+---
 
 ### Github Action
 <p align="left">
@@ -310,6 +313,8 @@ Gatsby는 또 한 번 해냅니다. Github Action만 활용하면, 배포하기�
 
 어떻게든 군입대 전에 배포하려는 나름의 과욕 때문에 벌어진 참사입니다. 위의 이미지가 그 대표적인 예시이며, 눈에 띄는 것들도, 조금은 덜 보이는 '깨짐'들도 수두룩합니다. (방문자가 개발자이든 아니든 간에)페이지에 대한 접근성을 높이려면, 모바일 환경의 UI 개선은 필수적입니다. 당장 눈에 보이는 것부터 하나하나씩 고쳐 나가는 게 1차적인 개선 목표입니다. 
 
+---
+
 ### ToC(Table of Contents)
 
 지금의 ToC는 [**Velog**](https://velog.io/)의 그것처럼, 화면의 좌우 폭이 1200px를 넘지 않으면, 아예 사용 자체가 불가능하도록(정확히는 Unvisible 처리되도록) 되어 있습니다. (실제로 ToC 구현에 [Velog-Client 오픈소스](https://github.com/velopert/velog-client)가 많은 도움을 주었습니다. 이 자리를 빌어 깊은 감사를 드립니다.) 모바일에서 사용할 때는 물론이거니와, 일반적인 모니터 화면의 2/3 이하로만 폭이 줄어도 ToC를 활용하기 어려워집니다. 
@@ -322,6 +327,8 @@ Gatsby는 또 한 번 해냅니다. Github Action만 활용하면, 배포하기�
 > **모바일 사용자 여러분, ToC가 여기 있습니다!**
 
 그래서 화면 폭 1200px 이하에서는 ToC의 숨김-펼침 처리가 가능하도록 수정하는 것이 목표입니다. 일종의 웹 위의 위젯을 만드는 것인데요. 아무래도 관련 예제가 많이 없다 보니...(일단 ToC 관련 포스트가 많이 없습니다.) 이 글을 쓰는 사이버지식정보방의 제한된 환경을 감안하더라도 구현까지는 시간이 어느 정도 소요될 듯 합니다. 핑계가 어떻게 되었든, 이 블로그의 지속가능성을 높이기 위한 두 번째 미션에 걸맞는 목표인 것은 사실입니다. 
+
+---
 
 ### Categorize
 
@@ -360,6 +367,7 @@ Gatsby는 또 한 번 해냅니다. Github Action만 활용하면, 배포하기�
 이 시리즈는 안드로이드 개발에서 사용하는 두 언어(Java와 Kotlin)가 가진 강력한 특성, <br/>
 **객체지향(Object-Oriented)에 대한 이야기**로 문을 열겠습니다. 기대해 주세요.
 
+---
 
 ### Android: Never been tried
 
@@ -381,6 +389,7 @@ Gatsby는 또 한 번 해냅니다. Github Action만 활용하면, 배포하기�
 
 이 시리즈는 "**Android Native에 Yolo(You Only Look Once)를 이식하려면 어떻게 해야 할까?**"로 문을 열겠습니다.
 
+---
 
 ### Machine-Learning Standard
 
@@ -400,6 +409,7 @@ Gatsby는 또 한 번 해냅니다. Github Action만 활용하면, 배포하기�
 
 제목만 보면, 학점이 벌써 제 발을 저릴 것 같은 이 시리즈는 "**Black Box**" 에 대한 이야기로 문을 열겠습니다.
 
+---
 
 ### Code through Words
 

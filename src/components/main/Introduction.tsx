@@ -41,7 +41,7 @@ const Wrapper = styled.div`
 
   @media (max-width: 768px) {
     width: 90vw;
-    //height: 300px;
+    height: 100vh;
     padding: 0 20px;
   }
 `
@@ -76,6 +76,11 @@ const PhoneShapedWrapper = styled.div`
   @media (max-width: 1200px) {
     width: 90vw;
   }
+
+  @media (max-width: 768px) {
+    height: 90vh;
+    margin-top: 15vh;
+  }
 `
 
 const PhoneShapeCameraIcon = styled.div`
@@ -94,6 +99,11 @@ const ContentsWrapper = styled.div`
   flex-direction: row;
   justify-content: flex-start;
   margin-top: 5vh;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: center;
+  }
 `
 
 const TextWrapper = styled.div`
@@ -107,6 +117,11 @@ const TextWrapper = styled.div`
   padding-left: 2.5vw;
   padding-bottom: 1vh;
   border-left: 3px solid rgba(2, 0, 36, 0.3);
+
+  @media (max-width: 768px) {
+    padding-bottom: 10vh;
+    border-left: 1px solid rgba(2, 0, 36, 0.3);
+  }
 `
 
 const SubTitle = styled.div`
@@ -117,7 +132,9 @@ const SubTitle = styled.div`
 
   height: 8vh;
   @media (max-width: 768px) {
-    font-size: 1.4rem;
+    font-size: 1.3rem;
+    line-height: 1.6;
+    margin-bottom: 5vh;
   }
 `
 
@@ -131,7 +148,7 @@ const Title = styled.div`
   margin-bottom: 3vh;
 
   @media (max-width: 768px) {
-    font-size: 1.8rem;
+    font-size: 2rem;
   }
 `
 
@@ -145,7 +162,7 @@ const TitleBorder = styled.h1`
   }
 
   @media (max-width: 768px) {
-    padding: 1px 30vw;
+    padding: 1px 37vw;
   }
 `
 
@@ -177,9 +194,9 @@ const Introduction: FunctionComponent<IntroductionProps> = function ({
                       .typeString('for Better Community.')
                       .deleteAll()
                       .pauseFor(500)
-                      .typeString('Writing Codes <br />')
+                      .typeString('Writing Codes for <br />')
                       .pauseFor(1000)
-                      .typeString('for Open Source Contribution.')
+                      .typeString('Open Source Contribution.')
                       .deleteAll()
                       .pauseFor(500)
                       .typeString('Implement Applications <br />')

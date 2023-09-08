@@ -48,6 +48,11 @@ const PersonalInfoBox = styled.div`
 
     margin-bottom: 1.5vh;
   }
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: center;
+  }
 `
 
 const PersonalInfoNameWrapper = styled.div`
@@ -66,6 +71,14 @@ const PersonalInfoNameWrapper = styled.div`
     width: 25%;
     height: 100%;
   }
+
+  @media (max-width: 768px) {
+    width: 100%;
+    height: auto;
+    align-items: center;
+
+    margin: 0 0 0 0;
+  }
 `
 
 const PersonalInfoName = styled.div`
@@ -81,7 +94,9 @@ const PersonalInfoName = styled.div`
   }
 
   @media (max-width: 768px) {
-    font-size: 1.4rem;
+    font-size: 1.7rem;
+    width: auto;
+    margin-bottom: 0.5rem;
   }
 `
 
@@ -99,7 +114,11 @@ const PersonalInfoNickname = styled.div`
   }
 
   @media (max-width: 768px) {
-    font-size: 0.9rem;
+    margin-top: 0;
+    font-size: 1.1rem;
+
+    padding: 0.5vh 20vw;
+    border-bottom: 1px solid rgba(2, 0, 36, 0.1);
   }
 `
 
@@ -128,6 +147,12 @@ const PersonalInfoContact = styled.div`
     border-left: 3px solid rgba(2, 0, 36, 0.1);
     padding-left: 1vw;
   }
+
+  @media (max-width: 768px) {
+    border-left: 0px solid rgba(2, 0, 36, 0.1);
+    padding-left: 0;
+    margin: 4vh 0;
+  }
 `
 
 const PersonalInfoContactIcon = styled.div`
@@ -145,9 +170,9 @@ const PersonalInfoContactIcon = styled.div`
   color: rgba(2, 0, 36, 1);
 
   @media (max-width: 768px) {
-    width: 2.2vh;
-    height: 2.2vh;
-    font-size: 1.4vh;
+    width: 2.5vh;
+    height: 2.5vh;
+    font-size: 1.6vh;
 
     margin: 0.4rem 0rem 0.3rem 0.1rem;
   }
@@ -170,8 +195,9 @@ const PersonalInfoContactText = styled.div`
   }
 
   @media (max-width: 768px) {
-    font-size: 0.9rem;
+    font-size: 1.1rem;
     margin: 0.4rem 0;
+    padding: 0rem 0.4rem;
   }
 `
 

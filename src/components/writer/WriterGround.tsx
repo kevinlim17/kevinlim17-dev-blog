@@ -32,7 +32,7 @@ const Wrapper = styled.div`
   justify-content: flex-end;
   align-items: center;
   width: 70vw;
-  height: 150vh;
+  height: auto;
   margin: 0 auto;
 
   @media (max-width: 768px) {
@@ -63,7 +63,7 @@ const PaperShapedWrapper = styled.div`
   animation-duration: 2.5s;
 
   @media (max-width: 1200px) {
-    width: 90vw;
+    width: 94vw;
   }
 `
 
@@ -72,6 +72,10 @@ const WriterMotto = styled.div`
   font-weight: 800;
   line-height: 1.4;
   margin-top: 5vh;
+
+  @media (max-width: 768px) {
+    padding-left: 2vw;
+  }
 `
 
 const WriterInfo = styled.div`
@@ -85,7 +89,9 @@ const WriterInfo = styled.div`
   border-bottom: 3px solid rgba(255, 255, 255, 0.1);
 
   @media (max-width: 768px) {
-    font-size: 1.4rem;
+    font-size: 1.1rem;
+    line-height: 1.7;
+    padding-left: 2.5vw;
   }
 `
 
@@ -96,7 +102,7 @@ const WriterGround: FunctionComponent<WriterGroundProps> = function ({
     <Background>
       <Wrapper>
         <PaperShapedWrapper>
-          <WriterMotto>🎯&nbsp; As a writer...</WriterMotto>
+          <WriterMotto>🎯&nbsp;As a writer...</WriterMotto>
           <WriterInfo>
             <TypeWriter
               options={{

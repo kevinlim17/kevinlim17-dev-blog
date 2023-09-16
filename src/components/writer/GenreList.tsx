@@ -30,6 +30,7 @@ const GenreListWrapper = styled.div`
 
   @media (max-width: 768px) {
     width: 100%;
+    margin: 1vw;
   }
 `
 
@@ -60,7 +61,7 @@ const GenreItem = styled(({ active, ...props }: GatsbyLinkProps) => (
 
   @media (max-width: 768px) {
     font-size: 15px;
-    margin-right: 10px;
+    margin: 1vw;
   }
 `
 

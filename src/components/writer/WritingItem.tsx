@@ -17,7 +17,15 @@ const WritingItemWrapper = styled(Link)`
   border-radius: 0 0 15px 15px;
 
   &:hover {
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  }
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: flex-start;
+
+    border-radius: 15px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
   }
 `
 
@@ -26,6 +34,13 @@ const ThumbnailImage = styled(GatsbyImage)`
   height: 100%;
 
   border-radius: 0 0 0 15px;
+
+  @media (max-width: 768px) {
+    width: 100%;
+    height: 100%;
+
+    border-radius: 15px 0;
+  }
 `
 
 const WritingItemContent = styled.div`
@@ -33,19 +48,22 @@ const WritingItemContent = styled.div`
   display: flex;
   flex-direction: column;
   padding: 15px;
+
+  @media (max-width: 768px) {
+    padding: 5vw 3vw 0;
+  }
 `
 
 const Title = styled.div`
   display: -webkit-box;
   overflow: hidden;
-  margin-bottom: 6px;
   text-overflow: ellipsis;
   white-space: normal;
   overflow-wrap: break-word;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   font-size: 20px;
-  font-weight: 500;
+  font-weight: 600;
 
   color: white;
   margin-bottom: 1vh;
@@ -55,17 +73,20 @@ const Description = styled.div`
   display: -webkit-box;
   overflow: hidden;
   margin-top: auto;
+  margin-bottom: 4vh;
+
   text-overflow: ellipsis;
   white-space: normal;
   overflow-wrap: break-word;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
+
   font-size: 16px;
   font-weight: 300;
+  line-height: 1.4;
   opacity: 0.8;
 
   color: white;
-  margin-bottom: 4vh;
 `
 
 const Genre = styled.div`
@@ -90,6 +111,10 @@ const Date = styled.div`
   font-size: 14px;
   font-weight: 700;
   color: white;
+
+  @media (max-width: 768px) {
+    margin-bottom: 3vh;
+  }
 `
 
 const WritingItem: FunctionComponent<BrunchPostItemType> = function ({

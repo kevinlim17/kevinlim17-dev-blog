@@ -14,6 +14,10 @@ const WritingListWrapper = styled.div`
   grid-gap: 10px;
   width: 100%;
   margin: 5vh auto;
+
+  @media (max-width: 768px) {
+    margin-top: 2vh;
+  }
 `
 
 const WritingList: FunctionComponent<WritingListProps> = function ({

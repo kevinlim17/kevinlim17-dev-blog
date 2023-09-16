@@ -49,7 +49,8 @@ const Slogan = styled.div`
   margin-bottom: 2.5vh;
 
   @media (max-width: 768px) {
-    font-size: 2.8vh;
+    font-size: 2.3vh;
+    margin: 1vh 0;
   }
 `
 
@@ -84,8 +85,7 @@ const SectionTitle = styled.div`
   }
 
   @media (max-width: 768px) {
-    width: 25vw;
-    font-size: 1.2rem;
+    display: none;
   }
 `
 
@@ -111,6 +111,8 @@ const SectionDetail = styled.div`
 
   @media (max-width: 768px) {
     font-size: 0.9rem;
+    border-left: 3px solid rgba(2, 0, 36, 0.2);
+    padding: 1vw 3vw;
   }
 `
 

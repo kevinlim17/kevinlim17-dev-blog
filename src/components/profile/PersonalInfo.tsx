@@ -179,7 +179,7 @@ const PersonalInfoContactIcon = styled.div`
 `
 
 const PersonalInfoContactText = styled.div`
-  font-size: 1.1rem;
+  font-size: 2.25vh;
   font-weight: 700;
   line-height: 1.2;
   margin: 0.6rem 0;

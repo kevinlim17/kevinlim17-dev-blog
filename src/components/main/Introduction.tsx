@@ -109,7 +109,7 @@ const ContentsWrapper = styled.div`
 const TextWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: flex-start;
   height: 100%;
 
@@ -119,8 +119,9 @@ const TextWrapper = styled.div`
   border-left: 3px solid rgba(2, 0, 36, 0.3);
 
   @media (max-width: 768px) {
-    padding-bottom: 10vh;
+    padding: 3vh 3vw;
     border-left: 1px solid rgba(2, 0, 36, 0.3);
+    height: 80%;
   }
 `
 
@@ -149,6 +150,7 @@ const Title = styled.div`
 
   @media (max-width: 768px) {
     font-size: 2rem;
+    margin-bottom: 0;
   }
 `
 

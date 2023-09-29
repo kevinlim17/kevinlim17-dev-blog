@@ -32,7 +32,7 @@ thumbnail: './kotlin_conf23.png'
 >
 
 한 언어의 미래에 대해 논하려면, 먼저 과거와 현재를 알아야겠지요. 기꺼이 한 단락을 할애할 가치가 충분합니다. 
-Kotlin FAQ(Frequently Asked Questions) 페이지에 언급된, '[**Kotlin이 무엇이냐**](https://kotlinlang.org/docs/faq.html#what-is-kotlin)'라는 질문에 대한 답을 먼저 살펴보도록 하겠습니다.
+우선 Kotlin FAQ(Frequently Asked Questions) 페이지에 언급된, '[**Kotlin이 무엇이냐**](https://kotlinlang.org/docs/faq.html#what-is-kotlin)'라는 질문에 대한 답을 살펴보도록 하겠습니다.
 
 >
 > Kotlin is an open-source statically typed programming language that targets the JVM, Android, JavaScript, Wasm, and Native. <br/>
@@ -61,7 +61,7 @@ Kotlin FAQ(Frequently Asked Questions) 페이지에 언급된, '[**Kotlin이 무
 > 덩컨 맥그레거, 냇 프라이스, <i>자바에서 코틀린으로</i>, 오현석 역, (서울: 한빛미디어), 30p.
 >
 
-프로그래밍 세계에서 바인딩은 간단하게 ['**호출과 본문의 연결(Association of method call to the method body)**'](https://beginnersbook.com/2013/04/java-static-dynamic-binding/)이라고 정의할 수 있습니다. (원래는 '묶다'라는 의미로 널리 알려져 있지요.) Kotlin이라는 언어에서 정적 바인딩을 선호한다는 것은 크게 세 가지 의미를 지닙니다.
+프로그래밍 세계에서 바인딩은 간단하게 ['**호출과 본문의 연결(Association of method call to the method body)**'](https://beginnersbook.com/2013/04/java-static-dynamic-binding/)이라고 정의할 수 있습니다. (원래는 '묶다'라는 의미로 널리 알려져 있지요.) Kotlin이라는 언어에서 정적 바인딩을 선호한다는 것은 크게 두 가지 의미를 지닙니다.
 
 1. 기본적으로 Class는 상속을 지원하지 않습니다. Overriding도 마찬가지입니다. 
    (`open` 키워드를 추가하지 않으면, `final`로 설정됩니다.)
@@ -71,21 +71,48 @@ Kotlin FAQ(Frequently Asked Questions) 페이지에 언급된, '[**Kotlin이 무
 **Polymorphism (다형성)** 과 **Binding** 에 대한 이야기는 ["[Android: Architecture #1] 객체지향이 뭔가요?"](https://kevinlim17.com/object_oriented/) 와 추후 포스트에서 조금 더 다뤄보기로 하고, 여기서는 Kotlin이 **"안정성"** 을 중시하는 언어라는 것만 짚고 넘어가도록 하겠습니다.
 
 
+> 아름다운 도식. 컬러풀한 매력을 가진 언어.
+
+<p align="left">
+    <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/cf150554-f464-4da4-91e6-6efffa1d0ad0" width="80%">
+</p>
+
+그리고 <i>크고 아름다운</i> 타겟의 수입니다. Kotlin이 가진 강력함은 사실 여기서 출발합니다. 
+Kotlin은 Java와 <u>**100% 상호 호환**</u>됩니다. 거대한 Java 생태계를 흡수할 수 있다는 사실 하나만으로, 이 언어가 가진 무한한 '가능성'을 보여줍니다. (이게 가능한 이유는, JVM이나 Android를 타겟으로 했을 때, Kotlin은 일차적으로 자바 바이트코드(`.javac`)로 컴파일되기 때문입니다.) 
+
+그 밖에도, Javascript, Native(MacOS, iOS, Windows, Linux, Android NDK를 지원하며, 코틀린 코드를 네이티브 바이너리로 바로 바꿔야 하는 경우 사용), WebAssembly(아직 시험 단계)를 위한 컴파일러를 각각 제공합니다. 단순히 Android Native나 Spring를 이용한 Backend 개발에서 Java라는 언어의 역할을 대체하는 것 이상을 바라보고 있다고 생각하셔도 좋을 것 같습니다. 웹 애플리케이션이나 데이터 사이언스, 임베디드 분야에서도 다른 언어의 지위를 넘보고 싶다는 의도가 다분하니 말이죠. (궁금하신 분들은 [**Kotlin PlayGround**](https://play.kotlinlang.org/)에서 직접 여러 환경을 체험보시는 것도 좋습니다.)
+
+이렇게 공식 답변만 뜯어보더라도 흥미로운 내용이 한 바가지라니! 
+이어서 Definition으로는 채 다 서술하지 못하는 Kotlin의 특성에 대해 조금 더 알아보고, 이 언어가 과연 궁극적으로 지향하는 바가 어디에 있는지 힌트를 조금만 더 얻어보도록 하겠습니다. 조금 더 힘내어, 걸어 보자구요.
+
 ___
 
 ### Kotlin의 특성
+<p align="left">
+    <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/cb67d5e7-e732-41e0-aaee-6ae1cd63d31a" width="80%">
+</p>
 
-#### 간결성
+> **일단은 재밌어야 한다. 배우는 게 뭐든.** </br>
+> [Official Site](kotlinlang.org) 대문에서 가져온 인상깊은 문구.
 
-#### 안전성
+#### Concise
 
-#### 상호 운용성
+#### Cross-platform
 
-#### 도구 친화성
+#### Safety
+
+#### Asynchronous
+
+#### Object-oriented & Functional
 
 ___
 
 ### Kotlin의 지향점
+<p align="left">
+    <img src="https://kotlinlang.org/lp/multiplatform/static/multiplatform-diagram-d716356ba4b4f2488c98714db033bd53.svg" width="80%">
+</p>
+
+>  한 장으로 요약 가능.
 
 
 

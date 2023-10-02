@@ -78,8 +78,9 @@ thumbnail: './kotlin_conf23.png'
 </p>
 
 그리고 <i>크고 아름다운</i> 타겟의 수입니다. Kotlin이 가진 강력함은 사실 여기서 출발합니다. 
-Kotlin은 Java와 <u>**100% 상호 호환**</u>됩니다. 거대한 Java 생태계를 흡수할 수 있다는 사실 하나만으로, 이 언어가 가진 무한한 '가능성'을 보여줍니다. (이게 가능한 이유는, JVM이나 Android를 타겟으로 했을 때, Kotlin은 일차적으로 자바 바이트코드(`.javac`)로 컴파일되기 때문입니다.) 
+먼저, Kotlin은 Java와 <u>**100% 상호 호환**</u>됩니다. 거대한 Java 생태계를 흡수할 수 있다는 사실 하나만으로, 이 언어가 가진 무한한 '가능성'을 보여줍니다. (이게 가능한 이유는, JVM이나 Android를 타겟으로 했을 때, Kotlin은 일차적으로 자바 바이트코드(`.javac`)로 컴파일되기 때문입니다.) 
 
+ 
 그 밖에도, Javascript, Native(MacOS, iOS, Windows, Linux, Android NDK를 지원하며, 코틀린 코드를 네이티브 바이너리로 바로 바꿔야 하는 경우 사용), WebAssembly(아직 시험 단계)를 위한 컴파일러를 각각 제공합니다. 단순히 Android Native나 Spring를 이용한 Backend 개발에서 Java라는 언어의 역할을 대체하는 것 이상을 바라보고 있다고 생각하셔도 좋을 것 같습니다. 웹 애플리케이션이나 데이터 사이언스, 임베디드 분야에서도 다른 언어의 지위를 넘보고 싶다는 의도가 다분하니 말이죠. (궁금하신 분들은 [**Kotlin PlayGround**](https://play.kotlinlang.org/)에서 직접 여러 환경을 체험보시는 것도 좋습니다.)
 
 이렇게 공식 답변만 뜯어보더라도 흥미로운 내용이 한 바가지라니! 
@@ -97,13 +98,186 @@ ___
 
 #### Concise
 
-#### Cross-platform
+비교적 최근에 개발된 언어답게, 문법 자체가 **간결한** 편입니다. 
+코드 길이라 하면 둘째가기 서러운 Java와 비교하며 좀 더 살펴보도록 하지요. 
+
+<table>
+<tr align="left">
+<th > Java Code </th>
+<th> Kotlin Code </th>
+</tr>
+<tr>
+<td valign= "top";>
+
+```java
+class HelloWorld {
+    public static void main(String[] args) {
+        String name = "stranger";
+        System.out.println("Hi, " + name);
+        System.out.print("Current count:");
+        for (int i = 0; i<= 10; i++) {
+            System.out.print(" " + i);
+        }
+    }
+}
+ ```
+
+</td>
+<td valign= "top";>
+
+ ```kotlin
+ fun main(){
+    val name = "stranger"        
+    println("Hi, $name!")        
+    print("Current count:")
+    for (i in 0..10) {           
+        print(" $i")
+    }
+ }
+ ```
+
+</td>
+</tr>
+</table>
+
+ > Kotlin Code 출처: [Official Site Code Example](kotlinlang.org), Java Code는 글쓴이가 작성.
+
+두 코드는 정확히 같은 결과를 출력합니다. 그러나 결과를 도출하는 방식에는 많은 차이가 있는데요.
+크게 세 가지 부분이 눈에 띕니다.
+
+1. Class의 작성을 강요하지 않는다.
+2. Java System Class에 속한 Method임을 명시적으로 작성하지 않아도 된다.
+3. Type Inference(타입 추론)를 지원한다. 
+
+위의 첫 번째 포인트가 바로 Kotlin과 Java라는 언어의 결을 완전히 다르게 만든 분기점이라고 볼 수 있습니다. Kotlin Community는 객체지향(Object-Oriented)은 물론이고, **함수형 프로그래밍(Functional Programming)** 도 "우리 언어가 가진 특성"이라 적극적으로 홍보합니다. 이 부분은 다섯 번째 특성에서 더 자세히 다뤄볼게요.
+(그리고 아래에서 다룰 거지만, Kotiln에는 함수형 프로그래밍의 중요한 특성 중 하나인 First-Class Citizen이 존재합니다. 이는 언어의 간결함을 결정짓는 요소라 볼 수도 있습니다.)
+
+두 번째 포인트입니다. Kotlin은 [**Standard Library**](https://github.com/JetBrains/kotlin/tree/master/libraries/stdlib)를 통해 기본적인 작업에 필요한 함수들을 구현해 두었습니다. 타겟에 따라, 기존 언어(Java, Javascript)의 메서드를 그대로 가져온 경우도 있고, [Native가 타겟](https://github.com/JetBrains/kotlin/tree/7a7d392b3470b38d42f80c896b7270678d0f95c3/kotlin-native/runtime/src)인 경우 C++과 Kotlin 자체를 활용해 작성한 것이 보입니다. 꼭 명시해야하나... 싶은 부분을 감췄다는 데에 의의가 있겠네요.
+
+마지막 포인트입니다. 위 Kotlin code에서 `name`이라는 변수를 선언할 때, 따로 타입을 명시하지 않았습니다. 이는 **타입 추론(Type Inference)** 를 지원한다는 의미입니다. 굳이 `val name: String = "stranger"` 이런 식으로 작성하지 않아도 된다는 것입니다.
+
+또 하나의 예시를 볼까요. 이번에는 Class에 대한 이야기입니다. 
+
+<table height="500">
+<tr align="left">
+<th > *1. Java class </th>
+<th> *2. Kotlin class </th>
+</tr>
+<tr valign="top">
+<td>
+
+```java
+class Developer {
+    private final String githubUsername;
+    private final String favoriteLang;
+
+    public Developer(String githubUsername, String favoriteLang) {
+        this.githubUsername = githubUsername;
+        this.favoriteLang = favoriteLang;
+    }
+
+    public String getGithubUsername() {
+        return githubUsername;
+    }
+
+    public String getFavoriteLang() {
+        return favoriteLang;
+    }
+
+    public void setGithubUsername(String newUsername) {
+        this.githubUsername = newUsername;
+    }
+
+    public void setFavoriteLang(String newFavoriteLang) {
+        this.favoriteLang = newFavoriteLang;
+    }
+
+    @Override 
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Developer that = (Developer) o;
+        return githubUsername.equals(that.githubUsername) &&
+                favoriteLang.equals(that.favoriteLang);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(githubUsername, favoriteLang);
+    }
+}
+ ```
+
+</td>
+
+<td valign="top">
+
+```kotlin
+class Developer(
+    val githubUsername: String,
+    val favoriteLang: String
+) {
+    override fun equals(o: Any?): Boolean {
+        if (this === o) return true
+        if (o == null || javaClass != o.javaClass) return false
+        val that = o as Developer
+        return githubUsername == that.githubUsername 
+            && favoriteLang == that.favoriteLang
+    }
+
+    override fun hashCode(): Int {
+        return Objects.hash(githubUsername, favoriteLang)
+    }
+}
+```
+
+</td>
+
+
+
+</td>
+</tr>
+</table>
+
+Kotlin으로 코드를 작성하면 얻을 수 있는 이점은 Class를 구성할 때 더욱 도드라집니다. 
+가장 간단하게 Intellij IDEA(또는 Android Studio)에서, <b>*1</b>과 같은 코드를 묶어 <b>'Convert Java File to Kotlin File'</b> 를 클릭하면, <b>*2</b> 와 같은 코드가 됩니다. 줄 수가 무려 반 이상 감소한 모습을 볼 수 있는데요. 정확히 어떤 부분들이 생략되었는지 변환 과정을 톺아보면,
+
+1. `constructor`가 Class Header 안으로 들어갔습니다. 
+   => 여기 들어간 Constructor를 Primary Constructor라고 합니다. (객체지향을 지원하는 다른 언어들처럼) Class 본문에서 추가로 만들 수 있습니다.
+2. `constructor`에서 사용되는 프로퍼티(Property)는 Class Header의 Parameter로 들어갑니다.
+3. Class Header 안에서 선언된 프로퍼티의 private 필드(field)와 getter/setter 메서드는 명시적으로 표시되지 않고, Kotlin Complier가 자동으로 생성합니다.
+
+기본적으로 Class를 생성할 때 필요한 Boilerplate Code(찍어내듯이 매번 생성해야 하는 코드)가 Kotlin에서는 눈에 띄게 줄어들었습니다. 하지만, 조금 더 나아가, 한 번 더 마법을 써 볼까요?
+
+ ```kotlin
+data class Developer(
+    val githubUsername: String,
+    val favoriteLang: String
+)
+ ```
+
+이번에는, 그나마 남아있던 메서드(`equals`, `hashCode`)마저 사라졌습니다. `class` 앞에 `data`를 붙이면,  
+Kotlin Compiler가 사용자가 작성하지 않은 `equals`, `hashCode`, `toString`, `copy`. `componentN` 메서드를 대신 생성해 줍니다. 물론 `data class`는 일반 Class와 1:1 대응 관계에 있는 것은 아닙니다. 몇 가지 한계가 있는데요, 간단하게만 이야기해 보자면, ([Data Classes | Kotlin Documentation](https://kotlinlang.org/docs/data-classes.html) 참고)
+
+1. `abstract`, `sealed`, `inner`, `open`을 앞에 붙일 수 없습니다. 
+2. Primary Constructor는 최소 1개 이상의 프로퍼티를 가져야 합니다.
+3. `val` 또는 `var`로 선언해야 합니다.
+
+위 가정을 충족하지 않는 상황 말고도, `data class`를 사용하지 말아야 하는 경우가 존재하는데요. (기본적으로 캡슐화(Encapsulation)을 지원하지 않기 때문입니다.) 적절히 사용한다면, 생산성 향상에 이만한 툴도 없습니다. (여담으로,  Android Native에서 Model Class 작성 시 매우 편리합니다.) 
+
+더 많이, 언어의 간결함을 설명하기에, 더 이상의 지면을 할애하기는 글쓴이도 독자도 모두 지치기에 아쉽게 마칩니다만,
+**Elvis Operator(`?:`), `takeIf`, `when`, `.let`** 등 흥미로운 구문들은 안드로이드 포스트에서 조금 더 다루도록 하겠습니다. 
 
 #### Safety
 
+
 #### Asynchronous
 
+
 #### Object-oriented & Functional
+
+
+#### Cross-platform
 
 ___
 
@@ -112,7 +286,7 @@ ___
     <img src="https://kotlinlang.org/lp/multiplatform/static/multiplatform-diagram-d716356ba4b4f2488c98714db033bd53.svg" width="80%">
 </p>
 
->  한 장으로 요약 가능.
+>  사진 한 장으로 요약 가능.
 
 
 

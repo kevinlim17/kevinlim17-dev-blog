@@ -1,6 +1,6 @@
 ---
 date: '2023-09-02'
-title: "Kotlin Conf'2023 Global with Inflearn 후기"
+title: "지금의 Kotlin 그리고 Kotlin Conf'2023"
 categories: ['Kotlin', 'Review']
 summary: '안드로이드 생초보의 첫 개발자 컨퍼런스'
 thumbnail: './kotlin_conf23.png'
@@ -239,10 +239,12 @@ class Developer(
 </tr>
 </table>
 
+
+
 Kotlin으로 코드를 작성하면 얻을 수 있는 이점은 Class를 구성할 때 더욱 도드라집니다. 
 가장 간단하게 Intellij IDEA(또는 Android Studio)에서, <b>*1</b>과 같은 코드를 묶어 <b>'Convert Java File to Kotlin File'</b> 를 클릭하면, <b>*2</b> 와 같은 코드가 됩니다. 줄 수가 무려 반 이상 감소한 모습을 볼 수 있는데요. 정확히 어떤 부분들이 생략되었는지 변환 과정을 톺아보면,
 
-1. `constructor`가 Class Header 안으로 들어갔습니다. 
+1. `constructor`가 Class Header 안으로 들어갔습니다. </br>
    => 여기 들어간 Constructor를 Primary Constructor라고 합니다. (객체지향을 지원하는 다른 언어들처럼) Class 본문에서 추가로 만들 수 있습니다.
 2. `constructor`에서 사용되는 프로퍼티(Property)는 Class Header의 Parameter로 들어갑니다.
 3. Class Header 안에서 선언된 프로퍼티의 private 필드(field)와 getter/setter 메서드는 명시적으로 표시되지 않고, Kotlin Complier가 자동으로 생성합니다.
@@ -256,8 +258,11 @@ data class Developer(
 )
  ```
 
-이번에는, 그나마 남아있던 메서드(`equals`, `hashCode`)마저 사라졌습니다. `class` 앞에 `data`를 붙이면,  
-Kotlin Compiler가 사용자가 작성하지 않은 `equals`, `hashCode`, `toString`, `copy`. `componentN` 메서드를 대신 생성해 줍니다. 물론 `data class`는 일반 Class와 1:1 대응 관계에 있는 것은 아닙니다. 몇 가지 한계가 있는데요, 간단하게만 이야기해 보자면, ([Data Classes | Kotlin Documentation](https://kotlinlang.org/docs/data-classes.html) 참고)
+
+
+이번에는, 그나마 남아있던 메서드(`equals`, `hashCode`)마저 사라졌습니다. `class` 앞에 `data`를 붙이면, Kotlin Compiler가 사용자가 작성하지 않은 `equals`, `hashCode`, `toString`, `copy`. `componentN` 메서드를 대신 생성해 줍니다. 
+
+물론 `data class`는 일반 Class와 1:1 대응 관계에 있는 것은 아닙니다. 몇 가지 한계가 있는데요, 간단하게만 이야기해 보자면, ([Data Classes | Kotlin Documentation](https://kotlinlang.org/docs/data-classes.html) 참고)
 
 1. `abstract`, `sealed`, `inner`, `open`을 앞에 붙일 수 없습니다. 
 2. Primary Constructor는 최소 1개 이상의 프로퍼티를 가져야 합니다.
@@ -265,19 +270,35 @@ Kotlin Compiler가 사용자가 작성하지 않은 `equals`, `hashCode`, `toStr
 
 위 가정을 충족하지 않는 상황 말고도, `data class`를 사용하지 말아야 하는 경우가 존재하는데요. (기본적으로 캡슐화(Encapsulation)을 지원하지 않기 때문입니다.) 적절히 사용한다면, 생산성 향상에 이만한 툴도 없습니다. (여담으로,  Android Native에서 Model Class 작성 시 매우 편리합니다.) 
 
-더 많이, 언어의 간결함을 설명하기에, 더 이상의 지면을 할애하기는 글쓴이도 독자도 모두 지치기에 아쉽게 마칩니다만,
-**Elvis Operator(`?:`), `takeIf`, `when`, `.let`** 등 흥미로운 구문들은 안드로이드 포스트에서 조금 더 다루도록 하겠습니다. 
+더 많이, 이 언어의 간결함을 설명하기에, 더 이상의 지면을 할애하기는 글쓴이도 독자도 모두 지치기에 아쉽게 마칩니다만, 
+아직 배워나갈 건, 써내려 가야 하는 건 더 많으니까요. <br/>
+**`takeIf`, `when`, `.let`** 등 흥미로운 구문들은 안드로이드 포스트에서 조금 더 다루도록 하겠습니다. 
 
 #### Safety
 
+> 
+> 반대로 코틀린은 널을 포용한다. <br/>
+> 선택성을 표준 라이브러리 대신 타입 시스템의 일부로 넣는다는 말은 <br/>
+> 코틀린 코드 기반(codebase)가 없음을 뜻하는 값을 일관성 있게 다룰 수 있다는 뜻이다, <br/>
+> (그러나) 코틀린의 널 처리는 완벽하지는 않다.
+> 
+> 덩컨 맥그레거, 냇 프라이스, <i>자바에서 코틀린으로</i>, 오현석 역, (서울: 한빛미디어), 62p.
+>
+
+Kotlin에서 안전성(Safety)이라 하면, 십중팔구 'Null Safety'를 이야기하는 것입니다.'Type-Safety'를 지원하는 정적 타입의 언어는 Kotlin을 제외하고라도 이미 많이 존재하기 때문입니다. 그러니 타입에 대한 내용은 앞에서 바인딩(Binding)에 대해 언급하며 짚어보았으니, 여기에서는 Null이라는 '타입'에 대해 살펴보겠습니다. 
 
 #### Asynchronous
+
+
 
 
 #### Object-oriented & Functional
 
 
+
 #### Cross-platform
+
+
 
 ___
 

@@ -53,13 +53,15 @@ const MarkdownRenderer = styled.div`
 
   * + h1,
   * + h2,
-  * + h3 {
+  * + h3,
+  * + h4 {
     margin-top: 10px;
   }
 
   hr + h1,
   hr + h2,
-  hr + h3 {
+  hr + h3,
+  hr + h4{
     margin-top: 0;
   }
 
@@ -77,6 +79,7 @@ const MarkdownRenderer = styled.div`
 
   h4 {
     font-size: 20px;
+    background-color: rgb(0,255,109, 0.1);
   }
 
   u {
@@ -100,8 +103,13 @@ const MarkdownRenderer = styled.div`
   // Adjust List Element Style
   ol,
   ul {
-    margin-left: 20px;
-    padding: 15px 0;
+    margin-left: 15px;
+    padding: 15px 10px;
+    border-left: 2px solid rgba(184, 184, 184, 0.5);
+  }
+
+  li {
+    margin-left: 1rem;
   }
 
   // Adjust Horizontal Rule style
@@ -122,6 +130,7 @@ const MarkdownRenderer = styled.div`
     border-radius: 3px;
     box-shadow: rgba(0, 0, 0, 0.12) 0 3px 1px -2px,
       rgba(0, 0, 0, 0.14) 0 2px 2px 0, rgba(0, 0, 0, 0.12) 0 1px 5px 0;
+    margin: 2rem 0;
   }
   th {
     background-color: #ddd;
@@ -135,6 +144,8 @@ const MarkdownRenderer = styled.div`
     padding: 5px;
     text-indent: 3px;
     border-radius: 3px;
+    max-width: 25vw;
+    min-width: 10vw;
   }
   td:nth-child(1) {
     background-color: #ddd;
@@ -195,6 +206,10 @@ const MarkdownRenderer = styled.div`
 
     hr {
       margin: 50px 0;
+    }
+
+    td {
+      width: 40vw;
     }
   }
 `

@@ -285,7 +285,166 @@ data class Developer(
 > 덩컨 맥그레거, 냇 프라이스, <i>자바에서 코틀린으로</i>, 오현석 역, (서울: 한빛미디어), 62p.
 >
 
-Kotlin에서 안전성(Safety)이라 하면, 십중팔구 'Null Safety'를 이야기하는 것입니다.'Type-Safety'를 지원하는 정적 타입의 언어는 Kotlin을 제외하고라도 이미 많이 존재하기 때문입니다. 그러니 타입에 대한 내용은 앞에서 바인딩(Binding)에 대해 언급하며 짚어보았으니, 여기에서는 Null이라는 '타입'에 대해 살펴보겠습니다. 
+Kotlin에서 안전성(Safety)이라 하면, 십중팔구 'Null Safety'를 이야기하는 것입니다.'Type-Safety'를 지원하는 정적 타입의 언어는 Kotlin을 제외하고라도 이미 많이 존재하기 때문입니다. 그러니 타입에 대한 내용은 앞에서 바인딩(Binding)에 대해 언급하며 짚어보았으니, 여기에서는 Null이라는 '타입 시스템의 일부'에 대해 더 자세히 살펴보겠습니다. 
+
+[공식 문서](https://kotlinlang.org/docs/null-safety.html#nullable-types-and-non-nullable-types)에서도 구현의 의도를 비교적 명확히 했습니다.
+
+>  Kotlin's type system is aimed at eliminating the danger of null references, also known as [The Billion Dollar Mistake](https://en.wikipedia.org/wiki/Null_pointer#History). </br>
+> One of the most common pitfalls in many programming languages, including Java, 
+> is that accessing a member of a null reference will result in a null reference exception. </br>
+> In Java this would be the equivalent of a `NullPointerException`, or an ***NPE*** for short. </br>
+>
+> </br>
+>
+> Kotlin의 타입 시스템은, ‘***백만 불짜리 실수***’로 흔히 언급되는 널 참조의 위험을 없애는 데 초점을 맞추어 개발되었습니다. </br>
+> Java를 포함해, 수많은 프로그래밍 언어가 가진 함정은, </br>
+> 널 참조의 멤버에 접근하는 시도 자체가 “null reference exception”으로 이어진다는 것입니다. </br>
+> 이를 Java에서는 `NullPointerException` 으로 취급하며, 짧게 ***NPE***라고 부르기도 합니다.
+>
+
+<h5>"그래서 우리는 Null을 타입으로 만들기로 했어요."</h5> </br>
+</br>
+가 핵심 논지입니다. 정확히는 Kotlin Type System이 참조(Reference)의 방식을 크게 두 가지로 분류한 것입니다. `null`을 포함할 수 있는 참조(nullable reference)과 그렇지 않은 참조(non-nullable reference)가 그것입니다. 간단한 예시를 살펴 보죠. 
+
+
+<table>
+<tr align="left">
+<th></th>
+<th >non-nullable </th>
+<th>nullable </th>
+</tr>
+<tr>
+<td><h5>Code</h5></td>
+<td valign= "top";>
+
+```kotlin
+fun main() {
+    var num: Int = 10
+    num = null
+    print(num)
+}
+ ```
+
+</td>
+<td valign= "top";>
+
+ ```kotlin
+ fun main(){
+    var num: Int? = 10
+    num = null
+    print(num)
+ }
+ ```
+
+</td>
+</tr>
+<tr>
+<td><h5>Result</h5></td>
+<td valign="top">
+
+```
+Compilation Error:
+Null can not be a value 
+of a non-null type Int
+```
+
+</td>
+<td valign="top">
+
+```
+null
+```
+
+</td>
+</tr>
+</table>
+
+위 코드에서, (Generic를 아는 독자라면 익숙한 알파벳) **`T?`** 는 **`T`** 를 포함한다는 것을 쉽게 알아챌 수 있습니다. 뒤에 `?`을 붙임으로써, 기존 타입이 `null`을 포함할 수 있음을 표현한 것이죠. (즉, `null`이 다른 원시 타입들처럼 메서드를 가지거나 독립적으로 그것의 Instance를 생성할 수 없다는 이야기입니다. 그럴 이유도 없고 말이죠.) `null`이 기존 타입 시스템에 편입됨으로써 가지는 가장 큰 이점은 **Runtime Error**를 크게 줄여준다는 것입니다. (어느 정도 규모를 가진) Codebase를 (Java에서 이야기하는) <i>NPE</i> 없이 유지하기는 매우 어려운 일이기 때문에, 이는 생산성 향상과 소프트웨어의 안정성에 큰 도움을 줄 수 있습니다.
+
+<i>하지만 Kotlin의 Null-Safety가 완전한 것은 아닙니다.</i>
+다시 말해서, Kotlin에서 '없음'을 표현하는 것이 항상 `null`이라는 건 아니란 이야기입니다. 몇 가지 예시를 들어보죠.
+
+
+<table>
+<tr align="left">
+<th>Collection</th>
+<th >Code</th>
+<th>Result </th>
+</tr>
+<tr>
+<td><code> Map </code></td>
+<td valign= "top";>
+
+```kotlin
+fun main() {
+    val playerMap : Map<Int, String> 
+    	= mapOf(10 to "Messi", 
+                5 to "Sergio", 
+                18 to "Jordi Alba")
+   	println(playerMap.get(7))
+}
+ ```
+
+</td>
+<td valign= "top";>
+
+```
+null
+```
+
+</td>
+</tr>
+<tr>
+<td><code> List </code></td>
+<td valign="top">
+
+ ```kotlin
+fun main() {
+    val playerList : List<String> 
+    	= listOf("Messi", 
+                 "Sergio", 
+                 "Jordi Alba")
+   	println(playerList.get(3))
+}
+ ```
+
+</td>
+<td valign="top">
+
+```
+Exception in thread "main"
+java.lang.ArrayIndexOutOfBoundsException:
+Index 3 out of bounds for length 3
+```
+
+</td>
+</tr>
+<tr>
+<td><code>Iterable</code></td>
+<td> 
+
+```kotlin
+  fun main(){
+    val iterable: Iterable<Int> = emptyList()
+    print(iterable.first())
+ }
+ ```
+ 
+ </td>
+<td valign="top">
+
+```
+Exception in thread "main" 
+java.util.NoSuchElementException: 
+List is empty.
+```
+
+</td>
+</tr>
+</table>
+
+`Map<K,V>.get(key)`는 key에 해당하는 값이 없을 때 `null`을 반환하지만, `List<T>.get(index)`는 `index`에 해당하는 값이 없을 때 `ArrayIndexOutOfBoundsException`을 던지고, 이와 비슷하게 `Iterable<T>.first()`는 `NoSuchElementException`을 던집니다. **결국 이는 Java와의 호환성을 유지하려고 생긴 문제인데요.** 하지만 `null`을 타입 시스템 안으로 끌어안을 때 생기는 이점이 압도적으로 많기에, 이러한 예외들은 기꺼이 감수해야 하지 않을까.. 싶기는 합니다. (그리고 Kotlin은 오픈소스 언어니까요, 여러분의 힘으로 바꿔낼 수도?)
+
 
 #### Asynchronous
 

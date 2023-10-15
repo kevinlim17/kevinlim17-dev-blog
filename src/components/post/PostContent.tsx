@@ -24,7 +24,7 @@ const MarkdownRenderer = styled.div`
   }
 
   // Markdown Style
-  line-height: 1.8;
+  line-height: 1.9;
   font-size: 15px;
   font-weight: 400;
 
@@ -48,14 +48,19 @@ const MarkdownRenderer = styled.div`
   }
   h4 {
     font-weight: 700;
-    margin-bottom: 1px;
+    margin-bottom: 10px;
+  }
+
+  h5 {
+    font-weight: 600;
+    margin-bottom: 7px;
   }
 
   * + h1,
   * + h2,
   * + h3,
   * + h4 {
-    margin-top: 10px;
+    margin-top: 20px;
   }
 
   hr + h1,
@@ -80,6 +85,11 @@ const MarkdownRenderer = styled.div`
   h4 {
     font-size: 20px;
     background-color: rgb(0,255,109, 0.1);
+  }
+
+  h5 {
+    font-size: 17px;
+    background-color: rgb(0, 0, 0, 0.05);
   }
 
   u {
@@ -145,7 +155,7 @@ const MarkdownRenderer = styled.div`
     text-indent: 3px;
     border-radius: 3px;
     max-width: 25vw;
-    min-width: 10vw;
+    min-width: 5vw;
   }
   td:nth-child(1) {
     background-color: #ddd;
@@ -157,6 +167,7 @@ const MarkdownRenderer = styled.div`
     margin: 30px 0;
     padding: 15px;
     font-size: 15px;
+    font-family: consolas;
 
     ::-webkit-scrollbar-thumb {
       background: rgba(255, 255, 255, 0.5);
@@ -169,6 +180,7 @@ const MarkdownRenderer = styled.div`
     tab-size: 2;
     padding: 3px 8px;
     font-size: 14px;
+    font-family: consolas;
     background-color: rgba(2, 0, 36, 1);
     color: rgba(0, 255, 109, 0.6);
     margin-right: 2px;
@@ -198,6 +210,10 @@ const MarkdownRenderer = styled.div`
 
     h4 {
       font-size: 17px;
+    }
+
+    h5 {
+      font-size: 15px;
     }
 
     img {

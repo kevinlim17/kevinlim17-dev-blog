@@ -94,12 +94,13 @@ ___
 </p>
 
 > **일단은 재밌어야 한다. 배우는 게 뭐든.** </br>
-> [Official Site](kotlinlang.org) 대문에서 가져온 인상깊은 문구.
+> [Official Site](kotlinlang.org) 대문에서 가져온 인상깊은 문구. </br>
+> (Functional의 `fun`은 아니겠지요..?)
 
 #### Concise
 
-비교적 최근에 개발된 언어답게, 문법 자체가 **간결한** 편입니다. 
-코드 길이라 하면 둘째가기 서러운 Java와 비교하며 좀 더 살펴보도록 하지요. 
+비교적 최근에 개발된 언어답게, 문법 자체가 **간결한** 편입니다. </br>
+이러한 면에서 Kotlin과는 대척점에 서 있는, 코드 길이라 하면 둘째가기 서러운 Java와 비교하며 살펴 보겠습니다.
 
 <table>
 <tr align="left">
@@ -110,6 +111,7 @@ ___
 <td valign= "top";>
 
 ```java
+
 class HelloWorld {
     public static void main(String[] args) {
         String name = "stranger";
@@ -120,20 +122,25 @@ class HelloWorld {
         }
     }
 }
+
+
  ```
 
 </td>
 <td valign= "top";>
 
  ```kotlin
+
  fun main(){
     val name = "stranger"        
     println("Hi, $name!")        
     print("Current count:")
     for (i in 0..10) {           
-        print(" $i")
+        print(" $i")https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/e4a4c768-b89c-4cd2-a373-6a4ed07665f0
     }
  }
+
+
  ```
 
 </td>
@@ -167,6 +174,7 @@ class HelloWorld {
 <td>
 
 ```java
+
 class Developer {
     private final String githubUsername;
     private final String favoriteLang;
@@ -206,13 +214,16 @@ class Developer {
         return Objects.hash(githubUsername, favoriteLang);
     }
 }
+
+
  ```
 
 </td>
 
-<td valign="top">
+<td valign="top">https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/e4a4c768-b89c-4cd2-a373-6a4ed07665f0
 
 ```kotlin
+
 class Developer(
     val githubUsername: String,
     val favoriteLang: String
@@ -229,6 +240,8 @@ class Developer(
         return Objects.hash(githubUsername, favoriteLang)
     }
 }
+
+
 ```
 
 </td>
@@ -247,15 +260,28 @@ Kotlin으로 코드를 작성하면 얻을 수 있는 이점은 Class를 구성�
 1. `constructor`가 Class Header 안으로 들어갔습니다. </br>
    => 여기 들어간 Constructor를 Primary Constructor라고 합니다. (객체지향을 지원하는 다른 언어들처럼) Class 본문에서 추가로 만들 수 있습니다.
 2. `constructor`에서 사용되는 프로퍼티(Property)는 Class Header의 Parameter로 들어갑니다.
-3. Class Header 안에서 선언된 프로퍼티의 private 필드(field)와 getter/setter 메서드는 명시적으로 표시되지 않고, Kotlin Complier가 자동으로 생성합니다.
+3. Class Header 안에서 선언된 프로퍼티의 private 필드(field)와 getter/setter 메서드는 명시적으로 표시되지 않고, Kotlin Complier가 자
+</td>
+
+
+
+</td>
+</tr>
+</table>
+
+
+동으로 생성합니다.
 
 기본적으로 Class를 생성할 때 필요한 Boilerplate Code(찍어내듯이 매번 생성해야 하는 코드)가 Kotlin에서는 눈에 띄게 줄어들었습니다. 하지만, 조금 더 나아가, 한 번 더 마법을 써 볼까요?
 
  ```kotlin
+
 data class Developer(
     val githubUsername: String,
     val favoriteLang: String
 )
+
+
  ```
 
 
@@ -263,6 +289,16 @@ data class Developer(
 이번에는, 그나마 남아있던 메서드(`equals`, `hashCode`)마저 사라졌습니다. `class` 앞에 `data`를 붙이면, Kotlin Compiler가 사용자가 작성하지 않은 `equals`, `hashCode`, `toString`, `copy`. `componentN` 메서드를 대신 생성해 줍니다. 
 
 물론 `data class`는 일반 Class와 1:1 대응 관계에 있는 것은 아닙니다. 몇 가지 한계가 있는데요, 간단하게만 이야기해 보자면, ([Data Classes | Kotlin Documentation](https://kotlinlang.org/docs/data-classes.html) 참고)
+
+</td>
+
+
+
+</td>
+</tr>
+</table>
+
+
 
 1. `abstract`, `sealed`, `inner`, `open`을 앞에 붙일 수 없습니다. 
 2. Primary Constructor는 최소 1개 이상의 프로퍼티를 가져야 합니다.
@@ -275,6 +311,16 @@ data class Developer(
 **`takeIf`, `when`, `.let`** 등 흥미로운 구문들은 안드로이드 포스트에서 조금 더 다루도록 하겠습니다. 
 
 #### Safety
+</td>
+
+
+
+</td>
+</tr>
+</table>
+
+
+
 
 > 
 > 반대로 코틀린은 널을 포용한다. <br/>
@@ -302,8 +348,7 @@ Kotlin에서 안전성(Safety)이라 하면, 십중팔구 'Null Safety'를 이�
 > 이를 Java에서는 `NullPointerException` 으로 취급하며, 짧게 ***NPE***라고 부르기도 합니다.
 >
 
-<h5>"그래서 우리는 Null을 타입으로 만들기로 했어요."</h5> </br>
-</br>
+**"그래서 우리는 Null을 타입으로 만들기로 했어요."** </br>
 가 핵심 논지입니다. 정확히는 Kotlin Type System이 참조(Reference)의 방식을 크게 두 가지로 분류한 것입니다. `null`을 포함할 수 있는 참조(nullable reference)과 그렇지 않은 참조(non-nullable reference)가 그것입니다. 간단한 예시를 살펴 보죠. 
 
 
@@ -314,32 +359,38 @@ Kotlin에서 안전성(Safety)이라 하면, 십중팔구 'Null Safety'를 이�
 <th>nullable </th>
 </tr>
 <tr>
-<td><h5>Code</h5></td>
+<td>Code</td>
 <td valign= "top";>
 
 ```kotlin
+
 fun main() {
     var num: Int = 10
     num = null
     print(num)
 }
+
+
  ```
 
 </td>
 <td valign= "top";>
 
  ```kotlin
- fun main(){
+
+ fun main() {
     var num: Int? = 10
     num = null
     print(num)
  }
+
+ 
  ```
 
 </td>
 </tr>
 <tr>
-<td><h5>Result</h5></td>
+<td>Result</td>
 <td valign="top">
 
 ```
@@ -372,10 +423,11 @@ null
 <th>Result </th>
 </tr>
 <tr>
-<td><code> Map </code></td>
+<td>Map</td>
 <td valign= "top";>
 
 ```kotlin
+
 fun main() {
     val playerMap : Map<Int, String> 
     	= mapOf(10 to "Messi", 
@@ -383,6 +435,8 @@ fun main() {
                 18 to "Jordi Alba")
    	println(playerMap.get(7))
 }
+
+
  ```
 
 </td>
@@ -395,10 +449,11 @@ null
 </td>
 </tr>
 <tr>
-<td><code> List </code></td>
+<td>List</td>
 <td valign="top">
 
  ```kotlin
+
 fun main() {
     val playerList : List<String> 
     	= listOf("Messi", 
@@ -406,6 +461,8 @@ fun main() {
                  "Jordi Alba")
    	println(playerList.get(3))
 }
+
+
  ```
 
 </td>
@@ -420,14 +477,17 @@ Index 3 out of bounds for length 3
 </td>
 </tr>
 <tr>
-<td><code>Iterable</code></td>
+<td>Iterable</td>
 <td> 
 
 ```kotlin
-  fun main(){
+
+fun main() {
     val iterable: Iterable<Int> = emptyList()
     print(iterable.first())
- }
+}
+
+
  ```
  
  </td>
@@ -443,15 +503,136 @@ List is empty.
 </tr>
 </table>
 
-`Map<K,V>.get(key)`는 key에 해당하는 값이 없을 때 `null`을 반환하지만, `List<T>.get(index)`는 `index`에 해당하는 값이 없을 때 `ArrayIndexOutOfBoundsException`을 던지고, 이와 비슷하게 `Iterable<T>.first()`는 `NoSuchElementException`을 던집니다. **결국 이는 Java와의 호환성을 유지하려고 생긴 문제인데요.** 하지만 `null`을 타입 시스템 안으로 끌어안을 때 생기는 이점이 압도적으로 많기에, 이러한 예외들은 기꺼이 감수해야 하지 않을까.. 싶기는 합니다. (그리고 Kotlin은 오픈소스 언어니까요, 여러분의 힘으로 바꿔낼 수도?)
+`Map<K,V>.get(key)`는 key에 해당하는 값이 없을 때 `null`을 반환하지만, `List<T>.get(index)`는 `index`에 해당하는 값이 없을 때 `ArrayIndexOutOfBoundsException`을 던지고, 이와 비슷하게 `Iterable<T>.first()`는 `NoSuchElementException`을 던집니다. 
+
+**결국 이는 Java와의 호환성을 유지하려고 생긴 문제인데요.** 하지만 `null`을 타입 시스템 안으로 끌어안을 때 생기는 이점이 압도적으로 많기에, 이러한 예외들은 기꺼이 감수해야 하지 않을까.. 싶기는 합니다. 하지만 앞으로 Kotlin 생태계에서 논의해볼 문제이기는 합니다. 일관성 있는 예외 처리는 독립된 언어의 정체성을 구성하는 데 중요한 요소이기 때문입니다. 
 
 
 #### Asynchronous
 
+비동기 처리는 어떤 (웹이던 앱이던) 애플리케이션을 제작하든 간에 핵심적인 로직을 차지합니다. </br>
+**동시 실행(Concurrency)에 대한 강력한 지원**, Kotlin은 (뒤에서 다룰) 방대한 야망의 일각을 1.3 release에서부터 **Coroutine**으로 드러내기 시작했습니다. 
+
+언제나 그랬듯이, [공식 문서](https://kotlinlang.org/docs/coroutines-basics.html#your-first-coroutine)로부터 우리의 이야기는 출발합니다.
+
+> A coroutine is an instance of a suspendable computation. </br>
+> It is conceptually similar to a thread, in the sense that it takes a block of code to run that works concurrently with the rest of the code. </br>
+> However, a coroutine is not bound to any particular thread. </br>
+> It may suspend its execution in one thread and resume in another one. </br>
+> </br>
+>  코루틴은 **<u>Suspendable Computation</u>** 의 인스턴스입니다. </br>
+>  일정한 블록의 코드를 가져다, 나머지 코드와 병렬적으로 실행토록 한다는 컨셉 자체는 스레드와 유사합니다. </br>
+> 하지만 코루틴은 어떠한 특정 스레드에도 (1:1로 대응되어) 바인딩되지 않습니다. </br>
+> 이는 (특정 코루틴이) 하나의 스레드에서 실행을 잠시 멈추었다가, 다른 스레드에서 재개될 수도 있다는 것입니다.
+
+</br>
+<h5> 첫 번째 질문. 여기서 Suspendable Computation이라는 게 무엇을 의미하나요? </h5>
+
+
+말 그대로 <u>중단(suspend) 그리고 재개(resume)가 가능한</u> **Computation** (이 맥락에서 '계산'으로 직역하기 어려운 까닭에 앞으로도 그대로 옮겨 적겠습니다)을 의미합니다. 그리고 Suspendable Computation은 Kotlin에서 `suspend fun`으로 구현됩니다. 그렇다면 공식 문서에서 코루틴을 `suspend fun`의 인스턴스로 언급하는 이유는 뭘까요? 이는 코루틴을 생성하는 함수인 `CoroutineScope.launch`를 [깊게 들여다보면](https://github.com/Kotlin/kotlinx.coroutines/blob/master/kotlinx-coroutines-core/common/src/Builders.common.kt#L47) 조금이나마 힌트를 얻을 수 있습니다. 
+
+
+```kotlin
+
+public fun CoroutineScope.launch(
+    context: CoroutineContext = EmptyCoroutineContext,
+    start: CoroutineStart = CoroutineStart.DEFAULT,
+    block: suspend CoroutineScope.() -> Unit
+): Job {
+    val newContext = newCoroutineContext(context)
+    val coroutine = if (start.isLazy)
+        LazyStandaloneCoroutine(newContext, block) else
+        StandaloneCoroutine(newContext, active = true)
+    coroutine.start(start, coroutine, block)
+    return coroutine
+}
+
+
+```
+
+`CoroutineScope.launch`의 파라미터 중 `block`은 주어진 CoroutineScope에서 실행될 `Coroutine Code`를 의미합니다. 즉, `launch()`는 `suspend fun`인 코드의 **block** 으로부터 Coroutine을 생성하는 함수라는 것입니다.
+
+그러니 '코루틴이 Suspendable Computation의 인스턴스이다'를 다시 이야기하면, Class가 인스턴스를 찍어내듯 Supendable function은 Coroutine을 (`launch()`나 `async()`와 같은 Coroutine Builder를 통해) 생성한다는 이야기입니다. 
+
+</br>
+<h5> 두 번째 질문. Suspendable function은 정확히 코루틴에서 어떤 역할을 하고 있나요? </h5>
+
+<blockquote>
+    <p align="left">
+        <img src="https://kotlinlang.org/docs/images/suspension-process.gif" width="60%">
+    </p>
+    <i>
+        When the computation is ready to be continued, it is returned to a thread (not necessarily the same one).</br>
+        Computation이 동작을 재개할 준비를 마치면, 스레드로 복귀합니다. (복귀하기 전 스레드와 같은 필요는 없습니다.)  
+    </i>
+    </br>
+</blockquote>
+
+> 이미지 및 텍스트 출처: [Kotlin Docs: Coroutines and channels - tutorial](https://kotlinlang.org/docs/coroutines-and-channels.html#starting-a-new-coroutine)
+
+위 그림은 코루틴이 스레드 위에서 주로 어떤 동작을 수행하는지 알기 쉽게 알려주는 도식입니다. 사실은 혼란을 가중시킬 수 있는 그림이기도 한데요. 정의(Definition)를 저 멀리 눈에 보이지 않는 곳에 두고, 도형이 움직이는 것만 보자 하면 <i>"코루틴이 suspendable한 function을 생성하는 것인가?"</i>라고 오해할 가능성도 다분하기 때문입니다. (사실은 그 **반대**라는 건 앞에서 언급했습니다.) 정확히는 **"코루틴 안에서만 suspendable한 function을 실행할 수 있는 것"** 입니다. (그리고 `suspend fun` 안에서 다른 `suspend fun`을 실행할 수 있습니다. 전자나 후자 모두 코루틴 안에서 실행되는 것이기 때문입니다.) 이를 다시 이야기하면, 일반적인 function에 <u>코루틴의 실행을 정지하는 역할</u>이 부여되었다고 보아도 무방합니다. 
+
+</br>
+
+<h5> 세 번째 질문. 그렇다면 (스레드와는 다르게) 코루틴은 어떻게 생성되고 관리되나요? </h5>
+
+> 이 단락은 [[Suhwan Jee: Kotlin Coroutine의 Structured Concurrency 구현 상세]](https://suhwan.dev/2022/01/21/Kotlin-coroutine-structured-concurrency/)에게 많은 빚을 지고 있습니다. 언급되는 코드와 도식은 위 포스트의 자료를 편집한 것임을 밝힙니다.
+
+기본적으로 코루틴은 CoroutineScope 안에서만 생성될 수 있습니다. 이를 멋지게 표현하면, **Scoped Execution**을 지원한다고 하는데요. CoroutineScope는 (Scope 안에서 생성된) 코루틴을 언제 시작할지, 멈출지, 재개할지 결정합니다. (즉 `launch()`나 `async()`와 같은 Builder를 CoroutineScope 안에서만 쓸 수 있다는 것입니다.) 굳이 Scope 안에서의 사용을 강제하는 이유에는 크게 두 가지가 있습니다.
+
+1. **코루틴의 Grouping을 가능하게 합니다.** </br>
+   => 이는 Scope가 Cancel되면, Scope 안에서 시작되었던 코루틴은 모두 Cancel된다는 것입니다. </br>
+   => 특정 코루틴이 더 이상 불필요한 경우, 이는 리소스의 낭비를 막는 효과를 낳습니다.
+2. **Coroutine Scope는 코루틴이 실행되는 Context를 정의하는 데 도움을 줍니다.**
+- 출처: [5 Common Kotlin Coroutines interview questions](https://medium.com/@theAndroidDeveloper/5-common-kotlin-coroutines-interview-questions-f084d098f51d)
+
+</br>
+
+위와 같은 사실은 코루틴의 구현이 **Structured Concurrency(구조적 병렬성)** 의 원칙을 충실하게 따랐기 때문입니다. 사실 처음에 언급했던 **"Kotlin이 동시 실행에 강력함을 지닌다"** 라는 이야기는 (세 번의 질문을 돌고 돌아) 여기에서 그 근거를 찾을 수 있게 된 것입니다. 간단한 도식과 함께 코드를 살펴볼까요.
+
+```Kotlin
+
+fun doConcurrentJob 
+     = coroutineScope { /* coroutine 1 */
+        launch { /* coroutine 2 */
+            launch { /* coroutine 3 */
+                launch { /* coroutine 4 */
+                }
+            }
+            launch { /* coroutine 5 */
+            }
+        }
+}
+
+
+```
+
+<p align="left">
+    <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/e4a4c768-b89c-4cd2-a373-6a4ed07665f0" width="75%" border="1px">
+    </br>
+    <i>
+        위 코드를 도식화.
+    </i>
+</p>
+
+**Structured Concurrency** 를 지원하기 위해, 코루틴은 트리 구조의 형태로 작성되어 있습니다. 즉, 부모-자식(parent-child) 관계를 지니고 있다는 의미입니다. 위에서는 **Grouping**이라는 개념으로 뭉뚱그려 설명했지만, 정확히는 트리 형태를 갖추고 있다고 이야기하는 것이 맞습니다. 또한 Context를 정의하는 데 도움이 된다는 것도, 결국 자식 코루틴이 자신의 Context를 정의하는 데 부모 코루틴의 Context를 가져오기 때문입니다. (간단하게, `myContext` **=**  `this` **+** `parentContext`, 이런 식으로 말이지요.) 이와 같은 구현은 다음과 같은 것들을 가능하게 합니다. 
+
+1. Structured concurrency ensures that they are not lost and do not leak. An outer scope cannot complete until all its children coroutines complete. </br>
+   <i> 구조적 병렬성은 코루틴이 누수되거나 손실되지 않을 것임을 보장합니다. <b>외부 Scope는 모든 자식 Scope의 작업이 끝날 때까지 (생명 주기를) 완결하지 않습니다.</b></i> </br>
+2. Structured concurrency also ensures that any errors in the code are properly reported and are never lost.</br>
+   <i> 또한 코드 상의 모든 에러가 누락 없이 정확하게 보고될 것임을 보장합니다. </i>
+
+- 출처: [Coroutines-Basics | Kotlin Documentation](https://kotlinlang.org/docs/coroutines-basics.html#structured-concurrency)
+
+
+조금은, 코드를 작성하는 관점에서, 풀어서 이야기하면, </br>
+ <u>(<b>1.</b>) 부모 Coroutine이 어떤 이유로든 취소되면, 모든 자식 Coroutine은 취소됩니다.</u> </br>
+또한, </br>
+<u>(<b>2.</b> 명시적으로 취소를 하지 않는 한,) 자식 Coroutine이 Exception을 던지면, 부모 Coroutine으로 Exception이 전달되어 parent를 취소시킵니다. </u>
 
 
 
-#### Object-oriented & Functional
+#### Object-oriented or Functional
 
 
 

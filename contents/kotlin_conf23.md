@@ -31,8 +31,12 @@ thumbnail: './kotlin_conf23.png'
 > 이 파트에서는 [**Kotlin Programming Language Official Site**](https://kotlinlang.org/) 에서 언급하는 내용들과 <br/>[**영문 위키피디아: Kotlin(Programming Language)**](https://en.wikipedia.org/wiki/Kotlin_(programming_language))를 번역하고 요약해 작성했습니다.
 >
 
+</br>
+
 한 언어의 미래에 대해 논하려면, 먼저 과거와 현재를 알아야겠지요. 기꺼이 한 단락을 할애할 가치가 충분합니다. 
 우선 Kotlin FAQ(Frequently Asked Questions) 페이지에 언급된, '[**Kotlin이 무엇이냐**](https://kotlinlang.org/docs/faq.html#what-is-kotlin)'라는 질문에 대한 답을 살펴보도록 하겠습니다.
+
+</br>
 
 >
 > Kotlin is an open-source statically typed programming language that targets the JVM, Android, JavaScript, Wasm, and Native. <br/>
@@ -51,6 +55,8 @@ thumbnail: './kotlin_conf23.png'
 
 먼저 정적 타입에 대한 이야기입니다. Kotlin은 Java를 기반으로 출발한 언어답게, 강한 Type-Safety(타입 안정성)를 추구합니다. 정적 타입의 언어는 컴파일 시에 변수의 타입을 결정합니다. (이와 반대로 JavaScript와 같은 동적(Dynamically-Typed) 언어는 런타임 시에 변수의 타입이 결정됩니다.) 여기에서 조금 더 개념을 확장해, 바인딩(Binding)에 대한 이야기로 넘어가 보죠.
 
+</br>
+
 >
 > **| 코틀린은 동적 바인딩보다 정적 바인딩을 더 선호한다 |** <br/>
 > 
@@ -61,6 +67,8 @@ thumbnail: './kotlin_conf23.png'
 > 덩컨 맥그레거, 냇 프라이스, <i>자바에서 코틀린으로</i>, 오현석 역, (서울: 한빛미디어), 30p.
 >
 
+</br>
+
 프로그래밍 세계에서 바인딩은 간단하게 ['**호출과 본문의 연결(Association of method call to the method body)**'](https://beginnersbook.com/2013/04/java-static-dynamic-binding/)이라고 정의할 수 있습니다. (원래는 '묶다'라는 의미로 널리 알려져 있지요.) Kotlin이라는 언어에서 정적 바인딩을 선호한다는 것은 크게 두 가지 의미를 지닙니다.
 
 1. 기본적으로 Class는 상속을 지원하지 않습니다. Overriding도 마찬가지입니다. 
@@ -70,6 +78,7 @@ thumbnail: './kotlin_conf23.png'
 
 **Polymorphism (다형성)** 과 **Binding** 에 대한 이야기는 ["[Android: Architecture #1] 객체지향이 뭔가요?"](https://kevinlim17.com/object_oriented/) 와 추후 포스트에서 조금 더 다뤄보기로 하고, 여기서는 Kotlin이 **"안정성"** 을 중시하는 언어라는 것만 짚고 넘어가도록 하겠습니다.
 
+</br>
 
 > 아름다운 도식. 컬러풀한 매력을 가진 언어.
 
@@ -82,6 +91,8 @@ thumbnail: './kotlin_conf23.png'
 
  
 그 밖에도, Javascript, Native(MacOS, iOS, Windows, Linux, Android NDK를 지원하며, 코틀린 코드를 네이티브 바이너리로 바로 바꿔야 하는 경우 사용), WebAssembly(아직 시험 단계)를 위한 컴파일러를 각각 제공합니다. 단순히 Android Native나 Spring를 이용한 Backend 개발에서 Java라는 언어의 역할을 대체하는 것 이상을 바라보고 있다고 생각하셔도 좋을 것 같습니다. 웹 애플리케이션이나 데이터 사이언스, 임베디드 분야에서도 다른 언어의 지위를 넘보고 싶다는 의도가 다분하니 말이죠. (궁금하신 분들은 [**Kotlin PlayGround**](https://play.kotlinlang.org/)에서 직접 여러 환경을 체험보시는 것도 좋습니다.)
+
+</br>
 
 이렇게 공식 답변만 뜯어보더라도 흥미로운 내용이 한 바가지라니! 
 이어서 Definition으로는 채 다 서술하지 못하는 Kotlin의 특성에 대해 조금 더 알아보고, 이 언어가 과연 궁극적으로 지향하는 바가 어디에 있는지 힌트를 조금만 더 얻어보도록 하겠습니다. 조금 더 힘내어, 걸어 보자구요.
@@ -136,7 +147,7 @@ class HelloWorld {
     println("Hi, $name!")        
     print("Current count:")
     for (i in 0..10) {           
-        print(" $i")https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/e4a4c768-b89c-4cd2-a373-6a4ed07665f0
+        print(" $i")
     }
  }
 
@@ -156,8 +167,8 @@ class HelloWorld {
 2. Java System Class에 속한 Method임을 명시적으로 작성하지 않아도 된다.
 3. Type Inference(타입 추론)를 지원한다. 
 
-위의 첫 번째 포인트가 바로 Kotlin과 Java라는 언어의 결을 완전히 다르게 만든 분기점이라고 볼 수 있습니다. Kotlin Community는 객체지향(Object-Oriented)은 물론이고, **함수형 프로그래밍(Functional Programming)** 도 "우리 언어가 가진 특성"이라 적극적으로 홍보합니다. 이 부분은 다섯 번째 특성에서 더 자세히 다뤄볼게요.
-(그리고 아래에서 다룰 거지만, Kotiln에는 함수형 프로그래밍의 중요한 특성 중 하나인 First-Class Citizen이 존재합니다. 이는 언어의 간결함을 결정짓는 요소라 볼 수도 있습니다.)
+위의 첫 번째 포인트가 바로 Kotlin과 Java라는 언어의 결을 완전히 다르게 만든 분기점이라고 볼 수 있습니다. Kotlin Community는 객체지향(Object-Oriented)은 물론이고, **함수형 프로그래밍(Functional Programming)** 도 "우리 언어가 가진 매력"이라 적극적으로 홍보합니다. 이 부분은 네 번째 특성에서 더 자세히 다뤄볼게요.
+(Kotiln의 함수는 First-Class Citizen의 조건을 충족합니다. 이는 언어의 간결함을 결정짓는 요소라 볼 수도 있습니다.)
 
 두 번째 포인트입니다. Kotlin은 [**Standard Library**](https://github.com/JetBrains/kotlin/tree/master/libraries/stdlib)를 통해 기본적인 작업에 필요한 함수들을 구현해 두었습니다. 타겟에 따라, 기존 언어(Java, Javascript)의 메서드를 그대로 가져온 경우도 있고, [Native가 타겟](https://github.com/JetBrains/kotlin/tree/7a7d392b3470b38d42f80c896b7270678d0f95c3/kotlin-native/runtime/src)인 경우 C++과 Kotlin 자체를 활용해 작성한 것이 보입니다. 꼭 명시해야하나... 싶은 부분을 감췄다는 데에 의의가 있겠네요.
 
@@ -220,7 +231,7 @@ class Developer {
 
 </td>
 
-<td valign="top">https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/e4a4c768-b89c-4cd2-a373-6a4ed07665f0
+<td valign="top">
 
 ```kotlin
 
@@ -260,7 +271,7 @@ Kotlin으로 코드를 작성하면 얻을 수 있는 이점은 Class를 구성�
 1. `constructor`가 Class Header 안으로 들어갔습니다. </br>
    => 여기 들어간 Constructor를 Primary Constructor라고 합니다. (객체지향을 지원하는 다른 언어들처럼) Class 본문에서 추가로 만들 수 있습니다.
 2. `constructor`에서 사용되는 프로퍼티(Property)는 Class Header의 Parameter로 들어갑니다.
-3. Class Header 안에서 선언된 프로퍼티의 private 필드(field)와 getter/setter 메서드는 명시적으로 표시되지 않고, Kotlin Complier가 자
+3. Class Header 안에서 선언된 프로퍼티의 private 필드(field)와 getter/setter 메서드는 명시적으로 표시되지 않고, Kotlin Complier가 자동으로 생성합니다.
 </td>
 
 
@@ -269,8 +280,6 @@ Kotlin으로 코드를 작성하면 얻을 수 있는 이점은 Class를 구성�
 </tr>
 </table>
 
-
-동으로 생성합니다.
 
 기본적으로 Class를 생성할 때 필요한 Boilerplate Code(찍어내듯이 매번 생성해야 하는 코드)가 Kotlin에서는 눈에 띄게 줄어들었습니다. 하지만, 조금 더 나아가, 한 번 더 마법을 써 볼까요?
 
@@ -310,17 +319,9 @@ data class Developer(
 아직 배워나갈 건, 써내려 가야 하는 건 더 많으니까요. <br/>
 **`takeIf`, `when`, `.let`** 등 흥미로운 구문들은 안드로이드 포스트에서 조금 더 다루도록 하겠습니다. 
 
+</br>
+
 #### Safety
-</td>
-
-
-
-</td>
-</tr>
-</table>
-
-
-
 
 > 
 > 반대로 코틀린은 널을 포용한다. <br/>
@@ -455,7 +456,7 @@ null
  ```kotlin
 
 fun main() {
-    val playerList : List<String> 
+    val playerList : List<String> is considered the return value:
     	= listOf("Messi", 
                  "Sergio", 
                  "Jordi Alba")
@@ -507,6 +508,7 @@ List is empty.
 
 **결국 이는 Java와의 호환성을 유지하려고 생긴 문제인데요.** 하지만 `null`을 타입 시스템 안으로 끌어안을 때 생기는 이점이 압도적으로 많기에, 이러한 예외들은 기꺼이 감수해야 하지 않을까.. 싶기는 합니다. 하지만 앞으로 Kotlin 생태계에서 논의해볼 문제이기는 합니다. 일관성 있는 예외 처리는 독립된 언어의 정체성을 구성하는 데 중요한 요소이기 때문입니다. 
 
+</br>
 
 #### Asynchronous
 
@@ -550,7 +552,10 @@ public fun CoroutineScope.launch(
 
 ```
 
-`CoroutineScope.launch`의 파라미터 중 `block`은 주어진 CoroutineScope에서 실행될 `Coroutine Code`를 의미합니다. 즉, `launch()`는 `suspend fun`인 코드의 **block** 으로부터 Coroutine을 생성하는 함수라는 것입니다.
+`CoroutineScope.launch`의 파라미터 중 `block`은 주어진 Cor
+
+</td>
+</tr>outineScope에서 실행될 `Coroutine Code`를 의미합니다. 즉, `launch()`는 `suspend fun`인 코드의 **block** 으로부터 Coroutine을 생성하는 함수라는 것입니다.
 
 그러니 '코루틴이 Suspendable Computation의 인스턴스이다'를 다시 이야기하면, Class가 인스턴스를 찍어내듯 Supendable function은 Coroutine을 (`launch()`나 `async()`와 같은 Coroutine Builder를 통해) 생성한다는 이야기입니다. 
 
@@ -608,11 +613,13 @@ fun doConcurrentJob
 ```
 
 <p align="left">
+    <i>
+        ⬇️ 위 코드를 도식화.
+    </i>
+    </br>
     <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/e4a4c768-b89c-4cd2-a373-6a4ed07665f0" width="75%" border="1px">
     </br>
-    <i>
-        위 코드를 도식화.
-    </i>
+    
 </p>
 
 **Structured Concurrency** 를 지원하기 위해, 코루틴은 트리 구조의 형태로 작성되어 있습니다. 즉, 부모-자식(parent-child) 관계를 지니고 있다는 의미입니다. 위에서는 **Grouping**이라는 개념으로 뭉뚱그려 설명했지만, 정확히는 트리 형태를 갖추고 있다고 이야기하는 것이 맞습니다. 또한 Context를 정의하는 데 도움이 된다는 것도, 결국 자식 코루틴이 자신의 Context를 정의하는 데 부모 코루틴의 Context를 가져오기 때문입니다. (간단하게, `myContext` **=**  `this` **+** `parentContext`, 이런 식으로 말이지요.) 이와 같은 구현은 다음과 같은 것들을 가능하게 합니다. 
@@ -624,21 +631,141 @@ fun doConcurrentJob
 
 - 출처: [Coroutines-Basics | Kotlin Documentation](https://kotlinlang.org/docs/coroutines-basics.html#structured-concurrency)
 
+</br>
 
-조금은, 코드를 작성하는 관점에서, 풀어서 이야기하면, </br>
+코루틴을 사용해 코드를 작성하는 관점에서, 위의 이야기를 풀어서 이야기하면, </br>
  <u>(<b>1.</b>) 부모 Coroutine이 어떤 이유로든 취소되면, 모든 자식 Coroutine은 취소됩니다.</u> </br>
 또한, </br>
-<u>(<b>2.</b> 명시적으로 취소를 하지 않는 한,) 자식 Coroutine이 Exception을 던지면, 부모 Coroutine으로 Exception이 전달되어 parent를 취소시킵니다. </u>
+<u>(<b>2.</b> 명시적으로 취소를 하지 않는 한) 자식 Coroutine이 Exception을 던지면, 부모 Coroutine으로 Exception이 전달되어 parent를 취소시킵니다. </u>
 
+</br>
 
+이는 일반적인 (즉 Structured가 아닌) 동시성 프로그래밍이 가지는 수많은 난점을 해결합니다. (C와 C++을 제외한 고수준 언어에서는 거의 사용되지 않는) `goto`와 크게 다르지 않게, 코드의 가독성(그리고 구조적 프로그래밍)을 해치던 예약어들, (예를 들어 `callback`, `promise`, `future` 등등..)의 구속에서 드디어 해방될 수 있는 것입니다. 코루틴을 사용하면, 큰 힘 들이지 않고, 동시에 실행되는 로직에 대해 명확한 역할과 한계를 부여할 수 있고, 오류에 대한 명확한 Report를 받아볼 수 있습니다. 
+
+</br>
 
 #### Object-oriented or Functional
 
+> <u>객체 지향 프로그래밍</u>은 메시지를 객체에 보내서 문제를 해결하는 기술이다. </br>
+> `myString`의 길이를 알고 싶은가? 그 객체에 `myString.length()`라고 메시지를 보내라. </br>
+> 콘솔에 문자열을 출력하고 싶은가? 문자열을 메시지에 넣고 콘솔을 표현하는 객체에 `System.out.println(myString)`처럼 출력을 요청하라. </br>
+> 고전적인 객체 지향 언어에서는 클래스에 메서드를 정의해서 객체가 메시지에 반응하는 방법을 정의한다.
+>
+> (중략)
+>
+> 반대로 <u>함수형 프로그래밍</u>에서는 값을 사용해 함수를 호출함으로써 문제를 해결한다. </br>
+> `myString`의 길이를 알고 싶으면 `length(myString)`처럼 함수에 값을 넘긴다. </br>
+> 콘솔에 문자열을 출력할 때는 `println(myString)`을 호출하고, </br>
+> 다른 장치에 문자열을 출력하고 싶다면 `println(myString, System.err)` 같이 원하는 장치를 함수에 전달해야 한다. </br>
+> 함수는 타입 **위에** 정의되지 않고, 함수의 파라미터와 결과가 타입을 **소유**한다.
+>
+> </br>
+>
+> 덩컨 맥그레거, 냇 프라이스, 자바에서 코틀린으로, 오현석 역, (서울: 한빛미디어), 177-8p.
+
+</br>
+
+(<i>고전적인 객체 지향 언어</i> 에 가까운) Java와의 100% 상호 운용성을 지원하는 만큼, Kotlin으로 객체 지향 코드를 작성하는 것은 언어의 **결**을 거스르지 않는 일입니다. 심지어 Kotlin으로 마이그레이션 했을 때 ( [Kotlin의 특성: Concise](https://didactic-doodle-94649jjj9gph997v-8000.app.github.dev/kotlin_conf23/#concise)에서도 언급했듯이, ) 클래스 작성 시의 Boilerplate가 크게 줄어드는 마법도 우리는 목격했습니다. 그렇다면 신나게 OOP로만, Kotlin 코드를 작성하면 될 일일까요? 표현이 거칠었지만,  이는 언어가 가진 매력을 (조금은) 퇴색시키는 일입니다. Kotlin은 멀티 패러다임(Multi-Paradigm) 언어니까요.  
+
+</br>
+
+(어쩔 수 없이 이 글에서 많이 등장하는 언어인) Java에서의 모든 코드는 클래스(Class)의 **필드(field)와 메서드(method)** 로 치환됩니다. (정확히는 JVM을 사용하는 모든 언어, 당연히 JVM을 타겟으로 하는 Kotlin도 바이트코드로 컴파일되면 그러합니다.) 그러니 Java라는 무기를 가진 상황에서 컴퓨팅적 문제에 맞딱드린 경우, 개발자들은 보통 <i><b>클래스에 메서드를 정의하여</b></i>  해결하는 객체지향적 접근법을 취하는 경우가 많습니다. 
+
+(하지만 Java로 함수적 접근을 할 수 없다는 것은 아닙니다. 옛날 옛적 순수한 Java 1.0에서의 함수는 일급 객체의 조건을 충족하지 못했지만, JDK 8(1.8)부터 본격적으로 Stream API를 지원하며 멀티 패러다임에 한 발짝 더 다가섰습니다.)
+
+Kotlin의 경우, 개발 초기부터 멀티 패러다임을 지원하기 위해 노력한 흔적들이 보입니다. 
+두 언어 모두에 존재하는 `println()`이 어떻게 개발자의 그릇 위로 올라오게 되었는지 비교하며 살펴볼까요? 먼저 Java입니다. 
+
+```Java
+System.out.println("Hello, Readers!");
+
+```
+슬쩍 보자하니 (기본으로 import되어 있는)  `java.lang` 패키지에 포함된 `System Class`에서 무언가를 가져오는 것 같습니다. 
+네 맞습니다, `out`이라는 static 필드를 가져옵니다. (static 필드이므로 우리에게는 System Class의 인스턴스가 필요하지 않죠.) 그렇다면 우리는 `out`이 어떤 형태를 가진 property인지 또 찾아나서야 합니다.
+
+```java
+public final static PrintStream out = null;
+```
+
+그렇습니다, `out`은 PrintStream의 인스턴스였던 것입니다. 그렇다면 분명 Java의 `println()`은 `PrintStream`이라는 클래스의 메서드일 것입니다. (예상이 아니라 이는 사실입니다. 같이 공부하려는 방식을 취하다 보니 표현이 조금 어색해졌네요.) 결론적으로 Java의 `println()`은 <i>객체가 메시지에 반응하는 방법을 정의한</i>  하나의 '**메서드**'입니다. 
+
+그런데 Kotlin의 `println()`은 조금 다른 방식으로 정의되어 있습니다. (일부러) Java와의 접점을 없애기 위해, Native가 타겟인 경우의 Console Source를 가져와 보았습니다. 함께 보시죠.
+
+<blockquote>
+<b>🗃️ Github Repo: JetBrains/kotlin - </b> 
+<a href="https://github.com/JetBrains/kotlin/blob/7a7d392b3470b38d42f80c896b7270678d0f95c3/kotlin-native/runtime/src/main/kotlin/kotlin/io/Console.kt#L23" target="blank" rel="nofollow"> kotlin-native/runtime/src/main/kotlin/kotlin/io/Console.kt</a>
+
+```Kotlin
+
+/*
+ * Copyright 2010-2018 JetBrains s.r.o. Use of this source code is governed by the Apache 2.0 license
+ * that can be found in the LICENSE file.
+ */
+
+package kotlin.io
+
+import kotlin.native.internal.GCUnsafeCall
+
+/** 중략 */
+
+/** Prints the given [message] and the line separator to the standard output stream. */
+@GCUnsafeCall("Kotlin_io_Console_println")
+@PublishedApi
+internal external fun println(message: String)
+
+/** Prints the given [message] and the line separator to the standard output stream. */
+public actual fun println(message: Any?) {
+    println(message.toString())
+}
+
+/** Prints the line separator to the standard output stream. */
+@GCUnsafeCall("Kotlin_io_Console_println0")
+public actual external fun println()
 
 
-#### Cross-platform
+/** 후략 */
 
+```
+</blockquote>
 
+</br>
+
+가독성을 위해 파일에 존재하는 대부분의 코드를 가렸지만, 전달하려는 바는 그보다 더 간결합니다. </br> Kotlin의 `println()`은 Class 안에 존재하지 않는다는 사실입니다. 
+
+(JVM이 타겟인 경우에는, 어떻게 보면 당연하게도, 함수 안에서 `System.out.println()`을 호출합니다.
+네이티브의 경우, [다음과 같은 C++ Source](https://github.com/JetBrains/kotlin/blob/7a7d392b3470b38d42f80c896b7270678d0f95c3/kotlin-native/runtime/src/main/cpp/Console.cpp#L38)를 통해 원하는 메시지를 콘솔에 출력합니다. 후자는 객체지향의 특성이 아무리 눈을 크게 뜨고 보아도 전무하다시피 합니다.)
+
+Kotlin은 `println()`과 같은 경우처럼,  함수(그리고 프로퍼티와 상수)를 Class 밖에 선언할 수 있도록 허용합니다. 이를 지적인 말로, '**최상위 함수(Top-level Function)**'를 선언할 수 있다고 이야기합니다. 사실상, Java에서 기존 Class에 함수를 추가하기 어렵거나 불가한 경우 사용하는, **`static` 메서드**를 대체한다고 보아도 무방합니다. 하지만 어떻게든 클래스에 묶이게 되는 Java의 메서드와는 달리, 최상위 함수의 경우 인스턴스 영역에 있지 않으므로, 선언하고 이를 참조하는 것이 더욱 간단합니다. 
+
+또한 Kotlin은 함수를 First-Class Citizen(일급 시민)으로 취급합니다. 이는 생태계 안의 고차 함수(Higher-Order Function)와 중첩 함수(Nested Function)의 존재를 저절로 일깨워줍니다.
+
+> Kotlin functions are [first-class](https://en.wikipedia.org/wiki/First-class_function), </br>
+> which means they can be stored in variables and data structures, </br>
+> and can be passed as arguments to and returned from other [higher-order functions](https://en.wikipedia.org/wiki/First-class_function). </br>
+> You can perform any operations on functions that are possible for other non-function values.
+>
+> Kotlin 함수는 일급 객체입니다. </br>
+> 이는 (함수가) 변수에 할당하거나 자료구조에 저장될 수 있으며, (함수나 객체의) 인자로 전달되거나, 다른 고차 함수의 리턴값이 될 수 있다는 뜻입니다.</br>
+> 함수가 아닌 값들을 가지고 했던 어떤 작업이든 (함수를 핸들링하며) 가능합니다.
+> 
+> </br>
+> 
+> To facilitate this, Kotlin, as a statically typed programming language, </br>
+> uses a family of [function types](https://kotlinlang.org/docs/lambdas.html#function-types) to represent functions, </br>
+> and provides a set of specialized language constructs, such as [lambda expressions](https://kotlinlang.org/docs/lambdas.html#lambda-expressions-and-anonymous-functions).
+>
+> 이를 용이하게 처리하기 위해, 정적 타입 프로그래밍 언어인 Kotlin은, </br>
+> 함수를 표현하기 위해 함수 타입을 사용하고, 람다 표현식과 같은 특수한 구조를 제공합니다.
+> 
+> </br>
+> 
+> 출처: [Higher-Order functions and lambdas | Kotlin Documentation](https://kotlinlang.org/docs/lambdas.html)
+
+</br>
+
+Higher-Order Function, Lambda Expression, Extended Function에 대해서는 (특히 안드로이드 관련한) 다른 포스트에서 조금 더 깊게 다루어 보도록 하겠습니다. 이 글에서는 이만 줄여볼게요.
+
+**개행이 포함하여 출력하는 함수, `println()`.** 프로그래밍 언어에서 가장 단순하다고 생각되는 함수 `하나`를 가지고, 선택할 수 있는 가장 먼 길을 돌아온 것은, Kotlin 생태계가 가진 일종의 **결**을 따라가기 위함이었습니다. 그리고 우리는 여정의 끝에 거의 다다랐습니다. 이 언어가 가진, Kotlin이라는 개발 커뮤니티 안의 사람들이 공동으로 추구하는 지향점, 그 어딘가에 존재하는 섬을 향해, 과연 우리는 어느 방향으로 뱃머리를 돌려야 할까요? 여러분은 감이 오셨나요?
 
 ___
 

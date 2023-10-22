@@ -44,7 +44,9 @@ const MarkdownRenderer = styled.div`
   h2,
   h3 {
     font-weight: 800;
-    margin-bottom: 10px;
+    margin-bottom: 2rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid rgba(2, 0, 36, 0.7);
   }
   h4 {
     font-weight: 700;
@@ -124,7 +126,7 @@ const MarkdownRenderer = styled.div`
 
   // Adjust Horizontal Rule style
   hr {
-    border: 1px solid rgba(184, 184, 184, 1);
+    border: 0.5px solid rgba(184, 184, 184, 0.3);
     margin: 30px 0;
   }
 
@@ -163,17 +165,31 @@ const MarkdownRenderer = styled.div`
   }
 
   // Adjust Code Style
+  span[class*='token function'],
+  span[class*='token keyword'],
+  span[class*='token class-name'],
+  span[class*='token operator'],
+  span[class*='token punctuation'],
+  span[class*='token number'],
+  span[class*='token expression'],
+  span[class*='token annotation builtin'] {
+    font-family: consolas;
+  }
+
   pre[class*='language-'] {
     margin: 30px 0;
     padding: 15px;
     font-size: 15px;
     font-family: consolas;
+    background-color: rgba(2, 0, 36, 0.85);
 
     ::-webkit-scrollbar-thumb {
       background: rgba(255, 255, 255, 0.5);
       border-radius: 3px;
     }
   }
+  
+
 
   code[class*='language-'],
   pre[class*='language-'] {
@@ -181,8 +197,18 @@ const MarkdownRenderer = styled.div`
     padding: 3px 8px;
     font-size: 14px;
     font-family: consolas;
-    background-color: rgba(2, 0, 36, 1);
-    color: rgba(0, 255, 109, 0.6);
+    color: rgba(0, 255, 109, 1);
+    margin-right: 2px;
+    border-radius: 0.5rem;
+  }
+
+  code[class*='language-text']{
+    tab-size: 2;
+    padding: 3px 8px;
+    font-size: 14px;
+    font-family: consolas;
+    background-color: rgba(2, 0, 36, 0.8);
+    color: rgba(0, 255, 109, 1);
     margin-right: 2px;
     border-radius: 0.5rem;
     box-shadow: rgba(0, 0, 0, 0.12) 0 3px 1px -2px,

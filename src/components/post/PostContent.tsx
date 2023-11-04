@@ -68,7 +68,7 @@ const MarkdownRenderer = styled.div`
   hr + h1,
   hr + h2,
   hr + h3,
-  hr + h4{
+  hr + h4 {
     margin-top: 0;
   }
 
@@ -86,7 +86,7 @@ const MarkdownRenderer = styled.div`
 
   h4 {
     font-size: 20px;
-    background-color: rgb(0,255,109, 0.1);
+    background-color: rgb(0, 255, 109, 0.1);
   }
 
   h5 {
@@ -177,7 +177,8 @@ const MarkdownRenderer = styled.div`
   span[class*='token number'],
   span[class*='token expression'],
   span[class*='token annotation builtin'],
-  span[class*="token string"] {
+  span[class*='token string'],
+  span[class*='token annotation punctuation'] {
     font-family: consolas;
   }
 
@@ -193,8 +194,6 @@ const MarkdownRenderer = styled.div`
       border-radius: 3px;
     }
   }
-  
-
 
   code[class*='language-'],
   pre[class*='language-'] {
@@ -207,7 +206,7 @@ const MarkdownRenderer = styled.div`
     border-radius: 0.5rem;
   }
 
-  code[class*='language-text']{
+  code[class*='language-text'] {
     tab-size: 2;
     padding: 3px 8px;
     font-size: 14px;
@@ -217,7 +216,7 @@ const MarkdownRenderer = styled.div`
     margin-right: 2px;
     border-radius: 0.5rem;
     box-shadow: rgba(0, 0, 0, 0.12) 0 3px 1px -2px,
-    rgba(0, 0, 0, 0.14) 0 2px 2px 0, rgba(0, 0, 0, 0.12) 0 1px 5px 0;
+      rgba(0, 0, 0, 0.14) 0 2px 2px 0, rgba(0, 0, 0, 0.12) 0 1px 5px 0;
   }
 
   @media screen and (max-width: 768px) {

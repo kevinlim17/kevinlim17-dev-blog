@@ -83,7 +83,7 @@ thumbnail: './kotlin_conf23.png'
 > 아름다운 도식. 컬러풀한 매력을 가진 언어.
 
 <p align="left">
-    <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/cf150554-f464-4da4-91e6-6efffa1d0ad0" width="80%">
+    <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/40c41566-1cf2-4947-a79c-69cc731e2a69" width="80%">
 </p>
 
 그리고 <i>크고 아름다운</i> 타겟의 수입니다. Kotlin이 가진 강력함은 사실 여기서 출발합니다. 
@@ -614,7 +614,7 @@ fun doConcurrentJob
         ⬇️ 위 코드를 도식화.
     </i>
     </br>
-    <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/e4a4c768-b89c-4cd2-a373-6a4ed07665f0" width="75%" border="1px">
+    <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/ecc9e516-0789-4f0d-bffa-974770fca630" width="75%">
     </br>
     
 </p>
@@ -836,7 +836,7 @@ Kotlin은 위의 두 가치를 기반으로 두고 개발되었고, 지금도 �
 또한 Structured Concurrency의 원칙에 따라 구현된 **코루틴**이라는 라이브러리는, Kotlin이 '동시 실행'에 있어 얼마나 강력한 역량을 가진 언어인지 실감케 합니다. 단순히 멀티 스레딩(Multi-Threading)과 비동기(asynchronous) 프로그래밍을 언어 차원에서 지원할 뿐 아니라, 코루틴은 이에 '구조화된' 안정성을 보탰습니다. 이게 가능했던 이유는, '누수 없는' 동시성 프로그래밍을 지향하는 개발자들이, 코루틴에 (아쉽게도 앞에서 언급하지 않았지만) **Python** `trio` 라이브러리의 [`nursery`](https://chsasank.com/concurrent-programming-trio-tutorial.html) 블록의 개념을 도입했기 때문입니다. 
 
 <blockquote>
-    <h5>여기서 Nursery가 무엇인가요?</h5> 
+    <h5>여기서 Nursery가 무엇인가요? <a href="#-reference" style="font-size: xx-small;">[1]</a></h5> 
     <blockquote>
         Here's the core idea: </br>
         every time our control splits into multiple concurrent paths, 
@@ -847,40 +847,41 @@ Kotlin은 위의 두 가치를 기반으로 두고 개발되었고, 지금도 �
         <b>프로그램의 흐름이 병렬적으로 나뉠 때마다, 우리는 (이 흐름이) 다시 합쳐지기를 바랍니다. </b></br>
         세 가지 작업을 동시에 처리하고 싶을 때, Control Flow는 다음과 같아야 합니다.
         <p align="left">
-            <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/dcfec26b-bc10-4bbb-b0f1-9c3062fbc5cd" width="60%">
+            <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/c761fe9b-071f-46d1-98bb-d437d4829f16" width="70%"></br>
+            ⬆️ 위 Flow는 레퍼런스<a href="#-reference" style="font-size: xx-small;">[1]</a>의 도식을 코루틴으로 치환하여 글쓴이가 재구성한 것입니다.
         </p>
+        ---</br>
         Notice that this has just one arrow going in the top and one coming out the bottom, so it follows Dijkstra's black box rule. </br>
         --- </br>
         상단에 존재하는 하나의 화살표가 하단에서 하나의 화살표로 끝맺어 집니다. 이는 다익스트라(Edsger W. Dijkstra)의 <u>Black Box Rule</u>을 충족합니다.
     </blockquote>
-    다익스트라는 그의 논문</a>에서 이렇게 언급합니다.
+    다익스트라는 그의 논문<a href="#-reference" style="font-size: xx-small;">[2]</a>에서 이렇게 언급합니다.
     <blockquote>
     There is also an abstraction involved in naming an operation and using it on account of "what it does" while completely disregarding "how it works". 
     </blockquote>
-    개발자들은 (글이 쓰여진 1970년의 그들 역시) 종종(아니면 자주) "자신의 지적 능력으로는 한 번에 이해하기 어려운<i>that are too big to hold in your head all at once </i>" 프로그램을 개발하기 원해 왔습니다. 
-    </br>
-    </br>
-    <li>
-        Reference: Nathaniel J. Smith,
-        <a href="https://vorpus.org/blog/notes-on-structured-concurrency-or-go-statement-considered-harmful/" target="blank" rel="nofollow"> "Notes on structured concurrency, or: Go statement considered harmful"</a>, njs blog, last modified April 25, 2018.
-    </li>
-
+   다익스트라는 개발자들이 "자신의 지적 능력으로는 한 번에 이해하기 어려운<i>that are too big to hold in your head all at once </i>" 코드를 작성할 수 있으려면, <b>구조적 프로그래밍</b>(Structured Programming)이 필요하다고 역설했습니다. 이 논문이 쓰여질 당시만 해도 프로그래밍의 세계에서는 <code class="language-text">goto</code>가 횡행했으니까요. 그러면 인용한 부분의 'abstraction'과 구조적 프로그래밍은 어떤 관련이 있는 걸까요? (누구보다 장황하지만 구조적인 글을 지향하는 글쓴이는 지양하는 방식이지만) 간추려 이야기해 보겠습니다. 단순한 함수 하나를 보시죠.
+   </br>
+   <div class="gatsby-highlight" data-language="kotlin">
+    <pre class="language-kotlin"><code class ="language-kotlin"><span class="token function">println</span><span class="token punctuation">(</span>"Hello World!"<span class="token punctuation">)</span></code></pre></div>
+   보통 Kotlin에서 <code class="language-text">println()</code>을 사용할 때, (이 글에서 다루었던 것처럼) 콘솔 소스를 뒤져보거나 하지 않습니다.
+   (그러한 행위는 온전히 순수한, 학문적 호기심의 발로이므로 자주 시도하지 않으시는 걸 추천드립니다.) <b>"어떻게 동작하는지는 뒤로 제쳐두고,"</b> 그저 <b>"그 동작을 사용"</b>할 뿐입니다. 여기서 동작<i>operation</i>이란 함수(procedure), 조건문/반복문 안의 코드, 클래스의 메서드(method) 등을 모두 포괄하는 말입니다. 
+   </br></br>
+   즉, 우리는 프로그램을 구성하는 진정 모든 요소를 이해할 필요가 없습니다. (다익스트라는 이를 코드에 'Black Box'를 적절히 씌우는 행위라고 이야기합니다.) 적절한 추상화를 통해, 동작의 결과와 방향성을 이해하기만 하면 될 뿐입니다. 이는 우리가 사용하는 모든 동작의 결말이, 수많이 존재하는 강의 지류가 결국 바다로 비롯되는 것처럼, 하나의 흐름으로 모일 것임을 믿기 때문에 가능한 일입니다. 대부분의 현대 프로그래밍 언어는 <code class="language-text">goto</code>를 지양함으로써 위와 같은 구조적 프로그래밍의 원칙을, 최소한 표면적으로는, 준수합니다. 
+   </br></br>
+   <code class="language-text">nursery</code>는 동시성 프로그래밍에, 이러한 구조적 프로그래밍의 특성을 적극적으로 도입하려는 Python 생태계의 놀라운 발명품이라고 할 수 있겠습니다. (정확히는 이 텍스트를 구성하는 데 지대한 공헌을 한 블로그의 주인장, Nathaniel J. Smith의 작품입니다.) 핵심은 (코루틴과 비슷하게) <b><code class="language-text">nursery</code> 블록 안에서 시작된 동시성 흐름은 반드시 그 안에서 종료되며, 한 지점에서 끝맺어짐을 보장하는 것입니다.</b> 
+   </br>
 </blockquote>
-
-
 
 앞에서 언급한 내용들을 정리하면, 
 
 <blockquote>
     <p align="left">
-        <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/1378dda9-dccf-4e42-8643-c1cd4b3d3623" width="50%">
+        <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/bc4133d6-e58e-4bf0-b3b4-8394a27423a8" width="50%">
     </p>
-    </br>
-    코루틴 같은 경우, 엄밀하게는 Standard Library라는 기둥을 받치고 있는 것이 맞으나, </br>
-    여기서는 Concurrency Support의 기둥을 받치는 것으로 하겠습니다. 
 </blockquote>
 
-이런 그림이 나올 수 있겠네요.
+이런 그림이 나올 수 있겠네요. 그럼으로써 우리는 코틀린의 '안정성'에 대한 탐험을 미약하게나마 마쳤습니다. </br>
+이제 다른 섬으로 가볼까요?
 
 </br>
 
@@ -915,4 +916,5 @@ ___
 
 ## 🧭 Reference
 
-- Edsger W. Dijkstra. (1972). Chapter I: Notes on structured programming. In <i>Structured programming</i>. Academic Press Ltd., GBR, (pp. 10).
+1. Nathaniel J. Smith, <a href="https://vorpus.org/blog/notes-on-structured-concurrency-or-go-statement-considered-harmful/" target="blank" rel="nofollow"> "Notes on structured concurrency, or: Go statement considered harmful"</a>, njs blog, last modified April 25, 2018.
+2. Edsger W. Dijkstra. (1972). Chapter I: Notes on structured programming. In <i>Structured programming</i>. Academic Press Ltd., GBR, (pp. 10).

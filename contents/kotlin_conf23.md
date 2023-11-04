@@ -552,10 +552,7 @@ public fun CoroutineScope.launch(
 
 ```
 
-`CoroutineScope.launch`의 파라미터 중 `block`은 주어진 Cor
-
-</td>
-</tr>outineScope에서 실행될 `Coroutine Code`를 의미합니다. 즉, `launch()`는 `suspend fun`인 코드의 **block** 으로부터 Coroutine을 생성하는 함수라는 것입니다.
+`CoroutineScope.launch`의 파라미터 중 `block`은 주어진 CoroutineScope에서 실행될 `Coroutine Code`를 의미합니다. 즉, `launch()`는 `suspend fun`인 코드의 **block** 으로부터 Coroutine을 생성하는 함수라는 것입니다.
 
 그러니 '코루틴이 Suspendable Computation의 인스턴스이다'를 다시 이야기하면, Class가 인스턴스를 찍어내듯 Supendable function은 Coroutine을 (`launch()`나 `async()`와 같은 Coroutine Builder를 통해) 생성한다는 이야기입니다. 
 
@@ -667,24 +664,30 @@ fun doConcurrentJob
 
 (<i>고전적인 객체 지향 언어</i> 에 가까운) Java와의 100% 상호 운용성을 지원하는 만큼, Kotlin으로 객체 지향 코드를 작성하는 것은 언어의 **결**을 거스르지 않는 일입니다. 심지어 Kotlin으로 마이그레이션 했을 때 ( [Kotlin의 특성: Concise](https://didactic-doodle-94649jjj9gph997v-8000.app.github.dev/kotlin_conf23/#concise)에서도 언급했듯이, ) 클래스 작성 시의 Boilerplate가 크게 줄어드는 마법도 우리는 목격했습니다. 그렇다면 신나게 OOP로만, Kotlin 코드를 작성하면 될 일일까요? 표현이 거칠었지만,  이는 언어가 가진 매력을 (조금은) 퇴색시키는 일입니다. Kotlin은 멀티 패러다임(Multi-Paradigm) 언어니까요.  
 
-</br>
 
 (어쩔 수 없이 이 글에서 많이 등장하는 언어인) Java에서의 모든 코드는 클래스(Class)의 **필드(field)와 메서드(method)** 로 치환됩니다. (정확히는 JVM을 사용하는 모든 언어, 당연히 JVM을 타겟으로 하는 Kotlin도 바이트코드로 컴파일되면 그러합니다.) 그러니 Java라는 무기를 가진 상황에서 컴퓨팅적 문제에 맞딱드린 경우, 개발자들은 보통 <i><b>클래스에 메서드를 정의하여</b></i>  해결하는 객체지향적 접근법을 취하는 경우가 많습니다. 
 
 (하지만 Java로 함수적 접근을 할 수 없다는 것은 아닙니다. 옛날 옛적 순수한 Java 1.0에서의 함수는 일급 객체의 조건을 충족하지 못했지만, JDK 8(1.8)부터 본격적으로 Stream API를 지원하며 멀티 패러다임에 한 발짝 더 다가섰습니다.)
 
 Kotlin의 경우, 개발 초기부터 멀티 패러다임을 지원하기 위해 노력한 흔적들이 보입니다. 
-두 언어 모두에 존재하는 `println()`이 어떻게 개발자의 그릇 위로 올라오게 되었는지 비교하며 살펴볼까요? 먼저 Java입니다. 
+두 언어 모두에 존재하는 `println()`이 어떻게 개발자의 냉장고에 발을 들이게 되었는지 비교하며 살펴볼까요? 
+
+먼저 Java입니다. 
 
 ```Java
+
 System.out.println("Hello, Readers!");
+
 
 ```
 슬쩍 보자하니 (기본으로 import되어 있는)  `java.lang` 패키지에 포함된 `System Class`에서 무언가를 가져오는 것 같습니다. 
 네 맞습니다, `out`이라는 static 필드를 가져옵니다. (static 필드이므로 우리에게는 System Class의 인스턴스가 필요하지 않죠.) 그렇다면 우리는 `out`이 어떤 형태를 가진 property인지 또 찾아나서야 합니다.
 
 ```java
+
 public final static PrintStream out = null;
+
+
 ```
 
 그렇습니다, `out`은 PrintStream의 인스턴스였던 것입니다. 그렇다면 분명 Java의 `println()`은 `PrintStream`이라는 클래스의 메서드일 것입니다. (예상이 아니라 이는 사실입니다. 같이 공부하려는 방식을 취하다 보니 표현이 조금 어색해졌네요.) 결론적으로 Java의 `println()`은 <i>객체가 메시지에 반응하는 방법을 정의한</i>  하나의 '**메서드**'입니다. 
@@ -770,12 +773,124 @@ Higher-Order Function, Lambda Expression, Extended Function에 대해서는 (특
 ___
 
 ### Kotlin의 지향점
+
+**안정성 그리고 다양성.** Stability and Diversity.
+
+긴 항해 끝에 이 글이 다다른 결론입니다. </br>
+Kotlin은 위의 두 가치를 기반으로 두고 개발되었고, 지금도 그러하다는 것을요. 
+
+<blockquote>
+여기에 '간결함'이라는 친구가 왜 이름을 올리지 못했냐며 의아해할 독자 분들을 위해 </br>
+짤막하게(?) 설명을 덧붙이려 합니다. 정확히 이야기하자면 이 분은 자리를 빼앗긴 것이 아닙니다. </br>
+그는 안정성의 일부로 그의 몫을 다하고 있지요. 코드의 간결함은 흔히 생산성과 직결되기 쉬운데, </br>
+'코드를 더욱 빠르게 작성할 수 있다'라는 사실과는 더욱 밀접합니다. </br>
+(이를 프로그래밍 언어론<i>Programming Langauge Theory</i> 에서는 'Writablilty'라고 합니다.) </br>
+하지만 우리는 다른 측면의 '생산성'에 눈을 돌릴 필요가 있습니다. </br>
+많은 개발자분들이 공감하시겠지만,
+코드는 처음 작성하는 시간보다 이를 고치는 데 </br>
+(과장을 힘껏 보태서) 억겁 배의 시간이 소요된다는 것을요.</br>
+간결한 코드는 이 수많은 순간들에서 빛을 발합니다.  그 이유는 간단합니다. </br>
+우리에게 필연적인 실수들을 '코드를 되짚는 지금'에 이르러서라도 발견하게끔 하기 때문이죠. </br>
+이를 언어가 가진 '<b>디버깅 안정성</b> <i>Stability for Debugging</i>'이라 부를 수 있겠네요. </br>
+(엄밀하게는 'Readability'라고 합니다.)</br>
+이 글에서는 주로 Kotlin의 Codebase가 가진 안정성에 대해서만 이야기했지만, </br>
+프로그래밍 언어의 안정성에는, 이러한 측면도 포함되어야 한다고 생각합니다. </br>
+<b>(즉, 하나의 프로그래밍 언어가 '간결하다'라고 이야기하려면 Writability와 Readability에서 모두 높은 평가를 받아야 한다는 것입니다. )</b> </br>
+이런 부분들은 추후 Android 포스트에서 글쓴이가 직접 작성한 코드를 하나씩 뜯어보며 </br>
+그 중요성을 더 음미해보도록 하겠습니다. 조금의 시간을 두고 여유롭게 말이죠.
+</blockquote>
+
+</br>
+
+<h5><b>안정성</b> <i>Stability</i></h5>
+
+프로그래밍 언어의 안정성은, <i>이론적</i>으로는, Reliability(신뢰성 또는 신뢰 가능성)으로 치환되어 언급됩니다. (이 글에서는 Kotlin의 간결함과 더불어 Codebase의 안정성을, 영어로는 Stability로 통일하여 언급했습니다. 즉, 위의 텍스트에서는 프로그래밍 언어론의 엄밀한 이론적 체계를 따르지 않았음을 밝혀 둡니다.) 
+
+앞에서 언급한 특성들 중, **Null-Safety**(널 안전성)와 **Structured Concurrency**(구조적 병렬성)가 Kotlin의 안정성(여기서는 Reliability)을 지탱합니다. 그 이유를, [ChatGPT](https://chat.openai.com/)가 작성해준 프로그래밍 언어의 **신뢰성에 "기여하는" 요소**를 한 조각씩 분해하며 찾아 보도록 하겠습니다.
+</br>
+
+> Key factors that contribute to the **reliability** of a programming language include: </br>
+> 프로그래밍 언어의 **"신뢰성"** 을 높이는 요소들은 다음과 같습니다:
+
+
+1. > <u><strong style="background-color: palegreen;">Type System</strong></u>: The type system of a programming language determines how it handles data types and type checking. Strong, statically typed languages can catch many errors at compile time, leading to more reliable code. </br></br>
+    > => **타입 시스템**: 프로그래밍 언어의 타입 시스템은 데이터 타입을 어떻게 구성하고, 이에 대한 점검을 어떻게 수행할 것인지 결정합니다. 강 타입, 정적 타입 언어들은 컴파일 시에 많은 오류를 잡아낼 수 있으므로, (약 타입, 동적 타입의 지원하는 언어들에 비해) 더 '신뢰 가능한' 코드를 작성하는 데 유리합니다. </br>
+2. Error Handling
+3. Memory Management
+4. > <u><strong style="background-color: palegreen;">Concurrency Support</strong></u>: In multi-threaded or concurrent applications, the language's support for managing threads and synchronizing access to shared resources affects reliability. Languages with built-in support for concurrency and synchronization mechanisms can help developers avoid [race conditions](https://en.wikipedia.org/wiki/Race_condition) and other issues.</br></br>
+   > => **병렬성 지원**: 멀티 스레드를 사용하거나 병렬적인 기능을 지원하는 애플리케이션의 경우, 언어 차원의 지원은 "신뢰성"에 큰 영향을 끼칩니다. 병렬성과 동기화 메커니즘을 내재한 언어는 (개발자들이) Race Condition 등의 이슈를 피하는 데 도움을 줍니다.
+5. <u><strong style="background-color: palegreen;">Standard Library</strong></u>
+6. Tooling and Ecosystem
+7. Testing and Debugging Support
+8. Documentation
+9.  Long-Term Support
+10. Community and Code Reviews
+
+</br>
+
+**Null Safety**는 Kotlin의 타입 시스템을 단단하게 만들어주는 요소 중 하나입니다. [앞](#safety)에서 인용한 대로, Kotlin의 설계자들은 "<i>선택성을 표준 라이브러리 대신 타입 시스템의 일부로 넣음</i> "으로써 `없음`에 대한 처리에 일관성을 부여했습니다. 일반적으로, 다른 언어에서 타입 시스템에 대해 이야기한다면, **'강'이냐 '약'이냐(Strong-Typed or Weak-Typed), '정적'이냐 '동적'이냐(Statically-Typed or Dynamically-Typed)** 에 초점을 맞춥니다. 그리고 두 조건 모두에서 전자를 충족해야 더 '안정적'이라 이야기합니다. (물론 Kotlin은 Strongly-Typed이자 Statically-Typed Language입니다.) 
+
+여기서 Kotlin 생태계는 한 걸음 더 나아가, 모든 타입을 (정확히는 참조(Reference)의 방식을) 이원화함으로써, 컴파일 타임의 오류를 '잡아내는' 것에 그치지 않고, '없애는' 데에도 기여하였습니다. 
+타입 시스템에 있어, 어떤 프로그래밍 언어의 **'신뢰 수준이 높다'** 라는 건, Built-In으로 실수와 사고의 가능성을 줄이는, 자동차의 주행 보조 장치와 같은 것을 지니고 있다는 뜻이기에, 널 안정성은 그러한 의미에서 (Type System을 떠받치는) 기둥이 될 자격이 충분합니다.
+
+또한 Structured Concurrency의 원칙에 따라 구현된 **코루틴**이라는 라이브러리는, Kotlin이 '동시 실행'에 있어 얼마나 강력한 역량을 가진 언어인지 실감케 합니다. 단순히 멀티 스레딩(Multi-Threading)과 비동기(asynchronous) 프로그래밍을 언어 차원에서 지원할 뿐 아니라, 코루틴은 이에 '구조화된' 안정성을 보탰습니다. 이게 가능했던 이유는, '누수 없는' 동시성 프로그래밍을 지향하는 개발자들이, 코루틴에 (아쉽게도 앞에서 언급하지 않았지만) **Python** `trio` 라이브러리의 [`nursery`](https://chsasank.com/concurrent-programming-trio-tutorial.html) 블록의 개념을 도입했기 때문입니다. 
+
+<blockquote>
+    <h5>여기서 Nursery가 무엇인가요?</h5> 
+    <blockquote>
+        Here's the core idea: </br>
+        every time our control splits into multiple concurrent paths, 
+        we want to make sure that they join up again. </br>
+        So for example, if we want to do three things at the same time, our control flow should look something like this: </br>
+        --- </br>
+        핵심 아이디어: </br>
+        <b>프로그램의 흐름이 병렬적으로 나뉠 때마다, 우리는 (이 흐름이) 다시 합쳐지기를 바랍니다. </b></br>
+        세 가지 작업을 동시에 처리하고 싶을 때, Control Flow는 다음과 같아야 합니다.
+        <p align="left">
+            <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/dcfec26b-bc10-4bbb-b0f1-9c3062fbc5cd" width="60%">
+        </p>
+        Notice that this has just one arrow going in the top and one coming out the bottom, so it follows Dijkstra's black box rule. </br>
+        --- </br>
+        상단에 존재하는 하나의 화살표가 하단에서 하나의 화살표로 끝맺어 집니다. 이는 다익스트라(Edsger W. Dijkstra)의 <u>Black Box Rule</u>을 충족합니다.
+    </blockquote>
+    다익스트라는 그의 논문</a>에서 이렇게 언급합니다.
+    <blockquote>
+    There is also an abstraction involved in naming an operation and using it on account of "what it does" while completely disregarding "how it works". 
+    </blockquote>
+    개발자들은 (글이 쓰여진 1970년의 그들 역시) 종종(아니면 자주) "자신의 지적 능력으로는 한 번에 이해하기 어려운<i>that are too big to hold in your head all at once </i>" 프로그램을 개발하기 원해 왔습니다. 
+    </br>
+    </br>
+    <li>
+        Reference: Nathaniel J. Smith,
+        <a href="https://vorpus.org/blog/notes-on-structured-concurrency-or-go-statement-considered-harmful/" target="blank" rel="nofollow"> "Notes on structured concurrency, or: Go statement considered harmful"</a>, njs blog, last modified April 25, 2018.
+    </li>
+
+</blockquote>
+
+
+
+앞에서 언급한 내용들을 정리하면, 
+
+<blockquote>
+    <p align="left">
+        <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/1378dda9-dccf-4e42-8643-c1cd4b3d3623" width="50%">
+    </p>
+    </br>
+    코루틴 같은 경우, 엄밀하게는 Standard Library라는 기둥을 받치고 있는 것이 맞으나, </br>
+    여기서는 Concurrency Support의 기둥을 받치는 것으로 하겠습니다. 
+</blockquote>
+
+이런 그림이 나올 수 있겠네요.
+
+</br>
+
+<h5><b>다양성</b> <i>Diversity</i></h5>
+
 <p align="left">
-    <img src="https://kotlinlang.org/lp/multiplatform/static/multiplatform-diagram-d716356ba4b4f2488c98714db033bd53.svg" width="80%">
+    <img src="https://kotlinlang.org/assets/images/index/multiplatform.svg" width="80%">
 </p>
 
 >  사진 한 장으로 요약 가능.
-
 
 
 ---
@@ -799,3 +914,5 @@ ___
 ___
 
 ## 🧭 Reference
+
+- Edsger W. Dijkstra. (1972). Chapter I: Notes on structured programming. In <i>Structured programming</i>. Academic Press Ltd., GBR, (pp. 10).

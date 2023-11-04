@@ -116,12 +116,16 @@ const MarkdownRenderer = styled.div`
   ol,
   ul {
     margin-left: 15px;
-    padding: 15px 10px;
+    padding: 1rem 0.8rem;
     border-left: 2px solid rgba(184, 184, 184, 0.5);
   }
 
   li {
-    margin-left: 1rem;
+    margin: 0 2rem;
+  }
+
+  li::marker {
+    font-weight: 800;
   }
 
   // Adjust Horizontal Rule style
@@ -172,7 +176,8 @@ const MarkdownRenderer = styled.div`
   span[class*='token punctuation'],
   span[class*='token number'],
   span[class*='token expression'],
-  span[class*='token annotation builtin'] {
+  span[class*='token annotation builtin'],
+  span[class*="token string"] {
     font-family: consolas;
   }
 

@@ -73,10 +73,10 @@ thumbnail: './kotlin_conf23.png'
 
 1. 기본적으로 Class는 상속을 지원하지 않습니다. Overriding도 마찬가지입니다. 
    (`open` 키워드를 추가하지 않으면, `final`로 설정됩니다.)
-2. Method Overriding은 컴파일 타임(JVM 기준, .kt 코드가 .javac 바이트코드로 바뀔 때)이 아니라, 런타임에 이루어집니다. 
+2. Method Overriding은 컴파일 타임(JVM 기준, .kt 코드가 .class 바이트코드로 바뀔 때)이 아니라, 런타임에 이루어집니다. 
     ( **Runtime Polymorphism** 에 대한 이해가 필요합니다. )
 
-**Polymorphism (다형성)** 과 **Binding** 에 대한 이야기는 ["[Android: Architecture #1] 객체지향이 뭔가요?"](https://kevinlim17.com/object_oriented/) 와 추후 포스트에서 조금 더 다뤄보기로 하고, 여기서는 Kotlin이 **"안정성"** 을 중시하는 언어라는 것만 짚고 넘어가도록 하겠습니다.
+**Polymorphism (다형성)** 과 **Binding** 에 대한 이야기는 ["[Android: Architecture #1] 객체지향이 뭔가요?"](https://kevinlim17.com/object_oriented/) 와 추후 포스트에서 조금 더 다뤄보기로 하고, 여기서는 Kotlin이 **"타입 안정성"** 을 중시하는 언어라는 것만 짚고 넘어가도록 하겠습니다.
 
 </br>
 
@@ -87,7 +87,7 @@ thumbnail: './kotlin_conf23.png'
 </p>
 
 그리고 <i>크고 아름다운</i> 타겟의 수입니다. Kotlin이 가진 강력함은 사실 여기서 출발합니다. 
-먼저, Kotlin은 Java와 <u>**100% 상호 호환**</u>됩니다. 거대한 Java 생태계를 흡수할 수 있다는 사실 하나만으로, 이 언어가 가진 무한한 '가능성'을 보여줍니다. (이게 가능한 이유는, JVM이나 Android를 타겟으로 했을 때, Kotlin은 일차적으로 자바 바이트코드(`.javac`)로 컴파일되기 때문입니다.) 
+먼저, Kotlin은 Java와 <u>**100% 상호 호환**</u>됩니다. 거대한 Java 생태계를 흡수할 수 있다는 사실 하나만으로, 이 언어가 가진 무한한 '가능성'을 보여줍니다. (이게 가능한 이유는, JVM이나 Android를 타겟으로 했을 때, Kotlin은 일차적으로 자바 바이트코드(`.class`)로 컴파일되기 때문입니다.) 
 
  
 그 밖에도, Javascript, Native(MacOS, iOS, Windows, Linux, Android NDK를 지원하며, 코틀린 코드를 네이티브 바이너리로 바로 바꿔야 하는 경우 사용), WebAssembly(아직 시험 단계)를 위한 컴파일러를 각각 제공합니다. 단순히 Android Native나 Spring를 이용한 Backend 개발에서 Java라는 언어의 역할을 대체하는 것 이상을 바라보고 있다고 생각하셔도 좋을 것 같습니다. 웹 애플리케이션이나 데이터 사이언스, 임베디드 분야에서도 다른 언어의 지위를 넘보고 싶다는 의도가 다분하니 말이죠. (궁금하신 분들은 [**Kotlin PlayGround**](https://play.kotlinlang.org/)에서 직접 여러 환경을 체험보시는 것도 좋습니다.)
@@ -165,7 +165,7 @@ class HelloWorld {
 
 1. Class의 작성을 강요하지 않는다.
 2. Java System Class에 속한 Method임을 명시적으로 작성하지 않아도 된다.
-3. Type Inference(타입 추론)를 지원한다. 
+3. Type Inference(타입 추론)를 지원한다. (이는 Java도 지원.)
 
 위의 첫 번째 포인트가 바로 Kotlin과 Java라는 언어의 결을 완전히 다르게 만든 분기점이라고 볼 수 있습니다. Kotlin Community는 객체지향(Object-Oriented)은 물론이고, **함수형 프로그래밍(Functional Programming)** 도 "우리 언어가 가진 매력"이라 적극적으로 홍보합니다. 이 부분은 네 번째 특성에서 더 자세히 다뤄볼게요.
 (Kotiln의 함수는 First-Class Citizen의 조건을 충족합니다. 이는 언어의 간결함을 결정짓는 요소라 볼 수도 있습니다.)
@@ -419,13 +419,11 @@ null
 
 <table>
 <tr align="left">
-<th>Collection</th>
 <th >Code</th>
 <th>Result </th>
 </tr>
 <tr>
-<td>Map</td>
-<td valign= "top";>
+<td valign= "top" style="background-color:white;";>
 
 ```kotlin
 
@@ -450,13 +448,12 @@ null
 </td>
 </tr>
 <tr>
-<td>List</td>
-<td valign="top">
+<td valign="top" style="background-color:white;">
 
  ```kotlin
 
 fun main() {
-    val playerList : List<String> is considered the return value:
+    val playerList : List<String>
     	= listOf("Messi", 
                  "Sergio", 
                  "Jordi Alba")
@@ -478,8 +475,7 @@ Index 3 out of bounds for length 3
 </td>
 </tr>
 <tr>
-<td>Iterable</td>
-<td> 
+<td style="background-color:white;"> 
 
 ```kotlin
 
@@ -505,6 +501,8 @@ List is empty.
 </table>
 
 `Map<K,V>.get(key)`는 key에 해당하는 값이 없을 때 `null`을 반환하지만, `List<T>.get(index)`는 `index`에 해당하는 값이 없을 때 `ArrayIndexOutOfBoundsException`을 던지고, 이와 비슷하게 `Iterable<T>.first()`는 `NoSuchElementException`을 던집니다. 
+
+</br>
 
 **결국 이는 Java와의 호환성을 유지하려고 생긴 문제인데요.** 하지만 `null`을 타입 시스템 안으로 끌어안을 때 생기는 이점이 압도적으로 많기에, 이러한 예외들은 기꺼이 감수해야 하지 않을까.. 싶기는 합니다. 하지만 앞으로 Kotlin 생태계에서 논의해볼 문제이기는 합니다. 일관성 있는 예외 처리는 독립된 언어의 정체성을 구성하는 데 중요한 요소이기 때문입니다. 
 
@@ -836,8 +834,9 @@ Kotlin은 위의 두 가치를 기반으로 두고 개발되었고, 지금도 �
 또한 Structured Concurrency의 원칙에 따라 구현된 **코루틴**이라는 라이브러리는, Kotlin이 '동시 실행'에 있어 얼마나 강력한 역량을 가진 언어인지 실감케 합니다. 단순히 멀티 스레딩(Multi-Threading)과 비동기(asynchronous) 프로그래밍을 언어 차원에서 지원할 뿐 아니라, 코루틴은 이에 '구조화된' 안정성을 보탰습니다. 이게 가능했던 이유는, '누수 없는' 동시성 프로그래밍을 지향하는 개발자들이, 코루틴에 (아쉽게도 앞에서 언급하지 않았지만) **Python** `trio` 라이브러리의 [`nursery`](https://chsasank.com/concurrent-programming-trio-tutorial.html) 블록의 개념을 도입했기 때문입니다. 
 
 <blockquote>
-    <h5>여기서 Nursery가 무엇인가요? <a href="#-reference" style="font-size: xx-small;">[1]</a></h5> 
+    <h5>여기서 Nursery가 무엇인가요? <sup><a id="doc1" href="#ref1">[1]</a></sup> </h5> 
     <blockquote>
+        <a href="https://vorpus.org/blog/notes-on-structured-concurrency-or-go-statement-considered-harmful/#nurseries-a-structured-replacement-for-go-statements"><h5>Nurseries: a structured replacement for go statements</h5></a>
         Here's the core idea: </br>
         every time our control splits into multiple concurrent paths, 
         we want to make sure that they join up again. </br>
@@ -848,17 +847,21 @@ Kotlin은 위의 두 가치를 기반으로 두고 개발되었고, 지금도 �
         세 가지 작업을 동시에 처리하고 싶을 때, Control Flow는 다음과 같아야 합니다.
         <p align="left">
             <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/c761fe9b-071f-46d1-98bb-d437d4829f16" width="70%"></br>
-            ⬆️ 위 Flow는 레퍼런스<a href="#-reference" style="font-size: xx-small;">[1]</a>의 도식을 코루틴으로 치환하여 글쓴이가 재구성한 것입니다.
+            ⬆️ 위 Flow는 레퍼런스<sup><a href="#ref1">[1]</a></sup>의 도식을 코루틴으로 치환하여 글쓴이가 재구성한 것입니다.
         </p>
         ---</br>
         Notice that this has just one arrow going in the top and one coming out the bottom, so it follows Dijkstra's black box rule. </br>
         --- </br>
         상단에 존재하는 하나의 화살표가 하단에서 하나의 화살표로 끝맺어 집니다. 이는 다익스트라(Edsger W. Dijkstra)의 <u>Black Box Rule</u>을 충족합니다.
     </blockquote>
-    다익스트라는 그의 논문<a href="#-reference" style="font-size: xx-small;">[2]</a>에서 이렇게 언급합니다.
+    다익스트라는 그의 논문<sup><a id="doc2" href="#ref2">[2]</a></sup>에서 이렇게 언급합니다.
     <blockquote>
     There is also an abstraction involved in naming an operation and using it on account of "what it does" while completely disregarding "how it works". 
+    </br>
+    ---</br>
+    특정 동작에 이름을 붙이며, 그 동작이 어떻게 작동하는지 완전히 무시한 뒤 그것이 무엇을 하는지에만 포커스를 맞추는 것, 추상화는 바로 그 지점에도 존재합니다.
     </blockquote>
+    </br>
    다익스트라는 개발자들이 "자신의 지적 능력으로는 한 번에 이해하기 어려운<i>that are too big to hold in your head all at once </i>" 코드를 작성할 수 있으려면, <b>구조적 프로그래밍</b>(Structured Programming)이 필요하다고 역설했습니다. 이 논문이 쓰여질 당시만 해도 프로그래밍의 세계에서는 <code class="language-text">goto</code>가 횡행했으니까요. 그러면 인용한 부분의 'abstraction'과 구조적 프로그래밍은 어떤 관련이 있는 걸까요? (누구보다 장황하지만 구조적인 글을 지향하는 글쓴이는 지양하는 방식이지만) 간추려 이야기해 보겠습니다. 단순한 함수 하나를 보시죠.
    </br>
    <div class="gatsby-highlight" data-language="kotlin">
@@ -870,28 +873,87 @@ Kotlin은 위의 두 가치를 기반으로 두고 개발되었고, 지금도 �
    </br></br>
    <code class="language-text">nursery</code>는 동시성 프로그래밍에, 이러한 구조적 프로그래밍의 특성을 적극적으로 도입하려는 Python 생태계의 놀라운 발명품이라고 할 수 있겠습니다. (정확히는 이 텍스트를 구성하는 데 지대한 공헌을 한 블로그의 주인장, Nathaniel J. Smith의 작품입니다.) 핵심은 (코루틴과 비슷하게) <b><code class="language-text">nursery</code> 블록 안에서 시작된 동시성 흐름은 반드시 그 안에서 종료되며, 한 지점에서 끝맺어짐을 보장하는 것입니다.</b> 
    </br>
+   </br>
 </blockquote>
 
-앞에서 언급한 내용들을 정리하면, 
+</br>
+이제 앞에서 언급한 내용들을 정리하면, 
 
 <blockquote>
     <p align="left">
         <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/bc4133d6-e58e-4bf0-b3b4-8394a27423a8" width="50%">
     </p>
+    ⬆️ Coroutine은 Standard Library라는 기둥을 받치고 있는 것이 (엄밀하게는) 맞으나, 편의상 위와 같이 제작하였음을 밝힙니다.
 </blockquote>
 
 이런 그림이 나올 수 있겠네요. 그럼으로써 우리는 코틀린의 '안정성'에 대한 탐험을 미약하게나마 마쳤습니다. </br>
-이제 다른 섬으로 가볼까요?
+이제 다른 섬으로 모험을 떠나볼까요?
 
 </br>
 
 <h5><b>다양성</b> <i>Diversity</i></h5>
 
 <p align="left">
-    <img src="https://kotlinlang.org/assets/images/index/multiplatform.svg" width="80%">
+    <img src="https://kotlinlang.org/assets/images/index/multiplatform.svg" width="70%">
 </p>
 
->  사진 한 장으로 요약 가능.
+>  사진 한 장으로 요약 가능. </br>
+>  ⬆️ 출처: [Kotlin Overview: Kotlin Multiplatform](https://kotlinlang.org/docs/multiplatform.html)
+
+</br>
+
+사실 글의 첫머리에서 **Kotlin의 정의**를 살펴볼 때, 모든 힌트는 주어졌습니다.
+앞서 글쓴이는 **해당 텍스트**를 톺아보며 '정적 타입<i>Statically-Typed</i>'과 '타겟<i>Target</i>'에 주안점을 두고 논지를 전개해 나갔는데요. 그렇게 하고선 Kotlin의 네 가지 특성을 살펴본 뒤, 다시 이 언어가 지향하는 두 지점을 향해 항해했습니다. 그리고 그 두 지점은 우리 여정의 시작과 맞닿아 있습니다.
+결국 이 단락도 그러한 회귀의 일부입니다.
+
+</br>
+
+'안정성'과 마찬가지로, Kotlin의 '다양성'도 단순히 한 가지 개념만을 담고 있는 것은 아닙니다. 크게 네 차원에서의 다양성을 이야기해볼 수 있는데요. <b>`Usage`, `Target`, `Platform`, `Code Style`</b>이 바로 그것입니다. <u><b>Code Style</b></u>를 제외한 셋은 밀접히 관련되어 있지만, 사용되는 맥락이 조금씩 다릅니다. (그리고 <u>네 번째 차원</u>에 대한 이야기는 [Object-Oriented or Functional](#object-oriented-or-functional)에서 다루었으니 여기서는 생략하겠습니다.) 
+
+
+</br>
+
+<h5>Usage: 무엇을 개발하는 데 Kotlin을 사용할 것인가</h5>
+
+쉽게 말해 "Kotlin으로 뭐 만들 수 있어?" 입니다. 공식 홈페이지의 내용(Kotlin이 제공하는 Solution)을 토대로 정리해 보면 다음과 같습니다. 
+
+- Android Native 
+- Server-Side
+- **Multiplatform**
+- **Full-Stack Web Application** 
+- Data Science
+
+
+**강조한 부분**을 제외한 세 가지 분야는, Java와의 100% 상호 운용성이 바탕에 있습니다. 안드로이드 네이티브 개발이나 Spring을 이용한 백엔드 개발은 원래 Java로 이루어진 것이었고, Jupyter나 Zeppelin을 이용한 Data Science에 대한 지원도, 기존에 존재하던 JVM 기반의 라이브러리를 바탕으로 출발한 것입니다.
+(Kotlin 전용으로 개발된 백엔드 프레임워크 [**Ktor**](https://ktor.io/docs/welcome.html)에 대해서는 조금 뒤에서 다뤄보겠습니다.) 
+
+하지만 나머지 **두 분야**는 조금 다릅니다. JVM과는 무관하게, 오롯이 Kotlin 생태계에서 창발된 것들입니다. (모바일 뿐 아니라 데스크톱이나 웹을 포함하여) 다양한 플랫폼에서 동작하는 애플리케이션을 하나의 언어로 작성한다거나, 웹사이트를 (심지어 풀스택으로) JavaScript가 아닌 언어로 개발한다는 것, 그리고 전자와 후자의 '언어'가 같은 생태계를 지칭한다는 건, 조금 어색한 이야기로까지 들립니다.  
+
+위와 같은 일들을 가능하게 하려면 여러 요소들이 뒷받침되어야겠지만, 가장 중요한 것은 Kotlin으로 작성된 코드를 상황에 따라 '어떻게 변환시키냐'에 달려 있습니다. 그래서 우리는 Target에 대한 이야기로 발걸음을 옮길 수 밖에 없습니다. 다음 스텝을 밟아 볼까요?
+
+
+</br>
+
+<h5>Target: Kotlin을 어떻게 컴파일할 것인가</h5>
+
+<p align="left">
+    <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/40c41566-1cf2-4947-a79c-69cc731e2a69" width="70%">
+</p>
+
+
+
+</br>
+
+<h5>Platform: 어떤 환경에서 Kotlin Software를 사용할 것인가</h5>
+
+<p align="left" style="background-color:rgba(184, 184, 184, 0.1);">
+    <img src="https://kotlinlang.org/docs/images/kotlin-multiplatform-hierarchical-structure.svg" width="70%"></br>
+    ⬆️ 출처: <a href="https://kotlinlang.org/docs/multiplatform.html#code-sharing-between-platforms"><b>Kotlin Overview: Kotlin Multiplatform</b></a>
+    </br>
+</p>
+
+</br>
+
 
 
 ---
@@ -916,5 +978,10 @@ ___
 
 ## 🧭 Reference
 
-1. Nathaniel J. Smith, <a href="https://vorpus.org/blog/notes-on-structured-concurrency-or-go-statement-considered-harmful/" target="blank" rel="nofollow"> "Notes on structured concurrency, or: Go statement considered harmful"</a>, njs blog, last modified April 25, 2018.
-2. Edsger W. Dijkstra. (1972). Chapter I: Notes on structured programming. In <i>Structured programming</i>. Academic Press Ltd., GBR, (pp. 10).
+<ol>
+    <sup><a id="ref1" href="#doc1"><b>[1]</b></a></sup>
+        Nathaniel J. Smith, <a href="https://vorpus.org/blog/notes-on-structured-concurrency-or-go-statement-considered-harmful/" target="blank" rel="nofollow"> "Notes on structured concurrency, or: Go statement considered harmful"</a>, njs blog, last modified April 25, 2018.
+</br>
+    <sup><a id="ref2" href="#doc2"><b>[2]</b></a></sup>
+         Edsger W. Dijkstra. (1972). Chapter I: Notes on structured programming. In <i>Structured programming</i>. Academic Press Ltd., GBR, (pp. 10).
+</ol>

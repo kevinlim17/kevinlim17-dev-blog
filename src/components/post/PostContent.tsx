@@ -141,6 +141,11 @@ const MarkdownRenderer = styled.div`
     text-underline-position: under;
   }
 
+  // Adjust Footnote Style
+  sup > a {
+    text-decoration: blink;
+  }
+
   // Adjust Table Style
   table {
     border-radius: 3px;

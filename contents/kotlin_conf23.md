@@ -867,7 +867,7 @@ Kotlin은 위의 두 가치를 기반으로 두고 개발되었고, 지금도 �
    <div class="gatsby-highlight" data-language="kotlin">
     <pre class="language-kotlin"><code class ="language-kotlin"><span class="token function">println</span><span class="token punctuation">(</span>"Hello World!"<span class="token punctuation">)</span></code></pre></div>
    보통 Kotlin에서 <code class="language-text">println()</code>을 사용할 때, (이 글에서 다루었던 것처럼) 콘솔 소스를 뒤져보거나 하지 않습니다.
-   (그러한 행위는 온전히 순수한, 학문적 호기심의 발로이므로 자주 시도하지 않으시는 걸 추천드립니다.) <b>"어떻게 동작하는지는 뒤로 제쳐두고,"</b> 그저 <b>"그 동작을 사용"</b>할 뿐입니다. 여기서 동작<i>operation</i>이란 함수(procedure), 조건문/반복문 안의 코드, 클래스의 메서드(method) 등을 모두 포괄하는 말입니다. 
+   (그러한 행위는 온전히 순수한, 학문적 호기심의 발로이므로 자주 시도하지 않으시는 걸 추천드립니다.) <b>"어떻게 동작하는지는 뒤로 제쳐두고,"</b> 그저 <b>"그 동작을 사용"</b>할 뿐입니다. 여기서 동작<i>operation</i>이란 함수(Function), 조건문/반복문 안의 코드, 클래스의 메서드(method) 등을 모두 포괄하는 말입니다. 
    </br></br>
    즉, 우리는 프로그램을 구성하는 진정 모든 요소를 이해할 필요가 없습니다. (다익스트라는 이를 코드에 'Black Box'를 적절히 씌우는 행위라고 이야기합니다.) 적절한 추상화를 통해, 동작의 결과와 방향성을 이해하기만 하면 될 뿐입니다. 이는 우리가 사용하는 모든 동작의 결말이, 수많이 존재하는 강의 지류가 결국 바다로 비롯되는 것처럼, 하나의 흐름으로 모일 것임을 믿기 때문에 가능한 일입니다. 대부분의 현대 프로그래밍 언어는 <code class="language-text">goto</code>를 지양함으로써 위와 같은 구조적 프로그래밍의 원칙을, 최소한 표면적으로는, 준수합니다. 
    </br></br>
@@ -919,17 +919,17 @@ Kotlin은 위의 두 가치를 기반으로 두고 개발되었고, 지금도 �
 
 - Android Native 
 - Server-Side
-- **Multiplatform**
-- **Full-Stack Web Application** 
+- **Multiplatform Application**
+- **Client-Side Web Application** 
 - Data Science
 
 
 **강조한 부분**을 제외한 세 가지 분야는, Java와의 100% 상호 운용성이 바탕에 있습니다. 안드로이드 네이티브 개발이나 Spring을 이용한 백엔드 개발은 원래 Java로 이루어진 것이었고, Jupyter나 Zeppelin을 이용한 Data Science에 대한 지원도, 기존에 존재하던 JVM 기반의 라이브러리를 바탕으로 출발한 것입니다.
 (Kotlin 전용으로 개발된 백엔드 프레임워크 [**Ktor**](https://ktor.io/docs/welcome.html)에 대해서는 조금 뒤에서 다뤄보겠습니다.) 
 
-하지만 나머지 **두 분야**는 조금 다릅니다. JVM과는 무관하게, 오롯이 Kotlin 생태계에서 창발된 것들입니다. (모바일 뿐 아니라 데스크톱이나 웹을 포함하여) 다양한 플랫폼에서 동작하는 애플리케이션을 하나의 언어로 작성한다거나, 웹사이트를 (심지어 풀스택으로) JavaScript가 아닌 언어로 개발한다는 것, 그리고 전자와 후자의 '언어'가 같은 생태계를 지칭한다는 건, 조금 어색한 이야기로까지 들립니다.  
+하지만 나머지 **두 분야**는 조금 다릅니다. JVM과는 무관하게, 오롯이 Kotlin 생태계에서 창발된 것들입니다. (모바일 뿐 아니라 데스크톱이나 웹을 포함하여) 다양한 플랫폼에서 동작하는 애플리케이션을 하나의 언어로 작성한다거나, 웹사이트를 JavaScript가 아닌 언어로 개발한다는 것, 그리고 전자와 후자의 '언어'가 같은 생태계를 지칭한다는 건, 조금 어색한 이야기로까지 들립니다.  
 
-위와 같은 일들을 가능하게 하려면 여러 요소들이 뒷받침되어야겠지만, 가장 중요한 것은 Kotlin으로 작성된 코드를 상황에 따라 '어떻게 변환시키냐'에 달려 있습니다. 그래서 우리는 Target에 대한 이야기로 발걸음을 옮길 수 밖에 없습니다. 다음 스텝을 밟아 볼까요?
+**위와 같은 일들**을 가능하게 하려면 여러 요소들이 뒷받침되어야겠지만, 가장 중요한 것은 Kotlin으로 작성된 코드를 상황에 따라 '어떻게 변환시키냐'에 달려 있습니다. 그래서 우리는 Target에 대한 이야기로 발걸음을 옮길 수 밖에 없습니다. 다음 스텝을 밟아 볼까요?
 
 
 </br>
@@ -940,18 +940,70 @@ Kotlin은 위의 두 가치를 기반으로 두고 개발되었고, 지금도 �
     <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/40c41566-1cf2-4947-a79c-69cc731e2a69" width="70%">
 </p>
 
+Kotlin 컴파일러는 크게 네 가지 타겟(Target)을 가집니다. JVM(Java Virtual Machine), JavaScript, WebAssembly, 그리고 Native가 그것입니다. 
 
+JVM을 타겟으로 하는 경우, 우리가 작성한 Kotlin 코드는 Java 8 바이트코드(`.class`)로 컴파일<sup><a id="doc3" href="#ref3">[3]</a></sup>됩니다. 이후에는 온전히 JVM의 손에 맡겨집니다. 이를 통해 Java 생태계의 가장 큰 장점인 '운영체제에 대한 독립성'을 저절로 확보하게 됩니다. (이를 흔히 Write Once, Run Anywhere: **WORA 원칙**이라고 하죠.) 대부분의 Kotlin 코드는 JVM의 손을 거쳐 0과 1이 됩니다.
+
+타겟이 JavaScript인 경우, ES5.1 버전의 코드로 변환되며, 이는 CommonJS와 AMD(Asynchronous Module Definition) 모듈 시스템과의 호환을 지원합니다.<sup><a id="doc4" href="#ref4">[4]</a></sup> 또한 (아직 실험 단계이기는 하지만,) WebAssembly로의 컴파일도 가능합니다. 컴파일러가 이 두 타겟을 지원함으로써, 클라이언트 사이드의 웹 개발이 가능해지며, 명시적으로 Java와의 첫 번째 분기(分岐)가 일어납니다. 
+
+Native의 경우, 이름이 말해주듯, Kotlin 코드는 Virtual Machine을 거치지 않고 Binary로 컴파일됩니다. 
+모든 경우에서 **JVM이 만병통치약이 아니기 때문에**, (특히 임베디드나 macOS, iOS에서 Desirable한 해결책이 아니기 때문에,) 궁극적인 Multiplatform 지향성을 갖추기 위해서 (그리고 속도를 위해서,) Kotlin의 개발자들은 Native Complier가 필요하다고 판단한 것 같습니다. 두 번째 분기는 여기서 일어납니다. Java와는 달리 '운영체제 독립성'과 '의존성'을 모두 취한 것이죠.
+
+**컴파일 가능성**에 대해 알아보았으니, 우리는 이제 다양한 환경에서 공통된 로직으로 Kotlin으로 작성한 애플리케이션을 동작(Run)시킬 수 있을지 고민해야 합니다. 
 
 </br>
 
 <h5>Platform: 어떤 환경에서 Kotlin Software를 사용할 것인가</h5>
 
-<p align="left" style="background-color:rgba(184, 184, 184, 0.1);">
+<p align="left" style="background-color:rgba(184, 184, 184, 0.1); padding-left: 1rem;">
     <img src="https://kotlinlang.org/docs/images/kotlin-multiplatform-hierarchical-structure.svg" width="70%"></br>
     ⬆️ 출처: <a href="https://kotlinlang.org/docs/multiplatform.html#code-sharing-between-platforms"><b>Kotlin Overview: Kotlin Multiplatform</b></a>
     </br>
 </p>
 
+> **Write Single Logic, Use it for Any Platform.**
+> </br> 공통 로직을 작성하고, 어떤 플랫폼을 위해서든 동작하게 하자.
+
+
+얼핏 보면, 위 문장은 다른 Cross-Platform 프레임워크의 지향점과 겹치는 것 같지만, 이 생태계는 "애플리케이션을 동작시키기 위한 모든 구성 요소"를 End to End로 Kotlin으로만 작성하라고 강요하지 않습니다. 우리에게는 세 가지 선택지가 있습니다.
+
+
+<p align="center" style="background-color:rgba(184, 184, 184, 0.1);">
+    <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/722edc21-2401-4654-8b6e-cefd0012301c" width="80%"> </br>
+    <img src="https://kotlinlang.org/docs/images/multiplatform-compose.svg" width="50%"></br>
+    ⬆️ 이미지 출처: <a href="https://www.jetbrains.com/kotlin-multiplatform/"><b>Kotlin Multiplatform for Cross-Platform Development | Jetbrains </b></a>
+</p>
+
+</br>
+
+첫 번째 옵션은 **Logic의 일부를 공유**하는 것입니다. (위의 두 번째 그림을 참고하면)  Data / Business / Presentation Layer 중 일부만을 Kotlin으로 작성하고, 나머지 부분은 각 플랫폼에 맞는 네이티브 코드로 작성하는 것입니다.
+
+두 번째는 **UI를 제외한 모든 구성 요소의 네이티브 의존성을 제거하는 것**입니다. 첫 번째 경우에서 플랫폼 간 공통 로직의 비율을 늘린 것인데요. MVVM 아키텍처를 적용한 모바일 애플리케이션을 예로 들어보죠. 
+
+<blockquote>
+    <p align="left">
+        <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/8cf9b039-82f4-4565-bebf-2261ab25125f" width="75%"/>
+    </p>
+    </br>
+    ⬆️ Data Layer에 해당하는 Model과 Presentation Layer에 해당하는 ViewModel은 Kotlin으로 작성하고, View는 각 네이티브 환경에 맞추어 작성한 경우의 다이어그램.
+</blockquote>
+
+</br>
+
+세 번째 옵션은 **UI까지 모두 Kotlin으로 작성하는 것**입니다. 이를 위해서는 Jetpack Compose 기반의 
+[**Compose Multiplatform**](https://github.com/JetBrains/compose-multiplatform)이라는 프레임워크를 사용해야 합니다. 사실 다른 Cross-platform 생태계와 경쟁하게 될 지점은 바로 여기입니다. 애플리케이션(Client Side)의 모든 Layer를 하나의 언어로 작성하기 때문인데요. 그렇지만 Kotlin이라는 생태계가 아직 이 부분에 있어서 강점을 지닌다고 이야기하기에는 시기상조입니다. Desktop Application이나 iOS의 경우에는 아직 불안정한 요소가 많기 때문입니다. 
+
+그러나 Kotlin Multiplaform의 강점은 세 번째 옵션에 있는 것이 아니라고 글쓴이는 생각합니다. 완전한 네이티브 의존성에서 벗어나, 다양한 플랫폼을 대상으로 한 애플리케이션을 만들 때, Kotlin으로 공통 로직을 (비교적 많은 비율을 할애하여) 작성할 수 있다는 것은 충분히 큰 메리트입니다. 
+
+</br>
+
+이렇게 (WORA와는 확실히 다른 의미의) **아래 문장**을 충족시키기 위한 제반 조건은 마련되었습니다. 
+> **Write Single Logic, Use it for Any Platform.**
+> </br> 공통 로직을 작성하고, 어떤 플랫폼을 위해서든 동작하게 하자.
+
+**Kotlin의 다양성은 'Multiplatform'이라는 단어 안에도 존재합니다.**
+
+</br>
 </br>
 
 
@@ -982,6 +1034,15 @@ ___
     <sup><a id="ref1" href="#doc1"><b>[1]</b></a></sup>
         Nathaniel J. Smith, <a href="https://vorpus.org/blog/notes-on-structured-concurrency-or-go-statement-considered-harmful/" target="blank" rel="nofollow"> "Notes on structured concurrency, or: Go statement considered harmful"</a>, njs blog, last modified April 25, 2018.
 </br>
+</br>
     <sup><a id="ref2" href="#doc2"><b>[2]</b></a></sup>
          Edsger W. Dijkstra. (1972). Chapter I: Notes on structured programming. In <i>Structured programming</i>. Academic Press Ltd., GBR, (pp. 10).
+</br>
+</br>
+    <sup><a id="ref3" href="#doc3"><b>[3]</b></a></sup>
+        <i>"By Default, the Kotlin/JVM compiler produces Java 8 compatible bytecode. (...) Starting with Kotlin 1.5, the compiler does not support producing bytecode compatible with Java versions below 8"</i>,  <a href="https://kotlinlang.org/docs/faq.html#which-versions-of-jvm-does-kotlin-target" target="blank">Kotlin FAQ - Which versions of JVM does Kotlin target?</a>에서 인용.
+</br>
+</br>
+     <sup><a id="ref4" href="#doc4"><b>[4]</b></a></sup>
+        <i>"When targeting JavaScript, Kotlin transpiles to ES5.1 and generates code which is compatible with module systems including AMD and CommonJS."</i>,  <a href="https://kotlinlang.org/docs/faq.html#what-does-kotlin-compile-down-to" target="blank">Kotlin FAQ - What does Kotlin compile down to?</a>에서 인용.
 </ol>

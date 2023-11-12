@@ -12,7 +12,7 @@ const MarkdownRenderer = styled.div`
   max-width: 58vw;
   margin: 0 0 0 9vw;
   padding: 50px 40px 0 40px;
-  word-break: break-all;
+  word-break: word-break;
   border-left: 0.5px solid rgba(2, 0, 36, 0.2);
   border-right: 0.5px solid rgba(2, 0, 36, 0.2);
 

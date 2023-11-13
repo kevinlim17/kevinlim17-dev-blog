@@ -15,7 +15,7 @@ thumbnail: './kotlin_conf23.png'
 뜬 구름 잡는 이야기는 과감히 각설하고, 이 공간에서 다룰 내용은 '**컨퍼런스 리뷰**'입니다. 
 무려 글쓴이가 사회인이던 시절(그래봤자 고작 4달 전 이야기지만)에 다녀온 것이라, 매우 늦은 감이 없지 않아 있지만, 그래도 개인 노션에 후기를 Raw한 형태로라도 정리해 두었으니, 정돈된 형태로 다듬어 보자는 결심에서 공유해 봅니다. 
 
-지난 4월 25일, 판교 인프랩 오피스에서, 저녁 6시 30분부터 두 시간 가량 진행된, "**인프런 퇴근길 밋업 with KotlinConf'23 Global**"에 대한 짤막한 소감과 **코틀린(Kotlin)이라는 언어의 미래**에 대한 제 생각들을 중심으로 이야기 나누어 보겠습니다. 
+지난 4월 25일, 판교 인프랩 오피스에서, 저녁 6시 30분부터 두 시간 가량 진행된, "**인프런 퇴근길 밋업 with KotlinConf'23 Global**"에 대한 짤막한 소감과 **코틀린(Kotlin)이라는 언어의 현재와 미래**에 대한 제 생각들을 중심으로 이야기 나누어 보겠습니다. 
 
 함께 가시죠.
 
@@ -31,12 +31,10 @@ thumbnail: './kotlin_conf23.png'
 > 이 파트에서는 [**Kotlin Programming Language Official Site**](https://kotlinlang.org/) 에서 언급하는 내용들과 <br/>[**영문 위키피디아: Kotlin(Programming Language)**](https://en.wikipedia.org/wiki/Kotlin_(programming_language))를 번역하고 요약해 작성했습니다.
 >
 
-</br>
 
-한 언어의 미래에 대해 논하려면, 먼저 과거와 현재를 알아야겠지요. 기꺼이 한 단락을 할애할 가치가 충분합니다. 
+한 언어의 미래에 대해 논하려면, 먼저 과거와 현재를 알아야겠지요. 
 우선 Kotlin FAQ(Frequently Asked Questions) 페이지에 언급된, '[**Kotlin이 무엇이냐**](https://kotlinlang.org/docs/faq.html#what-is-kotlin)'라는 질문에 대한 답을 살펴보도록 하겠습니다.
 
-</br>
 
 >
 > Kotlin is an open-source statically typed programming language that targets the JVM, Android, JavaScript, Wasm, and Native. <br/>
@@ -48,6 +46,7 @@ thumbnail: './kotlin_conf23.png'
 > Jetbrains 사에 의해 개발되었으며, Kotlin 프로젝트는 2010년에 [**첫 발걸음**](https://github.com/JetBrains/kotlin/commit/3e4dce385331c91c9059fcdcea3eae2394f34942)을 떼었습니다. <br/>
 > 1.0 버전의 공식 배포는 2016년 2월에 이루어졌습니다. <br/>
 >
+</br>
 
 답변을 찬찬히 뜯어보면, 크게 두 가지 지점에서 눈길이 멈춥니다.
 
@@ -80,11 +79,12 @@ thumbnail: './kotlin_conf23.png'
 
 </br>
 
-> 아름다운 도식. 컬러풀한 매력을 가진 언어.
-
-<p align="left">
-    <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/40c41566-1cf2-4947-a79c-69cc731e2a69" width="80%">
+<p align="left" style="background-color:rgba(184, 184, 184, 0.1); padding-left:1rem;">
+    <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/40c41566-1cf2-4947-a79c-69cc731e2a69" width="80%"> </br>
+    ⬆️ 아름다운 도식. 컬러풀한 매력을 가진 언어.
 </p>
+
+</br>
 
 그리고 <i>크고 아름다운</i> 타겟의 수입니다. Kotlin이 가진 강력함은 사실 여기서 출발합니다. 
 먼저, Kotlin은 Java와 <u>**100% 상호 호환**</u>됩니다. 거대한 Java 생태계를 흡수할 수 있다는 사실 하나만으로, 이 언어가 가진 무한한 '가능성'을 보여줍니다. (이게 가능한 이유는, JVM이나 Android를 타겟으로 했을 때, Kotlin은 일차적으로 자바 바이트코드(`.class`)로 컴파일되기 때문입니다.) 
@@ -949,7 +949,7 @@ JVM을 타겟으로 하는 경우, 우리가 작성한 Kotlin 코드는 Java 8 �
 Native의 경우, 이름이 말해주듯, Kotlin 코드는 Virtual Machine을 거치지 않고 Binary로 컴파일됩니다. 
 모든 경우에서 **JVM이 만병통치약이 아니기 때문에**, (특히 임베디드나 macOS, iOS에서 Desirable한 해결책이 아니기 때문에,) 궁극적인 Multiplatform 지향성을 갖추기 위해서 (그리고 속도를 위해서,) Kotlin의 개발자들은 Native Complier가 필요하다고 판단한 것 같습니다. 두 번째 분기는 여기서 일어납니다. Java와는 달리 '운영체제 독립성'과 '의존성'을 모두 취한 것이죠.
 
-**컴파일 가능성**에 대해 알아보았으니, 우리는 이제 다양한 환경에서 공통된 로직으로 Kotlin으로 작성한 애플리케이션을 동작(Run)시킬 수 있을지 고민해야 합니다. 
+**컴파일 가능성**에 대해 알아보았으니, 우리는 Kotlin으로 작성한 애플리케이션을, 다양한 환경에서, 어떻게 동작(Run)시킬 수 있을지 고민해야 합니다. 
 
 </br>
 
@@ -965,7 +965,7 @@ Native의 경우, 이름이 말해주듯, Kotlin 코드는 Virtual Machine을 �
 > </br> 공통 로직을 작성하고, 어떤 플랫폼을 위해서든 동작하게 하자.
 
 
-얼핏 보면, 위 문장은 다른 Cross-Platform 프레임워크의 지향점과 겹치는 것 같지만, 이 생태계는 "애플리케이션을 동작시키기 위한 모든 구성 요소"를 End to End로 Kotlin으로만 작성하라고 강요하지 않습니다. 우리에게는 세 가지 선택지가 있습니다.
+얼핏 보면, 위 문장은 다른 Cross-Platform 프레임워크의 지향점과 겹치는 것 같지만, 이 생태계는 "애플리케이션을 동작시키기 위한 모든 구성 요소"를, End to End로 Kotlin으로만 작성하기를, 강요하지 않습니다. 우리에게는 세 가지 선택지가 있습니다.
 
 
 <p align="center" style="background-color:rgba(184, 184, 184, 0.1);">
@@ -981,7 +981,7 @@ Native의 경우, 이름이 말해주듯, Kotlin 코드는 Virtual Machine을 �
 두 번째는 **UI를 제외한 모든 구성 요소의 네이티브 의존성을 제거하는 것**입니다. 첫 번째 경우에서 플랫폼 간 공통 로직의 비율을 늘린 것인데요. MVVM 아키텍처를 적용한 모바일 애플리케이션을 예로 들어보죠. 
 
 <blockquote>
-    <p align="left">
+    <p align="left" style="padding-left:1rem;">
         <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/8cf9b039-82f4-4565-bebf-2261ab25125f" width="75%"/>
     </p>
     </br>
@@ -990,20 +990,23 @@ Native의 경우, 이름이 말해주듯, Kotlin 코드는 Virtual Machine을 �
 
 </br>
 
+동일한 기능과 형태를 지닌 View가 각 네이티브 환경에 맞추어 작성되어 있는 형태입니다.
+여기서 Compose UI와 SwiftUI 각각의 **#1**는 동일한 ViewModel에 의존하고 있습니다. (**#2** View도 마찬가지입니다.) View를 제외한 모든 로직은 (Swift를 사용하지 않고) Kotlin으로 작성함으로써, 각각 네이티브 애플리케이션을 작성하는 것보다 코드량은 현저히 줄었으며, (각각 Material과 Cupertino의)  고유한 UI 특성은 살렸습니다. 
+
+
 세 번째 옵션은 **UI까지 모두 Kotlin으로 작성하는 것**입니다. 이를 위해서는 Jetpack Compose 기반의 
 [**Compose Multiplatform**](https://github.com/JetBrains/compose-multiplatform)이라는 프레임워크를 사용해야 합니다. 사실 다른 Cross-platform 생태계와 경쟁하게 될 지점은 바로 여기입니다. 애플리케이션(Client Side)의 모든 Layer를 하나의 언어로 작성하기 때문인데요. 그렇지만 Kotlin이라는 생태계가 아직 이 부분에 있어서 강점을 지닌다고 이야기하기에는 시기상조입니다. Desktop Application이나 iOS의 경우에는 아직 불안정한 요소가 많기 때문입니다. 
 
-그러나 Kotlin Multiplaform의 강점은 세 번째 옵션에 있는 것이 아니라고 글쓴이는 생각합니다. 완전한 네이티브 의존성에서 벗어나, 다양한 플랫폼을 대상으로 한 애플리케이션을 만들 때, Kotlin으로 공통 로직을 (비교적 많은 비율을 할애하여) 작성할 수 있다는 것은 충분히 큰 메리트입니다. 
 
-</br>
+그러나 Kotlin Multiplaform의 방점은 세 번째 옵션에서 찍히는 것이 아니라고, 글쓴이는 생각합니다. 완전한 네이티브 의존성에서 벗어나 애플리케이션을 개발할 때, Kotlin이 우리 손에 쥐어 주는 **세 가지의 옵션**은, (Kotlin Multiplatform이) 다른 Cross-platform의 결(結)과 분기되는 결정적인 지점이자 그 자체로 이 생태계가 가진 다양성의 표상입니다. 
 
-이렇게 (WORA와는 확실히 다른 의미의) **아래 문장**을 충족시키기 위한 제반 조건은 마련되었습니다. 
+이렇게 (WORA와는 확실히 다른 의미의) **아래 문장**을 충족시키기 위한 제반 조건은 모두 마련되었습니다.
+
 > **Write Single Logic, Use it for Any Platform.**
 > </br> 공통 로직을 작성하고, 어떤 플랫폼을 위해서든 동작하게 하자.
 
-**Kotlin의 다양성은 'Multiplatform'이라는 단어 안에도 존재합니다.**
+**그러니 Kotlin의 다양성은 'Multiplatform'이라는 단어 안에도 존재합니다.**
 
-</br>
 </br>
 
 

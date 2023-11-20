@@ -998,7 +998,7 @@ Native의 경우, 이름이 말해주듯, Kotlin 코드는 Virtual Machine을 �
 [**Compose Multiplatform**](https://github.com/JetBrains/compose-multiplatform)이라는 프레임워크를 사용해야 합니다. 사실 다른 Cross-platform 생태계와 경쟁하게 될 지점은 바로 여기입니다. 애플리케이션(Client Side)의 모든 Layer를 하나의 언어로 작성하기 때문인데요. 그렇지만 Kotlin이라는 생태계가 아직 이 부분에 있어서 강점을 지닌다고 이야기하기에는 시기상조입니다. Desktop Application이나 iOS의 경우에는 아직 불안정한 요소가 많기 때문입니다. 
 
 
-그러나 Kotlin Multiplaform의 방점은 세 번째 옵션에서 찍히는 것이 아니라고, 글쓴이는 생각합니다. 완전한 네이티브 의존성에서 벗어나 애플리케이션을 개발할 때, Kotlin이 우리 손에 쥐어 주는 **세 가지의 옵션**은, (Kotlin Multiplatform이) 다른 Cross-platform의 결(結)과 분기되는 결정적인 지점이자 그 자체로 이 생태계가 가진 다양성의 표상입니다. 
+그러나 Kotlin Multiplaform의 방점은 세 번째 옵션에서 찍히는 것이 아니라고 글쓴이는 생각합니다. 완전한 네이티브 의존성에서 벗어나 애플리케이션을 개발할 때, Kotlin이 우리 손에 쥐어 주는 **세 가지의 옵션**은, (Kotlin Multiplatform이) 다른 Cross-platform의 결(結)과 분기되는 결정적인 지점이자 그 자체로 이 생태계가 가진 다양성의 표상입니다. 
 
 이렇게 (WORA와는 확실히 다른 의미의) **아래 문장**을 충족시키기 위한 제반 조건은 모두 마련되었습니다.
 
@@ -1009,21 +1009,58 @@ Native의 경우, 이름이 말해주듯, Kotlin 코드는 Virtual Machine을 �
 
 </br>
 
-
-
 ---
 ## 🔙 Kotlin Conf' is Back!
 
+잠시 숨을 고를 시간입니다. 지금까지 Kotlin이라는 커다란 섬, 가장자리를 숨가쁘게 달려 왔으니까요. (Kotlin은 실제로 핀란드 만(Gulf of Finland)에 있는 러시아 영유의 섬입니다. 이름만 봐도, 인도네시아 섬에서 그 명칭을 가져온, Java와 떼려야 뗄 수 없는 언어긴 하네요.) </br>
+
+</br>
+
+<p align="center" style="background-color:rgba(184, 184, 184, 0.1)">
+    </br>
+    <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/6d9d4ab2-c820-490d-a4c2-8ca7e1898363" width="40%" /></br>
+    ⬆️ 넓고 넓은 12제곱킬로미터의 섬. 우리는 섬 한 바퀴를 거닐었습니다. </br>
+    오직 텍스트를 향유하는 경험으로 말이죠. </br>
+    이미지 출처: <a href="https://maps.app.goo.gl/wLNfjHkPTo11T79v9">Kotlin Island: Google Maps</a>
+</p>
+</br>
+
+이 글은 지금까지 하나의 프로그래밍 언어가 가질 수 있는 **다양성(Diversity)과 안정성(Reliability)** 에 중점을 두고 논지를 전개해 왔습니다. 한 생태계의 미래를 바라보는, 앞으로의 텍스트에서도 그러할 것입니다. 위에서 다루었던 언어의 신뢰성을 높이는 10가지 요소를 다시금 톺아보며 (암스테르담에서와 판교, 모두의) 컨퍼런스 내용을 정리해 보겠습니다. 
+
+네 가지 키워드로 정리한, Kotlin의 미래로, 함께 가시죠. 
+
 ### Growing of Kotlin
+
+<p align="left">
+    <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/05aca570-ab9a-4b68-9d2a-f6866a263928" width="100%"/>
+</p>
+
+
+<p align="left">
+    <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/33ba9854-ea24-4a6c-9717-0390304cb224" width="100%"/>
+</p>
 
 ---
 ### K2 Compiler
 
+<p align="left">
+    <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/86064c22-7ec1-44e7-a684-879b1690c3ca" width="100%">
+</p>
+
+
 ---
 ### Kotlin 2.0
+<h5>Static Extensions</h5>
+<h5>Collection Literals</h5>
+<h5>Name-based destructing</h5>
+<h5>Context Receivers</h5>
+<h5>Explicit fields</h5>
 
 ---
 ### Multiplatform
+<p align="left">
+    <img src="https://blog.jetbrains.com/wp-content/uploads/2023/04/KC_keynote_2023_2650x1024.100.jpeg" width="100%">
+</p>
 
 ---
 

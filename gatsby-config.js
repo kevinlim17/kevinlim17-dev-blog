@@ -12,7 +12,7 @@ module.exports = {
     title: `kevinlim17-blog`,
     description: `코드를 쓰고 이야기를 개발합니다.`,
     author: `Seung Hyeon Lim`,
-    siteUrl: `https://kevinlim17.com/`, //배포 후 변경 예정
+    siteUrl: `https://kevinlim17.com`,
   },
   plugins: [
     {
@@ -120,10 +120,12 @@ module.exports = {
         stripQueryString: true,
       },
     },
-    `gatsby-plugin-sitemap`,
+    `gatsby-plugin-advanced-sitemap`,
     {
       resolve: 'gatsby-plugin-robots-txt',
       options: {
+        host: 'https://kevinlim17.com',
+        sitemap: 'https://kevinlim17.com/sitemap.xml',
         policy: [{ userAgent: '*', allow: '/' }],
       },
     },

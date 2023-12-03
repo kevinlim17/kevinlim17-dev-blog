@@ -1,3 +1,5 @@
+
+
 import React, { FunctionComponent } from 'react'
 import styled from '@emotion/styled'
 
@@ -31,6 +33,7 @@ const MarkdownRenderer = styled.div`
   // Apply Padding Attribute to All Elements
   p {
     padding: 3px 0;
+    border-radius: 0.5rem;
   }
 
   img {
@@ -38,7 +41,7 @@ const MarkdownRenderer = styled.div`
   }
 
   // Adjust Heading Element Style
-  h1 {
+  h1 {rgba(0, 255, 109, 1)
     font-weight: 900;
   }
   h2,
@@ -109,6 +112,7 @@ const MarkdownRenderer = styled.div`
     margin: 10px 0;
     padding: 10px 15px;
     border-left: 2px solid rgba(184, 184, 184, 0.5);
+    border-radius: 1rem;
     background: rgba(184, 184, 184, 0.1);
   }
 
@@ -118,6 +122,7 @@ const MarkdownRenderer = styled.div`
     margin-left: 15px;
     padding: 1rem 0.8rem;
     border-left: 2px solid rgba(184, 184, 184, 0.5);
+    border-radius: 0.5rem;
   }
 
   li {
@@ -148,7 +153,7 @@ const MarkdownRenderer = styled.div`
 
   // Adjust Table Style
   table {
-    border-radius: 3px;
+    border-radius: 0.5rem;
     box-shadow: rgba(0, 0, 0, 0.12) 0 3px 1px -2px,
       rgba(0, 0, 0, 0.14) 0 2px 2px 0, rgba(0, 0, 0, 0.12) 0 1px 5px 0;
     margin: 2rem 0;
@@ -158,13 +163,13 @@ const MarkdownRenderer = styled.div`
     border-right: 1px solid #ddd;
     border-bottom: 1px solid #ddd;
     padding: 5px;
-    border-radius: 3px;
+    border-radius: 0.5rem;
   }
   td {
     border-bottom: 1px solid rgba(184, 184, 184, 1);
     padding: 5px;
     text-indent: 3px;
-    border-radius: 3px;
+    border-radius: 0.5rem;
     max-width: 25vw;
     min-width: 5vw;
   }
@@ -191,7 +196,6 @@ const MarkdownRenderer = styled.div`
     margin: 30px 0;
     padding: 15px;
     font-size: 15px;
-    font-family: consolas;
     background-color: rgba(2, 0, 36, 0.85);
 
     ::-webkit-scrollbar-thumb {
@@ -202,9 +206,9 @@ const MarkdownRenderer = styled.div`
 
   code[class*='language-'],
   pre[class*='language-'] {
-    tab-size: 2;
-    padding: 3px 8px;
-    font-size: 14px;
+    tab-size: 5;
+    padding: 3px 20px;
+    font-size: 15px;
     font-family: consolas;
     color: rgba(0, 255, 109, 1);
     margin-right: 2px;
@@ -212,7 +216,7 @@ const MarkdownRenderer = styled.div`
   }
 
   code[class*='language-text'] {
-    tab-size: 2;
+    tab-size: 5;
     padding: 3px 8px;
     font-size: 14px;
     font-family: consolas;

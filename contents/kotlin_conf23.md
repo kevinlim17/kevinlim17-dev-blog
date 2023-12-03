@@ -113,13 +113,13 @@ ___
 비교적 최근에 개발된 언어답게, 문법 자체가 **간결한** 편입니다. </br>
 이러한 면에서 Kotlin과는 대척점에 서 있는, 코드 길이라 하면 둘째가기 서러운 Java와 비교하며 살펴 보겠습니다.
 
-<table>
-<tr align="left">
-<th > Java Code </th>
-<th> Kotlin Code </th>
-</tr>
+<table style="margin-bottom: -0.2rem;">
+    <tr align="center">
+        <th style="background-color:rgba(2, 0, 36, 0.8); color:white;"> Java Code </th>
+        <th style="background-color:rgba(2, 0, 36, 0.8); color:white;"> Kotlin Code </th>
+    </tr>
 <tr>
-<td valign= "top";>
+<td valign= "top"; style="background-color:white">
 
 ```java
 
@@ -158,7 +158,11 @@ class HelloWorld {
 </tr>
 </table>
 
- > Kotlin Code 출처: [Official Site Code Example](kotlinlang.org), Java Code는 글쓴이가 작성.
+<blockquote style="background-color:white">
+    Kotlin Code 출처: <a href="kotlinlang.org">Official Site Code Example</a>, Java Code는 글쓴이가 작성.
+</blockquote>
+
+</br>
 
 두 코드는 정확히 같은 결과를 출력합니다. 그러나 결과를 도출하는 방식에는 많은 차이가 있는데요.
 크게 세 가지 부분이 눈에 띕니다.
@@ -177,12 +181,12 @@ class HelloWorld {
 또 하나의 예시를 볼까요. 이번에는 Class에 대한 이야기입니다. 
 
 <table height="500">
-<tr align="left">
-<th > *1. Java class </th>
-<th> *2. Kotlin class </th>
-</tr>
+    <tr align="center">
+        <th style="background-color:rgba(2, 0, 36, 0.8); color:white;"> *1. Java Class </th>
+        <th style="background-color:rgba(2, 0, 36, 0.8); color:white;"> *2. Kotlin Class </th>
+    </tr>
 <tr valign="top">
-<td>
+<td style="background-color:white">
 
 ```java
 
@@ -256,9 +260,6 @@ class Developer(
 ```
 
 </td>
-
-
-
 </td>
 </tr>
 </table>
@@ -293,19 +294,10 @@ data class Developer(
 
  ```
 
-
-
 이번에는, 그나마 남아있던 메서드(`equals`, `hashCode`)마저 사라졌습니다. `class` 앞에 `data`를 붙이면, Kotlin Compiler가 사용자가 작성하지 않은 `equals`, `hashCode`, `toString`, `copy`. `componentN` 메서드를 대신 생성해 줍니다. 
 
 물론 `data class`는 일반 Class와 1:1 대응 관계에 있는 것은 아닙니다. 몇 가지 한계가 있는데요, 간단하게만 이야기해 보자면, ([Data Classes | Kotlin Documentation](https://kotlinlang.org/docs/data-classes.html) 참고)
 
-</td>
-
-
-
-</td>
-</tr>
-</table>
 
 
 
@@ -354,14 +346,12 @@ Kotlin에서 안전성(Safety)이라 하면, 십중팔구 'Null Safety'를 이�
 
 
 <table>
-<tr align="left">
-<th></th>
-<th >non-nullable </th>
-<th>nullable </th>
-</tr>
+<tr align="center">
+        <th style="background-color:rgba(2, 0, 36, 0.8); color:white;"> Non-nullable </th>
+        <th style="background-color:rgba(2, 0, 36, 0.8); color:white;"> Nullable </th>
+    </tr>
 <tr>
-<td>Code</td>
-<td valign= "top";>
+<td valign= "top"; style="background-color:white";>
 
 ```kotlin
 
@@ -391,11 +381,10 @@ fun main() {
 </td>
 </tr>
 <tr>
-<td>Result</td>
-<td valign="top">
+<td valign="top" style="background-color:white">
 
 ```
-Compilation Error:
+Compilation Error: 
 Null can not be a value 
 of a non-null type Int
 ```
@@ -418,10 +407,10 @@ null
 
 
 <table>
-<tr align="left">
-<th >Code</th>
-<th>Result </th>
-</tr>
+<tr align="center">
+        <th style="background-color:rgba(2, 0, 36, 0.8); color:white;"> Code </th>
+        <th style="background-color:rgba(2, 0, 36, 0.8); color:white;"> Result </th>
+    </tr>
 <tr>
 <td valign= "top" style="background-color:white;";>
 
@@ -764,7 +753,7 @@ Kotlin은 `println()`과 같은 경우처럼,  함수(그리고 프로퍼티와 
 
 </br>
 
-Higher-Order Function, Lambda Expression, Extended Function에 대해서는 (특히 안드로이드 관련한) 다른 포스트에서 조금 더 깊게 다루어 보도록 하겠습니다. 이 글에서는 이만 줄여볼게요.
+Higher-Order Function, Lambda Expression, Extension Function에 대해서는 (특히 안드로이드 관련한) 다른 포스트에서 조금 더 깊게 다루어 보도록 하겠습니다. 이 글에서는 이만 줄여볼게요.
 
 **개행이 포함하여 출력하는 함수, `println()`.** 프로그래밍 언어에서 가장 단순하다고 생각되는 함수 `하나`를 가지고, 선택할 수 있는 가장 먼 길을 돌아온 것은, Kotlin 생태계가 가진 일종의 **결**을 따라가기 위함이었습니다. 그리고 우리는 여정의 끝에 거의 다다랐습니다. 이 언어가 가진, Kotlin이라는 개발 커뮤니티 안의 사람들이 공동으로 추구하는 지향점, 그 어딘가에 존재하는 섬을 향해, 과연 우리는 어느 방향으로 뱃머리를 돌려야 할까요? 여러분은 감이 오셨나요?
 
@@ -830,7 +819,7 @@ Kotlin은 위의 두 가치를 기반으로 두고 개발되었고, 지금도 �
 
 여기서 Kotlin 생태계는 한 걸음 더 나아가, 모든 타입을 (정확히는 참조(Reference)의 방식을) 이원화함으로써, 컴파일 타임의 오류를 '잡아내는' 것에 그치지 않고, '없애는' 데에도 기여하였습니다. 
 타입 시스템에 있어, 어떤 프로그래밍 언어의 **'신뢰 수준이 높다'** 라는 건, Built-In으로 실수와 사고의 가능성을 줄이는, 자동차의 주행 보조 장치와 같은 것을 지니고 있다는 뜻이기에, 널 안정성은 그러한 의미에서 (Type System을 떠받치는) 기둥이 될 자격이 충분합니다.
-
+<u><strong style="background-color: palegreen;">Standard Library</strong></u>
 또한 Structured Concurrency의 원칙에 따라 구현된 **코루틴**이라는 라이브러리는, Kotlin이 '동시 실행'에 있어 얼마나 강력한 역량을 가진 언어인지 실감케 합니다. 단순히 멀티 스레딩(Multi-Threading)과 비동기(asynchronous) 프로그래밍을 언어 차원에서 지원할 뿐 아니라, 코루틴은 이에 '구조화된' 안정성을 보탰습니다. 이게 가능했던 이유는, '누수 없는' 동시성 프로그래밍을 지향하는 개발자들이, 코루틴에 (아쉽게도 앞에서 언급하지 않았지만) **Python** `trio` 라이브러리의 [`nursery`](https://chsasank.com/concurrent-programming-trio-tutorial.html) 블록의 개념을 도입했기 때문입니다. 
 
 <blockquote>
@@ -1031,9 +1020,25 @@ Native의 경우, 이름이 말해주듯, Kotlin 코드는 Virtual Machine을 �
 
 ### Growing of Kotlin
 
-<p align="left">
-    <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/05aca570-ab9a-4b68-9d2a-f6866a263928" width="100%"/>
-</p>
+<blockquote style="margin-left: 15px;">
+    <p align="left">
+        <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/05aca570-ab9a-4b68-9d2a-f6866a263928" width="100%"/>
+    </p>
+</blockquote>
+
+9. <u><strong style="background-color: palegreen;">Tooling and Ecosystem</strong></u> : The 
+    availability of reliable development tools, libraries, and a supportive community can contribute to the overall reliability of a programming language. A strong ecosystem can help developers find solutions to problems and reduce the risk of bugs. </br>
+    </br>
+    => <b>Tooling 그리고 생태계</b>: Stable한 개발 도구, 라이브러리, 그리고 탄탄한 커뮤니티는 프로그래밍 언어의 신뢰성을 유지하는 데 기여합니다. 다양성이 보장된 생태계는 개발자들이 그들의 문제를 해결하는 데, 버그의 위험성을 스스로 낮추는 데 도움을 줍니다.
+---
+10. <u><strong style="background-color: palegreen;">Community and Code Reviews</strong></u> : 
+    An active and supportive developer community, as well as peer code reviews, can help identify and address reliability issues in software written in a particular language.</br>
+    </br>
+    => <b>커뮤니티 그리고 코드 리뷰</b>: 안정적이고 활발한 개발자 커뮤니티는, 그리고 Peer Review는, 특정한 언어로 작성된 소프트웨어에 대한 신뢰성 문제를 발견하고 해결하는 데 도움을 줍니다.
+---
+
+
+
 
 
 <p align="left">
@@ -1050,7 +1055,182 @@ Native의 경우, 이름이 말해주듯, Kotlin 코드는 Virtual Machine을 �
 
 ---
 ### Kotlin 2.0
+
+
 <h5>Static Extensions</h5>
+
+우리가 그 실체에 다가갈 수 없는, Third-Party Class를 하나 가정해봅시다. </br>
+완전히 닫혀 있지만, 다행히도 우리는 <b style="background-color: rgba(184, 184, 184, 0.5)">*</b><b>Companion Object</b>가 그곳에 존재한다는 사실 정도는 알고 있습니다. 불행 중 다행입니다. 막 '정적인 확장 함수(Static Extension)를 작성하려던' 참이었거든요.
+
+```kotlin
+
+class QuotesTable(val quotes: List<Quote>) {
+    companion object {
+        
+    }
+}
+
+-----
+ 
+fun <T> QuotesTable.Companion.OpenFilteredBy(quotePropety: T) {
+    println("Hello, Static Extensions!")
+}
+
+fun main() {
+    QuotesTable.OpenFilteredBy("Ian McEwan")
+}
+
+
+```
+
+<blockquote>
+    <b><b style="background-color: rgba(184, 184, 184, 0.5)">*</b> Companion Object</b>
+    </br>
+    If you need to write a function that can be called without having a class instance </br>
+    but that needs access to the internals of a class (such as a factory method), </br>
+    you can write it as a member of an object declaration inside that class. </br>
+    --- </br>
+    Class의 인스턴스를 생성하지 않고 호출되는 함수를 작성하고 싶을 때, </br>
+    그러나 그것을 Class의 내부 요소에 접근하도록 하고 싶을 때, </br>
+    구현하고 싶은 함수를 <b>Class 안에 Object를 선언한 형태( <code class="language-text">companion object</code> )의 멤버</b>로 작성하면 됩니다. </br>
+    </br>
+    출처: <a href="https://kotlinlang.org/docs/classes.html#companion-objects">Classes | Kotlin Documentation</a>
+</blockquote>
+
+</br>
+
+그런데 이러한 '닫힌 클래스'에 Companion Object가 존재하지 않는다면 어떻게 될까요? 
+</br>
+
+<p align="left" style="background-color:rgba(168, 168, 168, 0.2); padding-left: 1rem">
+    <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/bb60a33e-066f-4c6c-8fc4-edea21732058" width="80%" style="border-radius:0.5rem"/> </br>
+    삐빅! 빨간불입니다.
+</p>
+
+</br>
+
+
+아쉽게도 우리는 그러한 시도조차 하지 못하게 됩니다. Kotlin 컴파일러는 `Unresolved Reference` 에러를 내며 이를 거부합니다. <b>1.9.20</b>까지의 Kotlin에서는, 일단은, 그렇습니다. </br> 
+
+Kotlin은 Java와 달리(그리고 다른 많은 언어들과 달리), 명시적으로 `static`이라는 키워드를 사용하지 않습니다. 대신 최상위 함수(Top-level Function), 동반 객체(companion object), 싱글톤 패턴(Singleton pattern) 지원 등으로 그의 역할을 효과적으로 대체한 것이죠.
+
+그럼에도, Kotlin 생태계에서 Class의 정적인 멤버(Static Member), 정적인 확장(Static Extension), 정적인 객체(Static Object)에 대한 논의는 꾸준히 이루어져 왔습니다. Kotlin 생태계에 대한 여러 고민들을 엿볼 수 있는 [KEEP - Kotlin Evolution and Enhancement Process](https://github.com/Kotlin/KEEP/blob/statics/proposals/statics.md#introduction)에서 구체적인 배경을 조금 더 살펴보도록 하죠. (Introduction 내용을 본문에 실었습니다.)
+
+
+>> 1. **Enable static extensions of 3rd party classes**, which is the top most voted feature in Kotlin. </br>
+>> &nbsp;&nbsp; => **서드파티 클래스에 대한 정적 확장**을 허용합니다. 이는 Kotlin 개발자들에 의해 가장 많이 요구된 기능입니다.
+>>
+>> 2. Provide a lighter-weight mechanism for defining static members that do not access instance variable as an alternative to companion objects in many use-cases. </br>
+>> &nbsp;&nbsp; => Companion object에 대한 대안으로, (인스턴스를 생성하지 않고) 정적 멤버를 정의하는 데 더욱 가벼운 매커니즘을 제공합니다. 
+>>
+>> 3. Simplify interoperability with JVM statics that Kotlin compiler has to support anyway — more concise and clear usage of Java frameworks that rely on statics, easier Java to Kotlin migration.
+>> &nbsp;&nbsp; => (미우던 고우던 Kotlin 컴파일러가 지원해야만 하는) JVM `static`과의 상호 운용을 단순화합니다. 이는 (Kotlin에서) `static`에 의존하는 Java 프레임워크의 간결하고 명확한 사용을 보장하며, Java로부터의 마이그레이션을 더욱 쉽게 만듭니다.
+
+<blockquote style="padding-top: 1.5rem;">
+컨퍼런스에서 언급한 <code class="language-text">Companion</code> 키워드가 <code class="language-text">static</code>이 되는 마법을 적용해 보면,
+
+```kotlin
+
+fun <T> QuotesTable.static.OpenFilteredBy(quotePropety: T) {
+    println("Hello, Static Extensions!")
+}
+
+
+```
+`QuotesTable.static`이 Receiver Type이 되면서 모든 문제가 해결된 것처럼 보입니다.
+</blockquote>
+
+</br>
+
+이렇게만 보면, `static` 키워드를 도입하는 것이 만사형통의 지름길로 보일 수 있겠지만, 속을 뜯어보면 그렇지만은 않습니다. 태초에 Kotlin은 명시적으로라도 `static`을 사용하지 않기로 약속한 언어인데, 이미 구축된 생태계를 뜯어고치려면 얼마나 많은 논의가 필요할까요? 수많은 의제를 담은 이 커다란 논쟁에서 두 줄기만 짧게 가지고 왔습니다. 
+
+<blockquote align="center">
+    <a href="https://github.com/Kotlin/KEEP/blob/statics/proposals/statics.md#static-section-vs-static-modifier"><b>Issue 1: Section syntax or Modifier Syntax</b></a>
+</blockquote>
+
+<table style="margin-top: -0.5rem;">
+<tr align="center";>
+<th style="background-color:rgba(2, 0, 36, 0.8); color:white"> <code class="language-text">static</code> section </th>
+<th style="background-color:rgba(2, 0, 36, 0.8); color:white"> <code class="language-text">static</code> modifier </th>
+</tr>
+<tr>
+<td valign= "top"; style="background-color:white">
+
+```kotlin
+
+class Color(val rgb: Int) {
+    static {
+        fun fromRGB(r: Int, g: Int, b: Int): Color {
+             /* impl */ 
+        }
+        val RED = Color(0xff0000)
+        // other declarations
+    }
+}
+
+
+ ```
+
+</td>
+<td valign= "top";>
+
+ ```kotlin
+
+class Color(val rgb: Int) {
+    static fun fromRGB(r: Int, g: Int, b: Int): Color { 
+        /* impl */ 
+    }
+    static val RED = Color(0xff0000)
+}
+
+
+ ```
+
+</td>
+</tr>
+</table>
+
+아직 `static` 멤버와 클래스, 인터페이스를 선언하는 방법마저 확실하지 않은 상황입니다. (키노트에서도 이를 어떻게 다룰 것인지 명확한 언급이 없었습니다. `static` 키워드를 정적인 확장 함수를 지원하는 데만 국소적으로 사용하지는 않을 것이니, 이는  Kotlin 생태계에 있어 확고한 분기점이 될 것임은 자명합니다.) </br> 
+KEEP 문서의 [해당 섹션](https://github.com/Kotlin/KEEP/blob/statics/proposals/statics.md#static-section-vs-static-modifier)을 간추려 보면, (불행인지 다행인지는 알 수 없지만) Section Syntax와 Modifier Syntax를 도입하는 데 있어 각각의 장단점은 명확합니다. 
+
+> **Section over Modifier**
+> 1. Companion object로부터의 마이그레이션이 쉽다. (모든 정적 멤버를 묶어 둔다는 점에서 개념적으로 유사합니다.)
+> 2. `fun SomeClass.static.ext()`이 보다 직관적인 구문(mnemonic expression)이 됩니다. (Static section의 확장이라는 것이 명확해집니다.)
+> **Modifier over Section**
+> 1. 다른 언어에서 `static`을 사용하는 방식과 유사합니다.
+> 2. 간헐적으로 사용하는 `static` 선언에 더욱 간결한 방식을 제공합니다.
+
+
+<p align="left" style="background-color:rgba(168, 168, 168, 0.1); padding:1rem;">
+    <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/c05b5425-a31c-4cdc-8caf-7537cf6694a0" width="80%"></br> We'll have to make once choice of syntax and accept all its disadvantages for the sake of having a consistent syntax across Kotlin codebases. </br>
+    --- </br>
+    <b>그리고 두 옵션 모두가 사용되는 일은 없을 것입니다.</b> </br>
+    (전략) 둘 중 하나만을 택할 것이며, 그 선택에 뒤따를 모든 부정적인 결과를 감수하고 Kotlin 코드베이스의 안정된 문법 환경을 지켜낼 것입니다.
+</p>
+
+</br>
+
+Kotlin을 손에 든 만국의 개발자 여러분, 우리에게 아직은 인내심이 더 필요할 듯 합니다. 
+Kotlin의 `static` 키워드 도입이 아직은 요원한 이유를 조금 더 살펴보겠습니다. 두 번째 이슈입니다.
+
+
+<blockquote align="center" style="padding:0.5rem;">
+    <a href="https://github.com/Kotlin/KEEP/blob/statics/proposals/statics.md#static-soft-keyword-ambiguity"><b>Issue 2: Static soft keyword ambiguity</b></a>
+
+```kotlin
+
+class Example {
+    class static {} // a valid declaration of a nested class
+}
+
+// Currently parsed as extension on `Example.static` class.
+fun Example.static.ext() {}
+
+
+```
+</blockquote>
+
+
 <h5>Collection Literals</h5>
 <h5>Name-based destructing</h5>
 <h5>Context Receivers</h5>

@@ -1,5 +1,3 @@
-
-
 import React, { FunctionComponent } from 'react'
 import styled from '@emotion/styled'
 
@@ -26,7 +24,7 @@ const MarkdownRenderer = styled.div`
   }
 
   // Markdown Style
-  line-height: 1.9;
+  line-height: 2;
   font-size: 15px;
   font-weight: 400;
 
@@ -58,7 +56,7 @@ const MarkdownRenderer = styled.div`
 
   h5 {
     font-weight: 600;
-    margin-bottom: 7px;
+    margin-bottom: 1rem;
   }
 
   * + h1,
@@ -116,6 +114,10 @@ const MarkdownRenderer = styled.div`
     background: rgba(184, 184, 184, 0.1);
   }
 
+  blockquote > div[class*='gatsby-highlight'] > pre[class*='language-'] {
+    margin: 0.5rem 0;
+  }
+
   // Adjust List Element Style
   ol,
   ul {
@@ -137,6 +139,10 @@ const MarkdownRenderer = styled.div`
   hr {
     border: 0.5px solid rgba(184, 184, 184, 0.3);
     margin: 30px 0;
+  }
+
+  blockquote > hr {
+    margin: 0.5rem 0;
   }
 
   // Adjust Link Element Style

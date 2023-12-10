@@ -682,7 +682,7 @@ public final static PrintStream out = null;
 그런데 Kotlin의 `println()`은 조금 다른 방식으로 정의되어 있습니다. (일부러) Java와의 접점을 없애기 위해, Native가 타겟인 경우의 Console Source를 가져와 보았습니다. 함께 보시죠.
 
 <blockquote>
-<b>🗃️ Github Repo: JetBrains/kotlin - </b> 
+<b>🗃️ Github Repo: JetBrains/kotlin - </b> </br>
 <a href="https://github.com/JetBrains/kotlin/blob/7a7d392b3470b38d42f80c896b7270678d0f95c3/kotlin-native/runtime/src/main/kotlin/kotlin/io/Console.kt#L23" target="blank" rel="nofollow"> kotlin-native/runtime/src/main/kotlin/kotlin/io/Console.kt</a>
 
 ```Kotlin
@@ -819,7 +819,7 @@ Kotlin은 위의 두 가치를 기반으로 두고 개발되었고, 지금도 �
 
 여기서 Kotlin 생태계는 한 걸음 더 나아가, 모든 타입을 (정확히는 참조(Reference)의 방식을) 이원화함으로써, 컴파일 타임의 오류를 '잡아내는' 것에 그치지 않고, '없애는' 데에도 기여하였습니다. 
 타입 시스템에 있어, 어떤 프로그래밍 언어의 **'신뢰 수준이 높다'** 라는 건, Built-In으로 실수와 사고의 가능성을 줄이는, 자동차의 주행 보조 장치와 같은 것을 지니고 있다는 뜻이기에, 널 안정성은 그러한 의미에서 (Type System을 떠받치는) 기둥이 될 자격이 충분합니다.
-<u><strong style="background-color: palegreen;">Standard Library</strong></u>
+
 또한 Structured Concurrency의 원칙에 따라 구현된 **코루틴**이라는 라이브러리는, Kotlin이 '동시 실행'에 있어 얼마나 강력한 역량을 가진 언어인지 실감케 합니다. 단순히 멀티 스레딩(Multi-Threading)과 비동기(asynchronous) 프로그래밍을 언어 차원에서 지원할 뿐 아니라, 코루틴은 이에 '구조화된' 안정성을 보탰습니다. 이게 가능했던 이유는, '누수 없는' 동시성 프로그래밍을 지향하는 개발자들이, 코루틴에 (아쉽게도 앞에서 언급하지 않았지만) **Python** `trio` 라이브러리의 [`nursery`](https://chsasank.com/concurrent-programming-trio-tutorial.html) 블록의 개념을 도입했기 때문입니다. 
 
 <blockquote>
@@ -853,8 +853,10 @@ Kotlin은 위의 두 가치를 기반으로 두고 개발되었고, 지금도 �
     </br>
    다익스트라는 개발자들이 "자신의 지적 능력으로는 한 번에 이해하기 어려운<i>that are too big to hold in your head all at once </i>" 코드를 작성할 수 있으려면, <b>구조적 프로그래밍</b>(Structured Programming)이 필요하다고 역설했습니다. 이 논문이 쓰여질 당시만 해도 프로그래밍의 세계에서는 <code class="language-text">goto</code>가 횡행했으니까요. 그러면 인용한 부분의 'abstraction'과 구조적 프로그래밍은 어떤 관련이 있는 걸까요? (누구보다 장황하지만 구조적인 글을 지향하는 글쓴이는 지양하는 방식이지만) 간추려 이야기해 보겠습니다. 단순한 함수 하나를 보시죠.
    </br>
+   </br>
    <div class="gatsby-highlight" data-language="kotlin">
     <pre class="language-kotlin"><code class ="language-kotlin"><span class="token function">println</span><span class="token punctuation">(</span>"Hello World!"<span class="token punctuation">)</span></code></pre></div>
+    </br>
    보통 Kotlin에서 <code class="language-text">println()</code>을 사용할 때, (이 글에서 다루었던 것처럼) 콘솔 소스를 뒤져보거나 하지 않습니다.
    (그러한 행위는 온전히 순수한, 학문적 호기심의 발로이므로 자주 시도하지 않으시는 걸 추천드립니다.) <b>"어떻게 동작하는지는 뒤로 제쳐두고,"</b> 그저 <b>"그 동작을 사용"</b>할 뿐입니다. 여기서 동작<i>operation</i>이란 함수(Function), 조건문/반복문 안의 코드, 클래스의 메서드(method) 등을 모두 포괄하는 말입니다. 
    </br></br>
@@ -1018,12 +1020,14 @@ Native의 경우, 이름이 말해주듯, Kotlin 코드는 Virtual Machine을 �
 
 네 가지 키워드로 정리한, Kotlin의 미래로, 함께 가시죠. 
 
-### Growing of Kotlin
+### Growing
 
 <blockquote style="margin-left: 15px;">
     <p align="left">
-        <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/05aca570-ab9a-4b68-9d2a-f6866a263928" width="100%"/>
+        <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/05aca570-ab9a-4b68-9d2a-f6866a263928" width="80%"/>
     </p>
+    ⬆️ 연도별 Kotlin을 Primary Language로 사용하여 코드를 작성한 Github Repository의 수</br>
+    (출처: <a href="https://blog.jetbrains.com/ko/kotlin/2023/04/kotlinconf-2023-opening-keynote/">Kotlin Conf'23 Opening Keynote</a>)
 </blockquote>
 
 9. <u><strong style="background-color: palegreen;">Tooling and Ecosystem</strong></u> : The 
@@ -1037,25 +1041,54 @@ Native의 경우, 이름이 말해주듯, Kotlin 코드는 Virtual Machine을 �
     => <b>커뮤니티 그리고 코드 리뷰</b>: 안정적이고 활발한 개발자 커뮤니티는, 그리고 Peer Review는, 특정한 언어로 작성된 소프트웨어에 대한 신뢰성 문제를 발견하고 해결하는 데 도움을 줍니다.
 ---
 
+우리는 앞서 프로그래밍 언어의 안정성(Reliablility)를 지탱하는 10가지 요소 중 두 가지만을 짚어 보았습니다. Type System과 Concurrency Support가 그것이었지요. 이번에는 Kotlin 코드 그 자체에서 조금 시선을 돌려 보겠습니다. 숫자 그리고 키워드로 보는 프로그래밍 언어의 성장. Kotlin 개발자들이 실제로 살아가야 할 코드 밖의 세계로, 커뮤니티의 공간으로 여러분을 초대합니다. 
 
+</br>
 
-
-
-<p align="left">
+<p align="left" style="background-color:rgba(168, 168, 168, 0.2); padding: 1.5rem 1rem">
     <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/33ba9854-ea24-4a6c-9717-0390304cb224" width="100%"/>
+    ⬆️ Opening Keynote에서 소개된 Kotlin의 오늘에 관한 흥미로운 수치들.</br>
 </p>
 
+</br>
+
+<h5>One Million</h5>
+
+2023년 4월 12일 기준, **1,000,000개**가 넘는 Github 프로젝트에서 Kotlin을 기본 언어로 사용합니다. 2019년, 20만 개가 채 되지 않았던 것을 생각하면 가히 놀라운 성장세입니다. 그러나 Github에서 눈여겨 봐야 할 수치는 더 있습니다. 특정 프로그래밍 언어가 **"개발자들 사이에서 꾸준히 논의의 대상이 되느냐"** 그리고 **"기여하고 싶은 프로젝트의 언어로 사용되느냐"** 를 드러내는 두 요소인데요. 바로 Pull Request와 Issue입니다. 
+
+(Kotlin에 한정해서만) 이와 관련된 수치는 Kotlin Foundation이나 JetBrains가 공식적으로 발표한 바가 없고, 대신 Github 자체적으로 [Public DataSet](https://cloud.google.com/blog/topics/public-datasets/github-on-bigquery-analyze-all-the-open-source-code?hl=en)을 공개해 두었습니다. 그리고 이 방대한 데이터를 활용한 멋진 [오픈소스](https://github.com/madnight/githut)도 존재하죠. 아래 두 그래프는 2012년 2분기부터 2023년 3분기까지 분기별로 Kotlin과 Swift가 Github의 전체 Pull Request와 Issue에서 Primary Language로 사용된 비율의 추이를 나타낸 것<sup><a id="doc5" href="#ref5"><b>[5]</b></a></sup>입니다.
+
+<blockquote>
+    <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/080b3658-5110-4af5-8158-e558eb22b585" width="100%">
+    ⬆️ Pull Request에서의 추이</br>
+    </br>
+    <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/fc110328-fcb2-4bcc-90a7-cb795980aedd" width="100%">
+    ⬆️ Issues에서의 추이</br>
+    
+</blockquote>
+
+
+
+
+<h5>Libraries</h5>
+
+<h5>Android</h5>
+
+
 ---
-### K2 Compiler
+### New Compiler
 
 <p align="left">
-    <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/86064c22-7ec1-44e7-a684-879b1690c3ca" width="100%">
+    <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/86064c22-7ec1-44e7-a684-879b1690c3ca" width="80%">
 </p>
 
 
 ---
-### Kotlin 2.0
+### The Second Version
 
+사실상 컨퍼런스 키노트의 첫 메인 챕터입니다. 앞으로의 Kotlin 코드베이스가 어떤 방향으로 돛을 돌릴 지 짐작할 수 있는 중요한 단서이기 때문이죠. 여기서부터는 조금 호흡을 길게 가져가도록 하겠습니다. 숨 들이쉬시고, `static` 키워드가 먼저 여러분을 찾아갑니다. 
+
+</br>
 
 <h5>Static Extensions</h5>
 
@@ -1084,17 +1117,22 @@ fun main() {
 ```
 
 <blockquote>
-    <b><b style="background-color: rgba(184, 184, 184, 0.5)">*</b> Companion Object</b>
-    </br>
-    If you need to write a function that can be called without having a class instance </br>
-    but that needs access to the internals of a class (such as a factory method), </br>
-    you can write it as a member of an object declaration inside that class. </br>
-    --- </br>
-    Class의 인스턴스를 생성하지 않고 호출되는 함수를 작성하고 싶을 때, </br>
-    그러나 그것을 Class의 내부 요소에 접근하도록 하고 싶을 때, </br>
-    구현하고 싶은 함수를 <b>Class 안에 Object를 선언한 형태( <code class="language-text">companion object</code> )의 멤버</b>로 작성하면 됩니다. </br>
-    </br>
-    출처: <a href="https://kotlinlang.org/docs/classes.html#companion-objects">Classes | Kotlin Documentation</a>
+    <b><b style="background-color: rgba(184, 184, 184, 0.5)">*</b> Companion Object</b></br>
+
+---
+
+If you need to write a function that can be called without having a class instance </br>
+but that needs access to the internals of a class (such as a factory method), </br>
+you can write it as a member of an object declaration inside that class. </br>
+
+---
+
+
+Class의 인스턴스를 생성하지 않고 호출되는 함수를 작성하고 싶을 때, </br>
+그러나 그것을 Class의 내부 요소에 접근하도록 하고 싶을 때, </br>
+구현하고 싶은 함수를 <b>Class 안에 Object를 선언한 형태( <code class="language-text">companion object</code> )의 멤버</b>로 작성하면 됩니다. </br>
+</br>
+출처: <a href="https://kotlinlang.org/docs/classes.html#companion-objects">Classes | Kotlin Documentation</a>
 </blockquote>
 
 </br>
@@ -1126,7 +1164,7 @@ Kotlin은 Java와 달리(그리고 다른 많은 언어들과 달리), 명시적
 >> 3. Simplify interoperability with JVM statics that Kotlin compiler has to support anyway — more concise and clear usage of Java frameworks that rely on statics, easier Java to Kotlin migration.
 >> &nbsp;&nbsp; => (미우던 고우던 Kotlin 컴파일러가 지원해야만 하는) JVM `static`과의 상호 운용을 단순화합니다. 이는 (Kotlin에서) `static`에 의존하는 Java 프레임워크의 간결하고 명확한 사용을 보장하며, Java로부터의 마이그레이션을 더욱 쉽게 만듭니다.
 
-<blockquote style="padding-top: 1.5rem;">
+<blockquote style="padding: 1.5rem 1rem;">
 컨퍼런스에서 언급한 <code class="language-text">Companion</code> 키워드가 <code class="language-text">static</code>이 되는 마법을 적용해 보면,
 
 ```kotlin
@@ -1194,7 +1232,7 @@ class Color(val rgb: Int) {
 KEEP 문서의 [해당 섹션](https://github.com/Kotlin/KEEP/blob/statics/proposals/statics.md#static-section-vs-static-modifier)을 간추려 보면, (불행인지 다행인지는 알 수 없지만) Section Syntax와 Modifier Syntax를 도입하는 데 있어 각각의 장단점은 명확합니다. 
 
 > **Section over Modifier**
-> 1. Companion object로부터의 마이그레이션이 쉽다. (모든 정적 멤버를 묶어 둔다는 점에서 개념적으로 유사합니다.)
+> 1. Companion object로부터의 마이그레이션이 쉬울 것입니다. (모든 정적 멤버를 일정한 공간에 묶어 둔다는 점에서 개념적으로 유사합니다.)
 > 2. `fun SomeClass.static.ext()`이 보다 직관적인 구문(mnemonic expression)이 됩니다. (Static section의 확장이라는 것이 명확해집니다.)
 > **Modifier over Section**
 > 1. 다른 언어에서 `static`을 사용하는 방식과 유사합니다.
@@ -1210,28 +1248,82 @@ KEEP 문서의 [해당 섹션](https://github.com/Kotlin/KEEP/blob/statics/propo
 
 </br>
 
-Kotlin을 손에 든 만국의 개발자 여러분, 우리에게 아직은 인내심이 더 필요할 듯 합니다. 
-Kotlin의 `static` 키워드 도입이 아직은 요원한 이유를 조금 더 살펴보겠습니다. 두 번째 이슈입니다.
+장단점이 명확한 두 가지 방식 중, 반드시 하나만을 선택해야 한다라... Kotlin을 손에 든 만국의 개발자 여러분, 우리에게 아직은 인내심이 더 필요할 듯 합니다. 
+Kotlin의 `static` 키워드 도입이 빠르게 이루어지기에는 요원한 이유를 조금 더 살펴보겠습니다. 두 번째 이슈입니다.
 
 
 <blockquote align="center" style="padding:0.5rem;">
-    <a href="https://github.com/Kotlin/KEEP/blob/statics/proposals/statics.md#static-soft-keyword-ambiguity"><b>Issue 2: Static soft keyword ambiguity</b></a>
+    <a href="https://github.com/Kotlin/KEEP/blob/statics/proposals/statics.md#static-soft-keyword-ambiguity" style="margin-bottom:-3rem"><b>Issue 2: Static soft keyword ambiguity</b></a>
 
+---
+1️⃣
 ```kotlin
 
 class Example {
-    class static {} // a valid declaration of a nested class
+    class static { // a valid declaration of a nested class
+        fun innerFunc() {
+            this.ext()
+        }
+    }
+    
+    private val ex = static()
+    
+    fun exFunc() {
+        ex.innerFunc()
+    }
 }
-
-// Currently parsed as extension on `Example.static` class.
-fun Example.static.ext() {}
 
 
 ```
+
+---
+2️⃣
+```kotlin
+
+fun Example.static.ext() { // Currently parsed as extension on `Example.static` class.
+    println("static is soft keyword")
+}
+
+fun main() {
+   val example = Example()
+   example.exFunc()
+}
+
+
+```
+이 스파게티 코드는 놀랍게도 정상적으로 컴파일됩니다...
 </blockquote>
+</br>
+
+2️⃣에서는 분명 우리가 `Example` 클래스의 정적인 확장 함수를 작성한 것처럼 보이지만, 실상은 1️⃣과 같이 사용되는, 그냥 nested class(`Example.static`)의 인스턴스를 Receiver로 하는, 일반적인 확장 함수를 작성한 것입니다. 
+
+이게 다 `static`이 Static Extension의 기획에서 **Soft Keyword**로 작동하기 때문에 발생한 참사입니다. KEEP 문서에서도 일종의 'Deprecation Cycle'이 필요하다며 이러한 모호함을 온전히 제거하는 데 시간이 어느 정도 소요될 것임을 암시하고 있습니다. 
+
+<blockquote style="padding: 1.5rem 1rem;">
+The detailed design on how to deal with this ambiguity is TBD. Initially, the compiler will have to parse this code as it was parsed before, which will complicate the implementation of <code class="language-text">Example.static</code> construct as it'll require the extra resolution step. 
+</br></br>
+We'll need to develop some kind of deprecation cycle to remove this ambiguity. The reasonable approach to such deprecation is to deprecate all nested and inner classes, interfaces, and objects with the name <code class="language-text">static</code>.
+
+---
+
+이 모호함에 대해 생태계 차원에서 어떻게 접근할지는 아직 미지수입니다. 일단 컴파일러는 기존의 방식대로 코드를 분석할 것이며, 이는 `Example.static` 구조를 작성하는 데 복잡함을 가중시킬 것입니다. (이게 클래스 이름인지 예약어인지 구분하기 위해) 추가적인 처리가 필요할 테니 말이죠.
+</br></br>
+그래서 이러한 모호함을 제거하기 위해, 우리는 일종의 Deprecation Cycle을 개발해야 합니다. 이에 대한 합리적인 접근은 `static`의 이름을 가진 모든 중첩 / 내부 클래스, 인터페이스, 그리고 객체를 Deprecate하는 것입니다.
+
+</blockquote>
+
+</br>
+
+위 내용들을 종합해 보았을 때, **"서드파티 클래스에 대한 정적 확장"** 이라는 이상보다, 더 나아가, `static`이라는 키워드를 통해 코드베이스를 어떻게 재편할 것인지에 대한 고민이 아직은 더 필요해 보입니다. Kotlin은 상대적으로 어린 언어이며, 땜질보다는 기둥부터 단단하게, 프로그래밍 언어의 백년지계(百年之計)는 천천히 닦아나가야 하니까요. ('땜질'이라는 표현에서 어떤 언어가 생각났다면, 뇌리를 스쳐간 그것이 바로 정답입니다.)
+
+
+</br>
 
 
 <h5>Collection Literals</h5>
+
+
+
 <h5>Name-based destructing</h5>
 <h5>Context Receivers</h5>
 <h5>Explicit fields</h5>
@@ -1265,4 +1357,10 @@ ___
 </br>
      <sup><a id="ref4" href="#doc4"><b>[4]</b></a></sup>
         <i>"When targeting JavaScript, Kotlin transpiles to ES5.1 and generates code which is compatible with module systems including AMD and CommonJS."</i>,  <a href="https://kotlinlang.org/docs/faq.html#what-does-kotlin-compile-down-to" target="blank">Kotlin FAQ - What does Kotlin compile down to?</a>에서 인용.
+</br>
+</br>
+    <sup><a id="ref5" href="#doc5"><b>[5]</b></a></sup>
+        Beuke, F. (2023). GitHut 2.0: GitHub Language Statistics.</br>
+        <a href="https://madnight.github.io/githut/#/pull_requests/2023/3/Kotlin,Swift">https://madnight.github.io/githut/#/pull_requests/2023/3/Kotlin,Swift</a></br>
+        <a href="https://madnight.github.io/githut/#/issues/2023/3/Kotlin,Swift">https://madnight.github.io/githut/#/issues/2023/3/Kotlin,Swift</a>
 </ol>

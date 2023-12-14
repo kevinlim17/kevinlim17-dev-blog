@@ -830,7 +830,7 @@ Kotlin은 위의 두 가치를 기반으로 두고 개발되었고, 지금도 �
         every time our control splits into multiple concurrent paths, 
         we want to make sure that they join up again. </br>
         So for example, if we want to do three things at the same time, our control flow should look something like this: </br>
-        --- </br>
+        <hr style="margin: 1rem 0"/>
         핵심 아이디어: </br>
         <b>프로그램의 흐름이 병렬적으로 나뉠 때마다, 우리는 (이 흐름이) 다시 합쳐지기를 바랍니다. </b></br>
         세 가지 작업을 동시에 처리하고 싶을 때, Control Flow는 다음과 같아야 합니다.
@@ -838,16 +838,16 @@ Kotlin은 위의 두 가치를 기반으로 두고 개발되었고, 지금도 �
             <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/c761fe9b-071f-46d1-98bb-d437d4829f16" width="70%"></br>
             ⬆️ 위 Flow는 레퍼런스<sup><a href="#ref1">[1]</a></sup>의 도식을 코루틴으로 치환하여 글쓴이가 재구성한 것입니다.
         </p>
-        ---</br>
+        <hr style="margin: 1rem 0"/>
         Notice that this has just one arrow going in the top and one coming out the bottom, so it follows Dijkstra's black box rule. </br>
-        --- </br>
+        <hr style="margin: 1rem 0"/>
         상단에 존재하는 하나의 화살표가 하단에서 하나의 화살표로 끝맺어 집니다. 이는 다익스트라(Edsger W. Dijkstra)의 <u>Black Box Rule</u>을 충족합니다.
     </blockquote>
     다익스트라는 그의 논문<sup><a id="doc2" href="#ref2">[2]</a></sup>에서 이렇게 언급합니다.
     <blockquote>
     There is also an abstraction involved in naming an operation and using it on account of "what it does" while completely disregarding "how it works". 
     </br>
-    ---</br>
+    <hr style="margin: 1rem 0"/>
     특정 동작에 이름을 붙이며, 그 동작이 어떻게 작동하는지 완전히 무시한 뒤 그것이 무엇을 하는지에만 포커스를 맞추는 것, 추상화는 바로 그 지점에도 존재합니다.
     </blockquote>
     </br>
@@ -1018,7 +1018,7 @@ Native의 경우, 이름이 말해주듯, Kotlin 코드는 Virtual Machine을 �
 
 이 글은 지금까지 하나의 프로그래밍 언어가 가질 수 있는 **다양성(Diversity)과 안정성(Reliability)** 에 중점을 두고 논지를 전개해 왔습니다. 한 생태계의 미래를 바라보는, 앞으로의 텍스트에서도 그러할 것입니다. 위에서 다루었던 언어의 신뢰성을 높이는 10가지 요소를 다시금 톺아보며 (암스테르담에서와 판교, 모두의) 컨퍼런스 내용을 정리해 보겠습니다. 
 
-네 가지 키워드로 정리한, Kotlin의 미래로, 함께 가시죠. 
+세 가지 키워드로 정리한, Kotlin의 미래로, 함께 가시죠. 
 
 ### Growing
 
@@ -1041,7 +1041,7 @@ Native의 경우, 이름이 말해주듯, Kotlin 코드는 Virtual Machine을 �
     => <b>커뮤니티 그리고 코드 리뷰</b>: 안정적이고 활발한 개발자 커뮤니티는, 그리고 Peer Review는, 특정한 언어로 작성된 소프트웨어에 대한 신뢰성 문제를 발견하고 해결하는 데 도움을 줍니다.
 ---
 
-우리는 앞서 프로그래밍 언어의 안정성(Reliablility)를 지탱하는 10가지 요소 중 두 가지만을 짚어 보았습니다. Type System과 Concurrency Support가 그것이었지요. 이번에는 Kotlin 코드 그 자체에서 조금 시선을 돌려 보겠습니다. 숫자 그리고 키워드로 보는 프로그래밍 언어의 성장. Kotlin 개발자들이 실제로 살아가야 할 코드 밖의 세계로, 커뮤니티의 공간으로 여러분을 초대합니다. 
+우리는 앞서 프로그래밍 언어의 안정성(Reliablility)를 지탱하는 10가지 요소 중 두 가지만을 짚어 보았습니다. Type System과 Concurrency Support가 그것이었지요. 이번에는 Kotlin 코드 그 자체에서 조금 시선을 돌려 보겠습니다. 숫자 그리고 키워드로 보는 프로그래밍 언어의 성장. 생태계와 커뮤니티에 대한 이야기. Kotlin 개발자들이 살아가는 코드 밖의 세계로, 공동체의 공간으로 여러분을 초대합니다. 
 
 </br>
 
@@ -1058,19 +1058,32 @@ Native의 경우, 이름이 말해주듯, Kotlin 코드는 Virtual Machine을 �
 
 (Kotlin에 한정해서만) 이와 관련된 수치는 Kotlin Foundation이나 JetBrains가 공식적으로 발표한 바가 없고, 대신 Github 자체적으로 [Public DataSet](https://cloud.google.com/blog/topics/public-datasets/github-on-bigquery-analyze-all-the-open-source-code?hl=en)을 공개해 두었습니다. 그리고 이 방대한 데이터를 활용한 멋진 [오픈소스](https://github.com/madnight/githut)도 존재하죠. 아래 두 그래프는 2012년 2분기부터 2023년 3분기까지 분기별로 Kotlin과 Swift가 Github의 전체 Pull Request와 Issue에서 Primary Language로 사용된 비율의 추이를 나타낸 것<sup><a id="doc5" href="#ref5"><b>[5]</b></a></sup>입니다.
 
-<blockquote>
+<blockquote style="padding: 1rem">
     <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/080b3658-5110-4af5-8158-e558eb22b585" width="100%">
     ⬆️ Pull Request에서의 추이</br>
-    </br>
+    <hr style="margin: 1rem 0"/>
     <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/fc110328-fcb2-4bcc-90a7-cb795980aedd" width="100%">
     ⬆️ Issues에서의 추이</br>
-    
+    <hr style="margin: 1rem 0"/>
+    <hr style="border: 5px solid rgba(138, 96, 254, 1); display: inline; margin-left: 0.5rem;" width="5%"/> <b>&nbsp;&nbsp;Kotlin</b>&nbsp;&nbsp;
+    <hr style="border: 5px solid rgba(255, 80, 52, 1); display: inline; margin-left: 0.5rem;" width="5%"/> <b>&nbsp;&nbsp;Swift</b> 
 </blockquote>
 
+</br>
 
+일부러 "네이티브 모바일 애플리케이션" 분야에서 직접적인 경쟁을 펼치고 있는 두 언어를 비교해 보았습니다.(참고로, 앞서 많은 비교를 일삼았던 Java와는 비교가 되지 않을 정도로, 오픈소스의 세계에서 Kotlin의 영향력은 아직 미약합니다.) 안정화 버전(LTS)이 2016년 처음 공개된 Kotlin은, 2014년 1.0의 Stable Release가 발표된 Swift보다 개발자들의 손에 녹아든 시간 자체가 조금 늦었습니다. 하지만 2019년 5월, 구글이 안드로이드 개발에서의 '**Kotlin-First**'를 선언함으로써, 판세가 역전됩니다. 꾸준히 안드로이드 생태계에서 영향력을 확장해 나가던 Kotlin은, Swift를 상대로, 2020년 1분기를 기점으로 두 수치 모두에서 우세를 거머쥐게 되었죠.
 
+</br>
+
+이러한 역전은 사실 예견되었던 일이며, 당연한 결과입니다. 태생부터가 Swift는 Apple 생태계를 위해 만들어진 언어입니다. Kotlin은 문법과 그 용도 모두 **General-Purpose** 언어죠. (이 글에서 수백 번 강조한 내용이기도 합니다. 보통 Swift도, [General-purpose programming language - Wikipedia](https://en.wikipedia.org/wiki/General-purpose_programming_language)의 권위를 빌려도, 이에 포함되나, 단일 플랫폼 지향성이 짙다는 점에서 그 의미가 퇴색되는 부분이 있습니다.) One Million이라는 숫자를 넘어, Kotlin 생태계는 Java, JavaScript, Python과 같은 언어들과 경쟁해야 하는 숙제를 안고 있습니다. 앞에서 설명한 Kotlin이 가진 모든 요소들은 이러한 경쟁에서 사용될 무기들입니다. 그들의 여정을 앞으로도 더 지켜보시죠. 
+
+</br>
 
 <h5>Libraries</h5>
+
+<p align="left">
+    <img src="https://blog.jetbrains.com/wp-content/uploads/2023/04/KC_keynote_2023_2650x1024.100.jpeg" width="80%">
+</p>
 
 <h5>Android</h5>
 
@@ -1086,7 +1099,7 @@ Native의 경우, 이름이 말해주듯, Kotlin 코드는 Virtual Machine을 �
 ---
 ### The Second Version
 
-사실상 컨퍼런스 키노트의 첫 메인 챕터입니다. 앞으로의 Kotlin 코드베이스가 어떤 방향으로 돛을 돌릴 지 짐작할 수 있는 중요한 단서이기 때문이죠. 여기서부터는 조금 호흡을 길게 가져가도록 하겠습니다. 숨 들이쉬시고, `static` 키워드가 먼저 여러분을 찾아갑니다. 
+사실상 컨퍼런스 키노트의 메인 챕터입니다. 앞으로의 Kotlin 코드베이스가 어떤 방향으로 돛을 돌릴 지 짐작할 수 있는 중요한 단서이기 때문이죠. 여기서는 조금 호흡을 길게 가져가도록 하겠습니다. 숨 들이쉬시고, `static` 키워드가 먼저 여러분을 찾아갑니다. 
 
 </br>
 
@@ -1308,7 +1321,7 @@ We'll need to develop some kind of deprecation cycle to remove this ambiguity. T
 
 이 모호함에 대해 생태계 차원에서 어떻게 접근할지는 아직 미지수입니다. 일단 컴파일러는 기존의 방식대로 코드를 분석할 것이며, 이는 `Example.static` 구조를 작성하는 데 복잡함을 가중시킬 것입니다. (이게 클래스 이름인지 예약어인지 구분하기 위해) 추가적인 처리가 필요할 테니 말이죠.
 </br></br>
-그래서 이러한 모호함을 제거하기 위해, 우리는 일종의 Deprecation Cycle을 개발해야 합니다. 이에 대한 합리적인 접근은 `static`의 이름을 가진 모든 중첩 / 내부 클래스, 인터페이스, 그리고 객체를 Deprecate하는 것입니다.
+그래서 이러한 모호함을 제거하기 위해, 우리는 일종의 Deprecation Cycle을 개발해야 합니다. 이에 대한 합리적인 접근은 `static`의 이름을 가진 모든 중첩 및 내부 클래스, 인터페이스, 그리고 객체를 Deprecate하는 것입니다.
 
 </blockquote>
 
@@ -1322,17 +1335,17 @@ We'll need to develop some kind of deprecation cycle to remove this ambiguity. T
 
 <h5>Collection Literals</h5>
 
+```kotlin
 
+cmdArgs = listOf("-language-version", "2.0")
+
+
+```
 
 <h5>Name-based destructing</h5>
 <h5>Context Receivers</h5>
 <h5>Explicit fields</h5>
 
----
-### Multiplatform
-<p align="left">
-    <img src="https://blog.jetbrains.com/wp-content/uploads/2023/04/KC_keynote_2023_2650x1024.100.jpeg" width="100%">
-</p>
 
 ---
 

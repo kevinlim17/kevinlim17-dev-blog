@@ -150,6 +150,7 @@ const MarkdownRenderer = styled.div`
     color: #4263eb;
     text-decoration: underline;
     text-underline-position: under;
+    word-break: break-word;
   }
 
   // Adjust Footnote Style

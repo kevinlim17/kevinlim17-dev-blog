@@ -1024,7 +1024,7 @@ Native의 경우, 이름이 말해주듯, Kotlin 코드는 Virtual Machine을 �
 
 <blockquote style="margin-left: 15px;">
     <p align="left">
-        <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/05aca570-ab9a-4b68-9d2a-f6866a263928" width="80%"/>
+        <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/05aca570-ab9a-4b68-9d2a-f6866a263928" width="70%"/>
     </p>
     ⬆️ 연도별 Kotlin을 Primary Language로 사용하여 코드를 작성한 Github Repository의 수</br>
     (출처: <a href="https://blog.jetbrains.com/ko/kotlin/2023/04/kotlinconf-2023-opening-keynote/">Kotlin Conf'23 Opening Keynote</a>)
@@ -1042,13 +1042,6 @@ Native의 경우, 이름이 말해주듯, Kotlin 코드는 Virtual Machine을 �
 ---
 
 우리는 앞서 프로그래밍 언어의 안정성(Reliablility)를 지탱하는 10가지 요소 중 두 가지만을 짚어 보았습니다. Type System과 Concurrency Support가 그것이었지요. 이번에는 Kotlin 코드 그 자체에서 조금 시선을 돌려 보겠습니다. 숫자 그리고 키워드로 보는 프로그래밍 언어의 성장. 생태계와 커뮤니티에 대한 이야기. Kotlin 개발자들이 살아가는 코드 밖의 세계로, 공동체의 공간으로 여러분을 초대합니다. 
-
-</br>
-
-<p align="left" style="background-color:rgba(168, 168, 168, 0.2); padding: 1.5rem 1rem">
-    <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/33ba9854-ea24-4a6c-9717-0390304cb224" width="100%"/>
-    ⬆️ Opening Keynote에서 소개된 Kotlin의 오늘에 관한 흥미로운 수치들.</br>
-</p>
 
 </br>
 
@@ -1079,13 +1072,38 @@ Native의 경우, 이름이 말해주듯, Kotlin 코드는 Virtual Machine을 �
 
 </br>
 
-<h5>Libraries</h5>
+<h5>Android</h5>
 
-<p align="left">
-    <img src="https://blog.jetbrains.com/wp-content/uploads/2023/04/KC_keynote_2023_2650x1024.100.jpeg" width="80%">
+<p align="center">
+    <img src="https://developer.android.com/static/images/kotlin/kotlin-for-android-text.svg?hl=ko" width="50%"/>
 </p>
 
-<h5>Android</h5>
+안드로이드와 Kotlin은 떼려야 뗄 수 없는 관계입니다. 개발자들이 Github에 남긴 흔적들이 증명하듯, Kotlin 커뮤니티가 성장하는 데에는 Android의 역할이 결정적이었습니다. 글쓴이도 Kotlin의 존재를 Android 개발을 배우다 접했고, [KotlinConf'23 - Keynote](https://youtu.be/c4f4SCEYA5Q)에서 JetBrains 사가 공개한 자료에 따르면 Kotlin 개발자의 66%는 안드로이드 네이티브 생태계에서 살아가는 사람들일 정도니까요.
+
+</br>
+
+
+<blockquote align="left">
+    <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/094f6255-ecce-4a49-98a2-8816cfdf99fc" width="75%"></br>
+    <hr/></br>
+    1. Android Native 개발자의 <b><u>97%</u></b>는 Kotlin 사용에 만족합니다.</br>
+    2. 상위 1000개의 안드로이드 앱 중 <b><u>95%</u></b>는 Kotlin으로 쓰여져 있습니다. </br>
+    3. 상위 1000개의 안드로이드 앱 중 <b><u>21%</u></b>의 UI는 <b>Jetpack Compose</b>로 작성되어 있습니다. </br>
+    </br>
+</blockquote>
+
+</br>
+
+
+
+
+
+
+<h5>Multiplatform</h5>
+
+<p align="left">
+    <img src="https://blog.jetbrains.com/wp-content/uploads/2023/04/KC_keynote_2023_2650x1024.100.jpeg" width="70%">
+</p>
 
 
 ---
@@ -1264,7 +1282,6 @@ KEEP 문서의 [해당 섹션](https://github.com/Kotlin/KEEP/blob/statics/propo
 장단점이 명확한 두 가지 방식 중, 반드시 하나만을 선택해야 한다라... Kotlin을 손에 든 만국의 개발자 여러분, 우리에게 아직은 인내심이 더 필요할 듯 합니다. 
 Kotlin의 `static` 키워드 도입이 빠르게 이루어지기에는 요원한 이유를 조금 더 살펴보겠습니다. 두 번째 이슈입니다.
 
-
 <blockquote align="center" style="padding:0.5rem;">
     <a href="https://github.com/Kotlin/KEEP/blob/statics/proposals/statics.md#static-soft-keyword-ambiguity" style="margin-bottom:-3rem"><b>Issue 2: Static soft keyword ambiguity</b></a>
 
@@ -1342,8 +1359,82 @@ cmdArgs = listOf("-language-version", "2.0")
 
 ```
 
-<h5>Name-based destructing</h5>
+
+<h5>Name-based destructuring</h5>
+
+우리는 필요에 따라 데이터를 결합하거나 해체합니다. 결합이 필요할 때는, 다양한 자료구조(Data Structure)를 통해 구조화(Structuring)시키고, 필요한 데이터를 그 속에서 탐색하거나 아예 분리시키는 일에 익숙합니다. Kotlin Standard Library에서는 우리가 많이 사용하는 자료구조를 Collection 인터페이스와 그 하위 Class들로 정리해 두었죠. (참고로, Map 인터페이스는 Collection 인터페이스와 독립적으로 존재합니다. )
+
+<blockquote style="background-color:rgba(168, 168, 168, 0.1); padding:1rem;">
+    <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/323be8d9-a3c6-4282-bff4-ceed7284546e" width="50%">
+    <hr/>⬆️ <a href="https://kotlinlang.org/docs/collections-overview.html#collection-types">Kotlin Documentation | Collections overview</a>의 내용을 재구성한 다이어그램.</br>
+    &nbsp;&nbsp;&nbsp;&nbsp; Collection Interface들 사이의 상속 관계를 나타내었습니다.
+</p>
+
+</br>
+
+List라는 Collection의 뿌리를 파고 들어가보면(격식을 갖추면, 인터페이스의 조상님을 찾아나서는 일이라고 할 수 있겠네요), `Iterable`이라는 인터페이스가 보입니다. 이 인터페이스를 상속받는 클래스들은 공통된 특성을 가지고 있습니다. [Iterable - Kotlin Programming Language](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-iterable/)의 내용을 가져와 보면, 
+
+<blockquote>
+
+```kotlin
+
+interface Iterable<out T>
+
+
+```
+---
+Classes that inherit from this interface can be represented as <b><u>a sequence of elements that can be iterated over. </u></b></br>
+이 인터페이스를 상속받는 클래스는 순회의 대상이 되는(반복 가능한) 특정한 요소의 나열을 표현합니다.  
+
+</blockquote>
+
+</br>
+
+즉, 다른 언어에서의 경우와 마찬가지로, (Keynote에서의 말을 빌려) Collection은 기본적으로 **순서-지향적(positional)** 입니다. 그런데 Kotlin은 데이터들을 결합하는 방법으로, Collection을 제외하고, 조금은 특별한 형태의 클래스를 사용합니다. 앞에서 간결함(Kotlin is Concise)에 대해 설명하며 소개했던 `data class`의 존재입니다. 
+
+<blockquote style="background-color:rgba(168, 168, 168, 0.1)">
+
+```kotlin
+
+data class Person(
+	val firstName: String,
+	val lastName: String
+)
+
+
+```
+이 친구는 구성 요소의 순서와 전혀 상관 없어 보입니다. (인간이 사용하는 '언어,' 그리고, 살아가는 문화권에 따라서 그 순서가 달라진다는 사실은 논외로 합시다.)
+</blockquote>
+
+</br>
+
+`data class`는 **name-based** 입니다. 이 곳에 결합된 데이터들이 모두 자신만의 특성을 가진다는 점에서 말이죠. Collection과는, 그것이 비슷한 속성의 여러 요소를 한 데 모아둔 형태라는 점에서, 방향이 가장 크게 갈립니다. 주로 데이터베이스나 `.json` 형태의 파일을 시각화(Visualize)하는 데 사용하는 `data class`는 그 존재에 있어, 어떤 속성을 가지고 있다는 사실이 중요한 것이지, 그 속성이 배치된 순서와는 하등 관계도 없고 그러한 목적을 위해 만들어진 것도 아니기 때문입니다. 
+
+그런데 `data class`의 인스턴스를 구조 분해(Destructuring)하는 경우에는 어떨까요? </br>
+당연히, 구성 요소를 합치는 데에 순서가 중요하지 않다고 했는데, 분해했을 때도 마찬가지 아닐까요? 
+
+<blockquote>
+
+```Kotlin
+
+/**person is an instance of data class named Person*/
+val (firstName, lastName) = person 
+
+
+```
+놀랍게도(?) 아니었습니다.
+</blockquote>
+
+</br>
+
+위 문법은 `data class`의 인스턴스가 가진 정보를 분해해 두 변수에 저장하는 경우 사용하는데요. 아직까지는, 이 분해 과정이 철저하게 **positional**하다는 것이 문제입니다. 키노트에서 **"Kotlin 2.0의 첫 번째 릴리즈에서는 볼 수 없겠지만, 분명 고칠 것("We are going to fix it")"** 이라 공언했으니, 생태계에서 과연 이 문제를 어떻게 해결할 지 좀 더 지켜보도록 하지요. 
+
+</br>
+
 <h5>Context Receivers</h5>
+
+
+
 <h5>Explicit fields</h5>
 
 

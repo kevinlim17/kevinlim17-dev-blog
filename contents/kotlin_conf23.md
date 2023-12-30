@@ -35,17 +35,18 @@ thumbnail: './kotlin_conf23.png'
 한 언어의 미래에 대해 논하려면, 먼저 과거와 현재를 알아야겠지요. 
 우선 Kotlin FAQ(Frequently Asked Questions) 페이지에 언급된, '[**Kotlin이 무엇이냐**](https://kotlinlang.org/docs/faq.html#what-is-kotlin)'라는 질문에 대한 답을 살펴보도록 하겠습니다.
 
+<blockquote>
+Kotlin is an open-source statically typed programming language that targets the JVM, Android, JavaScript, Wasm, and Native. <br/>
+It's developed by JetBrains. <br/>
+The project started in 2010 and was open source from very early on. <br/>
+The first official 1.0 release was in February 2016.
+<hr/>
+Kotlin은 오픈소스 정적 타입 언어로서, JVM(Java Virtual Machine), 안드로이드, 자바스크립트, 웹어셈블리, 네이티브를 타겟으로 지원합니다. <br/>
+Jetbrains 사에 의해 개발되었으며, Kotlin 프로젝트는 2010년에 <a href="https://github.com/JetBrains/kotlin/commit/3e4dce385331c91c9059fcdcea3eae2394f34942">
+<strong>첫 발걸음</strong></a>을 떼었습니다. <br/>
+1.0 버전의 공식 배포는 2016년 2월에 이루어졌습니다. <br/>
+</blockquote>
 
->
-> Kotlin is an open-source statically typed programming language that targets the JVM, Android, JavaScript, Wasm, and Native. <br/>
-> It's developed by JetBrains. <br/>
-> The project started in 2010 and was open source from very early on. <br/>
-> The first official 1.0 release was in February 2016.
->
-> Kotlin은 오픈소스 정적 타입 언어로서, JVM(Java Virtual Machine), 안드로이드, 자바스크립트, 웹어셈블리, 네이티브를 타겟으로 지원합니다. <br/>
-> Jetbrains 사에 의해 개발되었으며, Kotlin 프로젝트는 2010년에 [**첫 발걸음**](https://github.com/JetBrains/kotlin/commit/3e4dce385331c91c9059fcdcea3eae2394f34942)을 떼었습니다. <br/>
-> 1.0 버전의 공식 배포는 2016년 2월에 이루어졌습니다. <br/>
->
 </br>
 
 답변을 찬찬히 뜯어보면, 크게 두 가지 지점에서 눈길이 멈춥니다.
@@ -54,7 +55,6 @@ thumbnail: './kotlin_conf23.png'
 
 먼저 정적 타입에 대한 이야기입니다. Kotlin은 Java를 기반으로 출발한 언어답게, 강한 Type-Safety(타입 안정성)를 추구합니다. 정적 타입의 언어는 컴파일 시에 변수의 타입을 결정합니다. (이와 반대로 JavaScript와 같은 동적(Dynamically-Typed) 언어는 런타임 시에 변수의 타입이 결정됩니다.) 여기에서 조금 더 개념을 확장해, 바인딩(Binding)에 대한 이야기로 넘어가 보죠.
 
-</br>
 
 >
 > **| 코틀린은 동적 바인딩보다 정적 바인딩을 더 선호한다 |** <br/>
@@ -74,6 +74,8 @@ thumbnail: './kotlin_conf23.png'
    (`open` 키워드를 추가하지 않으면, `final`로 설정됩니다.)
 2. Method Overriding은 컴파일 타임(JVM 기준, .kt 코드가 .class 바이트코드로 바뀔 때)이 아니라, 런타임에 이루어집니다. 
     ( **Runtime Polymorphism** 에 대한 이해가 필요합니다. )
+
+</br>
 
 **Polymorphism (다형성)** 과 **Binding** 에 대한 이야기는 ["[Android: Architecture #1] 객체지향이 뭔가요?"](https://kevinlim17.com/object_oriented/) 와 추후 포스트에서 조금 더 다뤄보기로 하고, 여기서는 Kotlin이 **"타입 안정성"** 을 중시하는 언어라는 것만 짚고 넘어가도록 하겠습니다.
 
@@ -109,6 +111,12 @@ ___
 > (Functional의 `fun`은 아니겠지요..?)
 
 #### Concise
+
+<Blockquote style="padding: 1.25rem;">
+<a href="https://www.youtube.com/live/c4f4SCEYA5Q?si=uH1F2FqANY7e8kMd&t=1232" style="color:rgba(138, 6, 254, 0.7);"><b>And Kotlin's mission is to get rid of boilerplate.</b></a>
+<hr/>
+Conf'23 당시 Kotlin 프로젝트 리더였던 <strong><a href="https://github.com/elizarov">Roman Elizarov</a></strong>가 컨퍼런스 키노트에서.
+</Blockquote>
 
 비교적 최근에 개발된 언어답게, 문법 자체가 **간결한** 편입니다. </br>
 이러한 면에서 Kotlin과는 대척점에 서 있는, 코드 길이라 하면 둘째가기 서러운 Java와 비교하며 살펴 보겠습니다.
@@ -170,6 +178,8 @@ class HelloWorld {
 1. Class의 작성을 강요하지 않는다.
 2. Java System Class에 속한 Method임을 명시적으로 작성하지 않아도 된다.
 3. Type Inference(타입 추론)를 지원한다. (이는 Java도 지원.)
+
+</br>
 
 위의 첫 번째 포인트가 바로 Kotlin과 Java라는 언어의 결을 완전히 다르게 만든 분기점이라고 볼 수 있습니다. Kotlin Community는 객체지향(Object-Oriented)은 물론이고, **함수형 프로그래밍(Functional Programming)** 도 "우리 언어가 가진 매력"이라 적극적으로 홍보합니다. 이 부분은 네 번째 특성에서 더 자세히 다뤄볼게요.
 (Kotiln의 함수는 First-Class Citizen의 조건을 충족합니다. 이는 언어의 간결함을 결정짓는 요소라 볼 수도 있습니다.)
@@ -1041,7 +1051,7 @@ Native의 경우, 이름이 말해주듯, Kotlin 코드는 Virtual Machine을 �
     => <b>커뮤니티 그리고 코드 리뷰</b>: 안정적이고 활발한 개발자 커뮤니티는, 그리고 Peer Review는, 특정한 언어로 작성된 소프트웨어에 대한 신뢰성 문제를 발견하고 해결하는 데 도움을 줍니다.
 ---
 
-우리는 앞서 프로그래밍 언어의 안정성(Reliablility)를 지탱하는 10가지 요소 중 두 가지만을 짚어 보았습니다. Type System과 Concurrency Support가 그것이었지요. 이번에는 Kotlin 코드 그 자체에서 조금 시선을 돌려 보겠습니다. 숫자 그리고 키워드로 보는 프로그래밍 언어의 성장. 생태계와 커뮤니티에 대한 이야기. Kotlin 개발자들이 살아가는 코드 밖의 세계로, 공동체의 공간으로 여러분을 초대합니다. 
+우리는 앞서 프로그래밍 언어의 안정성(Reliablility)를 지탱하는 10가지 요소 중 두 가지만을 짚어 보았습니다. Type System과 Concurrency Support가 그것이었지요. **'Growing'** 챕터에서는 Kotlin Code 그 자체에서 조금 시선을 돌려 보겠습니다. 숫자 그리고 키워드로 보는 프로그래밍 언어의 성장. 생태계와 커뮤니티에 대한 이야기. Kotlin 개발자들이 살아가는 코드 밖의 세계로, 공동체의 공간으로 여러분을 초대합니다. 
 
 </br>
 
@@ -1058,8 +1068,8 @@ Native의 경우, 이름이 말해주듯, Kotlin 코드는 Virtual Machine을 �
     <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/fc110328-fcb2-4bcc-90a7-cb795980aedd" width="100%">
     ⬆️ Issues에서의 추이</br>
     <hr style="margin: 1rem 0"/>
-    <hr style="border: 5px solid rgba(138, 96, 254, 1); display: inline; margin-left: 0.5rem;" width="5%"/> <b>&nbsp;&nbsp;Kotlin</b>&nbsp;&nbsp;
-    <hr style="border: 5px solid rgba(255, 80, 52, 1); display: inline; margin-left: 0.5rem;" width="5%"/> <b>&nbsp;&nbsp;Swift</b> 
+    <hr style="border: 5px solid rgba(138, 96, 254, 1); display: inline; margin-left: 0.5rem;" width="5%"/> <strong>&nbsp;&nbsp;Kotlin</strong>&nbsp;&nbsp;
+    <hr style="border: 5px solid rgba(255, 80, 52, 1); display: inline; margin-left: 0.5rem;" width="5%"/> <strong>&nbsp;&nbsp;Swift</strong> 
 </blockquote>
 
 </br>
@@ -1403,7 +1413,7 @@ data class Person(
 
 
 ```
-이 친구는 구성 요소의 순서와 전혀 상관 없어 보입니다. (인간이 사용하는 '언어,' 그리고, 살아가는 문화권에 따라서 그 순서가 달라진다는 사실은 논외로 합시다.)
+이 친구는 구성 요소의 순서와 전혀 상관 없어 보입니다. (우리가 사용하는 '언어' 그리고 살아가는 문화권에 따라서 그 순서가 달라진다는 사실은 논외로 합시다.)
 </blockquote>
 
 </br>
@@ -1436,6 +1446,70 @@ val (firstName, lastName) = person
 
 
 <h5>Explicit fields</h5>
+
+명백한 'Field'라, 명백한 운명(Manifest Destiny)도 아니고 도대체 무슨 의미일까요? </br> 
+먼저, 기존에는 Kotlin에 '명시적인' `field`가 존재하지 않았으므로, 새로운 기능을 탐구함에 앞서 **이 키워드가 '뒤에서' 사용되는 방식**을 먼저 살펴보겠습니다. 
+
+</br>
+
+(이 글에서 자주 등장하는 언어인) Java에서 **필드(Field)** 라 하면, **클래스 안에 정의되는 변수(A variable declared inside a class)** 를 의미합니다. 그리고 ([JavaBeans의 작성 원칙](https://en.wikipedia.org/wiki/JavaBeans)을 충실히 따른다는 전제 하에) `static`이 아닌, 인스턴스 필드의 접근 제한자(Access Modifier)는 `private`으로 설정되어야 하지요. 그리고 Java에서는 getter와 setter(다른 말로는 Accessor와 Mutator 메서드)를 개발자가 임의로 작성함으로써, Field와 함께 하나의 Property를 구성합니다.
+
+<blockquote>
+<h5><a href="https://en.wikipedia.org/wiki/Property_(programming)">Property (programming)</a></h5>
+<p align="left">
+    <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/95551917-d0fe-4293-b4fd-6383af41fbe6" width="80%">
+</p>
+<hr/>
+<b>A special sort of class member, intermediate in functionality between a field (or data member) and a method.</b> </br>
+<hr/>
+<b>Class 멤버의 특수한 형태로, 필드와 메서드 영역의 중간에서 특수한 기능을 제공합니다.</b> </br>
+(여기서 특수한 기능이라 함은, 데이터를 캡슐화(Encapsulate)하고, 해당 데이터에 대한 접근 권한을 getter와 setter 메서드로 통제하는 것입니다.)
+
+</blockquote>
+</br>
+
+명시적으로 하나의 field에 대한 두 개의 메서드를 구현해야만 <strong>Property</strong>를 구성할 수 있는 Java와는 달리, Kotlin은 ([Concise](#concise)에서 언급했듯이) <u>Field에 대한 선언이 곧 Property에 대한 선언</u>입니다. 이것이 Kotlin의 Field가 '명시'적이지 않은 첫 번째 이유입니다. Kotlin에서는 순수한 의미의 Field를 선언할 수 없기 때문이지요. 그렇다면 명시적이지 않은 필드(이를 **Backing Field**라고 합니다)는 어떤 경우에 사용할까요? 
+
+<p align="left" style="background-color: rgba(168, 168, 168, 0.1); padding: 1.5rem;">
+    <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/38b9e8cc-af93-4317-bda6-2bb457fe4e05" width="80%">
+    </br>
+    위 코드는 Kotlin 클래스 내에서 <code class="language-text">var</code> 키워드로 Property를 선언하는 경우 자동으로 생성되는 Accessor와 Mutator 메서드를 명시적으로 선언한 것입니다. 이를 접근자 메서드의 <b>"Default Implementation"이라고 합니다.</b> </br>
+    이는 Java에서 JavaBeans에 따라 Property를 구성하는 방식과 동일합니다. 
+</p>
+
+</br>
+
+위의 예시가 보여주듯, "<strong>Property</strong>의 값을 저장하는 역할로서, 독립적인 형태로 전면에 나서지 않고, 온전히 <strong>그것</strong> 뒤에 숨어있기 때문"에, Kotlin에서의 field는 <strong>Backing Field</strong>라는 별칭을 얻게 된 것입니다. 그러나, Property를 생성할 때마다 Backing Field가 저절로 만들어지는 것은 아닙니다. [Kotlin의 Property에 관한 공식 문서](https://kotlinlang.org/docs/properties.html#backing-fields)에 따르면, 다음과 같은 경우에만 생성됩니다. 
+
+
+<blockquote style="padding: 1.25rem 1rem">
+A backing field will be generated for a property <br/>
+if it <strong>uses the default implementation of at least one of the accessors,</strong> <br/>
+or if <strong>a custom accessor references it through the field identifier. </strong>
+
+<hr/>
+
+Backing Field는 다음과 같은 경우에 생성됩니다. </br>
+1. 최소 하나의 접근자 메서드에서 '기본 구현'을 사용한 경우.
+2. 또는 커스텀 접근자가 `field`라는 예약어로 이를 참조한 경우.
+
+</blockquote>
+
+</br>
+
+<strong>그렇다면, `field`가 명시적으로 작동해야 하는, 그렇게 변화해야 하는 경우에는 무엇이 있을까요?</strong></br>
+Kotlin가 제공하는 기본적인 Property의 기능만으로는 사실 완전한 캡슐화(Encapsulation)를 구현하기 어렵습니다. 보통 Kotlin의 거의 모든 Data Structure는 Mutable한 것과 Immutable한 것으로 구분되어 있는데요(그리고 Mutable한 클래스가 Immutable한 그것을 상속받는 형태입니다). 이는 Kotlin 생태계의 개발자들이 가변적인 값보다 불변 데이터를 취급하는 것을 선호하는 데 기인합니다. 
+
+<blockquote>
+덩컨 맥그레거, 냇 프라이스, 자바에서 코틀린으로, 오현석 역, (서울: 한빛미디어), ??p.
+</blockquote>
+
+</br>
+
+그러니 클래스 안에서만 가변적인 데이터를 다루고, 이를 밖으로 내보낼 때에는 Immutable한 형태로 변경할 필요가 많은 경우에 존재하는데요. Property의 Getter(Accessor) 메서드의 경우에는, Customize한다 해도 그것의 Return Type을 변경할 수는 없으므로, 캡슐을 구성할 새로운 규칙이 필요합니다. 이러한 규칙을 Kotlin에서는 <a href="https://kotlinlang.org/docs/properties.html#backing-properties"><strong>Backing Property Pattern</strong></a>으로 정의합니다. 
+
+
+
 
 
 ---

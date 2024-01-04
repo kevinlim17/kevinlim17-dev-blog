@@ -55,16 +55,16 @@ Jetbrains 사에 의해 개발되었으며, Kotlin 프로젝트는 2010년에 <a
 
 먼저 정적 타입에 대한 이야기입니다. Kotlin은 Java를 기반으로 출발한 언어답게, 강한 Type-Safety(타입 안정성)를 추구합니다. 정적 타입의 언어는 컴파일 시에 변수의 타입을 결정합니다. (이와 반대로 JavaScript와 같은 동적(Dynamically-Typed) 언어는 런타임 시에 변수의 타입이 결정됩니다.) 여기에서 조금 더 개념을 확장해, 바인딩(Binding)에 대한 이야기로 넘어가 보죠.
 
+<blockquote style="padding: 1.25rem 1rem">
 
->
-> **| 코틀린은 동적 바인딩보다 정적 바인딩을 더 선호한다 |** <br/>
-> 
-> 코틀린은 타입 안전한, 합성적인 코딩 스타일을 장려한다. 확장 함수는 정적으로 바인딩된다. <br/>
-> 기본적으로 클래스는 확장될 수 없고, 메서드는 다형적이지 않다. <br/>
-> 여러분은 명시적으로 다형성과 상속을 활성화해야 한다.
-> 
-> 덩컨 맥그레거, 냇 프라이스, <i>자바에서 코틀린으로</i>, 오현석 역, (서울: 한빛미디어), 30p.
->
+**| 코틀린은 동적 바인딩보다 정적 바인딩을 더 선호한다 |** <br/>
+ 
+코틀린은 타입 안전한, 합성적인 코딩 스타일을 장려한다. 확장 함수는 정적으로 바인딩된다. <br/>
+기본적으로 클래스는 확장될 수 없고, 메서드는 다형적이지 않다. <br/>
+여러분은 명시적으로 다형성과 상속을 활성화해야 한다.
+<hr/>
+덩컨 맥그레거, 냇 프라이스, <i>자바에서 코틀린으로</i>, 오현석 역, (서울: 한빛미디어), 30p.
+</blockquote>
 
 </br>
 
@@ -1372,7 +1372,7 @@ cmdArgs = listOf("-language-version", "2.0")
 
 <h5>Name-based destructuring</h5>
 
-우리는 필요에 따라 데이터를 결합하거나 해체합니다. 결합이 필요할 때는, 다양한 자료구조(Data Structure)를 통해 구조화(Structuring)시키고, 필요한 데이터를 그 속에서 탐색하거나 아예 분리시키는 일에 익숙합니다. Kotlin Standard Library에서는 우리가 많이 사용하는 자료구조를 Collection 인터페이스와 그 하위 Class들로 정리해 두었죠. (참고로, Map 인터페이스는 Collection 인터페이스와 독립적으로 존재합니다. )
+우리는 필요에 따라 데이터를 결합하거나 해체합니다. 결합이 필요할 때는, 다양한 자료구조(Data Structure)를 통해 구조화(Structuring)시키고, 필요한 데이터를 그 속에서 탐색하거나 아예 분리시키는 일에 익숙합니다. Kotlin Standard Library에서는 우리가 많이 사용하는 자료구조를 Collection 인터페이스와 그 하위 Class들로 정리해 두었죠. (참고로, Map 인터페이스는 Collection 인터페이스와는 독립적으로 존재합니다. )
 
 <blockquote style="background-color:rgba(168, 168, 168, 0.1); padding:1rem;">
     <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/323be8d9-a3c6-4282-bff4-ceed7284546e" width="50%">
@@ -1437,9 +1437,11 @@ val (firstName, lastName) = person
 
 </br>
 
-위 문법은 `data class`의 인스턴스가 가진 정보를 분해해 두 변수에 저장하는 경우 사용하는데요. 아직까지는, 이 분해 과정이 철저하게 **positional**하다는 것이 문제입니다. 키노트에서 **"Kotlin 2.0의 첫 번째 릴리즈에서는 볼 수 없겠지만, 분명 고칠 것("We are going to fix it")"** 이라 공언했으니, 생태계에서 과연 이 문제를 어떻게 해결할 지 좀 더 지켜보도록 하지요. 
+위 문법은 `data class`의 인스턴스가 가진 정보를 분해해 두 변수에 저장하는 경우 사용하는데요. 아직까지는, 이 분해 과정이 철저하게 **positional**하다는 것이 문제입니다. 키노트에서 **"Kotlin 2.0의 첫 번째 릴리즈에서는 볼 수 없겠지만, 분명 고칠 것("We are going to fix it")"** 이라 공언했으니, 생태계에서 과연 이 문제를 어떻게 해결할 지 조금 더 지켜보도록 하지요. 
 
 </br>
+
+
 
 <h5>Context Receivers</h5>
 
@@ -1471,9 +1473,9 @@ val (firstName, lastName) = person
 명시적으로 하나의 field에 대한 두 개의 메서드를 구현해야만 <strong>Property</strong>를 구성할 수 있는 Java와는 달리, Kotlin은 ([Concise](#concise)에서 언급했듯이) <u>Field에 대한 선언이 곧 Property에 대한 선언</u>입니다. 이것이 Kotlin의 Field가 '명시'적이지 않은 첫 번째 이유입니다. Kotlin에서는 순수한 의미의 Field를 선언할 수 없기 때문이지요. 그렇다면 명시적이지 않은 필드(이를 **Backing Field**라고 합니다)는 어떤 경우에 사용할까요? 
 
 <p align="left" style="background-color: rgba(168, 168, 168, 0.1); padding: 1.5rem;">
-    <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/38b9e8cc-af93-4317-bda6-2bb457fe4e05" width="80%">
+    <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/38b9e8cc-af93-4317-bda6-2bb457fe4e05" width="75%">
     </br>
-    위 코드는 Kotlin 클래스 내에서 <code class="language-text">var</code> 키워드로 Property를 선언하는 경우 자동으로 생성되는 Accessor와 Mutator 메서드를 명시적으로 선언한 것입니다. 이를 접근자 메서드의 <b>"Default Implementation"이라고 합니다.</b> </br>
+    위 코드는 Kotlin 클래스 내에서 <code class="language-text">var</code> 키워드로 Property를 선언하는 경우 자동으로 생성되는 Accessor와 Mutator 메서드를 명시적으로 선언한 것입니다. 이를 접근자 메서드의 <strong>"Default Implementation"</strong> <b>이라고 합니다.</b> </br>
     이는 Java에서 JavaBeans에 따라 Property를 구성하는 방식과 동일합니다. 
 </p>
 
@@ -1490,25 +1492,89 @@ or if <strong>a custom accessor references it through the field identifier. </st
 <hr/>
 
 Backing Field는 다음과 같은 경우에 생성됩니다. </br>
-1. 최소 하나의 접근자 메서드에서 '기본 구현'을 사용한 경우.
+1. 최소 하나의 접근자 메서드에서 "Default Implementation"을 사용한 경우.
 2. 또는 커스텀 접근자가 `field`라는 예약어로 이를 참조한 경우.
 
 </blockquote>
 
 </br>
 
-<strong>그렇다면, `field`가 명시적으로 작동해야 하는, 그렇게 변화해야 하는 경우에는 무엇이 있을까요?</strong></br>
-Kotlin가 제공하는 기본적인 Property의 기능만으로는 사실 완전한 캡슐화(Encapsulation)를 구현하기 어렵습니다. 보통 Kotlin의 거의 모든 Data Structure는 Mutable한 것과 Immutable한 것으로 구분되어 있는데요(그리고 Mutable한 클래스가 Immutable한 그것을 상속받는 형태입니다). 이는 Kotlin 생태계의 개발자들이 가변적인 값보다 불변 데이터를 취급하는 것을 선호하는 데 기인합니다. 
+<strong>그렇다면, `field`가 명시적으로 표현되어야 하는 경우에는 무엇이 있을까요?</strong></br>
 
-<blockquote>
-덩컨 맥그레거, 냇 프라이스, 자바에서 코틀린으로, 오현석 역, (서울: 한빛미디어), ??p.
+이는 객체지향의 네 가지 기둥(Pillars) 중 하나라 할 수 있는 **캡슐화(Encapsulation)** 와 깊은 관련이 있습니다.
+
+사실 Kotlin Property의 기능만으로는 캡슐화된 필드(field)를 구현하기 어렵습니다. 특히 Data Structure를 취급하는 데 있어 더욱 그러한데요. 그 이유는 [영문 위키피디아](https://en.wikipedia.org/wiki/Encapsulation_(computer_programming))에서 언급한 캡슐화의 두 가지 조건을 살펴보면 찾을 수 있습니다.
+
+- A language mechanism for <strong>restricting direct access</strong> to some of the object's components
+- A language construct that facilitates the bundling of data with methods(or other functions) operating on those data
+  <hr style="margin: 1rem" />
+- 특정 객체의 구성 요소에 대한 <strong>직접적인 접근을 막는</strong> 매커니즘.
+- 데이터와 (그 데이터를 활용하는) 메서드의 묶음을 용이하게 하는 구조.
+
+</br>
+
+**Kotlin의 Property는 외부의 직접적인 접근을 막을 수 없습니다.** </br>
+해당 Property가 인스턴스의 단순한 속성을 나타내는 것이라면, 성능을 위해서라도 특수한 형태의 접근자 메서드를 구현하지 않는 편이 더 좋겠지만, 우리는 언제나 "외부에서 수정해야 하지 말아야 하는(Unmodifable) 데이터"를 클래스에 담아냅니다. 
+
+
+또한 (Name-Based Destructing 파트에서 다루었듯이) Kotlin의 `Collection` Interface와 그 하위 Interface들은 <u>Mutable한 것과 Immutable한 것</u>, 두 가지의 형태를 가지고 있습니다(정확히는 Mutable한 클래스가 Immutable한 그것을 확장하는 구조입니다). 
+
+즉, 이러한 설계는, 온전히 그 데이터를 읽는 용도(Read-Only)로만 사용하는 경우와 그렇지 않은 경우를 엄격히 분리하여 Collection을 사용하라며, 개발자들에게 언어 차원에서 권장하는 것입니다. 이는 Kotlin 생태계의 리더들이 **가변 객체보다 불변 데이터를 취급하는 것을 선호**하는 데 기인합니다. 
+
+<blockquote style="padding: 1.25rem 1rem">
+아마도 코틀린 설계자들은 이 책의 저자들처럼 앞에서 소개한 '공유된 컬렉션을 변경하지 말라'는 관습에 익숙해서가 아닐까 생각한다. 파라미터로 받거나, 결과로 반환되거나, 다른 방식으로 코드 사이에서 공유된 컬렉션을 항상 불변 컬렉션으로 취급한다면, 가변 컬렉션이 불변 컬렉션을 확장하도록 타입 시스템을 설계하는 것이 상당히 안전하다. 여기서 '<strong>상당히</strong>'라는 말은 '<strong>완전히</strong>'가 아니라 '<strong>대부분</strong>'이라는 뜻이다. 어쨌든 이 경우 얻을 수 있는 이익이 비용보다 훨씬 더 크다.
+<hr/>
+덩컨 맥그레거, 냇 프라이스, 자바에서 코틀린으로, 오현석 역, (서울: 한빛미디어), 105p. </br>
+ㄴ 볼드체로 표기된 텍스트는 인용서의 저자가 강조한 부분입니다.
 </blockquote>
 
 </br>
 
-그러니 클래스 안에서만 가변적인 데이터를 다루고, 이를 밖으로 내보낼 때에는 Immutable한 형태로 변경할 필요가 많은 경우에 존재하는데요. Property의 Getter(Accessor) 메서드의 경우에는, Customize한다 해도 그것의 Return Type을 변경할 수는 없으므로, 캡슐을 구성할 새로운 규칙이 필요합니다. 이러한 규칙을 Kotlin에서는 <a href="https://kotlinlang.org/docs/properties.html#backing-properties"><strong>Backing Property Pattern</strong></a>으로 정의합니다. 
+Side Effect를 막기 위해 **공유된 컬렉션을 변경하지 말아야 합니다.**
+</br>
+그러니 Kotlin으로 Class를 작성할 때에는, 그 내부에서만 가변적인 Data Structure를 다루고, 이를 밖으로 내보낼 때에는 Immutable한 형태로 변경할 필요가 있습니다. Property의 Getter(Accessor) 메서드는, <u>Customize한다 해도 그것의 Return Type까지 변경할 수는 없으므로</u>, 우리에게는 캡슐을 구성할 새로운 규칙이 필요합니다. 이를 Kotlin에서는 <a href="https://kotlinlang.org/docs/properties.html#backing-properties"><strong>Backing Property Pattern</strong></a>으로 정의합니다. 
 
+<p align="left" style="background-color: rgba(168, 168, 168, 0.1); padding: 1.5rem;">
+    <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/17711044-9a74-4e51-814b-fcca2d95aead" width="80%"></br>
+    변경 가능한 Collection의 접근 제한자를 <code class="language-text">private</code>으로 설정하고, 외부에서 접근 가능한 property를 <code class="language-text">val</code>로 선언해 둔 방식입니다. </br> 여기서, 같은 데이터를 가리키는데도 불구하고, 필연적으로 생성되는 Boilerplate(<b>A Backing Property</b>)는 일종의 '캡슐화의 부작용'입니다.
+</p>
 
+</br>
+
+Kotlin의 Mission은 분명 <a href="https://www.youtube.com/live/c4f4SCEYA5Q?si=uH1F2FqANY7e8kMd&t=1232"><b>"Boilerplate를 제거하는 것(To get rid of boilerplate)"</b></a>이었습니다. 그들의 사명이 이런 곳에서도 예외를 발생시킬 수 없기에, 커뮤니티는 새로운 방식을 고안해 냅니다. **바로 감춰져 있던 Field를 밖으로 내보이는 것입니다.** 그렇게 Boilerplate가 사라진 새로운 코드는 Property의 두 가지 측면을 '**내보이게**' 되는데요. 
+
+<blockquote>
+    <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/bb17111a-dcc1-48a5-a564-a33142869e88" width="80%">
+    <ol>
+    1. ( <a href="https://github.com/Kotlin/KEEP/blob/explicit-backing-fields-re/proposals/explicit-backing-fields.md#expose-read-only-supertype">KEEP 문서</a>의 설명처럼) <strong>읽기 전용(Read-Only)인 Data Structure</strong> 만을 밖에 노출시킨다. 
+    </br>
+    2. 클래스 <u> 외부로 Expose되는 타입</u>과, 클래스 <u>내부에서 다루어지는 (대부분의 경우 Modifiable한) <strong>Data Structure나 Type</strong></u>을 병기한다.
+    </ol>
+</blockquote>
+
+</br>
+
+<strong>1번</strong>의 경우, 영어로는 Expose라는 표현이 적확할 것입니다. 클래스 내부에서 Mutable하게 다루어지던 Data Structure를 읽기 전용으로 밖에(Ex)-위치시키는(Pose) 것이니까요. </br>
+
+<strong>2번</strong>의 경우, 프로퍼티의 Field가 클래스 내부에서 "**어떤 타입으로 존재**"하는지 명시하는 것입니다. 이는 하나의 프로퍼티가 동시에 두 가지 타입, 즉 Read-Only 타입과 Modifiable한 타입으로 선언될 수 있도록 합니다. (이를 명시적으로 표현하지 않는다면, Class 내부에서 다뤄지는 Field의 타입과 Expose되는 타입이 다르다는 사실을 컴파일러가 확인할 방법은 존재하지 않습니다.)
+
+<blockquote style="padding: 1.5rem; 1rem;">
+With this new syntax, you can <strong><u>explicitly declare the type and the value</u></strong> of the private backing field for your public property. No more boilerplate.</br>
+Most of the design and the actual implementation for this new feature is already there. </br>
+It's just waiting to be released shortly after Kotlin 2.0.
+<hr/>
+이 새로운 문법을 통해, Public한 Property가 가진 Private한 Backing Field의 값과 타입을 명시적으로 선언할 수 있게 되었습니다. 더 이상의 Bolierplate는 없습니다. </br>
+새 기능에 대한 디자인과 실제 구현은 마무리 단계에 있습니다.  </br>
+<strong>이는 Kotlin 2.0의 첫 릴리즈 직후 공개될 예정입니다.</strong>
+<hr/>
+<a href="https://www.youtube.com/live/c4f4SCEYA5Q?si=ppAwayqAEwHG4QeI&t=1244"><strong>Kotlin Conf'23 컨퍼런스 키노트에서 </strong></a> - Roman Elizarov
+
+</blockquote>
+
+</br>
+
+**작지만, 큰 도움을 주는 기능(small yet very helpful feature).** </br>
+객체지향 프로그래밍과 캡슐화에 있어 Kotlin 생태계의 새로운 표준이 될 날이 얼마 남지 않았습니다.
 
 
 

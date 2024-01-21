@@ -35,7 +35,7 @@ thumbnail: './kotlin_conf23.png'
 한 언어의 미래에 대해 논하려면, 먼저 과거와 현재를 알아야겠지요. 
 우선 Kotlin FAQ(Frequently Asked Questions) 페이지에 언급된, '[**Kotlin이 무엇이냐**](https://kotlinlang.org/docs/faq.html#what-is-kotlin)'라는 질문에 대한 답을 살펴보도록 하겠습니다.
 
-<blockquote>
+<blockquote style="padding: 1.5rem;">
 Kotlin is an open-source statically typed programming language that targets the JVM, Android, JavaScript, Wasm, and Native. <br/>
 It's developed by JetBrains. <br/>
 The project started in 2010 and was open source from very early on. <br/>
@@ -68,6 +68,7 @@ Jetbrains 사에 의해 개발되었으며, Kotlin 프로젝트는 2010년에 <a
 
 </br>
 
+
 프로그래밍 세계에서 바인딩은 간단하게 ['**호출과 본문의 연결(Association of method call to the method body)**'](https://beginnersbook.com/2013/04/java-static-dynamic-binding/)이라고 정의할 수 있습니다. (원래는 '묶다'라는 의미로 널리 알려져 있지요.) Kotlin이라는 언어에서 정적 바인딩을 선호한다는 것은 크게 두 가지 의미를 지닙니다.
 
 1. 기본적으로 Class는 상속을 지원하지 않습니다. Overriding도 마찬가지입니다. 
@@ -92,7 +93,7 @@ Jetbrains 사에 의해 개발되었으며, Kotlin 프로젝트는 2010년에 <a
 먼저, Kotlin은 Java와 <u>**100% 상호 호환**</u>됩니다. 거대한 Java 생태계를 흡수할 수 있다는 사실 하나만으로, 이 언어가 가진 무한한 '가능성'을 보여줍니다. (이게 가능한 이유는, JVM이나 Android를 타겟으로 했을 때, Kotlin은 일차적으로 자바 바이트코드(`.class`)로 컴파일되기 때문입니다.) 
 
  
-그 밖에도, Javascript, Native(MacOS, iOS, Windows, Linux, Android NDK를 지원하며, 코틀린 코드를 네이티브 바이너리로 바로 바꿔야 하는 경우 사용), WebAssembly(아직 시험 단계)를 위한 컴파일러를 각각 제공합니다. 단순히 Android Native나 Spring를 이용한 Backend 개발에서 Java라는 언어의 역할을 대체하는 것 이상을 바라보고 있다고 생각하셔도 좋을 것 같습니다. 웹 애플리케이션이나 데이터 사이언스, 임베디드 분야에서도 다른 언어의 지위를 넘보고 싶다는 의도가 다분하니 말이죠. (궁금하신 분들은 [**Kotlin PlayGround**](https://play.kotlinlang.org/)에서 직접 여러 환경을 체험보시는 것도 좋습니다.)
+그 밖에도, Javascript, Native(MacOS, iOS, Windows, Linux, Android NDK를 지원하며, 코틀린 코드를 네이티브 바이너리로 바로 바꿔야 하는 경우 사용), WebAssembly(아직 시험 단계)를 위한 컴파일러를 각각 제공합니다. 단순히 Android Native나 Spring를 이용한 Backend 개발에서 Java라는 언어의 역할을 대체하는 것 이상을 바라보고 있다고 생각하셔도 좋을 것 같습니다. 웹 애플리케이션이나 데이터 사이언스, 임베디드 분야에서도 다른 언어의 지위를 넘보고 싶다는 의도가 다분하니 말이죠. (궁금하신 독자 분들은 [**Kotlin PlayGround**](https://play.kotlinlang.org/)에서 직접 여러 환경을 체험보시는 것도 좋습니다.)
 
 </br>
 
@@ -291,6 +292,7 @@ Kotlin으로 코드를 작성하면 얻을 수 있는 이점은 Class를 구성�
 </tr>
 </table>
 
+<br/>
 
 기본적으로 Class를 생성할 때 필요한 Boilerplate Code(찍어내듯이 매번 생성해야 하는 코드)가 Kotlin에서는 눈에 띄게 줄어들었습니다. 하지만, 조금 더 나아가, 한 번 더 마법을 써 볼까요?
 
@@ -304,7 +306,11 @@ data class Developer(
 
  ```
 
+ <br/>
+
 이번에는, 그나마 남아있던 메서드(`equals`, `hashCode`)마저 사라졌습니다. `class` 앞에 `data`를 붙이면, Kotlin Compiler가 사용자가 작성하지 않은 `equals`, `hashCode`, `toString`, `copy`. `componentN` 메서드를 대신 생성해 줍니다. 
+
+<br/>
 
 물론 `data class`는 일반 Class와 1:1 대응 관계에 있는 것은 아닙니다. 몇 가지 한계가 있는데요, 간단하게만 이야기해 보자면, ([Data Classes | Kotlin Documentation](https://kotlinlang.org/docs/data-classes.html) 참고)
 
@@ -314,6 +320,8 @@ data class Developer(
 1. `abstract`, `sealed`, `inner`, `open`을 앞에 붙일 수 없습니다. 
 2. Primary Constructor는 최소 1개 이상의 프로퍼티를 가져야 합니다.
 3. `val` 또는 `var`로 선언해야 합니다.
+
+</br>
 
 위 가정을 충족하지 않는 상황 말고도, `data class`를 사용하지 말아야 하는 경우가 존재하는데요. (기본적으로 캡슐화(Encapsulation)을 지원하지 않기 때문입니다.) 적절히 사용한다면, 생산성 향상에 이만한 툴도 없습니다. (여담으로,  Android Native에서 Model Class 작성 시 매우 편리합니다.) 
 
@@ -325,31 +333,36 @@ data class Developer(
 
 #### Safety
 
-> 
-> 반대로 코틀린은 널을 포용한다. <br/>
-> 선택성을 표준 라이브러리 대신 타입 시스템의 일부로 넣는다는 말은 <br/>
-> 코틀린 코드 기반(codebase)가 없음을 뜻하는 값을 일관성 있게 다룰 수 있다는 뜻이다, <br/>
-> (그러나) 코틀린의 널 처리는 완벽하지는 않다.
-> 
-> 덩컨 맥그레거, 냇 프라이스, <i>자바에서 코틀린으로</i>, 오현석 역, (서울: 한빛미디어), 62p.
->
+<blockquote style="padding:1rem;">
+반대로 코틀린은 널을 포용한다. <br/>
+선택성을 표준 라이브러리 대신 타입 시스템의 일부로 넣는다는 말은 <br/>
+코틀린 코드 기반(codebase)가 없음을 뜻하는 값을 일관성 있게 다룰 수 있다는 뜻이다, <br/>
+(그러나) 코틀린의 널 처리는 완벽하지는 않다.
+<hr/> 
+덩컨 맥그레거, 냇 프라이스, <i>자바에서 코틀린으로</i>, 오현석 역, (서울: 한빛미디어), 62p.
+</blockquote>
 
-Kotlin에서 안전성(Safety)이라 하면, 십중팔구 'Null Safety'를 이야기하는 것입니다.'Type-Safety'를 지원하는 정적 타입의 언어는 Kotlin을 제외하고라도 이미 많이 존재하기 때문입니다. 그러니 타입에 대한 내용은 앞에서 바인딩(Binding)에 대해 언급하며 짚어보았으니, 여기에서는 Null이라는 '타입 시스템의 일부'에 대해 더 자세히 살펴보겠습니다. 
+</br>
 
-[공식 문서](https://kotlinlang.org/docs/null-safety.html#nullable-types-and-non-nullable-types)에서도 구현의 의도를 비교적 명확히 했습니다.
+엔터프라이즈(Enterprise)단위의 프로젝트에 있어, Kotlin을 도입하려는 시도에 가장 명확하게 뒷받침되는 요소라 하면 **안전성**이 될 것입니다. 안전한 프로그래밍 언어란, 개발자로 하여금 오류 가능성을 낮추는 프로그램을 개발할 수 있게 하는 환경을 제공하는 언어입니다. 여기에서는 Kotlin의 안전함을 대표하는 사례 하나를 설명하고자 합니다. 바로 '**Null Safety**'입니다. Null이 <i>어떤 방식으로 타입 시스템의 일부로 포함되었는지</i> 살펴볼게요.
+  
+</br>
 
->  Kotlin's type system is aimed at eliminating the danger of null references, also known as [The Billion Dollar Mistake](https://en.wikipedia.org/wiki/Null_pointer#History). </br>
-> One of the most common pitfalls in many programming languages, including Java, 
-> is that accessing a member of a null reference will result in a null reference exception. </br>
-> In Java this would be the equivalent of a `NullPointerException`, or an ***NPE*** for short. </br>
->
-> </br>
->
-> Kotlin의 타입 시스템은, ‘***백만 불짜리 실수***’로 흔히 언급되는 널 참조의 위험을 없애는 데 초점을 맞추어 개발되었습니다. </br>
-> Java를 포함해, 수많은 프로그래밍 언어가 가진 함정은, </br>
-> 널 참조의 멤버에 접근하는 시도 자체가 “null reference exception”으로 이어진다는 것입니다. </br>
-> 이를 Java에서는 `NullPointerException` 으로 취급하며, 짧게 ***NPE***라고 부르기도 합니다.
->
+[공식 문서](https://kotlinlang.org/docs/null-safety.html#nullable-types-and-non-nullable-types)를 살펴보면, 이러한 구현의 의도를 명확히 했습니다.
+
+<blockquote style="padding: 1.5rem;">
+Kotlin's type system is aimed at eliminating the danger of null references, also known as <a href="https://en.wikipedia.org/wiki/Null_pointer#History">The Billion Dollar Mistake</a>. </br>
+One of the most common pitfalls in many programming languages, including Java, 
+is that accessing a member of a null reference will result in a null reference exception. </br>
+In Java this would be the equivalent of a <code class="language-text">NullPointerException</code>, or an <strong>NPE</strong> for short. </br>
+<hr style="margin: 1rem 0"/>
+Kotlin의 타입 시스템은, ‘<strong>백만 불짜리 실수</strong>’로 흔히 언급되는 널 참조의 위험을 없애는 데 초점을 맞추어 개발되었습니다. </br>
+Java를 포함해, 수많은 프로그래밍 언어가 가진 함정은, </br>
+널 참조의 멤버에 접근하는 시도 자체가 “null reference exception”으로 이어진다는 것입니다. </br>
+이를 Java에서는 <code class="language-text">NullPointerException</code> 으로 취급하며, 짧게 <strong>NPE</strong>라고 부르기도 합니다.
+</blockquote>
+
+</br>
 
 **"그래서 우리는 Null을 타입으로 만들기로 했어요."** </br>
 가 핵심 논지입니다. 정확히는 Kotlin Type System이 참조(Reference)의 방식을 크게 두 가지로 분류한 것입니다. `null`을 포함할 수 있는 참조(nullable reference)과 그렇지 않은 참조(non-nullable reference)가 그것입니다. 간단한 예시를 살펴 보죠. 
@@ -514,15 +527,17 @@ List is empty.
 
 언제나 그랬듯이, [공식 문서](https://kotlinlang.org/docs/coroutines-basics.html#your-first-coroutine)로부터 우리의 이야기는 출발합니다.
 
-> A coroutine is an instance of a suspendable computation. </br>
-> It is conceptually similar to a thread, in the sense that it takes a block of code to run that works concurrently with the rest of the code. </br>
-> However, a coroutine is not bound to any particular thread. </br>
-> It may suspend its execution in one thread and resume in another one. </br>
-> </br>
->  코루틴은 **<u>Suspendable Computation</u>** 의 인스턴스입니다. </br>
->  일정한 블록의 코드를 가져다, 나머지 코드와 병렬적으로 실행토록 한다는 컨셉 자체는 스레드와 유사합니다. </br>
-> 하지만 코루틴은 어떠한 특정 스레드에도 (1:1로 대응되어) 바인딩되지 않습니다. </br>
-> 이는 (특정 코루틴이) 하나의 스레드에서 실행을 잠시 멈추었다가, 다른 스레드에서 재개될 수도 있다는 것입니다.
+<blockquote style="padding: 1.5rem;">
+A coroutine is an instance of a suspendable computation. </br>
+It is conceptually similar to a thread, in the sense that it takes a block of code to run that works concurrently with the rest of the code. </br>
+However, a coroutine is not bound to any particular thread. </br>
+It may suspend its execution in one thread and resume in another one. </br>
+<hr style="margin: 1rem 0"/>
+코루틴은 <strong><u>Suspendable Computation</u></strong> 의 인스턴스입니다. </br>
+일정한 블록의 코드를 가져다, 나머지 코드와 병렬적으로 실행토록 한다는 컨셉 자체는 스레드와 유사합니다. </br>
+하지만 코루틴은 어떠한 특정 스레드에도 (1:1로 대응되어) 바인딩되지 않습니다. </br>
+이는 (특정 코루틴이) 하나의 스레드에서 실행을 잠시 멈추었다가, 다른 스레드에서 재개될 수도 있다는 것입니다.
+</blockquote>
 
 </br>
 <h5> 첫 번째 질문. 여기서 Suspendable Computation이라는 게 무엇을 의미하나요? </h5>
@@ -551,7 +566,7 @@ public fun CoroutineScope.launch(
 
 `CoroutineScope.launch`의 파라미터 중 `block`은 주어진 CoroutineScope에서 실행될 `Coroutine Code`를 의미합니다. 즉, `launch()`는 `suspend fun`인 코드의 **block** 으로부터 Coroutine을 생성하는 함수라는 것입니다.
 
-그러니 '코루틴이 Suspendable Computation의 인스턴스이다'를 다시 이야기하면, Class가 인스턴스를 찍어내듯 Supendable function은 Coroutine을 (`launch()`나 `async()`와 같은 Coroutine Builder를 통해) 생성한다는 이야기입니다. 
+그러니 '코루틴이 Suspendable Computation의 인스턴스이다'를 다르게 말하면, Class가 인스턴스를 찍어내듯 Supendable function은 Coroutine을 (`launch()`나 `async()`와 같은 Coroutine Builder를 통해) 생성한다는 이야기입니다. 
 
 </br>
 <h5> 두 번째 질문. Suspendable function은 정확히 코루틴에서 어떤 역할을 하고 있나요? </h5>
@@ -564,12 +579,14 @@ public fun CoroutineScope.launch(
         When the computation is ready to be continued, it is returned to a thread (not necessarily the same one).</br>
         Computation이 동작을 재개할 준비를 마치면, 스레드로 복귀합니다. (복귀하기 전 스레드와 같은 필요는 없습니다.)  
     </i>
-    </br>
+    <hr/>
+    이미지 및 텍스트 출처: <a href="https://kotlinlang.org/docs/coroutines-and-channels.html#starting-a-new-coroutine">Kotlin Docs: Coroutines and channels - tutorial</a>
 </blockquote>
 
-> 이미지 및 텍스트 출처: [Kotlin Docs: Coroutines and channels - tutorial](https://kotlinlang.org/docs/coroutines-and-channels.html#starting-a-new-coroutine)
 
-위 그림은 코루틴이 스레드 위에서 주로 어떤 동작을 수행하는지 알기 쉽게 알려주는 도식입니다. 사실은 혼란을 가중시킬 수 있는 그림이기도 한데요. 정의(Definition)를 저 멀리 눈에 보이지 않는 곳에 두고, 도형이 움직이는 것만 보자 하면 <i>"코루틴이 suspendable한 function을 생성하는 것인가?"</i>라고 오해할 가능성도 다분하기 때문입니다. (사실은 그 **반대**라는 건 앞에서 언급했습니다.) 정확히는 **"코루틴 안에서만 suspendable한 function을 실행할 수 있는 것"** 입니다. (그리고 `suspend fun` 안에서 다른 `suspend fun`을 실행할 수 있습니다. 전자나 후자 모두 코루틴 안에서 실행되는 것이기 때문입니다.) 이를 다시 이야기하면, 일반적인 function에 <u>코루틴의 실행을 정지하는 역할</u>이 부여되었다고 보아도 무방합니다. 
+</br>
+
+위 그림은 코루틴이 스레드 위에서 주로 어떤 동작을 수행하는지 알기 쉽게 알려주는 도식입니다. 사실은 혼란을 가중시킬 수 있는 그림이기도 한데요. 정의(Definition)를 저 멀리 눈에 보이지 않는 곳에 두고, 도형이 움직이는 것만 보자 하면 <i>"코루틴이 suspendable한 function을 생성하는 것인가?"</i>라고 오해할 가능성도 다분하기 때문입니다. (사실은 그 **반대**라는 건 앞에서 언급했습니다.) 정확히는 **"코루틴 안에서만 suspendable한 function을 실행할 수 있는 것"** 입니다. (그리고 `suspend fun` 안에서 다른 `suspend fun`을 실행할 수 있습니다. 전자나 후자 모두 코루틴 안에서 실행되는 것이기 때문입니다.) 즉 이는, 일반적인 function에 <u>코루틴의 실행을 정지하는 역할</u>이 부여되었다고 보아도 무방합니다. 
 
 </br>
 
@@ -577,13 +594,25 @@ public fun CoroutineScope.launch(
 
 > 이 단락은 [[Suhwan Jee: Kotlin Coroutine의 Structured Concurrency 구현 상세]](https://suhwan.dev/2022/01/21/Kotlin-coroutine-structured-concurrency/)에게 많은 빚을 지고 있습니다. 언급되는 코드와 도식은 위 포스트의 자료를 편집한 것임을 밝힙니다.
 
+</br>
+
 기본적으로 코루틴은 CoroutineScope 안에서만 생성될 수 있습니다. 이를 멋지게 표현하면, **Scoped Execution**을 지원한다고 하는데요. CoroutineScope는 (Scope 안에서 생성된) 코루틴을 언제 시작할지, 멈출지, 재개할지 결정합니다. (즉 `launch()`나 `async()`와 같은 Builder를 CoroutineScope 안에서만 쓸 수 있다는 것입니다.) 굳이 Scope 안에서의 사용을 강제하는 이유에는 크게 두 가지가 있습니다.
 
+
+<blockquote style="padding: 1.5rem;">
+
 1. **코루틴의 Grouping을 가능하게 합니다.** </br>
-   => 이는 Scope가 Cancel되면, Scope 안에서 시작되었던 코루틴은 모두 Cancel된다는 것입니다. </br>
-   => 특정 코루틴이 더 이상 불필요한 경우, 이는 리소스의 낭비를 막는 효과를 낳습니다.
+&nbsp;&nbsp;&nbsp;&nbsp;<strong>=></strong> 이는 Scope가 Cancel되면, Scope 안에서 시작되었던 코루틴은 모두 Cancel된다는 것입니다. </br>
+&nbsp;&nbsp;&nbsp;&nbsp;<strong>=></strong> 특정 코루틴이 더 이상 불필요한 경우, 이는 리소스의 낭비를 막는 효과를 낳습니다. </br>
+
 2. **Coroutine Scope는 코루틴이 실행되는 Context를 정의하는 데 도움을 줍니다.**
-- 출처: [5 Common Kotlin Coroutines interview questions](https://medium.com/@theAndroidDeveloper/5-common-kotlin-coroutines-interview-questions-f084d098f51d)
+
+<hr/>
+
+출처: [5 Common Kotlin Coroutines interview questions](https://medium.com/@theAndroidDeveloper/5-common-kotlin-coroutines-interview-questions-f084d098f51d)
+
+</blockquote>
+
 
 </br>
 
@@ -618,19 +647,27 @@ fun doConcurrentJob
 
 **Structured Concurrency** 를 지원하기 위해, 코루틴은 트리 구조의 형태로 작성되어 있습니다. 즉, 부모-자식(parent-child) 관계를 지니고 있다는 의미입니다. 위에서는 **Grouping**이라는 개념으로 뭉뚱그려 설명했지만, 정확히는 트리 형태를 갖추고 있다고 이야기하는 것이 맞습니다. 또한 Context를 정의하는 데 도움이 된다는 것도, 결국 자식 코루틴이 자신의 Context를 정의하는 데 부모 코루틴의 Context를 가져오기 때문입니다. (간단하게, `myContext` **=**  `this` **+** `parentContext`, 이런 식으로 말이지요.) 이와 같은 구현은 다음과 같은 것들을 가능하게 합니다. 
 
-1. Structured concurrency ensures that they are not lost and do not leak. An outer scope cannot complete until all its children coroutines complete. </br>
-   <i> 구조적 병렬성은 코루틴이 누수되거나 손실되지 않을 것임을 보장합니다. <b>외부 Scope는 모든 자식 Scope의 작업이 끝날 때까지 (생명 주기를) 완결하지 않습니다.</b></i> </br>
-2. Structured concurrency also ensures that any errors in the code are properly reported and are never lost.</br>
-   <i> 또한 코드 상의 모든 에러가 누락 없이 정확하게 보고될 것임을 보장합니다. </i>
 
-- 출처: [Coroutines-Basics | Kotlin Documentation](https://kotlinlang.org/docs/coroutines-basics.html#structured-concurrency)
+<blockquote style="padding: 1.5rem;">
+
+1. Structured concurrency ensures that they are not lost and do not leak. An outer scope cannot complete until all its children coroutines complete. </br>
+&nbsp;&nbsp;<i> 구조적 병렬성은 코루틴이 누수되거나 손실되지 않을 것임을 보장합니다. <b>외부 Scope는 모든 자식 Scope의 작업이 끝날 때까지 (생명 주기를) 완결하지 않습니다.</b></i> </br>
+
+2. Structured concurrency also ensures that any errors in the code are properly reported and are never lost.</br>
+&nbsp;&nbsp;<i> 또한 코드 상의 모든 에러가 누락 없이 정확하게 보고될 것임을 보장합니다. </i>
+
+<hr style="margin: 1rem 0"/>
+
+출처: [Coroutines-Basics | Kotlin Documentation](https://kotlinlang.org/docs/coroutines-basics.html#structured-concurrency)
+
+</blockquote>
 
 </br>
 
 코루틴을 사용해 코드를 작성하는 관점에서, 위의 이야기를 풀어서 이야기하면, </br>
  <u>(<b>1.</b>) 부모 Coroutine이 어떤 이유로든 취소되면, 모든 자식 Coroutine은 취소됩니다.</u> </br>
 또한, </br>
-<u>(<b>2.</b> 명시적으로 취소를 하지 않는 한) 자식 Coroutine이 Exception을 던지면, 부모 Coroutine으로 Exception이 전달되어 parent를 취소시킵니다. </u>
+<u>(<b>2.</b>) (명시적으로 취소를 하지 않는 한) 자식 Coroutine이 Exception을 던지면, 부모 Coroutine으로 Exception이 전달되어 parent를 취소시킵니다. </u>
 
 </br>
 
@@ -640,22 +677,26 @@ fun doConcurrentJob
 
 #### Object-oriented or Functional
 
-> <u>객체 지향 프로그래밍</u>은 메시지를 객체에 보내서 문제를 해결하는 기술이다. </br>
-> `myString`의 길이를 알고 싶은가? 그 객체에 `myString.length()`라고 메시지를 보내라. </br>
-> 콘솔에 문자열을 출력하고 싶은가? 문자열을 메시지에 넣고 콘솔을 표현하는 객체에 `System.out.println(myString)`처럼 출력을 요청하라. </br>
-> 고전적인 객체 지향 언어에서는 클래스에 메서드를 정의해서 객체가 메시지에 반응하는 방법을 정의한다.
->
-> (중략)
->
-> 반대로 <u>함수형 프로그래밍</u>에서는 값을 사용해 함수를 호출함으로써 문제를 해결한다. </br>
-> `myString`의 길이를 알고 싶으면 `length(myString)`처럼 함수에 값을 넘긴다. </br>
-> 콘솔에 문자열을 출력할 때는 `println(myString)`을 호출하고, </br>
-> 다른 장치에 문자열을 출력하고 싶다면 `println(myString, System.err)` 같이 원하는 장치를 함수에 전달해야 한다. </br>
-> 함수는 타입 **위에** 정의되지 않고, 함수의 파라미터와 결과가 타입을 **소유**한다.
->
-> </br>
->
-> 덩컨 맥그레거, 냇 프라이스, 자바에서 코틀린으로, 오현석 역, (서울: 한빛미디어), 177-8p.
+<blockquote style="padding: 1.5rem">
+
+<u>객체 지향 프로그래밍</u>은 메시지를 객체에 보내서 문제를 해결하는 기술이다. </br>
+`myString`의 길이를 알고 싶은가? 그 객체에 `myString.length()`라고 메시지를 보내라. </br>
+콘솔에 문자열을 출력하고 싶은가? 문자열을 메시지에 넣고 콘솔을 표현하는 객체에 `System.out.println(myString)`처럼 출력을 요청하라. </br>
+고전적인 객체 지향 언어에서는 클래스에 메서드를 정의해서 객체가 메시지에 반응하는 방법을 정의한다.
+
+(중략)
+
+반대로 <u>함수형 프로그래밍</u>에서는 값을 사용해 함수를 호출함으로써 문제를 해결한다. </br>
+`myString`의 길이를 알고 싶으면 `length(myString)`처럼 함수에 값을 넘긴다. </br>
+콘솔에 문자열을 출력할 때는 `println(myString)`을 호출하고, </br>
+다른 장치에 문자열을 출력하고 싶다면 `println(myString, System.err)` 같이 원하는 장치를 함수에 전달해야 한다. </br>
+함수는 타입 **위에** 정의되지 않고, 함수의 파라미터와 결과가 타입을 **소유**한다.
+
+<hr style="margin: 1rem 0" />
+덩컨 맥그레거, 냇 프라이스, 자바에서 코틀린으로, 오현석 역, (서울: 한빛미디어), 177-8p.
+
+</blockquote>
+
 
 </br>
 
@@ -691,8 +732,8 @@ public final static PrintStream out = null;
 
 그런데 Kotlin의 `println()`은 조금 다른 방식으로 정의되어 있습니다. (일부러) Java와의 접점을 없애기 위해, Native가 타겟인 경우의 Console Source를 가져와 보았습니다. 함께 보시죠.
 
-<blockquote>
-<b>🗃️ Github Repo: JetBrains/kotlin - </b> </br>
+<blockquote style="padding: 1.2rem;">
+<strong>🗃️ Github Repo: JetBrains/kotlin - </strong> </br>
 <a href="https://github.com/JetBrains/kotlin/blob/7a7d392b3470b38d42f80c896b7270678d0f95c3/kotlin-native/runtime/src/main/kotlin/kotlin/io/Console.kt#L23" target="blank" rel="nofollow"> kotlin-native/runtime/src/main/kotlin/kotlin/io/Console.kt</a>
 
 ```Kotlin
@@ -739,27 +780,37 @@ Kotlin은 `println()`과 같은 경우처럼,  함수(그리고 프로퍼티와 
 
 또한 Kotlin은 함수를 First-Class Citizen(일급 시민)으로 취급합니다. 이는 생태계 안의 고차 함수(Higher-Order Function)와 중첩 함수(Nested Function)의 존재를 저절로 일깨워줍니다.
 
-> Kotlin functions are [first-class](https://en.wikipedia.org/wiki/First-class_function), </br>
-> which means they can be stored in variables and data structures, </br>
-> and can be passed as arguments to and returned from other [higher-order functions](https://en.wikipedia.org/wiki/First-class_function). </br>
-> You can perform any operations on functions that are possible for other non-function values.
->
-> Kotlin 함수는 일급 객체입니다. </br>
-> 이는 (함수가) 변수에 할당하거나 자료구조에 저장될 수 있으며, (함수나 객체의) 인자로 전달되거나, 다른 고차 함수의 리턴값이 될 수 있다는 뜻입니다.</br>
-> 함수가 아닌 값들을 가지고 했던 어떤 작업이든 (함수를 핸들링하며) 가능합니다.
-> 
-> </br>
-> 
-> To facilitate this, Kotlin, as a statically typed programming language, </br>
-> uses a family of [function types](https://kotlinlang.org/docs/lambdas.html#function-types) to represent functions, </br>
-> and provides a set of specialized language constructs, such as [lambda expressions](https://kotlinlang.org/docs/lambdas.html#lambda-expressions-and-anonymous-functions).
->
-> 이를 용이하게 처리하기 위해, 정적 타입 프로그래밍 언어인 Kotlin은, </br>
-> 함수를 표현하기 위해 함수 타입을 사용하고, 람다 표현식과 같은 특수한 구조를 제공합니다.
-> 
-> </br>
-> 
-> 출처: [Higher-Order functions and lambdas | Kotlin Documentation](https://kotlinlang.org/docs/lambdas.html)
+<blockquote style="padding: 1.5rem;">
+
+<blockquote>
+
+Kotlin functions are [first-class](https://en.wikipedia.org/wiki/First-class_function), </br>
+which means they can be stored in variables and data structures, </br>
+and can be passed as arguments to and returned from other [higher-order functions](https://en.wikipedia.org/wiki/First-class_function). </br>
+You can perform any operations on functions that are possible for other non-function values.
+
+</blockquote>
+
+Kotlin 함수는 일급 객체입니다. </br>
+이는 (함수가) 변수에 할당하거나 자료구조에 저장될 수 있으며, (함수나 객체의) 인자로 전달되거나, 다른 고차 함수의 리턴값이 될 수 있다는 뜻입니다.</br>
+함수가 아닌 값들을 가지고 했던 어떤 작업이든 (함수를 핸들링하며) 가능합니다.
+
+<blockquote>
+
+To facilitate this, Kotlin, as a statically typed programming language, </br>
+uses a family of [function types](https://kotlinlang.org/docs/lambdas.html#function-types) to represent functions, </br>
+and provides a set of specialized language constructs, such as [lambda expressions](https://kotlinlang.org/docs/lambdas.html#lambda-expressions-and-anonymous-functions).
+
+</blockquote>
+이를 용이하게 처리하기 위해, 정적 타입 프로그래밍 언어인 Kotlin은, </br>
+함수를 표현하기 위해 함수 타입을 사용하고, 람다 표현식과 같은 특수한 구조를 제공합니다. 
+
+<hr/>
+
+출처: [Higher-Order functions and lambdas | Kotlin Documentation](https://kotlinlang.org/docs/lambdas.html)
+
+</blockquote>
+
 
 </br>
 
@@ -776,12 +827,13 @@ ___
 긴 항해 끝에 이 글이 다다른 결론입니다. </br>
 Kotlin은 위의 두 가치를 기반으로 두고 개발되었고, 지금도 그러하다는 것을요. 
 
-<blockquote>
+<blockquote style="padding: 1.5rem;">
 여기에 '간결함'이라는 친구가 왜 이름을 올리지 못했냐며 의아해할 독자 분들을 위해 </br>
 짤막하게(?) 설명을 덧붙이려 합니다. 정확히 이야기하자면 이 분은 자리를 빼앗긴 것이 아닙니다. </br>
 그는 안정성의 일부로 그의 몫을 다하고 있지요. 코드의 간결함은 흔히 생산성과 직결되기 쉬운데, </br>
 '코드를 더욱 빠르게 작성할 수 있다'라는 사실과는 더욱 밀접합니다. </br>
 (이를 프로그래밍 언어론<i>Programming Langauge Theory</i> 에서는 'Writablilty'라고 합니다.) </br>
+</br>
 하지만 우리는 다른 측면의 '생산성'에 눈을 돌릴 필요가 있습니다. </br>
 많은 개발자분들이 공감하시겠지만,
 코드는 처음 작성하는 시간보다 이를 고치는 데 </br>
@@ -790,6 +842,7 @@ Kotlin은 위의 두 가치를 기반으로 두고 개발되었고, 지금도 �
 우리에게 필연적인 실수들을 '코드를 되짚는 지금'에 이르러서라도 발견하게끔 하기 때문이죠. </br>
 이를 언어가 가진 '<b>디버깅 안정성</b> <i>Stability for Debugging</i>'이라 부를 수 있겠네요. </br>
 (엄밀하게는 'Readability'라고 합니다.)</br>
+</br>
 이 글에서는 주로 Kotlin의 Codebase가 가진 안정성에 대해서만 이야기했지만, </br>
 프로그래밍 언어의 안정성에는, 이러한 측면도 포함되어야 한다고 생각합니다. </br>
 <b>(즉, 하나의 프로그래밍 언어가 '간결하다'라고 이야기하려면 Writability와 Readability에서 모두 높은 평가를 받아야 한다는 것입니다. )</b> </br>
@@ -806,16 +859,23 @@ Kotlin은 위의 두 가치를 기반으로 두고 개발되었고, 지금도 �
 앞에서 언급한 특성들 중, **Null-Safety**(널 안전성)와 **Structured Concurrency**(구조적 병렬성)가 Kotlin의 안정성(여기서는 Reliability)을 지탱합니다. 그 이유를, [ChatGPT](https://chat.openai.com/)가 작성해준 프로그래밍 언어의 **신뢰성에 "기여하는" 요소**를 한 조각씩 분해하며 찾아 보도록 하겠습니다.
 </br>
 
-> Key factors that contribute to the **reliability** of a programming language include: </br>
-> 프로그래밍 언어의 **"신뢰성"** 을 높이는 요소들은 다음과 같습니다:
+<blockquote style="padding: 1rem;">
 
+Key factors that contribute to the **reliability** of a programming language include: </br>
+프로그래밍 언어의 **"신뢰성"** 을 높이는 요소들은 다음과 같습니다:
 
-1. > <u><strong style="background-color: palegreen;">Type System</strong></u>: The type system of a programming language determines how it handles data types and type checking. Strong, statically typed languages can catch many errors at compile time, leading to more reliable code. </br></br>
-    > => **타입 시스템**: 프로그래밍 언어의 타입 시스템은 데이터 타입을 어떻게 구성하고, 이에 대한 점검을 어떻게 수행할 것인지 결정합니다. 강 타입, 정적 타입 언어들은 컴파일 시에 많은 오류를 잡아낼 수 있으므로, (약 타입, 동적 타입의 지원하는 언어들에 비해) 더 '신뢰 가능한' 코드를 작성하는 데 유리합니다. </br>
+</blockquote>
+
+1. <blockquote style="padding:1.5rem"> <u><strong style="background-color: palegreen;">Type System</strong></u>: The type system of a programming language determines how it handles data types and type checking. Strong, statically typed languages can catch many errors at compile time, leading to more reliable code. </br></br>
+    => <strong>타입 시스템</strong>: 프로그래밍 언어의 타입 시스템은 데이터 타입을 어떻게 구성하고, 이에 대한 점검을 어떻게 수행할 것인지 결정합니다. 강 타입, 정적 타입 언어들은 컴파일 시에 많은 오류를 잡아낼 수 있으므로, (약 타입, 동적 타입의 지원하는 언어들에 비해) 더 '신뢰 가능한' 코드를 작성하는 데 유리합니다. </br>
+
+    </blockquote>
 2. Error Handling
 3. Memory Management
-4. > <u><strong style="background-color: palegreen;">Concurrency Support</strong></u>: In multi-threaded or concurrent applications, the language's support for managing threads and synchronizing access to shared resources affects reliability. Languages with built-in support for concurrency and synchronization mechanisms can help developers avoid [race conditions](https://en.wikipedia.org/wiki/Race_condition) and other issues.</br></br>
-   > => **병렬성 지원**: 멀티 스레드를 사용하거나 병렬적인 기능을 지원하는 애플리케이션의 경우, 언어 차원의 지원은 "신뢰성"에 큰 영향을 끼칩니다. 병렬성과 동기화 메커니즘을 내재한 언어는 (개발자들이) Race Condition 등의 이슈를 피하는 데 도움을 줍니다.
+4. <blockquote style="padding:1.5rem"><u><strong style="background-color: palegreen;">Concurrency Support</strong></u>: In multi-threaded or concurrent applications, the language's support for managing threads and synchronizing access to shared resources affects reliability. Languages with built-in support for concurrency and synchronization mechanisms can help developers avoid [race conditions](https://en.wikipedia.org/wiki/Race_condition) and other issues.</br></br>
+   => <strong>병렬성 지원</strong>: 멀티 스레드를 사용하거나 병렬적인 기능을 지원하는 애플리케이션의 경우, 언어 차원의 지원은 "신뢰성"에 큰 영향을 끼칩니다. 병렬성과 동기화 메커니즘을 내재한 언어는 (개발자들이) Race Condition 등의 이슈를 피하는 데 도움을 줍니다.
+
+   </blockquote>
 5. <u><strong style="background-color: palegreen;">Standard Library</strong></u>
 6. Tooling and Ecosystem
 7. Testing and Debugging Support
@@ -880,7 +940,7 @@ Kotlin은 위의 두 가치를 기반으로 두고 개발되었고, 지금도 �
 </br>
 이제 앞에서 언급한 내용들을 정리하면, 
 
-<blockquote>
+<blockquote style="padding: 1.5rem;">
     <p align="left">
         <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/bc4133d6-e58e-4bf0-b3b4-8394a27423a8" width="50%">
     </p>
@@ -938,7 +998,7 @@ Kotlin은 위의 두 가치를 기반으로 두고 개발되었고, 지금도 �
 <h5>Target: Kotlin을 어떻게 컴파일할 것인가</h5>
 
 <p align="left">
-    <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/40c41566-1cf2-4947-a79c-69cc731e2a69" width="70%">
+    <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/40c41566-1cf2-4947-a79c-69cc731e2a69" width="60%">
 </p>
 
 Kotlin 컴파일러는 크게 네 가지 타겟(Target)을 가집니다. JVM(Java Virtual Machine), JavaScript, WebAssembly, 그리고 Native가 그것입니다. 
@@ -970,8 +1030,8 @@ Native의 경우, 이름이 말해주듯, Kotlin 코드는 Virtual Machine을 �
 
 
 <p align="center" style="background-color:rgba(184, 184, 184, 0.1);">
-    <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/722edc21-2401-4654-8b6e-cefd0012301c" width="80%"> </br>
-    <img src="https://kotlinlang.org/docs/images/multiplatform-compose.svg" width="50%"></br>
+    <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/722edc21-2401-4654-8b6e-cefd0012301c" width="60%"> </br>
+    <img src="https://kotlinlang.org/docs/images/multiplatform-compose.svg" width="40%"></br>
     ⬆️ 이미지 출처: <a href="https://www.jetbrains.com/kotlin-multiplatform/"><b>Kotlin Multiplatform for Cross-Platform Development | Jetbrains </b></a>
 </p>
 
@@ -981,9 +1041,9 @@ Native의 경우, 이름이 말해주듯, Kotlin 코드는 Virtual Machine을 �
 
 두 번째는 **UI를 제외한 모든 구성 요소의 네이티브 의존성을 제거하는 것**입니다. 첫 번째 경우에서 플랫폼 간 공통 로직의 비율을 늘린 것인데요. MVVM 아키텍처를 적용한 모바일 애플리케이션을 예로 들어보죠. 
 
-<blockquote>
+<blockquote style="padding: 1.5rem">
     <p align="left" style="padding-left:1rem;">
-        <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/8cf9b039-82f4-4565-bebf-2261ab25125f" width="75%"/>
+        <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/8cf9b039-82f4-4565-bebf-2261ab25125f" width="65%"/>
     </p>
     </br>
     ⬆️ Data Layer에 해당하는 Model과 Presentation Layer에 해당하는 ViewModel은 Kotlin으로 작성하고, View는 각 네이티브 환경에 맞추어 작성한 경우의 다이어그램.
@@ -1062,10 +1122,10 @@ Native의 경우, 이름이 말해주듯, Kotlin 코드는 Virtual Machine을 �
 (Kotlin에 한정해서만) 이와 관련된 수치는 Kotlin Foundation이나 JetBrains가 공식적으로 발표한 바가 없고, 대신 Github 자체적으로 [Public DataSet](https://cloud.google.com/blog/topics/public-datasets/github-on-bigquery-analyze-all-the-open-source-code?hl=en)을 공개해 두었습니다. 그리고 이 방대한 데이터를 활용한 멋진 [오픈소스](https://github.com/madnight/githut)도 존재하죠. 아래 두 그래프는 2012년 2분기부터 2023년 3분기까지 분기별로 Kotlin과 Swift가 Github의 전체 Pull Request와 Issue에서 Primary Language로 사용된 비율의 추이를 나타낸 것<sup><a id="doc5" href="#ref5"><b>[5]</b></a></sup>입니다.
 
 <blockquote style="padding: 1rem">
-    <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/080b3658-5110-4af5-8158-e558eb22b585" width="100%">
+    <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/080b3658-5110-4af5-8158-e558eb22b585" width="100%"></br>
     ⬆️ Pull Request에서의 추이</br>
     <hr style="margin: 1rem 0"/>
-    <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/fc110328-fcb2-4bcc-90a7-cb795980aedd" width="100%">
+    <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/fc110328-fcb2-4bcc-90a7-cb795980aedd" width="100%"></br>
     ⬆️ Issues에서의 추이</br>
     <hr style="margin: 1rem 0"/>
     <hr style="border: 5px solid rgba(138, 96, 254, 1); display: inline; margin-left: 0.5rem;" width="5%"/> <strong>&nbsp;&nbsp;Kotlin</strong>&nbsp;&nbsp;
@@ -1078,7 +1138,7 @@ Native의 경우, 이름이 말해주듯, Kotlin 코드는 Virtual Machine을 �
 
 </br>
 
-이러한 역전은 사실 예견되었던 일이며, 당연한 결과입니다. 태생부터가 Swift는 Apple 생태계를 위해 만들어진 언어입니다. Kotlin은 문법과 그 용도 모두 **General-Purpose** 언어죠. (이 글에서 수백 번 강조한 내용이기도 합니다. 보통 Swift도, [General-purpose programming language - Wikipedia](https://en.wikipedia.org/wiki/General-purpose_programming_language)의 권위를 빌려도, 이에 포함되나, 단일 플랫폼 지향성이 짙다는 점에서 그 의미가 퇴색되는 부분이 있습니다.) One Million이라는 숫자를 넘어, Kotlin 생태계는 Java, JavaScript, Python과 같은 언어들과 경쟁해야 하는 숙제를 안고 있습니다. 앞에서 설명한 Kotlin이 가진 모든 요소들은 이러한 경쟁에서 사용될 무기들입니다. 그들의 여정을 앞으로도 더 지켜보시죠. 
+이러한 역전은 사실 예견되었던 일이며, 당연한 결과입니다. 태생부터가 Swift는 Apple 생태계를 위해 만들어진 언어입니다. Kotlin은 문법과 그 용도 모두 **General-Purpose** 언어죠. (이 글에서 수백 번 강조한 내용이기도 합니다. 보통 Swift도, [General-purpose programming language - Wikipedia](https://en.wikipedia.org/wiki/General-purpose_programming_language)의 권위를 빌려도, 이에 포함되나, 단일 플랫폼 지향성이 짙다는 점에서 그 의미가 퇴색되는 부분이 있습니다.) One Million이라는 숫자를 넘어, Kotlin 생태계는 Java, JavaScript, Python과 같은, 거대한 커뮤니티를 가진 언어들과 경쟁해야 하는 숙제를 안고 있습니다. 앞에서 설명한 Kotlin이 가진 모든 요소들은 이러한 경쟁에서 사용될 무기들입니다. 그들의 여정을 앞으로도 더 지켜보시죠. 
 
 </br>
 
@@ -1102,11 +1162,9 @@ Native의 경우, 이름이 말해주듯, Kotlin 코드는 Virtual Machine을 �
     </br>
 </blockquote>
 
+
+
 </br>
-
-
-
-
 
 
 <h5>Multiplatform</h5>
@@ -1127,7 +1185,7 @@ Native의 경우, 이름이 말해주듯, Kotlin 코드는 Virtual Machine을 �
 ---
 ### The Second Version
 
-사실상 컨퍼런스 키노트의 메인 챕터입니다. 앞으로의 Kotlin 코드베이스가 어떤 방향으로 돛을 돌릴 지 짐작할 수 있는 중요한 단서이기 때문이죠. 여기서는 조금 호흡을 길게 가져가도록 하겠습니다. 숨 들이쉬시고, `static` 키워드가 먼저 여러분을 찾아갑니다. 
+사실상 컨퍼런스 키노트의 메인 챕터입니다. 앞으로의 Kotlin 코드베이스가 어떤 방향으로 돛을 돌릴 지 짐작할 수 있는 중요한 단서이기 때문이죠. 여기서는 조금 호흡을 길게 가져가도록 하겠습니다. 숨 깊게 들이쉬시고, `static` 키워드가 먼저 여러분을 찾아갑니다. 
 
 </br>
 
@@ -1157,8 +1215,8 @@ fun main() {
 
 ```
 
-<blockquote>
-    <b><b style="background-color: rgba(184, 184, 184, 0.5)">*</b> Companion Object</b></br>
+<blockquote style="padding: 1.2rem;">
+    <strong><b style="background-color: rgba(184, 184, 184, 0.5)">*</b> Companion Object</strong></br>
 
 ---
 
@@ -1269,6 +1327,8 @@ class Color(val rgb: Int) {
 </tr>
 </table>
 
+</br>
+
 아직 `static` 멤버와 클래스, 인터페이스를 선언하는 방법마저 확실하지 않은 상황입니다. (키노트에서도 이를 어떻게 다룰 것인지 명확한 언급이 없었습니다. `static` 키워드를 정적인 확장 함수를 지원하는 데만 국소적으로 사용하지는 않을 것이니, 이는  Kotlin 생태계에 있어 확고한 분기점이 될 것임은 자명합니다.) </br> 
 KEEP 문서의 [해당 섹션](https://github.com/Kotlin/KEEP/blob/statics/proposals/statics.md#static-section-vs-static-modifier)을 간추려 보면, (불행인지 다행인지는 알 수 없지만) Section Syntax와 Modifier Syntax를 도입하는 데 있어 각각의 장단점은 명확합니다. 
 
@@ -1339,7 +1399,7 @@ fun main() {
 
 이게 다 `static`이 Static Extension의 기획에서 **Soft Keyword**로 작동하기 때문에 발생한 참사입니다. KEEP 문서에서도 일종의 'Deprecation Cycle'이 필요하다며 이러한 모호함을 온전히 제거하는 데 시간이 어느 정도 소요될 것임을 암시하고 있습니다. 
 
-<blockquote style="padding: 1.5rem 1rem;">
+<blockquote style="padding: 1.5rem;">
 The detailed design on how to deal with this ambiguity is TBD. Initially, the compiler will have to parse this code as it was parsed before, which will complicate the implementation of <code class="language-text">Example.static</code> construct as it'll require the extra resolution step. 
 </br></br>
 We'll need to develop some kind of deprecation cycle to remove this ambiguity. The reasonable approach to such deprecation is to deprecate all nested and inner classes, interfaces, and objects with the name <code class="language-text">static</code>.
@@ -1364,18 +1424,177 @@ We'll need to develop some kind of deprecation cycle to remove this ambiguity. T
 
 ```kotlin
 
-cmdArgs = listOf("-language-version", "2.0")
+val list1 = listOf(0, 1, 2, 3)
 
 
 ```
 
+Kotlin에서 Collection을 선언(Declare)하는 방법은 독특합니다. <strong>JavaScript, Python, Swift, Go</strong>와 같이 현대의 개발자들이 선호하는 언어들과도 결이 크게 다른 편이지요. 
+
+
+<p align="left" style="background-color:rgba(168, 168, 168, 0.1); padding:1.5rem;">
+    <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/0d2ebbbf-8f7e-4f4c-a57b-0876b983e9b6" width="60%"></br></br>
+    흔히 List(혹은 Array)를 선언한다 하면, Element들을 <strong><code class="language-text">[]</code>(Array Literal)</strong>로 감싼 뒤 특정 변수에 대입하는 방식이 일반적입니다. </br>
+    언어에 따라 Literal의 종류는 달라질 수 있겠지만, Kotlin처럼 Collection의 선언을 함수로만 강제하는 경우는 드문 편입니다. 
+</p>
+
+</br>
+
+이는 Collection Literal을 지원하지 않는 Java와의 상호 운용성이 <strong>간결함</strong>의 발목을 잡은 경우입니다. Kotlin 생태계의 Collection Literal 도입에 대한 [Jetbrains YouTrack](https://youtrack.jetbrains.com/issue/KT-43871/Collection-literals)의 발제를 보면 그 이유가 조금 더 또렷해지는데요. 모두 literal을 도입하는 데 있어 합리적인 동인(動因)이지만, '비효율적(Inefficent)'이라는 단어가 포함된 네 번째 요소가 눈에 띱니다.
+
+
+
+>>1. Collection literals are <strong>concise</strong>, which is important in data-heavy applications (esp. data-science). </br>
+>> &nbsp;&nbsp; => Collection Literal이 더 <strong>간결한</strong> 문법을 제공합니다. 이는 무거운 데이터를 다루는 애플리케이션에서 특히 중요합니다. <hr/>
+>>
+>>2. Collection literals are <strong>more regular</strong>. Without collection literals you'll have to remember, by heart, a separate function to create each type of collection. `listOf`, `mapOf`, `setOf`, `intArrayOf`, etc -> there's a lot of collection construction functions to navigate. </br>
+>> &nbsp;&nbsp; => Collection Literal이 <strong>더 널리</strong> 사용됩니다. Collection Literal이 없다면 각 컬렉션을 생성하는 데 필요한 함수를 외우고 있어야 합니다. <hr/>
+>>
+>> 3. Collection literals can play better with type-inference.</br> 
+>> &nbsp;&nbsp; => Collection Literal은 타입 추론과 손발이 더 잘 맞습니다. <hr/>
+>>
+>>4. Collection literals give Kotlin a chance to address <strong>the long-standing design problem</strong> <u>that the general creation of collections is currently inefficient in Kotlin due to the underlying use of <strong>varargs</strong>.</u> </br>
+>>&nbsp;&nbsp; => Collection Literal은 Kotlin의 헤묵은 디자인 문제인 <u><strong>varargs</strong> 사용으로 인한 컬렉션 생성의 비효율</u>을 해결할 수 있는 기회를 줍니다. 
+
+
+
+</br>
+
+Kotlin에서 컬렉션 생성을 도맡는 함수들의 Signature(Function Signature)를 보면, 공통된 부분이 존재하는데요. 바로 `vararg`라는 Modifier입니다. `vararg`는 Kotlin에서 함수를 선언할 때, 고정되어 있지 않은 수의 동일 타입 인자를 전달해야 하는 경우(To declare a parameter that accepts a variable number of arguments of the same type) 사용합니다.
+
+
+<blockquote style="padding: 1rem">
+🗃️ Github Repo: JetBrains/kotlin - </br>
+<a href="https://github.com/JetBrains/kotlin/blob/0938b46726b9c6938df309098316ce741815bb55/libraries/stdlib/src/kotlin/collections/Collections.kt#L78">kotlin/libraries/stdlib/src/kotlin/collections/Collections.kt</a>
+<img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/94613e71-b2e0-4739-860e-4134a00b5a6a" width="80%"/>
+
+</blockquote>
+
+</br>
+
+
+`listOf()`와 비슷하게, [`setOf()`](https://github.com/JetBrains/kotlin/blob/0938b46726b9c6938df309098316ce741815bb55/libraries/stdlib/src/kotlin/collections/Sets.kt#L44)도, [`mapOf()`](https://github.com/JetBrains/kotlin/blob/0938b46726b9c6938df309098316ce741815bb55/libraries/stdlib/src/kotlin/collections/Maps.kt#L54)도 **`vararg`** 를 이용해 주어진 요소들을 뭉쳐내어 컬렉션으로 리턴하는 함수들입니다. 겉으로만 보면, Java와의 상호 운용성도 만족하고 가변적인 크기의 컬렉션을 선언(Declare)하는 데 최적의 선택지인 듯 하지만, Discussion에서 Kotlin이라는 언어 디자인의 <strong>헤묵은 문제(long-standing problem)</strong>이라 언급한 데에는 두 가지 이유가 있습니다. (이 문제에 대해서는 [StackOverflow: Java's varargs performance](https://stackoverflow.com/questions/2426455/javas-varargs-performance)를 참고했습니다.)
+
+</br>
+
+<strong style="background-color:rgba(168, 168, 168, 0.1)">1. vararg는 타입이 아니라 문법적 설탕(Syntatic Sugar)입니다.</strong> 
+
+varargs는 기본적으로 메서드입니다. 동일한 타입을 가진 여러 인자(argument)를 받아, 그 개수를 파악한 뒤, 이를 Array로 변환하여 리턴하는 함수이지요. 이러한 사실을 알려주는 Indicator를 약간의 Deep-Dive를 통해 파악할 수 있습니다. 다음 Kotlin 코드를 JVM(Java Virtual Machine) 위에서 컴파일한다 가정해 봅시다. 간단한 함수를 Kotlin Compiler를 통해 Java ByteCode로 변환<sup><a id="doc6" href="#ref6">[6]</a></sup>해 보면,
+
+<hr style="margin: 1rem 0"/>
+<p align="left" style="padding: 0.5rem;">
+    <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/27148779-dc6d-4116-820c-7fe7c02a654e" width="80%"><br/>
+</p>
+<hr style="margin: 1rem 0"/>
+
+</br>
+
+ Kotlin의 `vararg` Modifier는 Java의 <strong style="background-color: rgba(254, 244, 69, 0.5)">Varargs</strong>로 치환됩니다. 또한 `ACC_VARARGS` 플래그는 `sum1()` 함수에 가변 개수의 파라미터를 전달됨을 확인합니다. 하지만 이 부분들만 체크해서는 Varargs가 문법적 설탕임을 단정짓기 어렵습니다. 결정적인 증거는 바로 <strong style="background-color: rgba(69, 199, 254, 0.5)">descriptor</strong>라는 부분에 존재합니다. 
+
+Java ByteCode를 이루는 Instruction 중, <strong style="background-color: rgba(69, 199, 254, 0.5)">descriptor</strong>는 메서드의 인자(Argument)와 Return Type을 나타냅니다. 소괄호 안쪽을 보면 인자의 타입과 수를 알 수 있는데요. 여기서는 <code class="language-text" style="color: white;">[I</code>가 이에 해당됩니다. 
+
+<blockquote style="padding: 1.5rem;">
+<p align="left">
+    <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/c4130b62-73a7-4cf6-bedb-30eea0a7744a" width="60%">
+</p>
+<hr style="margin: 1rem 0"/>
+Type Descriptor가 <code class="language-text" style="color: white;">[</code>로 시작하면, 이는 배열(Array)을 의미하는 것입니다. </br> 
+    그러니 <code class="language-text" style="color: white;">[I</code>는 Integer 타입의 요소를 가진 Array라는 의미입니다. </br>
+    결국, Kotlin에서의 <code class="language-text">vararg ns: Int</code>는 Java에서의 <code class="language-text">int...</code>와 동일하게 취급되고, JVM에서는 이를 <code class="language-text">int[]</code>와 동일하게 취급한다는 결론에 이르게 됩니다.
+</blockquote>
+
+</br>
+
+ 이 지점에서 발생하는 첫 번째 문제는, **함수의 인자(argument) 수가 불변할 때보다 varargs의 퍼포먼스가 현저히 떨어진다는 것입니다**. [해당 문제에 관한 Accepted Answer](https://stackoverflow.com/a/2426504)를 보면, 이에 대한 이론적 근거를 쉽게 찾을 수 있습니다. 그리고 느린 속도를 유인하는 아래의 사실은 곧바로 두 번째 문제와 직결됩니다. 
+
+<blockquote style="padding:1.5rem;">
+Static list of arguments is quite different from an array. </br>
+When you pass them that way, compiler reserves space for the references and populates them when the method is called.
+
+Varargs is an equivalent of array. To call such a method, it's necessary to create and populate array at run time. 
+<hr/>
+(메서드에) 정해진 수의 인자들을 전달하는 건 일반적인 배열(Array)을 전달하는 것과 크게 다릅니다.</br> 전자의 경우에는 (Compile Time에) Compiler가 (Method Signature에 있는 만큼의) 메모리를 확보하고 메서드가 사용될(called) 시 그 인자들을 활용합니다. </br>
+Varargs는 Array와 동일하게 작동합니다. varargs를 사용하면, Compiler는 <strong>Runtime에 메모리 확보 및 Array 생성까지 진행하게 됩니다.</strong>
+
+</blockquote>
+
+</br>
+
+<strong style="background-color:rgba(168, 168, 168, 0.1)">2. vararg는 Kotlin의 안정성을 해칩니다.</strong>
+
+본문 초반에 인용했던 문장을 다시 들고 왔습니다. Kotlin에서 정적 바인딩을 선호한다는 것을 풀어 이야기할 때, 앞에서는 클래스와 메서드에 대해서만 언급하였지만, 바인딩(Binding)은 사실 개념적 폭이 더 넓은 단어입니다. 메서드 ’<strong>호출과 본문의 연결(Association of method call to the method body)’</strong>이라고 개념적인 너비를 좁혀서 서술할 수도 있지만, <strong>특정 데이터를 일정한 메모리 주소에 묶어두는 것</strong>이라고도 설명할 수 있습니다. 
+
+<blockquote style="padding: 1.25rem 1rem">
+
+**| 코틀린은 동적 바인딩보다 정적 바인딩을 더 선호한다 |** <br/>
+ 
+코틀린은 타입 안전한, 합성적인 코딩 스타일을 장려한다. 확장 함수는 정적으로 바인딩된다. <br/>
+기본적으로 클래스는 확장될 수 없고, 메서드는 다형적이지 않다. <br/>
+여러분은 명시적으로 다형성과 상속을 활성화해야 한다.
+<hr/>
+덩컨 맥그레거, 냇 프라이스, <i>자바에서 코틀린으로</i>, 오현석 역, (서울: 한빛미디어), 30p.
+</blockquote>
+
+</br>
+
+정적인(Static) 바인딩은 컴파일 타임(Compile Time)에 이루어지는 바인딩이며, 동적인(Dynamic) 바인딩은 런타임(Rumtime)에 이루어지는 바인딩입니다. Kotlin의 언어 디자인은 컴파일 타임에 이루어지는 바인딩을 지향합니다. 객체지향 프로그래밍(OOP), 확장 함수(Extended Function)의 바인딩 방식은 이러한 경향성에서 기인할 뿐이지요. 이러한 디자인의 방향성에서, `varargs`라는 설탕의 탈을 쓴 'Dynamic Array'는 옥의 티라고 할 수 있겠습니다. **결국 Collection Literal의 도입은, 기타 요소에 의존하지 않는, Kotlin Collections의 정적인 바인딩을 향한 여정과 궤를 같이합니다.**  [Collection Literals이 충족해야 하는 조건](https://youtrack.jetbrains.com/issue/KT-43871#requirements)을 보면 이와 같은 의도를 더욱 명확하게 읽어낼 수 있습니다. 
+
+<blockquote style="padding: 1.5rem">
+<h5>Requirements</h5>
+<strong>6.  </strong> Construction of collection literals shall be efficient by design, without needing to have special optimization in compiler. The underlying mechanism shall not rely on <code class="language-text">vararg</code>s, <code class="language-text">Pair</code>s, or other wrappers.
+<hr style="margin: 1rem 0"/>
+    Collection Literal의 구현은 컴파일러 차원의 특정한 최적화를 필요로 하지 않고, 오로지 언어 디자인 차원에서만 다루어질 것입니다. 내부 메커니즘은 (지금처럼) <strong>varargs</strong>나 <strong>Pair(K,V)</strong> 등의 wrapper에 의존하지 않을 것입니다. 
+
+</blockquote>
+
+</br>
+
+Flexible한 Collection Literal을 구현하는 데에 있어, 산적한 과제들 중 하나를 소개하겠습니다. 사실상 위에서 소개한 여섯 번째 조건에 이어지는 이야기인데요. </br>
+(아래는 YouTrack Issue의 발제 중 [**Concerns**](https://youtrack.jetbrains.com/issue/KT-43871#concerns)를 번역하고 간추려 정리한 것입니다.)
+
+
+<blockquote style="padding: 1.5rem;">
+<h5>Concerns</h5>
+
+여기에, 데이터 클래스 하나와 함수 하나가 놓여있습니다.
+<p align="left">
+    <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/a68caf70-d0aa-453d-8bde-f5ec60f4fe21" width="60%">
+</p>
+
+`drawLine`이라는 API는, 지금까지의 Kotlin에서는, 이렇게 사용됩니다. 
+<p align="left">
+    <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/e237acb8-a4d6-4130-9948-eb779f42bbe3" width="60%">
+</p>
+
+(코드에 이런 표현을 덧불이는 게 적절한지의 여부에 대한 판단을 뒤로 제쳐두고,) 이 코드는 **장황합니다.**</br> 
+지금의 Kotlin에서 이 장황함을 해결할 수 있는 방법은, 원시 타입(Primitive Type)으로 인자(Argument)를 대체하는 Overloading 뿐이지만, 이는 API의 타입 안정성을 해칩니다. 그리고 새로운 함수를 구현해야 할 만큼의 보상, 그만큼의 간결함도 주어지지 않지요.
+
+<p align="left">
+    <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/ba69b729-0125-47ff-a47d-9ba0fb3621fd" width="60%">
+</p>
+
+만약 우리의 손에 <strong>"유연한 형태의 Collection Literal"</strong>이 들려 있다면, `Point`라는 Class를 Collection으로 가정하고 싶은 강렬한 유혹에 빠질 것입니다. `[]`라는 가상의 Collection Builder를 통해 새로이 함수를 호출해 보면, 다음과 같은 형태를 띱니다.
+
+<p align="left">
+    <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/fb93c3ce-128a-47fc-bf1a-183b30e286de" width="60%">
+</p>
+
+</blockquote>
+
+</br>
+
+객체에 Literal을 씌워 관리하는 대표적인 언어로 JavaScript가 있습니다. 이를 <strong>Object Literal</strong> 이라고 일컫는데요. JavaScript에서는 `{}`를 사용하는데, 아직 Kotlin에서는 <strong>Data Class의 인스턴스를 Literal을 씌워 관리하는 규칙</strong>이 정해지지 않았습니다.
+
+하나의 이슈가 가진 수많은 가지들을 여기서 다 다루지는 못하겠지만, 단 하나 분명한 건 간결함을 향한 Kotlin의 여정에는 아직 수많은 과제가 남아 있다는 사실입니다. 근본적인 Language Design의 재구성을 감내해야만 하는, 올해의 키노트에서 다룬 이슈는 하나 더 있습니다. 바로 Name-based Destructuring입니다.
+
+</br>
 
 <h5>Name-based destructuring</h5>
 
 우리는 필요에 따라 데이터를 결합하거나 해체합니다. 결합이 필요할 때는, 다양한 자료구조(Data Structure)를 통해 구조화(Structuring)시키고, 필요한 데이터를 그 속에서 탐색하거나 아예 분리시키는 일에 익숙합니다. Kotlin Standard Library에서는 우리가 많이 사용하는 자료구조를 Collection 인터페이스와 그 하위 Class들로 정리해 두었죠. (참고로, Map 인터페이스는 Collection 인터페이스와는 독립적으로 존재합니다. )
 
 <blockquote style="background-color:rgba(168, 168, 168, 0.1); padding:1rem;">
-    <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/323be8d9-a3c6-4282-bff4-ceed7284546e" width="50%">
+    <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/95e9aaa9-d59c-46fd-8faf-3524fea99503" width="50%">
     <hr/>⬆️ <a href="https://kotlinlang.org/docs/collections-overview.html#collection-types">Kotlin Documentation | Collections overview</a>의 내용을 재구성한 다이어그램.</br>
     &nbsp;&nbsp;&nbsp;&nbsp; Collection Interface들 사이의 상속 관계를 나타내었습니다.
 </p>
@@ -1384,7 +1603,7 @@ cmdArgs = listOf("-language-version", "2.0")
 
 List라는 Collection의 뿌리를 파고 들어가보면(격식을 갖추면, 인터페이스의 조상님을 찾아나서는 일이라고 할 수 있겠네요), `Iterable`이라는 인터페이스가 보입니다. 이 인터페이스를 상속받는 클래스들은 공통된 특성을 가지고 있습니다. [Iterable - Kotlin Programming Language](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-iterable/)의 내용을 가져와 보면, 
 
-<blockquote>
+<blockquote style="padding: 1.5rem;">
 
 ```kotlin
 
@@ -1402,7 +1621,7 @@ Classes that inherit from this interface can be represented as <b><u>a sequence 
 
 즉, 다른 언어에서의 경우와 마찬가지로, (Keynote에서의 말을 빌려) Collection은 기본적으로 **순서-지향적(positional)** 입니다. 그런데 Kotlin은 데이터들을 결합하는 방법으로, Collection을 제외하고, 조금은 특별한 형태의 클래스를 사용합니다. 앞에서 간결함(Kotlin is Concise)에 대해 설명하며 소개했던 `data class`의 존재입니다. 
 
-<blockquote style="background-color:rgba(168, 168, 168, 0.1)">
+<blockquote style="background-color:rgba(168, 168, 168, 0.1); padding:1.5rem;">
 
 ```kotlin
 
@@ -1413,7 +1632,8 @@ data class Person(
 
 
 ```
-이 친구는 구성 요소의 순서와 전혀 상관 없어 보입니다. (우리가 사용하는 '언어' 그리고 살아가는 문화권에 따라서 그 순서가 달라진다는 사실은 논외로 합시다.)
+이 친구는 구성 요소의 순서와 전혀 상관 없어 보입니다. </br>
+(우리가 사용하는 '언어' 그리고 살아가는 문화권에 따라서 그 순서가 달라진다는 사실은 논외로 합시다.)
 </blockquote>
 
 </br>
@@ -1456,7 +1676,7 @@ val (firstName, lastName) = person
 
 (이 글에서 자주 등장하는 언어인) Java에서 **필드(Field)** 라 하면, **클래스 안에 정의되는 변수(A variable declared inside a class)** 를 의미합니다. 그리고 ([JavaBeans의 작성 원칙](https://en.wikipedia.org/wiki/JavaBeans)을 충실히 따른다는 전제 하에) `static`이 아닌, 인스턴스 필드의 접근 제한자(Access Modifier)는 `private`으로 설정되어야 하지요. 그리고 Java에서는 getter와 setter(다른 말로는 Accessor와 Mutator 메서드)를 개발자가 임의로 작성함으로써, Field와 함께 하나의 Property를 구성합니다.
 
-<blockquote>
+<blockquote style="padding: 1.5rem;">
 <h5><a href="https://en.wikipedia.org/wiki/Property_(programming)">Property (programming)</a></h5>
 <p align="left">
     <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/95551917-d0fe-4293-b4fd-6383af41fbe6" width="80%">
@@ -1519,9 +1739,9 @@ Backing Field는 다음과 같은 경우에 생성됩니다. </br>
 
 또한 (Name-Based Destructing 파트에서 다루었듯이) Kotlin의 `Collection` Interface와 그 하위 Interface들은 <u>Mutable한 것과 Immutable한 것</u>, 두 가지의 형태를 가지고 있습니다(정확히는 Mutable한 클래스가 Immutable한 그것을 확장하는 구조입니다). 
 
-즉, 이러한 설계는, 온전히 그 데이터를 읽는 용도(Read-Only)로만 사용하는 경우와 그렇지 않은 경우를 엄격히 분리하여 Collection을 사용하라며, 개발자들에게 언어 차원에서 권장하는 것입니다. 이는 Kotlin 생태계의 리더들이 **가변 객체보다 불변 데이터를 취급하는 것을 선호**하는 데 기인합니다. 
+즉, 이러한 설계는, 온전히 그 데이터를 읽는 용도(Read-Only)로만 사용하는 경우와 그렇지 않은 경우를 엄격히 분리하여 Collection을 사용하라며, 개발자들에게 언어 차원에서 권장하는 것입니다. 이는 Kotlin 생태계의 리더(Leader)들이 **가변 객체보다 불변 데이터를 취급하는 것을 선호**하는 데 기인합니다. 
 
-<blockquote style="padding: 1.25rem 1rem">
+<blockquote style="padding:1.5rem">
 아마도 코틀린 설계자들은 이 책의 저자들처럼 앞에서 소개한 '공유된 컬렉션을 변경하지 말라'는 관습에 익숙해서가 아닐까 생각한다. 파라미터로 받거나, 결과로 반환되거나, 다른 방식으로 코드 사이에서 공유된 컬렉션을 항상 불변 컬렉션으로 취급한다면, 가변 컬렉션이 불변 컬렉션을 확장하도록 타입 시스템을 설계하는 것이 상당히 안전하다. 여기서 '<strong>상당히</strong>'라는 말은 '<strong>완전히</strong>'가 아니라 '<strong>대부분</strong>'이라는 뜻이다. 어쨌든 이 경우 얻을 수 있는 이익이 비용보다 훨씬 더 크다.
 <hr/>
 덩컨 맥그레거, 냇 프라이스, 자바에서 코틀린으로, 오현석 역, (서울: 한빛미디어), 105p. </br>
@@ -1530,7 +1750,7 @@ Backing Field는 다음과 같은 경우에 생성됩니다. </br>
 
 </br>
 
-Side Effect를 막기 위해 **공유된 컬렉션을 변경하지 말아야 합니다.**
+그리고 Side Effect를 막기 위해 **공유된 컬렉션을 변경하지 말아야 합니다.**
 </br>
 그러니 Kotlin으로 Class를 작성할 때에는, 그 내부에서만 가변적인 Data Structure를 다루고, 이를 밖으로 내보낼 때에는 Immutable한 형태로 변경할 필요가 있습니다. Property의 Getter(Accessor) 메서드는, <u>Customize한다 해도 그것의 Return Type까지 변경할 수는 없으므로</u>, 우리에게는 캡슐을 구성할 새로운 규칙이 필요합니다. 이를 Kotlin에서는 <a href="https://kotlinlang.org/docs/properties.html#backing-properties"><strong>Backing Property Pattern</strong></a>으로 정의합니다. 
 
@@ -1574,15 +1794,15 @@ It's just waiting to be released shortly after Kotlin 2.0.
 </br>
 
 **작지만, 큰 도움을 주는 기능(small yet very helpful feature).** </br>
-객체지향 프로그래밍과 캡슐화에 있어 Kotlin 생태계의 새로운 표준이 될 날이 얼마 남지 않았습니다.
+Explicit Field가 객체지향 개발과 캡슐화에 있어 Kotlin 생태계의 새로운 표준이 될 날이 얼마 남지 않았습니다.
 
 
 
 ---
 
-## 💬 Networking
+## ✍️ Wrap-Up
 
-___
+---
 
 ## 🧭 Reference
 
@@ -1607,4 +1827,8 @@ ___
         Beuke, F. (2023). GitHut 2.0: GitHub Language Statistics.</br>
         <a href="https://madnight.github.io/githut/#/pull_requests/2023/3/Kotlin,Swift">https://madnight.github.io/githut/#/pull_requests/2023/3/Kotlin,Swift</a></br>
         <a href="https://madnight.github.io/githut/#/issues/2023/3/Kotlin,Swift">https://madnight.github.io/githut/#/issues/2023/3/Kotlin,Swift</a>
+</br>
+</br>
+    <sup><a id="ref6" href="#doc6"><b>[6]</b></a></sup>
+        Ali Dehghani, <a href="https://www.baeldung.com/kotlin/varargs-spread-operator#bytecode-representation">"Varargs and Spread Operator in Kotlin"</a>, Baeldung Kotlin, last modified May 9, 2023.
 </ol>

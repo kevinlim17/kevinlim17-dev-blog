@@ -21,6 +21,10 @@ const MarkdownRenderer = styled.div`
     margin-left: 5vw;
     border: 0px;
     line-height: 2;
+
+    img {
+      width: 80%;
+    }
   }
 
   // Markdown Style

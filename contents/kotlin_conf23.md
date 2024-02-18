@@ -1,5 +1,5 @@
 ---
-date: '2023-09-02'
+date: '2024-02-01'
 title: "지금의 Kotlin 그리고 Kotlin Conf'2023"
 categories: ['Kotlin', 'Review']
 summary: '안드로이드 생초보의 첫 개발자 컨퍼런스'
@@ -782,7 +782,7 @@ Kotlin은 `println()`과 같은 경우처럼,  함수(그리고 프로퍼티와 
 
 <blockquote style="padding: 1.5rem;">
 
-<blockquote>
+<blockquote style="padding: 1.5rem;">
 
 Kotlin functions are [first-class](https://en.wikipedia.org/wiki/First-class_function), </br>
 which means they can be stored in variables and data structures, </br>
@@ -795,7 +795,7 @@ Kotlin 함수는 일급 객체입니다. </br>
 이는 (함수가) 변수에 할당하거나 자료구조에 저장될 수 있으며, (함수나 객체의) 인자로 전달되거나, 다른 고차 함수의 리턴값이 될 수 있다는 뜻입니다.</br>
 함수가 아닌 값들을 가지고 했던 어떤 작업이든 (함수를 핸들링하며) 가능합니다.
 
-<blockquote>
+<blockquote style="padding: 1.5rem;">
 
 To facilitate this, Kotlin, as a statically typed programming language, </br>
 uses a family of [function types](https://kotlinlang.org/docs/lambdas.html#function-types) to represent functions, </br>
@@ -872,7 +872,7 @@ Key factors that contribute to the **reliability** of a programming language inc
     </blockquote>
 2. Error Handling
 3. Memory Management
-4. <blockquote style="padding:1.5rem"><u><strong style="background-color: palegreen;">Concurrency Support</strong></u>: In multi-threaded or concurrent applications, the language's support for managing threads and synchronizing access to shared resources affects reliability. Languages with built-in support for concurrency and synchronization mechanisms can help developers avoid [race conditions](https://en.wikipedia.org/wiki/Race_condition) and other issues.</br></br>
+4. <blockquote style="padding:1.5rem"><u><strong style="background-color: palegreen;">Concurrency Support</strong></u>: In multi-threaded or concurrent applications, the language's support for managing threads and synchronizing access to shared resources affects reliability. Languages with built-in support for concurrency and synchronization mechanisms can help developers avoid <a href="https://en.wikipedia.org/wiki/Race_condition">race conditions</a> and other issues.</br></br>
    => <strong>병렬성 지원</strong>: 멀티 스레드를 사용하거나 병렬적인 기능을 지원하는 애플리케이션의 경우, 언어 차원의 지원은 "신뢰성"에 큰 영향을 끼칩니다. 병렬성과 동기화 메커니즘을 내재한 언어는 (개발자들이) Race Condition 등의 이슈를 피하는 데 도움을 줍니다.
 
    </blockquote>
@@ -892,9 +892,9 @@ Key factors that contribute to the **reliability** of a programming language inc
 
 또한 Structured Concurrency의 원칙에 따라 구현된 **코루틴**이라는 라이브러리는, Kotlin이 '동시 실행'에 있어 얼마나 강력한 역량을 가진 언어인지 실감케 합니다. 단순히 멀티 스레딩(Multi-Threading)과 비동기(asynchronous) 프로그래밍을 언어 차원에서 지원할 뿐 아니라, 코루틴은 이에 '구조화된' 안정성을 보탰습니다. 이게 가능했던 이유는, '누수 없는' 동시성 프로그래밍을 지향하는 개발자들이, 코루틴에 (아쉽게도 앞에서 언급하지 않았지만) **Python** `trio` 라이브러리의 [`nursery`](https://chsasank.com/concurrent-programming-trio-tutorial.html) 블록의 개념을 도입했기 때문입니다. 
 
-<blockquote>
-    <h5>여기서 Nursery가 무엇인가요? <sup><a id="doc1" href="#ref1">[1]</a></sup> </h5> 
-    <blockquote>
+<blockquote blockquote style="background-color: rgba(58, 119, 156, 0.06); padding: 1.5rem; border-top: 0.5px solid rgba(184, 184, 184, 0.5)">
+    <h5 style="background-color: transparent; font-weight: 800;">여기서 Nursery가 무엇인가요? <sup><a id="doc1" href="#ref1">[1]</a></sup> </h5> 
+    <blockquote style="padding: 1.5rem; background-color: rgba(168, 168, 168, 0.06);">
         <a href="https://vorpus.org/blog/notes-on-structured-concurrency-or-go-statement-considered-harmful/#nurseries-a-structured-replacement-for-go-statements"><h5>Nurseries: a structured replacement for go statements</h5></a>
         Here's the core idea: </br>
         every time our control splits into multiple concurrent paths, 
@@ -914,7 +914,7 @@ Key factors that contribute to the **reliability** of a programming language inc
         상단에 존재하는 하나의 화살표가 하단에서 하나의 화살표로 끝맺어 집니다. 이는 다익스트라(Edsger W. Dijkstra)의 <u>Black Box Rule</u>을 충족합니다.
     </blockquote>
     다익스트라는 그의 논문<sup><a id="doc2" href="#ref2">[2]</a></sup>에서 이렇게 언급합니다.
-    <blockquote>
+    <blockquote style="background-color: rgba(168, 168, 168, 0.06); padding: 1.5rem;">
     There is also an abstraction involved in naming an operation and using it on account of "what it does" while completely disregarding "how it works". 
     </br>
     <hr style="margin: 1rem 0"/>
@@ -986,7 +986,7 @@ Key factors that contribute to the **reliability** of a programming language inc
 
 
 **강조한 부분**을 제외한 세 가지 분야는, Java와의 100% 상호 운용성이 바탕에 있습니다. 안드로이드 네이티브 개발이나 Spring을 이용한 백엔드 개발은 원래 Java로 이루어진 것이었고, Jupyter나 Zeppelin을 이용한 Data Science에 대한 지원도, 기존에 존재하던 JVM 기반의 라이브러리를 바탕으로 출발한 것입니다.
-(Kotlin 전용으로 개발된 백엔드 프레임워크 [**Ktor**](https://ktor.io/docs/welcome.html)에 대해서는 조금 뒤에서 다뤄보겠습니다.) 
+(Kotlin 전용으로 개발된 백엔드 프레임워크 [**Ktor**](https://ktor.io/docs/welcome.html)에 대해서는 다른 포스트에서 다뤄보겠습니다.) 
 
 하지만 나머지 **두 분야**는 조금 다릅니다. JVM과는 무관하게, 오롯이 Kotlin 생태계에서 창발된 것들입니다. (모바일 뿐 아니라 데스크톱이나 웹을 포함하여) 다양한 플랫폼에서 동작하는 애플리케이션을 하나의 언어로 작성한다거나, 웹사이트를 JavaScript가 아닌 언어로 개발한다는 것, 그리고 전자와 후자의 '언어'가 같은 생태계를 지칭한다는 건, 조금 어색한 이야기로까지 들립니다.  
 
@@ -1150,29 +1150,179 @@ Native의 경우, 이름이 말해주듯, Kotlin 코드는 Virtual Machine을 �
 
 안드로이드와 Kotlin은 떼려야 뗄 수 없는 관계입니다. 개발자들이 Github에 남긴 흔적들이 증명하듯, Kotlin 커뮤니티가 성장하는 데에는 Android의 역할이 결정적이었습니다. 글쓴이도 Kotlin의 존재를 Android 개발을 배우다 접했고, [KotlinConf'23 - Keynote](https://youtu.be/c4f4SCEYA5Q)에서 JetBrains 사가 공개한 자료에 따르면 Kotlin 개발자의 66%는 안드로이드 네이티브 생태계에서 살아가는 사람들일 정도니까요.
 
-</br>
 
-
-<blockquote align="left">
+<blockquote align="left" style="padding: 1.5rem">
     <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/094f6255-ecce-4a49-98a2-8816cfdf99fc" width="75%"></br>
     <hr/></br>
     1. Android Native 개발자의 <b><u>97%</u></b>는 Kotlin 사용에 만족합니다.</br>
     2. 상위 1000개의 안드로이드 앱 중 <b><u>95%</u></b>는 Kotlin으로 쓰여져 있습니다. </br>
     3. 상위 1000개의 안드로이드 앱 중 <b><u>21%</u></b>의 UI는 <b>Jetpack Compose</b>로 작성되어 있습니다. </br>
-    </br>
 </blockquote>
-
-
 
 </br>
 
+구글이 안드로이드 애플리케이션 개발에서 Kotlin-First를 선언한 이후, 수많은 네이티브 프로젝트의 코드베이스(Codebase)가 다시 짜여지기 시작했습니다. 그렇지만 안드로이드의 총본산(總本山)에서 일종의 <strong>대원칙</strong>을 세웠다고 해서, 기존의 Java 생태계에 살던 개발자들이 그저 순순히 따라간 것일까요? 젊고 진취적인 이미지로 대변되는 개발자 집단은 사실 보수적인 면모도 지니고 있습니다. "이미 잘 작동하는 것처럼 보이는 코드"를 뜯어내는 작업은 절대 가벼운 결심에서 추동될 일이 아니기도 합니다.
 
-<h5>Multiplatform</h5>
+<blockquote style="padding: 1.5rem">
+왜 프로젝트에서 자바, 자바스크립트, C++가 아니라 코틀린을 사용하려고 하나요? </br>
+기업에서 진행하는 프로젝트에 코틀린을 사용하려고 한다면 작게는 팀원, 크게는 경영진까지도 설득할 수 있어야 할 것입니다. </br>
+이러한 설득에 가장 많이 활용되는 이유는 코틀린의 <strong>안정성</strong>(Safety)입니다. </br>
+코틀린은 다양한 설계 지원을 통해서 애플리케이션의 잠재적인 오류를 줄여 줍니다. </br>
+'애플리케이션이 갑자기 종료되는 상황', '한 시간 동안 쇼핑하며 장바구니에 넣은 제품들이 결제가 되지 않는 상황'등을 직접 마주하지 않아도, 안정성이 왜 중요한지는 쉽게 이해할 수 있을 것입니다. </br>
+<strong>크래쉬(crash)가 적으면 사용자와 개발자 모두에게 좋고, 상당한 비즈니스 가치를 제공합니다. </strong>
+<hr style="margin: 1rem 0"/>
+마르친 모스칼라, <i>이펙티브 코틀린</i>, 윤인성 역, (서울: 도서출판인사이트), p.30.
+</blockquote>
 
+</br>
+
+결국 <strong>안정성, 안정성, 안정성</strong>입니다. </br>
+필요한 건 언어의 안정성을 증명할 수치(figure)입니다. 네이티브 생태계에서 살아가는 개발자들로 하여금 Kotlin으로의 마이그레이션을 유도하기 위한 구글의 노력 중 한 가지를 살펴보겠습니다. 
+
+<blockquote style="padding: 1.5rem">
+<h5><strong><a href="https://android-developers.googleblog.com/2020/07/Google-home-reduces-crashes.html">Google Home reduces #1 cause of crashes by 33%</a></strong></h5>
 <p align="left">
-    <img src="https://blog.jetbrains.com/wp-content/uploads/2023/04/KC_keynote_2023_2650x1024.100.jpeg" width="70%">
+    <img src="https://1.bp.blogspot.com/-MHWfKy9RlMo/Xw9IxKKmklI/AAAAAAAAPPI/0qpwh_xchekGcmC81hR6XYp5xz_wi2TrQCLcBGAsYHQ/s1600/Google%2BHome%2Band%2BKotlin%2B.png" width="60%">
+</p>
+<blockquote style="padding: 1.2rem">
+<strong>"Efficacy and writing less code that does more is the ‘speed’ increase you can achieve with Kotlin.”</strong> </br>
+Kotlin을 사용할 때의 장점은 더 적은 코드와 효율성이 만들어내는 <strong>속도 향상</strong>입니다.
+<hr style="margin: 1rem 0"/>
+ - Jared Burrows, Software Engineer on Google Home
+</blockquote>
+
+</blockquote>
+
+</br>
+
+Google Home은 Google Nest를 포함한 IoT 가전제품을 조작하기 위한 애플리케이션입니다. 기능만 짧게 훑어 보아도 엄청난 코드량이 눈앞을 서성입니다. 당연히, 백만 줄이 넘어가는(over a million lines of code) 소스(Source)를 뒤집기란 쉬운 일이 아닙니다. 큰 **결심**이 필요한 일이지요. (지금은 그 비율이 훨씬 늘었겠지만,) Google Home 개발팀은 2020년 6월까지 전체 코드의 30%를 Kotlin으로 대체했습니다. `val`를 이용한 불변 데이터 관리, 스마트 캐스팅(Smart Casting), 코루틴(Coroutine), 그리고 수많은 [Jetpack 라이브러리](https://developer.android.com/jetpack)가 리팩터링(Refactoring) 전투에서 그들의 무기가 되었지요.
+
+당연히 2020년에 7월에 작성된 [위 글](https://android-developers.googleblog.com/2020/07/Google-home-reduces-crashes.html)에서는 '**30%**' 정도의 변화가 이끌어낸 결과에 대해서 다루고 있음에도, 그 내용은 사뭇 놀랍습니다. 구체적인 수치로 살펴보면 다음과 같습니다.
+
+<p align="left" style="margin: 1rem 0">
+    <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/c6ea3c08-71ed-4a73-bcbd-01773b15909a" width="90%">
 </p>
 
+
+<strong>먼저, <code class="language-text" style="color: white">kotlin-parcelize</code> 플러그인과 <code class="language-text" style="color: rgba(255, 110, 162, 1)">data class</code>를 이용해 코드량을 획기적으로 줄인 사례(80% 감소)가 주목할 만합니다.</strong> Kotlin의 간결함을 나타내는 사례로 [앞](#concise)에서  <code class="language-text" style="color: rgba(255, 110, 162, 1)">data class</code>를 언급했으니, 여기서는 안드로이드에 의존성을 가진 인터페이스에 대해서 잠깐 다뤄보겠습니다. Kotlin 생태계 전체를 포괄하는 이야기가 아니므로, 아래 초록 배경의 블록은 독자 분들의 필요에 따라 흘겨 읽으셔도 좋습니다. 
+
+</br>
+
+<blockquote style="background-color: rgba(0, 255, 109, 0.03); padding: 1.5rem; border-top: 0.5px solid rgba(184, 184, 184, 0.5)">
+    <h5 style="background-color:transparent; font-weight: 800;">직렬화 그리고 <code class="language-text">Parcelable</code></h5>
+    <blockquote style="background-color: rgba(168, 168, 168, 0.06); padding: 1.5rem;">
+    <h5 style="background-color: rgba(168, 168, 168, 0.06); font-weight: 800;"><a href="https://docs.oracle.com/javase/tutorial/jndi/objects/serial.html">Serializable Objects</a></h5>
+    To <strong>serialize</strong> an object means to convert its state to a byte stream so that the byte stream can be reverted back into a copy of the object. </br>
+    A Java object is serializable if its class or any of its superclasses implements either the <code class="language-text">java.io.Serializable</code> interface or its subinterface, <code class="language-text">java.io.Externalizable</code>.
+    <hr style="margin: 1.5rem 0"/>
+    객체를 <strong>직렬화</strong>한다는 건 해당 객체의 상태를 ByteStream으로 변환하여 그 ByteStream을 다시 객체의 복사본으로 되돌릴 수 있도록 하는 것을 의미합니다. </br>
+    Java 객체는 해당 클래스나 상위 클래스 중 하나가 <code class="language-text">java.io.Serializable</code> 인터페이스 또는 그 하위 인터페이스인 <code class="language-text">java.io.Externalizable</code>을 implement하는 경우 직렬화됩니다.
+    </blockquote>
+    </br>
+    직렬화(Serialize)는 하나의 프로세스에서 다른 프로세스로, Byte-Stream 형태로 객체를 내보내야 할 때 사용합니다. <strong style="color: rgba(52, 168, 82, 1)">Android</strong>에서도 화면 설계에서 프로세스 간 객체의 전달이 필요한 경우, 이에 따른 직렬화 메커니즘이 요구되며, 이러한 메커니즘을  <strong style="color: rgba(52, 168, 82, 1)">OS</strong> 의존적으로 구현한 것이 <code class="language-text" style="color: white">Parcelable</code> 객체입니다. 
+    </br>
+    <blockquote style="background-color: rgba(168, 168, 168, 0.06); padding: 1.5rem;">
+    <h5 style="background-color:rgba(168, 168, 168, 0.06); font-weight: 800;"><a href="https://developer.android.com/guide/components/activities/parcelables-and-bundles#kotlin">Parcelable and bundles</a></h5>
+    <strong><code class="language-text" style="color: white">Parcelable</code> and <code class="language-text" style="color: white">Bundle</code></strong> objects are intended to be used across process boundaries such as with <u>IPC/Binder transactions</u>, between activities with intents, and to store transient state across configuration changes.
+    <hr style="margin: 1rem 0"/>
+    <strong>Parcelable</strong>과 <strong>Bundle</strong> 객체는 IPC / Binder 트랜젝션과 같이 프로세스 경계를 넘나드는, Intent가 존재하는 여러 Activity 사이에서 사용되거나, Configuration 변경 중 일시적인 상태를 저장하기 위해 사용됩니다. 
+    </blockquote>
+    </br>
+    <code class="language-text" style="color: white">Bundle</code>이 간단한 값 데이터를 담아 Activity 사이를 오가는 것과는 다르게, Complex한 형태의 객체가 다른 프로세스로 전달되기 위해서는 해당 클래스에 <code class="language-text" style="color: white">Parcelable</code> Interface를 Implement해야 합니다. 그렇게 직렬화가 마무리되면, <strong style="color: rgba(52, 168, 82, 1)">OS</strong>는 <u>Binder 매커니즘</u>을 통해 프로세스 간 통신을 진행합니다. (그러한 통신이 애플리케이션 내에서 진행되든 밖으로 나아가게 되든 말이지요.)
+    </br></br>
+    <p align="left">
+        <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/a154124d-19a6-471f-8d5d-e4dee4d7e7ad" width="80%">
+    </p>
+    </br>
+    Activity 사이의 데이터 전달 뿐 아니라, IoT 기능을 지원하는 Google Home 애플리케이션의 특성상, (추측하건대) 외부의 서비스 서버(시스템 프로세스)를 활용해야 하는 경우가 많을 것입니다. (<code class="language-text" style="color: white">Serializable</code> Interface을 Implement해 명시적인 모든 작업을 Compiler에 떠넘기는 대신에, 수많은 <a href="https://developer.android.com/reference/android/os/Parcel">Parcel</a> 객체를 생성해야만 하지요.) </br>
+    여러 프로세스를 오가는 속도와 안정성을 위해, Android의 <code class="language-text" style="color: white">Parcelable</code> 인터페이스는 역직렬화(Deserialization)을 진행할 때의 Reflection을 없앤 대가로, 수많은 Bolierplate를 생성해 냈습니다. </br>
+    </br>
+    <blockquote style="background-color: rgba(168, 168, 168, 0.06); padding: 1.5rem;">
+    In such cases, the custom class should implement Parcelable, and provide the appropriate <code class="language-text" style="color: white">writeToParcel(android.os.Parcel, int)</code> method. </br>
+    It must also provide a non-null field called <code class="language-text" style="color: white">CREATOR</code> that implements the <code class="language-text" style="color: white">Parcelable.Creator</code> interface, whose <code class="language-text" style="color: white">createFromParcel()</code> method is used for converting the Parcel back to the current object.
+    <hr style="margin: 1.25rem 0"/>
+    (Complex한 형태의 객체가 프로세스를 오가는) 이러한 경우에는, 우리의 Custom Class는 <strong>Parcelable</strong> Interface를 implement해야 하며, 적절한 <strong>writeToParcel</strong> 메서드를 구현해야만 합니다.
+    또한 <strong>Parcelable.Creator</strong> Interface를 implement하는 null이 아닌 <strong>CREATOR</strong> 필드를 생성해야 하고, 여기에 존재해야 하는 <strong>createFromParcel</strong> 메서드는 Parcel 객체를 기존 객체로 변환하는 데 사용합니다. 
+    </blockquote>
+    </br>
+    <code class="language-text" style="color: white">@Parcelize</code> Annotation은 이러한 Bolierplate를 제거하는 데 기여했습니다. 그리고 간결한 문법을 제공하는 <code class="language-text" style="color: rgba(255, 110, 162, 1)">data class</code>와 결합하며 생산성도 덩달아 크게 증가했지요. 위와 같은 예시는, 직렬화가 필요하다면 <strong> Parcelable</strong> 인터페이스를 구현하도록, 그리고 간결함을 제공하는 플러그인을 사용하도록 유도하는, 결국은 Android 개발자들을 Kotlin 생태계로 끌어당기려는 노력의 일환이라고 할 수 있겠습니다.
+    </br>
+</blockquote>
+
+</br>
+
+<p align="left">
+    <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/69f305dd-b140-41f9-85ff-f03c48821942" width="80%">
+</p>
+</br>
+
+그리고 **NullPointerException의 감소입니다.** [위 포스트](https://android-developers.googleblog.com/2020/07/Google-home-reduces-crashes.html)에 따르면 Google Play Console에서 가장 흔한 Crash는 NPE인데요. Kotlin을 도입함으로써 사용자 경험을 근본적으로 개선할 기회를 얻은 것입니다. 
+
+이는 Kotlin이 "Potentially `null` variable"에 대해 엄격한 문법적 규칙을 적용하기 때문인데요(Nullable의 개념에 대해서는 [앞](#safety)에서 다루었으니 여기서는 촌음을 아끼기 위해 생략하겠습니다.) 
+
+Kotlin Compiler의 필터가 덧씌워지지 않은, 원래의 JVM에서는 어떤 방식으로 변수(variable)을 다룰까요?
+어떻게 변수를 다루길래 **백만 불짜리 실수**가 계속해서 발생하는 것인지, 그 근원을 잠깐 살펴보겠습니다.(아래 블록의 내용은 StackOverflow의 [What is a NullPointerException, and how do I fix it?](https://stackoverflow.com/questions/218384/what-is-a-nullpointerexception-and-how-do-i-fix-it)의 답변을 재구성한 것입니다.)
+
+<blockquote style="background-color: rgba(255, 80, 52, 0.02); padding: 1.5rem; border-top: 0.5px solid rgba(184, 184, 184, 0.5)">
+    <h5 style="background-color:transparent; font-weight: 800;"><a href="https://stackoverflow.com/a/218510">What is a NullPointerException, and how do I fix it?</a></h5>
+    Java 생태계에는 두 가지 타입의 변수가 있습니다.
+    <strong style="background-color: rgba(255, 80, 52, 0.3)">Primitive</strong>와 <strong style="background-color: rgba(58, 119, 156, 0.3)">Reference</strong>가 바로 그것이죠. </br>
+    흔히 번역된 투로 각각 원시 타입과 참조 타입이라 부르지요.
+    </br>
+    <p align="left">
+        <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/81d0568f-ac26-4942-8d90-5e48a78e700c" width="80%">
+    </p>
+    </br>
+    <strong style="background-color: rgba(255, 80, 52, 0.3)">Primitives</strong>는 <u>Data를 직접 담을 수 있는 변수</u>입니다. 이는 해당 Data를 직접적으로 다룰 수 있음을 의미(manipulate directly)합니다. Java에서는 <code class="language-text">int</code>, <code class="language-text">short</code>, <code class="language-text">long</code>, <code class="language-text">char</code>, <code class="language-text">byte</code>, <code class="language-text">double</code>, <code class="language-text">float</code>, <code class="language-text">boolean</code>의 8개의 타입이 이에 해당됩니다.  </br> 
+    <p align="left">
+        <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/7e5052f0-84f1-4a17-b29b-74df17ecf344" width="80%">
+    </p>
+    위의 코드는 컴파일 에러를 야기합니다. Primitive인 <code class="language-text">x</code>에 데이터를 할당하지 않은 채로, <code class="language-text">y</code>를 초기화하는 데 <code class="language-text">x</code>를 직접 활용하려고 했기 때문입니다. 모든 Primitive는 다루어지기 이전에 초기화되어야 합니다. (have to be initialized to a usable value before manipulated)
+    </br></br>
+    <strong style="background-color: rgba(58, 119, 156, 0.3)">References</strong>는 <u>객체(<code class="language-text">Object</code>)의 메모리 주소를 담는</u> 변수입니다. 객체를 '다루려면,' 일종의 <strong>Dereferencing</strong>이 필요합니다. <code class="language-text">.</code>을 이용해 Field나 Method에 접근하거나, <code class="language-text">[]</code>를 통해 Array를 인덱싱하는 등이 이에 해당됩니다.
+    <p align="left">
+        <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/b050b249-3cb8-4be2-b8b7-5a9d812027fe" width="80%">
+    </p>
+    References는 Primitives와 다르게, 초기화하지 않아도 특정한 값을 가집니다. 문제의 <code class="language-text">null</code>은 여기서 발생하는데요. Java 컴파일러는 할당이 이루어지지 않은 Reference에 자동으로 <code class="language-text">null</code>을 부여합니다. <strong>null</strong>은 기본적으로 변수가 어떤 메모리 주소도 가리키고 있지 않음을 의미합니다. 특정한 객체의 메모리 주소가 할당되지 않은 References를 <strong>Dereferencing</strong>할 때, 발생하는 Runtime Error가 바로 <code class="language-text" style="color: white">NullPointerException</code>인 것입니다. 
+
+</blockquote>
+
+</br>
+
+Kotlin은 Runtime에 이루어지던 null에 대한 접근을, Compile Time에 이루어지도록 설계되었습니다.
+이게 무슨 이야기인지는 [Codelab](https://developer.android.com/codelabs/basic-android-kotlin-compose-nullability)의 예시로 Null Safety의 탄탄한 내실을 조금 더 들여다 보며 살펴보겠습니다.
+
+<blockquote style="background-color: rgba(0, 255, 109, 0.03); padding: 1.5rem; border-top: 0.5px solid rgba(184, 184, 184, 0.5)">
+    <h5 style="background-color:transparent; font-weight: 800;">Use nullability in Kotlin: <a href="https://developer.android.com/codelabs/basic-android-kotlin-compose-nullability#2">Handle nullable variables</a></code></h5>
+    <h5>Part of "Access a property of a nullable variable"</h5>
+    <p align="left">
+        <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/31d05fb5-f3f8-4215-977d-84b5523282ea" width="75%" />
+    </p>
+    위 코드를 컴파일하면, 아래와 같은 결과가 나옵니다.
+    <blockquote style="padding: 1.5rem; background-color: transparent">
+        <p align="left">
+            <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/38388c5c-8874-4007-b333-349a8bb831d4" width="75%"/>
+        </p>
+        <code class="language-text">String?</code>과 같은 Nullable 객체에는 오직 <code class="language-text" style="color: white">?.</code>를 이용한 <strong>Safe Call</strong>이나 <code class="language-text" style="color: white">!!.</code>를 통한 <strong>Non-Null Assertion Call</strong>을 사용해서만 접근할 수 있습니다. 
+    </blockquote>
+    </br>
+    컴파일 에러는 말 그대로 코드를 컴파일할 수 없을 때 발생합니다. 즉, 문법적으로 올바르지 않은 코드를 작성해 생기는 참사지요. Null Safety를 위해 Kotlin은 엄격한 문법적 규칙(Syntatic Rule)을 적용합니다. 변수가 <code class="language-text">null</code>의 가능성을 가질 때 (정확히는 변수가 <strong>아무런 객체의 메모리 주소도 가리키고 있지 않을 가능성이 있을 때</strong>(When referencing nothing)), 접근 자체를 거부함으로써 "문법적 사고"를 미연에 방지합니다. </br>
+    </br>
+    이를 바꾸어 말하면, (Kotlin에는 Primitive Type이 존재하지 않으므로) 특정 변수의 멤버에 접근할 수 있다는 건, 그 변수는 <code class="language-text">null</code>의 값을 가질 수 없다는 의미입니다.
+    <blockquote style="padding: 1.5rem; background-color: transparent">
+     Due to the null safety nature of Kotlin, </br> 
+     such runtime errors are prevented because the Kotlin compiler forces a null check for nullable types.</br><strong>Null check</strong> refers to a process of checking whether a variable could be null before it's accessed and treated as a non-nullable type.
+     <hr />
+     Null Safety를 지원함으로써 </br>
+     이러한 Runtime Error는 예방됩니다. Kotlin 컴파일러가 Nullable 타입에 대한 <code class="language-text">null</code> 체크를 강제하기 때문인데요. </br> 
+     여기서 <strong>Null Check</strong>란 Nullable 변수에 접근하고 이를 Non-Nullable처럼 다루기 이전에 변수의 null 여부를 체크하는 프로세스를 의미합니다.
+    </blockquote>
+    
+</blockquote>
+
+</br>
+
+이렇게 Kotlin의 엄격한 실용주의적 설계 원칙은 Android에 결합되어 그 빛을 발합니다. 추후에 <strong>"Android 생태계는 왜 Kotlin을 선택했는가?"</strong>의 주제로 관련 내용을 좀 더 톺아보겠습니다. 이제 더욱 '숫자로운' 이야기를 다룰 시간입니다. 함께 가시죠.
 
 ---
 ### New Compiler
@@ -1447,14 +1597,14 @@ Kotlin에서 Collection을 선언(Declare)하는 방법은 독특합니다. <str
 >>1. Collection literals are <strong>concise</strong>, which is important in data-heavy applications (esp. data-science). </br>
 >> &nbsp;&nbsp; => Collection Literal이 더 <strong>간결한</strong> 문법을 제공합니다. 이는 무거운 데이터를 다루는 애플리케이션에서 특히 중요합니다. <hr/>
 >>
->>2. Collection literals are <strong>more regular</strong>. Without collection literals you'll have to remember, by heart, a separate function to create each type of collection. `listOf`, `mapOf`, `setOf`, `intArrayOf`, etc -> there's a lot of collection construction functions to navigate. </br>
+>>2. Collection literals are <strong>more regular</strong>. Without collection literals you'll have to remember, by heart, a separate function to create each type of collection. </br>`listOf`, `mapOf`, `setOf`, `intArrayOf`, etc -> there's a lot of collection construction functions to navigate. </br>
 >> &nbsp;&nbsp; => Collection Literal이 <strong>더 널리</strong> 사용됩니다. Collection Literal이 없다면 각 컬렉션을 생성하는 데 필요한 함수를 외우고 있어야 합니다. <hr/>
 >>
 >> 3. Collection literals can play better with type-inference.</br> 
 >> &nbsp;&nbsp; => Collection Literal은 타입 추론과 손발이 더 잘 맞습니다. <hr/>
 >>
 >>4. Collection literals give Kotlin a chance to address <strong>the long-standing design problem</strong> <u>that the general creation of collections is currently inefficient in Kotlin due to the underlying use of <strong>varargs</strong>.</u> </br>
->>&nbsp;&nbsp; => Collection Literal은 Kotlin의 헤묵은 디자인 문제인 <u><strong>varargs</strong> 사용으로 인한 컬렉션 생성의 비효율</u>을 해결할 수 있는 기회를 줍니다. 
+>>&nbsp;&nbsp; => Collection Literal은 Kotlin의 해묵은 디자인 문제인 <u><strong>varargs</strong> 사용으로 인한 컬렉션 생성의 비효율</u>을 해결할 수 있는 기회를 줍니다. 
 
 
 
@@ -1473,7 +1623,7 @@ Kotlin에서 컬렉션 생성을 도맡는 함수들의 Signature(Function Signa
 </br>
 
 
-`listOf()`와 비슷하게, [`setOf()`](https://github.com/JetBrains/kotlin/blob/0938b46726b9c6938df309098316ce741815bb55/libraries/stdlib/src/kotlin/collections/Sets.kt#L44)도, [`mapOf()`](https://github.com/JetBrains/kotlin/blob/0938b46726b9c6938df309098316ce741815bb55/libraries/stdlib/src/kotlin/collections/Maps.kt#L54)도 **`vararg`** 를 이용해 주어진 요소들을 뭉쳐내어 컬렉션으로 리턴하는 함수들입니다. 겉으로만 보면, Java와의 상호 운용성도 만족하고 가변적인 크기의 컬렉션을 선언(Declare)하는 데 최적의 선택지인 듯 하지만, Discussion에서 Kotlin이라는 언어 디자인의 <strong>헤묵은 문제(long-standing problem)</strong>이라 언급한 데에는 두 가지 이유가 있습니다. (이 문제에 대해서는 [StackOverflow: Java's varargs performance](https://stackoverflow.com/questions/2426455/javas-varargs-performance)를 참고했습니다.)
+`listOf()`와 비슷하게, [`setOf()`](https://github.com/JetBrains/kotlin/blob/0938b46726b9c6938df309098316ce741815bb55/libraries/stdlib/src/kotlin/collections/Sets.kt#L44)도, [`mapOf()`](https://github.com/JetBrains/kotlin/blob/0938b46726b9c6938df309098316ce741815bb55/libraries/stdlib/src/kotlin/collections/Maps.kt#L54)도 **`vararg`** 를 이용해 주어진 요소들을 뭉쳐내어 컬렉션으로 리턴하는 함수들입니다. 겉으로만 보면, Java와의 상호 운용성도 만족하고 가변적인 크기의 컬렉션을 선언(Declare)하는 데 최적의 선택지인 듯 하지만, Discussion에서 Kotlin이라는 언어 디자인의 <strong>해묵은 문제(long-standing problem)</strong>이라 언급한 데에는 두 가지 이유가 있습니다. (이 문제에 대해서는 [StackOverflow: Java's varargs performance](https://stackoverflow.com/questions/2426455/javas-varargs-performance)를 참고했습니다.)
 
 </br>
 
@@ -1765,10 +1915,10 @@ Kotlin의 Mission은 분명 <a href="https://www.youtube.com/live/c4f4SCEYA5Q?si
 
 <blockquote>
     <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/bb17111a-dcc1-48a5-a564-a33142869e88" width="80%">
-    <ol>
-    1. ( <a href="https://github.com/Kotlin/KEEP/blob/explicit-backing-fields-re/proposals/explicit-backing-fields.md#expose-read-only-supertype">KEEP 문서</a>의 설명처럼) <strong>읽기 전용(Read-Only)인 Data Structure</strong> 만을 밖에 노출시킨다. 
+    <ol style="margin: 0.25rem;">
+    1. &nbsp;( <a href="https://github.com/Kotlin/KEEP/blob/explicit-backing-fields-re/proposals/explicit-backing-fields.md#expose-read-only-supertype">KEEP 문서</a>의 설명처럼) <strong>읽기 전용(Read-Only)인 Data Structure</strong> 만을 밖에 노출시킨다. 
     </br>
-    2. 클래스 <u> 외부로 Expose되는 타입</u>과, 클래스 <u>내부에서 다루어지는 (대부분의 경우 Modifiable한) <strong>Data Structure나 Type</strong></u>을 병기한다.
+    2. &nbsp;클래스 <u> 외부로 Expose되는 타입</u>과, 클래스 <u>내부에서 다루어지는 (대부분의 경우 Modifiable한) <strong>Data Structure나 Type</strong></u>을 병기한다.
     </ol>
 </blockquote>
 
@@ -1782,11 +1932,11 @@ Kotlin의 Mission은 분명 <a href="https://www.youtube.com/live/c4f4SCEYA5Q?si
 With this new syntax, you can <strong><u>explicitly declare the type and the value</u></strong> of the private backing field for your public property. No more boilerplate.</br>
 Most of the design and the actual implementation for this new feature is already there. </br>
 It's just waiting to be released shortly after Kotlin 2.0.
-<hr/>
-이 새로운 문법을 통해, Public한 Property가 가진 Private한 Backing Field의 값과 타입을 명시적으로 선언할 수 있게 되었습니다. 더 이상의 Bolierplate는 없습니다. </br>
+<hr style="margin: 1rem 0;" />
+이 새로운 문법을 통해, Public한 Property가 가진 Private한 <u><strong>Backing Field의 값과 타입을 명시적으로 선언</strong></u>할 수 있게 되었습니다. 더 이상의 Bolierplate는 없습니다. </br>
 새 기능에 대한 디자인과 실제 구현은 마무리 단계에 있습니다.  </br>
 <strong>이는 Kotlin 2.0의 첫 릴리즈 직후 공개될 예정입니다.</strong>
-<hr/>
+<hr style="margin: 1rem 0;"/>
 <a href="https://www.youtube.com/live/c4f4SCEYA5Q?si=ppAwayqAEwHG4QeI&t=1244"><strong>Kotlin Conf'23 컨퍼런스 키노트에서 </strong></a> - Roman Elizarov
 
 </blockquote>
@@ -1801,6 +1951,19 @@ Explicit Field가 객체지향 개발과 캡슐화에 있어 Kotlin 생태계의
 ---
 
 ## ✍️ Wrap-Up
+
+<blockquote style="padding: 1.5rem">
+<sup><a id="doc7" href="#ref7">[7]</a></sup>
+One of the main ideas behind Kotlin is <strong>being pragmatic,</strong> </br>
+i.e., <u>being a programming language useful for day-to-day development, which helps the users get the job done via its features and its tools.</u> 
+</br>
+Thus, a lot of design decisions were and still are influenced by how beneficial these decisions are for Kotlin users. </br>
+<hr/ style="margin: 1rem 0">
+Kotlin의 핵심 가치는 "실용주의"입니다. </br>
+이는 Kotlin이 개발자들의 일상 속에 자연스레 녹아나는 언어가 되는 것, 즉 Kotlin이라는 생태계가 제공하는 기능과 도구를 통해 하루하루의 문제를 차근차근 해결해 나갈 수 있도록 돕는 것입니다. </br>
+그러므로, 우리의 많은 디자인 원칙은 Kotlin 사용자들에게 얼마나 도움을 줄 수 있는가를 기준으로 결정됩니다. 
+언제나 그랬듯이 말이죠. 
+</blockquote>
 
 ---
 
@@ -1831,4 +1994,8 @@ Explicit Field가 객체지향 개발과 캡슐화에 있어 Kotlin 생태계의
 </br>
     <sup><a id="ref6" href="#doc6"><b>[6]</b></a></sup>
         Ali Dehghani, <a href="https://www.baeldung.com/kotlin/varargs-spread-operator#bytecode-representation">"Varargs and Spread Operator in Kotlin"</a>, Baeldung Kotlin, last modified May 9, 2023.
+</br>
+</br>
+    <sup><a id="ref7" href="#doc7"><b>[7]</b></a></sup>
+        Marat Akhin, Mikhail Belyaev et al. (2020). Kotlin language specification: Kotlin/Core., JetBrains / JetBrains Research.
 </ol>

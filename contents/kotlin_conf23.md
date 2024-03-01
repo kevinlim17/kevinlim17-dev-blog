@@ -1115,7 +1115,7 @@ Native의 경우, 이름이 말해주듯, Kotlin 코드는 Virtual Machine을 �
 
 </br>
 
-<h5>One Million</h5>
+#### One Million
 
 2023년 4월 12일 기준, **1,000,000개**가 넘는 Github 프로젝트에서 Kotlin을 기본 언어로 사용합니다. 2019년, 20만 개가 채 되지 않았던 것을 생각하면 가히 놀라운 성장세입니다. 그러나 Github에서 눈여겨 봐야 할 수치는 더 있습니다. 특정 프로그래밍 언어가 **"개발자들 사이에서 꾸준히 논의의 대상이 되느냐"** 그리고 **"기여하고 싶은 프로젝트의 언어로 사용되느냐"** 를 드러내는 두 요소인데요. 바로 Pull Request와 Issue입니다. 
 
@@ -1142,7 +1142,7 @@ Native의 경우, 이름이 말해주듯, Kotlin 코드는 Virtual Machine을 �
 
 </br>
 
-<h5>Android</h5>
+#### Android
 
 <p align="center">
     <img src="https://developer.android.com/static/images/kotlin/kotlin-for-android-text.svg?hl=ko" width="50%"/>
@@ -1322,10 +1322,27 @@ Kotlin은 Runtime에 이루어지던 null에 대한 접근을, Compile Time에 �
 
 </br>
 
-이렇게 Kotlin의 엄격한 실용주의적 설계 원칙은 Android에 결합되어 그 빛을 발합니다. 추후에 <strong>"Android 생태계는 왜 Kotlin을 선택했는가?"</strong>의 주제로 관련 내용을 좀 더 톺아보겠습니다. 이제 더욱 '숫자로운' 이야기를 다룰 시간입니다. 함께 가시죠.
+다양성 속의 안정성. 이렇게 Kotlin의 엄격한 실용주의적 설계 원칙은 Android에 결합되어 그 빛을 발합니다. 추후에 <strong>"Android 생태계는 왜 Kotlin을 선택했는가?"</strong>의 주제로 관련 내용을 좀 더 톺아보겠습니다. 이제 더욱 '숫자로운' 이야기를 다룰 시간입니다. 함께 가시죠.
 
 ---
 ### New Compiler
+
+<p align="center">
+    <img src="https://blog.jetbrains.com/wp-content/uploads/2023/02/DSGN-15525-Blog-Post-about-Kotlin-2.0_kotlinlang.org_.png" width="80%">
+</p>
+
+Kotlin 2.0의 가장 큰 목표는 새로운 컴파일러를 성공적으로 안착시키는 것입니다. 
+
+
+#### How Compiler Works
+
+<p align="left">
+    <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/29f5312e-4c14-4934-99e5-f69d881dca75" width="100%">
+</p>
+
+</br>
+
+#### Improvements in K2
 
 <p align="left">
     <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/86064c22-7ec1-44e7-a684-879b1690c3ca" width="80%">

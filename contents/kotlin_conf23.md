@@ -1290,7 +1290,7 @@ Kotlin Compiler의 필터가 덧씌워지지 않은, 원래의 JVM에서는 어�
 </br>
 
 Kotlin은 Runtime에 이루어지던 null에 대한 접근을, Compile Time에 이루어지도록 설계되었습니다.
-이게 무슨 이야기인지는 [Codelab](https://developer.android.com/codelabs/basic-android-kotlin-compose-nullability)의 예시로 Null Safety의 탄탄한 내실을 조금 더 들여다 보며 살펴보겠습니다.
+이게 무슨 이야기인지는 [Codelab](https://developer.android.com/codelabs/basic-android-kotlin-compose-nullability)의 예시로 Null Safety의 탄탄한 내실을 조금 더 살펴보겠습니다.
 
 <blockquote style="background-color: rgba(0, 255, 109, 0.03); padding: 1.5rem; border-top: 0.5px solid rgba(184, 184, 184, 0.5)">
     <h5 style="background-color:transparent; font-weight: 800;">Use nullability in Kotlin: <a href="https://developer.android.com/codelabs/basic-android-kotlin-compose-nullability#2">Handle nullable variables</a></code></h5>
@@ -1322,23 +1322,45 @@ Kotlin은 Runtime에 이루어지던 null에 대한 접근을, Compile Time에 �
 
 </br>
 
-다양성 속의 안정성. 이렇게 Kotlin의 엄격한 실용주의적 설계 원칙은 Android에 결합되어 그 빛을 발합니다. 추후에 <strong>"Android 생태계는 왜 Kotlin을 선택했는가?"</strong>의 주제로 관련 내용을 좀 더 톺아보겠습니다. 이제 더욱 '숫자로운' 이야기를 다룰 시간입니다. 함께 가시죠.
+다양성 속의 안정성. 이렇게 Kotlin의 엄격한 실용주의적 설계 원칙은 Android에 결합되어 그 빛을 발합니다. 추후에 <strong>"Android 생태계는 왜 Kotlin을 선택했는가?"</strong>의 주제로 관련 내용을 좀 더 톺아보겠습니다. <br/>
+이제 진정 새로운 Kotlin에 대한 이야기를 나눌 시간입니다. 함께 가시죠.
 
 ---
 ### New Compiler
 
-<p align="center">
+<blockquote style="padding:1.5rem">
+<p align="left">
     <img src="https://blog.jetbrains.com/wp-content/uploads/2023/02/DSGN-15525-Blog-Post-about-Kotlin-2.0_kotlinlang.org_.png" width="80%">
 </p>
+We’ve been working on a new frontend for the Kotlin compiler (code-named “<strong>K2</strong>”) for quite a while. </br> ( ... ) </br>
+The new frontend is already available for preview – we’re continually polishing and stabilizing it and plan to make it the default compiler frontend in a future Kotlin release. </br>
+We’ve decided to name this future release <strong>Kotlin 2.0.</strong>
+<hr />
+<a href="https://blog.jetbrains.com/kotlin/2023/02/k2-kotlin-2-0/">The K2 Compiler Is Going Stable in Kotlin 2.0 | Kotlin Blog</a>
+</blockquote>
 
-Kotlin 2.0의 가장 큰 목표는 새로운 컴파일러를 성공적으로 안착시키는 것입니다. 
+</br>
 
+Kotlin 2.0의 릴리즈(Release)는 곧 새로운 컴파일러, 코드네임 "K2"의 안정화 버전을 적용한 Kotlin의 등장을 의미합니다. 정확히는 새로운 컴파일러 프론트엔드(Frontend)를 장착한 Kotlin인데요. 여기서 컴파일러 전체를 조금씩 수리한 것(Refactoring)이 아니라, <strong>"프론트엔드"만 완전히 새로 작성하였다는 사실(Rewriting)</strong>에 주목해야 합니다. (JVM 바이트코드나 JavaScript ES5를 타겟으로 하는) 컴파일러 백엔드(Backend)의 경우, 버전 1.5와 1.6에 걸쳐 업데이트되었습니다. 이는 Kotlin 전체 생태계에서 마이너 업데이트(Minor Version Update)에 포함되는 데 그쳤지요. 하지만 2.0의 릴리즈는 Kotlin 생태계 전체에 있어, 컴파일러 프론트엔드의 변화가 큰 의미를 지니게 됨을 그 자체로 암시하고 있습니다. 컴파일러의 어떠한 변화가 Kotlin의 Major한 움직임을 추동한 것일까요? 먼저, 기존의 컴파일러가 어떤 방식으로 작동하는지 살펴보겠습니다. 
+
+</br>
 
 #### How Compiler Works
 
 <p align="left">
-    <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/29f5312e-4c14-4934-99e5-f69d881dca75" width="100%">
+    <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/29f5312e-4c14-4934-99e5-f69d881dca75" width="90%">
 </p>
+
+</br>
+
+인간의 직업으로 따지면, 컴파일러는 일종의 번역가입니다. 서로 다른 언어의 세계를 연결하는 매개체로서의 역할을 수행하지요. 하지만 인간의 언어와 달리, 프로그래밍의 세계에서는 고수준(High-level)과 저수준(low-level)이라는 딱지가 붙기 십상이며, 컴파일러는 오로지 위에서 아래로의 번역만을 수행할 뿐입니다. 이는 컴퓨터가 우리의 생각보다 굉장히 단순한 일만을 수행할 수 있기 때문에, 인간의 사고 수준이 아직 기계보다는 고등하다는 인식에서 나온 표현이라 할 수 있겠습니다. 다시 문장의 방향키를 돌려서, 극도로 추상화된 인간의 사고에서 창발된 "고수준"의 프로그래밍 언어에서, 이보다 더 명료할 수 없는 바이너리(Binary)로의 여정까지 Kotlin 컴파일러는 어떤 일들을 할까요? 
+
+</br>
+
+<blockquote style="background-color: rgba(138, 96, 254, 0.03); padding: 1.5rem; border-top: 0.5px solid rgba(184, 184, 184, 0.5)">
+<h5 style="background-color:transparent; font-weight: 800;">Background</h5>
+
+</blockquote>
 
 </br>
 

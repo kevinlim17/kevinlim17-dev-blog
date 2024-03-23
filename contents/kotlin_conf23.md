@@ -1289,8 +1289,8 @@ Kotlin Compiler의 필터가 덧씌워지지 않은, 원래의 JVM에서는 어�
 
 </br>
 
-Kotlin은 Runtime에 이루어지던 null에 대한 접근을, Compile Time에 이루어지도록 설계되었습니다.
-이게 무슨 이야기인지는 [Codelab](https://developer.android.com/codelabs/basic-android-kotlin-compose-nullability)의 예시로 Null Safety의 탄탄한 내실을 조금 더 살펴보겠습니다.
+Kotlin은 null에 대한 접근을 Runtime 대신 Compile Time에 수행하게 하도록 설계되었습니다. Referencing은 기본적으로 Runtime의 몫인데, 이게 어떻게 가능했는지는
+[Codelab](https://developer.android.com/codelabs/basic-android-kotlin-compose-nullability)의 예시를 통해 자세히 살펴보겠습니다.
 
 <blockquote style="background-color: rgba(0, 255, 109, 0.03); padding: 1.5rem; border-top: 0.5px solid rgba(184, 184, 184, 0.5)">
     <h5 style="background-color:transparent; font-weight: 800;">Use nullability in Kotlin: <a href="https://developer.android.com/codelabs/basic-android-kotlin-compose-nullability#2">Handle nullable variables</a></code></h5>
@@ -1328,6 +1328,16 @@ Kotlin은 Runtime에 이루어지던 null에 대한 접근을, Compile Time에 �
 ---
 ### New Compiler
 
+<blockquote style="padding: 1.5rem; background: rgba(138, 96, 254, 0.03); border: 1px solid rgba(184, 184, 184, 0.5)">
+해당 단락은 YouTube 채널 <strong><a href="https://www.youtube.com/@Kotlin">Kotlin by Jetbrains</a></strong> 에서 업로드한</br>
+<blockquote style="padding: 1.5rem;">
+1. <a href="https://www.youtube.com/watch?v=iTdJJq_LyoY">What Everyone Must Know About the NEW Kotlin K2 Compiler</a></br>
+2. <a href="https://www.youtube.com/watch?v=wUGfuWHCqrc&t=281s">Crash Course on the Kotlin Compiler by Amanda Hinchman-Dominguez</a> </br>
+3. <a href="https://www.youtube.com/watch?v=db19VFLZqJM">The New Kotlin K2 Compiler: Expert Review</a> </br>
+</blockquote>
+세 영상을 참고해 작성되었습니다.
+</blockquote>
+
 <blockquote style="padding:1.5rem">
 <p align="left">
     <img src="https://blog.jetbrains.com/wp-content/uploads/2023/02/DSGN-15525-Blog-Post-about-Kotlin-2.0_kotlinlang.org_.png" width="80%">
@@ -1347,8 +1357,9 @@ Kotlin 2.0의 릴리즈(Release)는 곧 새로운 컴파일러, 코드네임 "K2
 
 #### How Compiler Works
 
+</br>
 <p align="left">
-    <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/29f5312e-4c14-4934-99e5-f69d881dca75" width="90%">
+    <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/9174997a-c0c1-492a-8a6b-1ea48164380c" width="80%">
 </p>
 
 </br>
@@ -1359,16 +1370,111 @@ Kotlin 2.0의 릴리즈(Release)는 곧 새로운 컴파일러, 코드네임 "K2
 
 <blockquote style="background-color: rgba(138, 96, 254, 0.03); padding: 1.5rem; border-top: 0.5px solid rgba(184, 184, 184, 0.5)">
 <h5 style="background-color:transparent; font-weight: 800;">Background</h5>
+<hr />
+해당 블록은 컴파일러를 다룰 때 빼놓을 수 없는 명저인 <strong>The Dragon Book</strong><sup><a id="doc6" href="#ref6">[6]</a></sup>의 내용을 기초로 작성되었습니다.
+<hr />
+</br>
+컴파일러는 크게 두 부분으로 구성됩니다. <strong>프론트엔드(Frontend)</strong>와 <strong>백엔드(Backend)</strong>가 바로 그것인데요. 
+
+<p align="left">
+    <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/29f5312e-4c14-4934-99e5-f69d881dca75" width="90%" />
+</p>
+
+
+Kotlin 컴파일러에서 <strong>프론트엔드(Frontend)</strong>는 개발자가 입력한 코드를 Input으로 받습니다. 그리고 PSI(Programming Structure Interface)로 통칭되는 일종의 문법 트리(Syntax Tree)에 <code class="language-text">BindingContext</code>를 덧붙여 백엔드(Backend)로 내보냅니다. </br>
+</br>
+<strong>백엔드(Backend)</strong>는 프론트엔드의 Output을 받아 Machine Code, JavaScript, 또는 JVM Bytecode로 변환하는 역할을 수행합니다. 바로 타겟으로 변환하여 최적화 단계를 진행하는 경우도 있고, 
+<code class="language-text" style="background-color: black; color: white;">Intermediate Representation</code>, 줄여서 <code class="language-text" style="background-color: black; color: white;">IR</code>을 생성한 후에 타겟으로 변환하는 경우도 있습니다. </br>
+</br>
+위 그림에는 표기하지 않았지만 <code class="language-text" style="background-color: black; color: white;">IR</code>을 최적화하는 단계를 <strong>미들엔드(Middle-end)</strong>로 분리할 수 있습니다. Kotlin 컴파일러가 어떻게 일하는지 다루는 이 글에서는 <a href="https://blog.jetbrains.com/kotlin/2021/10/the-road-to-the-k2-compiler/">The Road to K2 Compiler | Kotlin Blog</a>의 내용을 준용하여 해당 과정(Optimizing IR)을 백엔드에 포함시킵니다. 참고해 주세요. 
 
 </blockquote>
 
 </br>
+
+<h5>Parser</h5>
+
+<p align="center">
+    <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/bbe6b240-0b05-4823-918a-e5b8895f548e" width="80%">
+</p>
+
+</br>
+
+컴파일러가 코드를 처음 읽을 때, 가장 먼저 하는 일은 개발자가 정확히 무엇을 작성했는지 파악하는 것입니다. 이를 위한 첫 번째 단계는 코드를 쪼개는 것입니다. 정제된 언어로 <strong>Tokenize</strong>한다고 하는데요. 
+
+컴파일의 첫 단추를 꿰는 Parser의 역할은 <strong>코드가 잘 돌아가는지</strong> 파악하는 게 아니라, 컴파일러의 다른 부분이 코드를 잘 분석하고 검증할 수 있도록 만드는 것입니다. Computer Scientific하게 다시 말하면, <strong>Tokenize</strong>된 Node들을 Tree의 형태로 정리해서 Semantic Analyzer로 넘겨야 하지요.
+
+</br>
+<strong style="background-color:rgba(168, 168, 168, 0.1)">1. Lexical Analysis: 규칙에 맞게 자르기</strong> 
+
+</br>
+<p align="left">
+    <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/3f4c09f0-053b-415a-af0c-87c094159efd" width="80%" />
+</p>
+</br>
+
+**Lexical**의 사전적 의미는 **"relating to words or vocabulary"**, 즉 단어나 어휘에 관련되어 있다는 뜻입니다. 이를 준용해서 Lexical Process의 역할을 설명해 보면, 아직 아무런 의미도 가지지 못하는 문자의 집합을 Kotlin의 어휘에 맞게 재구성하는 것입니다. 
+
+이를 위해 Kotlin 컴파일러의 Parser는 [KotlinLexer](https://github.com/JetBrains/kotlin/blob/92d200e093c693b3c06e53a39e0b0973b84c7ec5/compiler/psi/src/org/jetbrains/kotlin/lexer/KotlinLexer.java) 객체를 생성합니다. 이 Lexer는 우리가 작성한 코드를 Token의 집합으로 치환합니다. 이 Token들은 <a href="https://github.com/JetBrains/kotlin/blob/master/compiler/psi/src/org/jetbrains/kotlin/lexer/KtTokens.java"><code class="language-text" style="color: white">KtTokens</code></a>이라는 interface에 정리되어 있는데요. 간단한 예시로 <code class="language-text" style="color: orange">is</code>라는 키워드가 어떻게 정의되어 있는지 살펴보겠습니다.
+
+```java
+
+public interface KtTokens {
+    ...
+    int IS_KEYWORD_Id = 30;
+    ...
+    KtKeywordToken IS_KEYWORD = KtKeywordToken.keyword("is", IS_KEYWORD_Id);
+}
+
+
+```
+
+
+</br>
+<strong style="background-color:rgba(168, 168, 168, 0.1)">2. Syntax Analysis: 트리 만들기</strong> 
+
+<p align="left">
+    <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/2279a931-0e57-4e50-adc9-e556874f8a25" width="100%">
+</p>
+
+</br>
+
+<h5>Semantic Analyzer</h5>
+
+</br>
+
+<h5>Backend with <strong>IR</strong> </h5>
+
+<p align="left">
+    <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/be630c45-d269-4644-b491-3b0ca3bbdbc7" width="80%">
+</p>
+
+<p align="left">
+    <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/faccf0c6-7c69-4bd4-8cce-719399b82255" width="80%">
+</p>
+
+
 
 #### Improvements in K2
 
 <p align="left">
     <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/86064c22-7ec1-44e7-a684-879b1690c3ca" width="80%">
 </p>
+
+</br>
+<h5>Old Frontend vs New Frontend</h5>
+
+<p align="left">
+    <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/5634f041-d569-4a3a-821f-03355ba63820" width="80%">
+</p>
+
+</br>
+<h5>Frontend IR</h5>
+
+<p align="left">
+    <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/61cf6386-040e-442d-a6cc-cbae97013591" width="80%">
+</p>
+
 
 
 ---
@@ -1668,7 +1774,7 @@ Kotlin에서 컬렉션 생성을 도맡는 함수들의 Signature(Function Signa
 
 <strong style="background-color:rgba(168, 168, 168, 0.1)">1. vararg는 타입이 아니라 문법적 설탕(Syntatic Sugar)입니다.</strong> 
 
-varargs는 기본적으로 메서드입니다. 동일한 타입을 가진 여러 인자(argument)를 받아, 그 개수를 파악한 뒤, 이를 Array로 변환하여 리턴하는 함수이지요. 이러한 사실을 알려주는 Indicator를 약간의 Deep-Dive를 통해 파악할 수 있습니다. 다음 Kotlin 코드를 JVM(Java Virtual Machine) 위에서 컴파일한다 가정해 봅시다. 간단한 함수를 Kotlin Compiler를 통해 Java ByteCode로 변환<sup><a id="doc6" href="#ref6">[6]</a></sup>해 보면,
+varargs는 기본적으로 메서드입니다. 동일한 타입을 가진 여러 인자(argument)를 받아, 그 개수를 파악한 뒤, 이를 Array로 변환하여 리턴하는 함수이지요. 이러한 사실을 알려주는 Indicator를 약간의 Deep-Dive를 통해 파악할 수 있습니다. 다음 Kotlin 코드를 JVM(Java Virtual Machine) 위에서 컴파일한다 가정해 봅시다. 간단한 함수를 Kotlin Compiler를 통해 Java ByteCode로 변환<sup><a id="doc7" href="#ref7">[7]</a></sup>해 보면,
 
 <hr style="margin: 1rem 0"/>
 <p align="left" style="padding: 0.5rem;">
@@ -1992,7 +2098,7 @@ Explicit Field가 객체지향 개발과 캡슐화에 있어 Kotlin 생태계의
 ## ✍️ Wrap-Up
 
 <blockquote style="padding: 1.5rem">
-<sup><a id="doc7" href="#ref7">[7]</a></sup>
+<sup><a id="doc8" href="#ref8">[8]</a></sup>
 One of the main ideas behind Kotlin is <strong>being pragmatic,</strong> </br>
 i.e., <u>being a programming language useful for day-to-day development, which helps the users get the job done via its features and its tools.</u> 
 </br>
@@ -2032,9 +2138,13 @@ Kotlin의 핵심 가치는 "실용주의"입니다. </br>
 </br>
 </br>
     <sup><a id="ref6" href="#doc6"><b>[6]</b></a></sup>
-        Ali Dehghani, <a href="https://www.baeldung.com/kotlin/varargs-spread-operator#bytecode-representation">"Varargs and Spread Operator in Kotlin"</a>, Baeldung Kotlin, last modified May 9, 2023.
+        Aho, Alfred Vaino; Lam, Monica Sin-Ling; Sethi, Ravi; Ullman, Jeffrey David (2006). <i>Compilers: Principles, Techniques, and Tools</i> (2 ed.). Boston, Massachusetts, USA: Addison-Wesley. ISBN 0-321-48681-1. OCLC 70775643
 </br>
 </br>
     <sup><a id="ref7" href="#doc7"><b>[7]</b></a></sup>
+        Ali Dehghani, <a href="https://www.baeldung.com/kotlin/varargs-spread-operator#bytecode-representation">"Varargs and Spread Operator in Kotlin"</a>, Baeldung Kotlin, last modified May 9, 2023.
+</br>
+</br>
+    <sup><a id="ref8" href="#doc8"><b>[8]</b></a></sup>
         Marat Akhin, Mikhail Belyaev et al. (2020). Kotlin language specification: Kotlin/Core., JetBrains / JetBrains Research.
 </ol>

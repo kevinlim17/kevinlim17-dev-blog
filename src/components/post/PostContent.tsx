@@ -199,15 +199,22 @@ const MarkdownRenderer = styled.div`
   span[class*='token expression'],
   span[class*='token annotation builtin'],
   span[class*='token string'],
+  span[class*='token comment'],
+  span[class*='token constant'],
   span[class*='token annotation punctuation'] {
-    font-family: consolas;
+    font-family: "IBM Plex Mono", monospace;
+    font-weight: 500;
+    font-style: normal;
   }
 
   pre[class*='language-'] {
     margin: 30px 0;
     padding: 15px;
-    font-size: 15px;
-    background-color: rgba(2, 0, 36, 0.85);
+    font-size: 17px;
+    font-family: "IBM Plex Mono", monospace;
+    font-weight: 500;
+    font-style: normal;
+    background-color: rgba(5, 0, 56, 0.95);
 
     ::-webkit-scrollbar-thumb {
       background: rgba(255, 255, 255, 0.5);
@@ -219,8 +226,11 @@ const MarkdownRenderer = styled.div`
   pre[class*='language-'] {
     tab-size: 5;
     padding: 3px 20px;
-    font-size: 15px;
-    font-family: consolas;
+    font-size: 16px;
+    font-family: "IBM Plex Mono", monospace;
+    font-weight: 500;
+    font-style: normal;
+    line-height: 1.35;
     color: rgba(0, 255, 109, 1);
     margin-right: 2px;
     border-radius: 0.5rem;
@@ -229,8 +239,10 @@ const MarkdownRenderer = styled.div`
   code[class*='language-text'] {
     tab-size: 5;
     padding: 3px 8px;
-    font-size: 14px;
-    font-family: consolas;
+    font-size: 15px;
+    font-family: "IBM Plex Mono", monospace;
+    font-weight: 500;
+    font-style: normal;
     background-color: rgba(2, 0, 36, 0.8);
     color: rgba(0, 255, 109, 1);
     margin-right: 2px;

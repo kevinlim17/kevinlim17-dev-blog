@@ -25,6 +25,11 @@ const MarkdownRenderer = styled.div`
     img {
       width: 80%;
     }
+
+    blockquote > p > img {
+      width: 100%;
+    }
+
   }
 
   // Markdown Style
@@ -119,7 +124,7 @@ const MarkdownRenderer = styled.div`
   }
 
   blockquote > div[class*='gatsby-highlight'] > pre[class*='language-'] {
-    margin: 0.5rem 0;
+    margin: 1rem 0;
   }
 
   // Adjust List Element Style
@@ -151,7 +156,7 @@ const MarkdownRenderer = styled.div`
 
   // Adjust Link Element Style
   a {
-    color: #4263eb;
+    color: rgba(65, 75, 178, 1);
     text-decoration: underline;
     text-underline-position: under;
     word-break: break-word;
@@ -190,18 +195,7 @@ const MarkdownRenderer = styled.div`
   }
 
   // Adjust Code Style
-  span[class*='token function'],
-  span[class*='token keyword'],
-  span[class*='token class-name'],
-  span[class*='token operator'],
-  span[class*='token punctuation'],
-  span[class*='token number'],
-  span[class*='token expression'],
-  span[class*='token annotation builtin'],
-  span[class*='token string'],
-  span[class*='token comment'],
-  span[class*='token constant'],
-  span[class*='token annotation punctuation'] {
+  span[class*='token '] {
     font-family: "IBM Plex Mono", monospace;
     font-weight: 500;
     font-style: normal;
@@ -210,7 +204,7 @@ const MarkdownRenderer = styled.div`
   pre[class*='language-'] {
     margin: 30px 0;
     padding: 15px;
-    font-size: 17px;
+    font-size: 15px;
     font-family: "IBM Plex Mono", monospace;
     font-weight: 500;
     font-style: normal;
@@ -226,7 +220,7 @@ const MarkdownRenderer = styled.div`
   pre[class*='language-'] {
     tab-size: 5;
     padding: 3px 20px;
-    font-size: 16px;
+    font-size: 15px;
     font-family: "IBM Plex Mono", monospace;
     font-weight: 500;
     font-style: normal;

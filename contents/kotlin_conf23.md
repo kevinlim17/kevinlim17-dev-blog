@@ -167,8 +167,8 @@ class HelloWorld {
 </tr>
 </table>
 
-<blockquote style="background-color:white">
-    Kotlin Code 출처: <a href="kotlinlang.org">Official Site Code Example</a>, Java Code는 글쓴이가 작성.
+<blockquote style="background-color:white; padding-left: 2rem;">
+  Kotlin Code 출처: <a href="kotlinlang.org">Official Site Code Example</a>, Java Code는 글쓴이가 작성.
 </blockquote>
 
 </br>
@@ -571,7 +571,7 @@ public fun CoroutineScope.launch(
 </br>
 <h5> 두 번째 질문. Suspendable function은 정확히 코루틴에서 어떤 역할을 하고 있나요? </h5>
 
-<blockquote>
+<blockquote style="padding: 1.5rem">
     <p align="left">
         <img src="https://kotlinlang.org/docs/images/suspension-process.gif" width="60%">
     </p>
@@ -599,7 +599,7 @@ public fun CoroutineScope.launch(
 기본적으로 코루틴은 CoroutineScope 안에서만 생성될 수 있습니다. 이를 멋지게 표현하면, **Scoped Execution**을 지원한다고 하는데요. CoroutineScope는 (Scope 안에서 생성된) 코루틴을 언제 시작할지, 멈출지, 재개할지 결정합니다. (즉 `launch()`나 `async()`와 같은 Builder를 CoroutineScope 안에서만 쓸 수 있다는 것입니다.) 굳이 Scope 안에서의 사용을 강제하는 이유에는 크게 두 가지가 있습니다.
 
 
-<blockquote style="padding: 1.5rem;">
+<blockquote style="padding: 1rem;">
 
 1. **코루틴의 Grouping을 가능하게 합니다.** </br>
 &nbsp;&nbsp;&nbsp;&nbsp;<strong>=></strong> 이는 Scope가 Cancel되면, Scope 안에서 시작되었던 코루틴은 모두 Cancel된다는 것입니다. </br>
@@ -648,7 +648,7 @@ fun doConcurrentJob
 **Structured Concurrency** 를 지원하기 위해, 코루틴은 트리 구조의 형태로 작성되어 있습니다. 즉, 부모-자식(parent-child) 관계를 지니고 있다는 의미입니다. 위에서는 **Grouping**이라는 개념으로 뭉뚱그려 설명했지만, 정확히는 트리 형태를 갖추고 있다고 이야기하는 것이 맞습니다. 또한 Context를 정의하는 데 도움이 된다는 것도, 결국 자식 코루틴이 자신의 Context를 정의하는 데 부모 코루틴의 Context를 가져오기 때문입니다. (간단하게, `myContext` **=**  `this` **+** `parentContext`, 이런 식으로 말이지요.) 이와 같은 구현은 다음과 같은 것들을 가능하게 합니다. 
 
 
-<blockquote style="padding: 1.5rem;">
+<blockquote style="padding: 1rem;">
 
 1. Structured concurrency ensures that they are not lost and do not leak. An outer scope cannot complete until all its children coroutines complete. </br>
 &nbsp;&nbsp;<i> 구조적 병렬성은 코루틴이 누수되거나 손실되지 않을 것임을 보장합니다. <b>외부 Scope는 모든 자식 Scope의 작업이 끝날 때까지 (생명 주기를) 완결하지 않습니다.</b></i> </br>
@@ -1329,7 +1329,7 @@ Kotlin은 null에 대한 접근을 Runtime 대신 Compile Time에 수행하게 �
 ### New Compiler
 
 <blockquote style="padding: 1.5rem; background: rgba(138, 96, 254, 0.03); border: 1px solid rgba(184, 184, 184, 0.5)">
-해당 단락은 YouTube 채널 <strong><a href="https://www.youtube.com/@Kotlin">Kotlin by Jetbrains</a></strong> 에서 업로드한</br>
+해당 섹션은 YouTube 채널 <strong><a href="https://www.youtube.com/@Kotlin">Kotlin by Jetbrains</a></strong> 에서 업로드한</br>
 <blockquote style="padding: 1.5rem;">
 1. <a href="https://www.youtube.com/watch?v=iTdJJq_LyoY">What Everyone Must Know About the NEW Kotlin K2 Compiler</a></br>
 2. <a href="https://www.youtube.com/watch?v=wUGfuWHCqrc&t=281s">Crash Course on the Kotlin Compiler by Amanda Hinchman-Dominguez</a> </br>
@@ -1370,23 +1370,31 @@ Kotlin 2.0의 릴리즈(Release)는 곧 새로운 컴파일러, 코드네임 "K2
 
 <blockquote style="background-color: rgba(138, 96, 254, 0.03); padding: 1.5rem; border-top: 0.5px solid rgba(184, 184, 184, 0.5)">
 <h5 style="background-color:transparent; font-weight: 800;">Background</h5>
-<hr />
-해당 블록은 컴파일러를 다룰 때 빼놓을 수 없는 명저인 <strong>The Dragon Book</strong><sup><a id="doc6" href="#ref6">[6]</a></sup>의 내용을 기초로 작성되었습니다.
-<hr />
-</br>
+<hr style="margin: 1rem 0;"/>
+해당 블록은 컴파일러를 다룰 때 빼놓을 수 없는 명저(名著, Modern Classic)인 <strong>The Dragon Book</strong><sup><a id="doc6" href="#ref6">[6]</a></sup>의 내용을 기초로 작성되었습니다.
+<hr style="margin: 1rem 0;"/> 
 컴파일러는 크게 두 부분으로 구성됩니다. <strong>프론트엔드(Frontend)</strong>와 <strong>백엔드(Backend)</strong>가 바로 그것인데요. 
 
-<p align="left">
-    <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/29f5312e-4c14-4934-99e5-f69d881dca75" width="90%" />
-</p>
-
-
-Kotlin 컴파일러에서 <strong>프론트엔드(Frontend)</strong>는 개발자가 입력한 코드를 Input으로 받습니다. 그리고 PSI(Programming Structure Interface)로 통칭되는 일종의 문법 트리(Syntax Tree)에 <code class="language-text">BindingContext</code>를 덧붙여 백엔드(Backend)로 내보냅니다. </br>
 </br>
-<strong>백엔드(Backend)</strong>는 프론트엔드의 Output을 받아 Machine Code, JavaScript, 또는 JVM Bytecode로 변환하는 역할을 수행합니다. 바로 타겟으로 변환하여 최적화 단계를 진행하는 경우도 있고, 
+<blockquote style="background-color: transparent; padding-left: 1.5rem;">
+    <p align="left">
+        <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/09b2a2fe-fc1a-4a38-af17-77658d905172" width="90%" />
+    </p>
+    </br>
+    <a href="https://courses.cs.washington.edu/courses/cse401/08wi/lecture/AST.pdf">Washington CS Course 401: Abstract Syntax Parsing Trees</a>의 세번째 슬라이드를 재구성.
+</blockquote>
+</br>
+
+컴파일러에서 <strong>프론트엔드(Frontend)</strong>는 개발자가 입력한 코드를 Input으로 받습니다. 그리고 <strong>Syntax Tree</strong>(IntelliJ Platform 계열에서는 Programming Structure Interface라고 부르는 것)에 <strong><b style="background-color: rgba(184, 184, 184, 0.5)">*</b>Symbol Table</strong>를 덧붙여 백엔드(Backend)로 내보냅니다. </br>
+</br>
+<strong>백엔드(Backend)</strong>는 프론트엔드의 Output을 받아 Machine Code, JavaScript, 또는 JVM Bytecode, 즉 <strong>Target Code</strong>로 변환하는 역할을 수행합니다. 바로 타겟으로 변환하여 최적화 단계를 진행하는 경우도 있고, 
 <code class="language-text" style="background-color: black; color: white;">Intermediate Representation</code>, 줄여서 <code class="language-text" style="background-color: black; color: white;">IR</code>을 생성한 후에 타겟으로 변환하는 경우도 있습니다. </br>
 </br>
-위 그림에는 표기하지 않았지만 <code class="language-text" style="background-color: black; color: white;">IR</code>을 최적화하는 단계를 <strong>미들엔드(Middle-end)</strong>로 분리할 수 있습니다. Kotlin 컴파일러가 어떻게 일하는지 다루는 이 글에서는 <a href="https://blog.jetbrains.com/kotlin/2021/10/the-road-to-the-k2-compiler/">The Road to K2 Compiler | Kotlin Blog</a>의 내용을 준용하여 해당 과정(Optimizing IR)을 백엔드에 포함시킵니다. 참고해 주세요. 
+<code class="language-text" style="background-color: black; color: white;">IR</code>을 최적화하는 단계를 <strong>미들엔드(Middle-end)</strong>로 분리할 수 있습니다. Kotlin 컴파일러가 어떻게 일하는지 다루는 이 글에서는 <a href="https://blog.jetbrains.com/kotlin/2021/10/the-road-to-the-k2-compiler/">The Road to K2 Compiler | Kotlin Blog</a>의 내용을 준용하여 해당 과정(Optimizing IR)을 백엔드에 포함시킵니다. 참고해 주세요. 
+
+<hr style="margin: 1.5rem 0"/>
+<b style="background-color: rgba(184, 184, 184, 0.5)">*</b> Symbol Table : 컴파일러 또는 인터프리터와 같은 Language Translator에서 사용하는 자료구조입니다. 각각의 Identifier, Constant, Procedure, Function이 코드 내에서 어떻게 선언하였고 사용되었는지 연결하는 역할을 맡고 있지요.
+
 
 </blockquote>
 
@@ -1415,22 +1423,90 @@ Kotlin 컴파일러에서 <strong>프론트엔드(Frontend)</strong>는 개발�
 
 **Lexical**의 사전적 의미는 **"relating to words or vocabulary"**, 즉 단어나 어휘에 관련되어 있다는 뜻입니다. 이를 준용해서 Lexical Process의 역할을 설명해 보면, 아직 아무런 의미도 가지지 못하는 문자의 집합을 Kotlin의 어휘에 맞게 재구성하는 것입니다. 
 
-이를 위해 Kotlin 컴파일러의 Parser는 [KotlinLexer](https://github.com/JetBrains/kotlin/blob/92d200e093c693b3c06e53a39e0b0973b84c7ec5/compiler/psi/src/org/jetbrains/kotlin/lexer/KotlinLexer.java) 객체를 생성합니다. 이 Lexer는 우리가 작성한 코드를 Token의 집합으로 치환합니다. 이 Token들은 <a href="https://github.com/JetBrains/kotlin/blob/master/compiler/psi/src/org/jetbrains/kotlin/lexer/KtTokens.java"><code class="language-text" style="color: white">KtTokens</code></a>이라는 interface에 정리되어 있는데요. 간단한 예시로 <code class="language-text" style="color: orange">is</code>라는 키워드가 어떻게 정의되어 있는지 살펴보겠습니다.
+이를 위해 Kotlin 컴파일러의 Parser는 [KotlinLexer](https://github.com/JetBrains/kotlin/blob/92d200e093c693b3c06e53a39e0b0973b84c7ec5/compiler/psi/src/org/jetbrains/kotlin/lexer/KotlinLexer.java) 객체를 생성합니다. 이 Lexer는 우리가 작성한 코드를 Token의 집합으로 치환합니다. 이 Token들은 <a href="https://github.com/JetBrains/kotlin/blob/master/compiler/psi/src/org/jetbrains/kotlin/lexer/KtTokens.java"><code class="language-text" style="color: white">KtTokens</code></a> interface에 정리되어 있는데요. 여기에서 <code class="language-text" style="color: orange">return</code>이라는 키워드는 이렇게 정의되어 있습니다.
 
 ```java
 
 public interface KtTokens {
     ...
-    int IS_KEYWORD_Id = 30;
+    int RETURN_KEYWORD_Id = 33;
     ...
-    KtKeywordToken IS_KEYWORD = KtKeywordToken.keyword("is", IS_KEYWORD_Id);
+    KtKeywordToken RETURN_KEYWORD = KtKeywordToken.keyword("return", RETURN_KEYWORD_Id);
+}
+
+
+```
+</br>
+
+따끈따끈하게 막 생성된 토큰들은 <a href="https://github.com/gigliovale/kotlin/blob/master/compiler/frontend/src/org/jetbrains/kotlin/parsing/KotlinExpressionParsing.java"><code class="language-text" style="color: white">KotlinExpressionParsing</code></a> 객체가 Expression Node의 `set`으로 변환합니다. 이러한 집합을 한데 모아 <code><a href="https://github.com/JetBrains/intellij-community/blob/master/platform/core-api/src/com/intellij/lang/ASTNode.java"><strong>AST</strong>Node</a></code> 객체를 통해 <a href="https://plugins.jetbrains.com/docs/intellij/implementing-parser-and-psi.html?from=jetbrains.org"><strong>PSI</strong></a> Tree를 구성합니다. (<strong>AST</strong>와 <strong>PSI</strong>가 무엇인지는 아래의 '트리 만들기' 부분에서 좀 더 다뤄보도록 할게요.) 그에 앞서 
+<strong>IntelliJ Platform Plugin의 Document</strong>를 보며 <code class="language-text" style="color: #f8c555">RETURN_KEYWORD</code></a>가 어떻게 PSI Tree의 일부가 되는지 살펴봅시다.
+
+<blockquote style="background-color: rgba(248, 197, 85, 0.04); margin-top: 1.5rem; padding: 1.5rem; border-top: 0.5px solid rgba(184, 184, 184, 0.5)">
+
+<h5 style="background-color:transparent; font-weight: 800;"><a href="https://plugins.jetbrains.com/docs/intellij/implementing-parser-and-psi.html#parser-implementation">Parser Implementation</a></h5>
+
+
+<blockquote style="background-color:white; padding: 1.5rem; border-left: 0px;">
+🗃️ Github Repo: JetBrains/kotlin -
+<a href="https://github.com/JetBrains/kotlin/blob/master/compiler/psi/src/org/jetbrains/kotlin/parsing/KotlinExpressionParsing.java#L1690">compiler/psi/src/org/jetbrains/kotlin/parsing/KotlinExpressionParsing.java</a>
+
+```java 
+
+/*
+* "return" getEntryPoint? element?
+*/
+private void parseReturn() {
+    assert _at(RETURN_KEYWORD);
+
+    PsiBuilder.Marker returnExpression = mark();
+
+    advance(); // RETURN_KEYWORD
+
+    parseLabelReferenceWithNoWhitespace();
+
+    if (atSet(EXPRESSION_FIRST) && !at(EOL_OR_SEMICOLON)) parseExpression();
+
+    returnExpression.done(RETURN);
 }
 
 
 ```
 
 
+</blockquote>
+
+JetBrains IDE에서 (<strong>Kotlin</strong>을 포함한) Language Plugin은 `PsiParser` 인터페이스의 구현체로서 <strong>Parser</strong>를 제공합니다. 그리고 이는 `ParserDefinition.createParser()` 메서드의 리턴값이죠. 그리고 Parser는 `PsiBuilder` Class의 인스턴스를 Input으로 받지요. `PSIBuilder`의 인스턴스는 [KotlinLexer](https://github.com/JetBrains/kotlin/blob/92d200e093c693b3c06e53a39e0b0973b84c7ec5/compiler/psi/src/org/jetbrains/kotlin/lexer/KotlinLexer.java) 객체가 생성한 KtToken의 Stream을 받아
+구축 중인 <strong style="color: #4263eb">AST</strong>의 중간 상태를 유지하는 데 사용됩니다.
+
+
+(당연하게도) Parser는 Lexing Process에서 생성된 모든 Token을 처리해야만 합니다. (Stream이 끝에 닿을 때, 즉 <a href="https://github.com/JetBrains/intellij-community/tree/idea/233.14808.21/platform/core-api/src/com/intellij/lang/PsiBuilder.java"><code class="language-text" style="color:white">PsiBuilder.getTokenType()</code></a>이 <code class="language-text" style="color:white">null</code>을 반환할 때까지를 의미합니다.) 설사 생성된 Token이 문법에 어긋나더라도 말이지요. 
+
 </br>
+
+그렇게 Token의 Stream을 받아들인 Parser는 내부적으로 <strong>Marker (<a href="https://github.com/JetBrains/intellij-community/tree/idea/241.14494.240/platform/core-api/src/com/intellij/lang/PsiBuilder.java">`PsiBuilder.Marker`</a>의 인스턴스) 의 Pair</strong>를 맞춰주는 일을 수행합니다. 각각의 Pair는 <strong>KtToken</strong>의 범위를 결정하고, 이는 AST의 단일 노드를 확정합니다. 하나의 Pair가 다른 Pair 안에 중첩되어 있으면, 바깥 Pair가 안쪽 Pair의 부모 노드가 됩니다.
+Marker의 Pair, AST 노드의 <strong>타입(Type)</strong>은 <strong>End </strong>Marker가 세팅되면 결정됩니다. 이는 `PsiBuilder.Marker.done()`를 호출하는 방식으로 이루어지죠. 
+
+</br>
+
+<hr />
+
+</br>
+
+(<a href="https://plugins.jetbrains.com/docs/intellij/images/PsiBuilder.gif">Document의 이미지를 준용해</a>) 아래 도식은 <code class="language-text" style="color: white;">return 2 + 3</code> 이라는 (굉장히 단순한) 코드가 Tokenize되어 Marker의 Pair가 맞춰지기까지의 과정을 나타낸 것입니다. Token의 Type은 Kotlin에 맞추어 변경했으니 참고해 주세요.
+
+<p align="left">
+    <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/3135a229-5cf2-4a22-aa55-4b2003dab961" width="100%" />
+</p>
+<hr />
+
+이제 트리를 만들기 위한 준비를 모두 마쳤습니다. 
+
+</blockquote>
+
+</br>
+
+
+
 <strong style="background-color:rgba(168, 168, 168, 0.1)">2. Syntax Analysis: 트리 만들기</strong> 
 
 <p align="left">
@@ -1438,6 +1514,108 @@ public interface KtTokens {
 </p>
 
 </br>
+
+위에서 <strong style="color: #4263eb">AST</strong>는 Abstract Syntax Tree를 이야기하는데요. <strong style="background-color: rgba(138, 96, 254, 0.2);">Background</strong>에서는 뭉뚱그려 Parser의 Output이 Syntax Tree라고 언급했지만, 정확히는 Abstract(추상화된)이라는 수식어가 붙어야 합니다. 그러니, <strong>Abstract</strong> Version이 존재하므로, 추상화의 대상인 <strong>Concrete</strong> Version도 존재하겠죠. 그렇다면 이 두 형태의 Syntax Tree에는 어떤 차이가 있을까요. Eli Bendersky의 블로그 포스트인 <a href="https://eli.thegreenplace.net/2009/02/16/abstract-vs-concrete-syntax-trees/">Abstract vs. Concrete Syntax Trees</a>는 명쾌한 해답을 제공합니다. 글쓴이가 그 내용을 간추려 보았습니다.
+
+<blockquote style="background-color: rgba(58, 119, 156, 0.06); margin-top: 1.5rem; padding: 1.5rem; border-top: 0.5px solid rgba(184, 184, 184, 0.5)">
+<h5 style="background-color:transparent; font-weight: 800; margin-bottom: 2rem;"><a href="https://eli.thegreenplace.net/2009/02/16/abstract-vs-concrete-syntax-trees/">Abstract vs. Concrete Syntax Trees</a></h5>
+
+
+```c
+return a + 2;
+
+```
+이번에도 (분석하기 비교적 쉬운) <code class="language-text" style="color: #cc99cd">return</code> 키워드를 가져와 봤습니다. </br> 위 코드를 분석해 Concrete한 방식으로 문법의 나무를 만들면 어떻게 될까요. 일단 Dragon Book에서 이야기하는 정의부터 보시죠. 
+
+<blockquote style="padding: 1.5rem; margin: 1.5rem 0; background-color: rgba(58, 119, 156, 0.06);">
+
+<strong>A parse tree(= CST)</strong> pictorially shows how <u><strong>the start symbol of a grammar</strong></u> derives a string in the language. <sup><a id="doc6" href="#ref6">[6]</a></sup>
+<hr style="margin: 1rem 0"/>
+Parse Tree는 프로그래밍 언어에서 하나의 문자열이 <u>Start Symbol</u>에 의해 (문법적으로) 어떻게 산출되는지 시각적으로 나타냅니다. 
+</blockquote>
+
+
+여기서 Start Symbol이 뭘까요? </br> Blog에서는 자세히 설명해 주지 않지만, <a href="https://www.ibm.com/docs/en/zos/3.1.0?topic=section-start-symbol">IBM Documentation</a>에서는 이렇게 이야기합니다.
+
+<blockquote style="padding: 1.5rem; margin: 1.5rem 0; background-color: rgba(58, 119, 156, 0.06);">
+The first <strong><u>nonterminal symbol</u></strong> defined in the rules section is called <strong>the start symbol</strong>. </br>
+This symbol is taken to be the largest, most general structure described by the grammar rules. </br>
+For example, if you are generating the parser for a compiler, <u>the start symbol should describe what a complete program looks like in the language to be parsed.</u>
+<hr style="margin: 1rem 0"/>
+Grammar Rules Section에서 가장 처음 정의되는 Nonterminal Symbol을 <strong>Start Symbol</strong>이라고 합니다. </br> Start Symbol은 Grammar Rule에서 설명하는 가장 크고 중요한 구조로 취급됩니다. </br>
+예를 들어, 컴파일러가 Parser를 구성할 때, Start Symbol은 프로그램이 어떻게 구성되는지 서술해야 하는 역할을 맡습니다. 
+
+</blockquote>
+
+Kotlin Compiler가 <code class="language-text" style="color: #cc99cd">return</code>이라는 키워드를 해석할 때 찾는 사전의 단락은 아래와 같습니다. </br> 
+정답부터 이야기해 보자면, 여기서 <u><strong>nonterminal symbol</strong></u>은 `jumpExpression`과 `expression`입니다. <a href="https://www.geeksforgeeks.org/introduction-to-grammar-in-theory-of-computation/">GeeksforGeeks</a>의 표현을 빌리자면, 구문의 생성에는 관여하나 구문의 구성 요소는 아닌 Symbol(<i>those symbols which take part in the generation of the sentence but are not the component of the sentence</i>)이지요.
+
+```kotlin
+
+jumpExpression
+  : 'throw' expression
+  | ('return' | RETURN_AT) expression?
+  | 'continue'
+  | CONTINUE_AT
+  | 'break'
+  | BREAK_AT
+  ;
+
+
+```
+</br>
+
+조금 익숙한 형태로 풀어가 볼까요. 정말 간단한 영어 문장을 생각해 봅시다. <strong>S</strong><i>Subject</i> + <strong>V</strong><i>Verb</i> + <strong>O</strong><i>Object</i> 같은 딱딱한 문법 구조 말고, 축구 게임을 떠올려 봅시다. (개발자들에게 항상 뛰어난 영감을 제공하는 <a href="https://stackoverflow.com/questions/57908662/what-are-terminal-and-nonterminal-symbols">stackoverflow</a>의 비유를 차용해 보았습니다) 리오넬 메시가 (늘 그랬듯이) 좋은 패스를 했습니다. '패스'라는 행위(<strong>action</strong>)를 '선수의 이름'(<strong>player</strong>)과 묶어 <strong>movement</strong>라고 이름 붙인 뒤, 프로그래밍 언어의 문법 체계대로 옮겨 보면 다음과 같습니다.
+
+<p align="center">
+    <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/f239674b-40fa-416c-8e80-a72ea1a9bbf1" width="90%" />
+</p>
+
+</br>
+정리해 보지요. 하나의 문장이 게임에서 <code class="language-text" style="color: white">movement</code>라고 인식되려면, <code class="language-text" style="color: white">player</code>와 <code class="language-text" style="color: white">action</code>으로 구성되어야 합니다. 그리고 <code class="language-text" style="color: white">player</code>는 <code class="language-text" style="color: white">name</code>과 <code class="language-text" style="color: white">surname</code>으로 구성되어야 하지요. 또한 <code class="language-text" style="color: white">action</code>은 <code class="language-text" style="color: #cc99cd">'passes'</code>, <code class="language-text" style="color: #cc99cd">'crosses'</code>, <code class="language-text" style="color: #cc99cd">'shots'</code> 중 하나여야만 합니다. 하지만 <code class="language-text" style="color: #cc99cd">'passes'</code>에서 가지가 더 뻗어나가지는 않지요. <code class="language-text" style="color: #cc99cd">'passes'</code>와 마찬가지로, 실제로 우리가 작성하는 코드, 이 예시에서는 통틀어 <strong>"Lionel Messi passes"</strong>라는 텍스트는 나무가 가진 수많은 가지들의 종단점(terminal point)에 위치합니다. 아래는 나무의 예시입니다. 
+
+<p align="left">
+    <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/802105f0-965a-4cb7-9db2-687f36f17504" width="50%" />
+</p>
+
+</br>
+<strong>Non-Terminal Symbol은 구문의 생성에는 관여하나, 구문의 구성 요소는 아니다.</strong></br>
+이를 풀어서 이야기하면, Non-Terminal Symbol은 컴파일러가 우리가 작성한 코드를 해석하는 데 필요한 일종의 표지인 것입니다. 그와 달리 Terminal Symbol은 Grammar Rule에 맞게 쪼개진 Token일 뿐이지요. <a href="https://kotlinlang.org/docs/reference/grammar.html">Kotlin Grammar Rule</a>에 맞추어,
+<code class="language-text" style="color: white">return a + 2</code>로 Concrete한 나무를 만든다면, 
+
+<p align="left">
+    <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/f6f5640a-476f-47aa-97fe-0165d685cffe" width="90%" />
+</p>
+
+</br>
+위의 그림과 같습니다. </br>
+나무에서 <code class="language-text" style="color: white;">return</code>, <code class="language-text" style="color: white;">a</code>, <code class="language-text" style="color: white;">+</code>, <code class="language-text" style="color: white;">2</code>를 제외한 모든 Element는 non-terminal symbol인 것이지요. Sentence에서 가장 처음 등장하는 non-terminal symbol이 Start Symbol이니, 여기서는 <code class="language-text">jumpExpression</code>이겠네요. 결국 AST, Parse Tree는 Start Symbol이 어떻게 Terminal Point(우리가 작성한 String)까지 도달하는지를 산출한 결과입니다. </br>
+
+</br>
+
+이렇게 짧은 코드임에도 불구하고, 이 정도의 복잡도를 가진 나무로 치환된다면, 아무리 컴퓨터라도 같이 일하기 어려운 형태(<i>not a very useful representation to work with</i>)임은 확실합니다. 우리에게는 코드(우리가 작성한 문자열에 가까운 무리)에 가까운 나무보다, 컴파일러에게 가까운 나무가 필요합니다. 그래서 등장하는 형태의 나무가 <strong>Abstract Syntax Tree</strong>이죠.
+
+
+<blockquote style="padding: 1.5rem; background-color: rgba(58, 119, 156, 0.06);">
+<strong>Abstract syntax trees</strong>, or simply syntax trees, differ from parse trees because superficial distinctions of form, unimportant for translation, do not appear in syntax trees. <sup><a id="doc6" href="#ref6">[6]</a></sup>
+<hr style="margin: 1rem 0"/>
+Abstract Syntax Tree, 혹은 간단히 <strong>Syntax Tree</strong>라 불리는 구조는 Parse Tree와 다른 형태를 지닙니다. (문법적) 형태의 피상적인 구별점, 즉 번역에 필요없는 요소들은 생략됩니다.
+</blockquote>
+
+<p align="left" style="padding: 2rem;">
+    <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/419500af-356a-4e8c-89cd-86c9a1431f5a" width="70%" />
+</p>
+
+
+
+</blockquote>
+
+</br>
+
+PSI Tree는 두 형태의 Tree 중 어떤 형태에 가까울까요.  
+
+</br>
+
 
 <h5>Semantic Analyzer</h5>
 
@@ -1484,7 +1662,7 @@ public interface KtTokens {
 
 </br>
 
-<h5>Static Extensions</h5>
+#### Static Extensions
 
 우리가 그 실체에 다가갈 수 없는, Third-Party Class를 하나 가정해봅시다. </br>
 완전히 닫혀 있지만, 다행히도 우리는 <b style="background-color: rgba(184, 184, 184, 0.5)">*</b><b>Companion Object</b>가 그곳에 존재한다는 사실 정도는 알고 있습니다. 불행 중 다행입니다. 막 '정적인 확장 함수(Static Extension)를 작성하려던' 참이었거든요.
@@ -1510,7 +1688,7 @@ fun main() {
 
 ```
 
-<blockquote style="padding: 1.2rem;">
+<blockquote style="padding: 1.5rem;">
     <strong><b style="background-color: rgba(184, 184, 184, 0.5)">*</b> Companion Object</strong></br>
 
 ---
@@ -1548,15 +1726,28 @@ Kotlin은 Java와 달리(그리고 다른 많은 언어들과 달리), 명시적
 
 그럼에도, Kotlin 생태계에서 Class의 정적인 멤버(Static Member), 정적인 확장(Static Extension), 정적인 객체(Static Object)에 대한 논의는 꾸준히 이루어져 왔습니다. Kotlin 생태계에 대한 여러 고민들을 엿볼 수 있는 [KEEP - Kotlin Evolution and Enhancement Process](https://github.com/Kotlin/KEEP/blob/statics/proposals/statics.md#introduction)에서 구체적인 배경을 조금 더 살펴보도록 하죠. (Introduction 내용을 본문에 실었습니다.)
 
+<blockquote style="padding: 1rem;">
 
->> 1. **Enable static extensions of 3rd party classes**, which is the top most voted feature in Kotlin. </br>
->> &nbsp;&nbsp; => **서드파티 클래스에 대한 정적 확장**을 허용합니다. 이는 Kotlin 개발자들에 의해 가장 많이 요구된 기능입니다.
->>
->> 2. Provide a lighter-weight mechanism for defining static members that do not access instance variable as an alternative to companion objects in many use-cases. </br>
->> &nbsp;&nbsp; => Companion object에 대한 대안으로, (인스턴스를 생성하지 않고) 정적 멤버를 정의하는 데 더욱 가벼운 매커니즘을 제공합니다. 
->>
->> 3. Simplify interoperability with JVM statics that Kotlin compiler has to support anyway — more concise and clear usage of Java frameworks that rely on statics, easier Java to Kotlin migration.
->> &nbsp;&nbsp; => (미우던 고우던 Kotlin 컴파일러가 지원해야만 하는) JVM `static`과의 상호 운용을 단순화합니다. 이는 (Kotlin에서) `static`에 의존하는 Java 프레임워크의 간결하고 명확한 사용을 보장하며, Java로부터의 마이그레이션을 더욱 쉽게 만듭니다.
+<blockquote style="padding: 1.5rem;"> 
+1.  <strong>Enable static extensions of 3rd party classes</strong>, which is the top most voted feature in Kotlin. </br>
+</blockquote>
+
+&nbsp;&nbsp; => **서드파티 클래스에 대한 정적 확장**을 허용합니다. 이는 Kotlin 개발자들에 의해 가장 많이 요구된 기능입니다.
+
+<blockquote style="padding: 1.5rem;"> 
+2.  Provide a lighter-weight mechanism for defining static members that do not access instance variable as an alternative to companion objects in many use-cases. </br>
+</blockquote>
+
+&nbsp;&nbsp; => Companion object에 대한 대안으로, (인스턴스를 생성하지 않고) 정적 멤버를 정의하는 데 더욱 가벼운 매커니즘을 제공합니다. 
+
+<blockquote style="padding: 1.5rem;">
+3. Simplify interoperability with JVM statics that Kotlin compiler has to support anyway — more concise and clear usage of Java frameworks that rely on statics, easier Java to Kotlin migration.
+</blockquote>
+
+&nbsp;&nbsp; => (미우던 고우던 Kotlin 컴파일러가 지원해야만 하는) JVM `static`과의 상호 운용을 단순화합니다. 이는 (Kotlin에서) `static`에 의존하는 Java 프레임워크의 간결하고 명확한 사용을 보장하며, Java로부터의 마이그레이션을 더욱 쉽게 만듭니다.
+
+
+</blockquote>
 
 <blockquote style="padding: 1.5rem 1rem;">
 컨퍼런스에서 언급한 <code class="language-text">Companion</code> 키워드가 <code class="language-text">static</code>이 되는 마법을 적용해 보면,
@@ -1627,15 +1818,20 @@ class Color(val rgb: Int) {
 아직 `static` 멤버와 클래스, 인터페이스를 선언하는 방법마저 확실하지 않은 상황입니다. (키노트에서도 이를 어떻게 다룰 것인지 명확한 언급이 없었습니다. `static` 키워드를 정적인 확장 함수를 지원하는 데만 국소적으로 사용하지는 않을 것이니, 이는  Kotlin 생태계에 있어 확고한 분기점이 될 것임은 자명합니다.) </br> 
 KEEP 문서의 [해당 섹션](https://github.com/Kotlin/KEEP/blob/statics/proposals/statics.md#static-section-vs-static-modifier)을 간추려 보면, (불행인지 다행인지는 알 수 없지만) Section Syntax와 Modifier Syntax를 도입하는 데 있어 각각의 장단점은 명확합니다. 
 
-> **Section over Modifier**
-> 1. Companion object로부터의 마이그레이션이 쉬울 것입니다. (모든 정적 멤버를 일정한 공간에 묶어 둔다는 점에서 개념적으로 유사합니다.)
-> 2. `fun SomeClass.static.ext()`이 보다 직관적인 구문(mnemonic expression)이 됩니다. (Static section의 확장이라는 것이 명확해집니다.)
-> **Modifier over Section**
-> 1. 다른 언어에서 `static`을 사용하는 방식과 유사합니다.
-> 2. 간헐적으로 사용하는 `static` 선언에 더욱 간결한 방식을 제공합니다.
+<blockquote style="padding: 1.5rem;">
+<strong>Section over Modifier</strong>
 
+1. Companion object로부터의 마이그레이션이 쉬울 것입니다. (모든 정적 멤버를 일정한 공간에 묶어 둔다는 점에서 개념적으로 유사합니다.)
+2. `fun SomeClass.static.ext()`이 보다 직관적인 구문(mnemonic expression)이 됩니다. (Static section의 확장이라는 것이 명확해집니다.)
+<hr style="margin: 1rem 0;"/>
+<strong>Modifier over Section</strong>
 
-<p align="left" style="background-color:rgba(168, 168, 168, 0.1); padding:1rem;">
+1. 다른 언어에서 `static`을 사용하는 방식과 유사합니다.
+2. 간헐적으로 사용하는 `static` 선언에 더욱 간결한 방식을 제공합니다.
+
+</blockquote>
+
+<p align="left" style="background-color:rgba(168, 168, 168, 0.1); padding:1.5rem;">
     <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/c05b5425-a31c-4cdc-8caf-7537cf6694a0" width="80%"></br> We'll have to make once choice of syntax and accept all its disadvantages for the sake of having a consistent syntax across Kotlin codebases. </br>
     --- </br>
     <b>그리고 두 옵션 모두가 사용되는 일은 없을 것입니다.</b> </br>
@@ -1647,7 +1843,7 @@ KEEP 문서의 [해당 섹션](https://github.com/Kotlin/KEEP/blob/statics/propo
 장단점이 명확한 두 가지 방식 중, 반드시 하나만을 선택해야 한다라... Kotlin을 손에 든 만국의 개발자 여러분, 우리에게 아직은 인내심이 더 필요할 듯 합니다. 
 Kotlin의 `static` 키워드 도입이 빠르게 이루어지기에는 요원한 이유를 조금 더 살펴보겠습니다. 두 번째 이슈입니다.
 
-<blockquote align="center" style="padding:0.5rem;">
+<blockquote align="center" style="padding:1rem;">
     <a href="https://github.com/Kotlin/KEEP/blob/statics/proposals/statics.md#static-soft-keyword-ambiguity" style="margin-bottom:-3rem"><b>Issue 2: Static soft keyword ambiguity</b></a>
 
 ---
@@ -1715,7 +1911,7 @@ We'll need to develop some kind of deprecation cycle to remove this ambiguity. T
 </br>
 
 
-<h5>Collection Literals</h5>
+#### Collection Literals
 
 ```kotlin
 
@@ -1884,7 +2080,7 @@ Flexible한 Collection Literal을 구현하는 데에 있어, 산적한 과제�
 
 </br>
 
-<h5>Name-based destructuring</h5>
+#### Name-based destructuring
 
 우리는 필요에 따라 데이터를 결합하거나 해체합니다. 결합이 필요할 때는, 다양한 자료구조(Data Structure)를 통해 구조화(Structuring)시키고, 필요한 데이터를 그 속에서 탐색하거나 아예 분리시키는 일에 익숙합니다. Kotlin Standard Library에서는 우리가 많이 사용하는 자료구조를 Collection 인터페이스와 그 하위 Class들로 정리해 두었죠. (참고로, Map 인터페이스는 Collection 인터페이스와는 독립적으로 존재합니다. )
 
@@ -1956,13 +2152,11 @@ val (firstName, lastName) = person
 
 </br>
 
-
-
-<h5>Context Receivers</h5>
+#### Context Receivers
 
 
 
-<h5>Explicit fields</h5>
+#### Explicit fields
 
 명백한 'Field'라, 명백한 운명(Manifest Destiny)도 아니고 도대체 무슨 의미일까요? </br> 
 먼저, 기존에는 Kotlin에 '명시적인' `field`가 존재하지 않았으므로, 새로운 기능을 탐구함에 앞서 **이 키워드가 '뒤에서' 사용되는 방식**을 먼저 살펴보겠습니다. 

@@ -204,7 +204,7 @@ const MarkdownRenderer = styled.div`
   pre[class*='language-'] {
     margin: 30px 0;
     padding: 15px;
-    font-size: 15px;
+    font-size: 14px;
     font-family: "IBM Plex Mono", monospace;
     font-weight: 500;
     font-style: normal;
@@ -220,7 +220,7 @@ const MarkdownRenderer = styled.div`
   pre[class*='language-'] {
     tab-size: 5;
     padding: 3px 20px;
-    font-size: 15px;
+    font-size: 14px;
     font-family: "IBM Plex Mono", monospace;
     font-weight: 500;
     font-style: normal;
@@ -233,7 +233,7 @@ const MarkdownRenderer = styled.div`
   code[class*='language-text'] {
     tab-size: 5;
     padding: 3px 8px;
-    font-size: 15px;
+    font-size: 14px;
     font-family: "IBM Plex Mono", monospace;
     font-weight: 500;
     font-style: normal;

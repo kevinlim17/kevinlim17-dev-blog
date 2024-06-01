@@ -12,10 +12,10 @@ const Background = styled.div`
   z-index: 2;
   width: 100%;
   background: linear-gradient(
-    135deg,
-    rgba(2, 0, 36, 1) 0%,
-    rgba(131, 58, 2, 1) 70%,
-    rgba(255, 209, 0, 1) 100%
+    164deg, 
+    rgba(2,34,0,1) 0%, 
+    rgba(224,213,144,1) 50%, 
+    rgba(255,247,196,1) 100%
   );
   color: #ffffff;
   animation: ${GradientAnimation} 15s ease-out infinite;

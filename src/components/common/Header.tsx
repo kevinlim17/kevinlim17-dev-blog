@@ -1,11 +1,12 @@
 import React, { FunctionComponent, useCallback, useState } from 'react'
 import styled from '@emotion/styled'
 import { Link } from 'gatsby'
-import { faCode, faPen, faAddressCard } from '@fortawesome/free-solid-svg-icons'
+import { faCode, faAddressCard, faTree } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useScrollEvent } from 'hooks/useScrollEvent'
 import { toFit } from 'hooks/toFit'
 import CustomToolTip from './ToolTip'
+import { AvatarImage } from './AvatarImage'
 
 type HeaderTitleProps = {
   titleText: string
@@ -95,6 +96,7 @@ const Header: FunctionComponent<HeaderTitleProps> = function ({ titleText }) {
 
   return (
     <Wrapper isScroll={isScroll}>
+      <AvatarImage />
       <Title to="/">{titleText}</Title>
       <CustomToolTip title="Developer's Space">
         <SectionItem to="/" description="Developer's Space" isScroll={isScroll}>
@@ -102,13 +104,13 @@ const Header: FunctionComponent<HeaderTitleProps> = function ({ titleText }) {
         </SectionItem>
       </CustomToolTip>
 
-      <CustomToolTip title="Writer's Space">
+      <CustomToolTip title="Monthly, Soople">
         <SectionItem
-          to="/brunch_stories"
-          description="Writer's Space"
+          to="/soople"
+          description="Soople"
           isScroll={isScroll}
         >
-          <FontAwesomeIcon icon={faPen} />
+          <FontAwesomeIcon icon={faTree} />
         </SectionItem>
       </CustomToolTip>
 

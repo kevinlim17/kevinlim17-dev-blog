@@ -90,7 +90,7 @@ const IndexPage: FunctionComponent<IndexPageProps> = function ({
       description={description}
       url={siteUrl}
       image={publicURL}
-      headerTitle="🧑🏻‍💻 kevinlim17.dev"
+      headerTitle="&nbsp; kevinlim17.dev"
     >
       <Introduction profileImage={gatsbyImageData} />
       <CategoryList

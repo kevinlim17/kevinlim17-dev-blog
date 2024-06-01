@@ -48,7 +48,7 @@ const ProfilePage: FunctionComponent<ProfileProps> = function ({
   },
 }) {
   return (
-    <Template headerTitle="👤 kevinlim17.md">
+    <Template headerTitle="&nbsp; kevinlim17.md">
       <ProfilePageWrapper>
         <TabletShapedContainer profileImage={gatsbyImageData} />
       </ProfilePageWrapper>

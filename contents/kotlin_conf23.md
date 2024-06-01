@@ -1388,7 +1388,7 @@ Kotlin 2.0의 릴리즈(Release)는 곧 새로운 컴파일러, 코드네임 "K2
 컴파일러에서 <strong>프론트엔드(Frontend)</strong>는 개발자가 입력한 코드를 Input으로 받습니다. 그리고 <strong>Syntax Tree</strong>(IntelliJ Platform 계열에서는 Programming Structure Interface라고 부르는 것)에 <strong><b style="background-color: rgba(184, 184, 184, 0.5)">*</b>Symbol Table</strong>를 덧붙여 백엔드(Backend)로 내보냅니다. </br>
 </br>
 <strong>백엔드(Backend)</strong>는 프론트엔드의 Output을 받아 Machine Code, JavaScript, 또는 JVM Bytecode, 즉 <strong>Target Code</strong>로 변환하는 역할을 수행합니다. 바로 타겟으로 변환하여 최적화 단계를 진행하는 경우도 있고, 
-<code class="language-text" style="background-color: black; color: white;">Intermediate Representation</code>, 줄여서 <code class="language-text" style="background-color: black; color: white;">IR</code>을 생성한 후에 타겟으로 변환하는 경우도 있습니다. </br>
+프론트엔드에서 <code class="language-text" style="background-color: black; color: white;">Intermediate Representation</code>, 줄여서 <code class="language-text" style="background-color: black; color: white;">IR</code>을 만들어주는 경우, 이것을 타겟으로 변환하는 컴파일러 백엔드도 있습니다. </br>
 </br>
 <code class="language-text" style="background-color: black; color: white;">IR</code>을 최적화하는 단계를 <strong>미들엔드(Middle-end)</strong>로 분리할 수 있습니다. Kotlin 컴파일러가 어떻게 일하는지 다루는 이 글에서는 <a href="https://blog.jetbrains.com/kotlin/2021/10/the-road-to-the-k2-compiler/">The Road to K2 Compiler | Kotlin Blog</a>의 내용을 준용하여 해당 과정(Optimizing IR)을 백엔드에 포함시킵니다. 참고해 주세요. 
 
@@ -1521,8 +1521,8 @@ Marker의 Pair, AST 노드의 <strong>타입(Type)</strong>은 <strong>End </str
 <h5 style="background-color:transparent; font-weight: 800; margin-bottom: 2rem;"><a href="https://eli.thegreenplace.net/2009/02/16/abstract-vs-concrete-syntax-trees/">Abstract vs. Concrete Syntax Trees</a></h5>
 
 
-```c
-return a + 2;
+```kotlin
+return a + 2
 
 ```
 이번에도 (분석하기 비교적 쉬운) <code class="language-text" style="color: #cc99cd">return</code> 키워드를 가져와 봤습니다. </br> 위 코드를 분석해 Concrete한 방식으로 문법의 나무를 만들면 어떻게 될까요. 일단 Dragon Book에서 이야기하는 정의부터 보시죠. 
@@ -1601,62 +1601,233 @@ jumpExpression
 <hr style="margin: 1rem 0"/>
 Abstract Syntax Tree, 혹은 간단히 <strong>Syntax Tree</strong>라 불리는 구조는 Parse Tree와 다른 형태를 지닙니다. (문법적) 형태의 피상적인 구별점, 즉 번역에 필요없는 요소들은 생략됩니다.
 </blockquote>
+</br>
+
+이번에는 C99로 작성된 같은 내용의 코드를 보시죠.  
+```c
+return a + 2;
+
+```
+
+Kotlin 코드와는 <code class="language-text" style="color: white">;</code> 정도의 차이만 보이는 위의 C99 코드는 <a href="https://github.com/eliben/pycparser"><strong>pycparser</strong></a>를 사용하면 다음과 같은 도식으로 치환됩니다.
 
 <p align="left" style="padding: 2rem;">
     <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/419500af-356a-4e8c-89cd-86c9a1431f5a" width="70%" />
 </p>
 
-
+AST는 문법적인 잡동사니(Clutter)를 보여주진 않지만, 조각난(parsed) 문자열을 구조적으로 표현합니다. 코드를 "분할하는 데" 필요할 수 있는 정보이긴 하나, "분석하는 데" 필요한 정보를, 일종의 문법적 잡상을 제거한 형태를 보여주죠. 
 
 </blockquote>
 
 </br>
 
-PSI Tree는 두 형태의 Tree 중 어떤 형태에 가까울까요.  
+문자열(String)로 이루어진 코드(Code)를 Binary로 이끌어야 하는 험난한 여정에 Concrete한 나무, Parse Tree는 짊어지기 너무나 무겁습니다. 그래서 Parsing하는 문자열이 Grammar Rule을 준수한다고 판단되면, Concrete한 정보들은 버려집니다. 다시 정리하면, **CST**는 이 문자열이 해당 프로그래밍 언어의 문법에 어긋나지 않는지 파악하기 위해, 컴파일러가 가지는 일련의 사고 흐름을 시각화한 것입니다. 그리고 **AST**는 컴파일러가 CST를 만들며 열심히 문법적 오류를 검사한 결과, 최종적으로 판단한 코드의 **실체적인 구조**인 것입니다.  
+
+<p align="left">
+    <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/f9feeede-3da2-4840-b942-6887d08c253b"
+    width="100%"/>
+</p>
 
 </br>
 
+**이제 토큰들은 서로가 가진 끈을 묶어 나무가 되었습니다.**
+
+<p align="left">
+    <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/685631da-c43b-401d-b275-652e7a4b79fd" width="100%" />
+</p>
+
+
++ **PSI Tree에 대한 내용 추가하여 앞의 부분과 연결하기**
++ **Expert Review에서 가져와야 할 내용(`fun hello()`) 가져오기**
+
+</br>
 
 <h5>Semantic Analyzer</h5>
 
+<p align="left">
+    <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/7d987bb8-e905-4d03-ac49-5edc43542dab" width="90%">
+</p>
+
 </br>
 
+트리를 만들기 위해 수많은 일들을 했지만, 아직 이 문자열에 어떠한 **의미**도 부여되지 않은 상황입니다.
+직역하여 '의미 분석기'의 뜻을 가지는 Semantic Analyzer의 역할은, 정확히는, 손에 쥐여진 '나무'에 의미를 **부여**하는 일입니다. 전체 컴파일러에서 이 부분이 가지는 임무는 크게 세 가지인데요. 하나씩 살펴보도록 하지요.
+
+</br>
+<strong style="background-color:rgba(168, 168, 168, 0.1)">1. Call Resolution : 어디서 오셨나요</strong> 
+
+
+<table style="margin-bottom: -0.2rem; box-shadow: none; border-radius: 0rem">
+    <tr>
+        <td valign= "top" style="background-color:white; border-radius: 0rem; width: 40%;" >
+            <p align="left" style="margin-top: 0rem">
+                <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/7b0b446d-62a8-4ff9-8b54-26386967819d" width="100%"/>
+            </p>
+        </td>
+        <td valign="center" style="border-radius: 0rem; padding-left: 25px;">
+            옆의 코드에서 세 차례 등장하는 <code class="language-text" style="color: white">kevin</code>은 아직 연결되어 있지 않습니다. Syntax Tree에서 독립적으로 존재하는 하나의 노드(Node)일 뿐, 그저 문자열일 뿐이지요. Semantic Analyzer는 먼저 동일한 메모리 주소를 가리키는 Variable 그리고 Parameter를 찾아내야 합니다. 즉, 두 번째와 세 번째 <code class="language-text" style="color: white">kevin</code>이 함수에서 처음으로 등장하는 <code class="language-text" style="color: white">kevin</code>과 동일함을 파악해야 한다는 것이죠. </br></br>
+        </td>
+    </tr>
+</table>
+
+<table style="margin-bottom: -0.2rem; box-shadow: none; border-radius: 0rem">
+    <tr>
+        <td valign= "top" style="background-color:white; border-radius: 0rem; width: 40%;" >
+            <p align="left" style="margin-top: 0rem">
+                <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/7a850531-6b8b-445a-967b-d0dc8ede5b65" width="100%"/>
+            </p>
+        </td>
+        <td valign="center" style="border-radius: 0rem; padding-left: 25px;">
+            그렇다면 타입(<strong>Class</strong> 혹은 <strong>Interface</strong>)을 의미하는 String의 경우에는 어떨까요. 이 친구들도 Syntax Tree에 존재하는 Node일 뿐입니다. 아무런 의미도 지니지 않고 있죠. 프론트엔드가 만들어야 할 <strong>Table</strong>에는 타입에 대한 정보가 필수로 포함됩니다. 여기서 <code class="language-text" style="color: white">Life</code>는 같은 .kt 파일에 존재하는 빈 인터페이스를 가리키며, <code class="language-text" style="color: white">Human</code>은 Life를 상속(inherit)받은 클래스를 의미합니다. <strong>Type Argument</strong> (예를 들어 <code class="language-text" style="color: white"> val num : Int</code>에서의 <code class="language-text" style="color: white">Int</code>)도 이와 같은 방식으로 Resolution을 진행합니다. </br> </br>
+        </td>
+    </tr>
+</table>
+
+<table style="margin-bottom: -0.2rem; box-shadow: none; border-radius: 0rem">
+    <tr>
+        <td valign= "top" style="background-color:white; border-radius: 0rem; width: 40%;" >
+            <p align="left" style="margin-top: 0rem">
+                <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/2819fb1c-c3df-4387-a04d-48bb7106fe46" width="100%"/>
+            </p>
+        </td>
+        <td valign="center" style="border-radius: 0rem; padding-left: 25px;">
+            이제 함수를 찾을 차례입니다. 코드를 쓰고 읽는 우리는 <code class="language-text" style="color: white">kevin</code>이 <code class="language-text" style="color: white">Human</code>이라는 클래스의 인스턴스임을 알고 있습니다. 그리고 <code class="language-text" style="background-color: rgba(2, 0, 36, 1); color: rgba(12, 167, 136, 1)">hello()</code>가  <code class="language-text" style="color: white">Human</code>이라는 클래스의 메서드임을 인지하고 있지요. 하지만, 이 단계에서의 컴파일러는 'hello'라는 문자열만을 손에 들고 있을 뿐, 아무런 맥락을 지니고 있지 못합니다. 컴파일러는 <code class="language-text" style="background-color: rgba(2, 0, 36, 1); color: rgba(12, 167, 136, 1)">hello()</code>가 멤버 함수(member)인지, 확장 함수(extension)인지, 함수 타입의 프로퍼티(property of function type)인지 모릅니다. 또한 같은 모듈에 존재하는지, 다른 모듈에 존재하는지, 특정 라이브러리에 존재하는지 알지 못하죠. 그러니 Semantic Analyzer는, 단 하나도 빠짐없이, 주어진 이름(<code class="language-text" style="background-color: rgba(2, 0, 36, 1); color: rgba(12, 167, 136, 1)">hello</code>)에 해당하는 모든 함수를 찾아내야 합니다. 그리고 수많은 함수 중 가정 적절한 것을 골라내어야 합니다. 이것이 바로 Semantic Analyzer에서 가장 핵심적인 부분이며, 가장 많은 시간이 소요되는 작업이 바로 적절한 함수를 찾아내는 일인 이유입니다.
+            </br></br>
+        </td>
+    </tr>
+</table>
+
+</br>
+<strong style="background-color:rgba(168, 168, 168, 0.1)">2. Type Inference : 추측해 보는 수 밖에</strong> 
+
+</br>
+<p align="left">
+    <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/f27c6f1d-a08a-4c50-b862-96fd05cdf6dd" width="80%" />
+</p>
+</br>
+
+또 다른 Semantic Analyzer의 중요한 역할은 타입을 추론(Type Inference)하는 것입니다. Kotlin 뿐 아니라 Generic을 지원하는 모든 언어의 컴파일러가 가진 중대한 임무이지요. 
+
+
+</br>
+<strong style="background-color:rgba(168, 168, 168, 0.1)">3. Reporting Errors : 이만 돌아가세요</strong> 
+
+</br>
+<p align="left">
+    <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/523fc735-7296-487a-8bbc-1c9beb94970b" width="80%" />
+</p>
+</br>
+
+
+</br>
 <h5>Backend with <strong>IR</strong> </h5>
 
-<p align="left">
-    <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/be630c45-d269-4644-b491-3b0ca3bbdbc7" width="80%">
-</p>
+<blockquote style="padding: 1.5rem; background-color: rgba(184, 184, 184, 0.06); border-left: 1px solid rgba(138, 96, 254, 0.3)">
+<h5 style="background-color:transparent; font-weight: 800;"><a href="https://en.wikipedia.org/wiki/Compiler#Front_end">Front end</a></h5>
+The <strong>front end</strong> analyzes the source code to build an internal representation of the program, called the <strong>intermediate representation (IR)</strong>.</br> 
+It also manages the symbol table, a data structure mapping each symbol in the source code to associated information such as location, type and scope.
+<hr style="margin: 20px 0" />
 
-<p align="left">
-    <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/faccf0c6-7c69-4bd4-8cce-719399b82255" width="80%">
-</p>
+(컴파일러) 프론트엔드는 소스 코드를 분석해 (컴파일러) 내부에서 사용되는 표현식을 만듭니다. 이를 Intermediate Representation, 줄여서 <strong>IR</strong>이라고 부르죠. </br>
+프론트엔드는 (Source Code 내의 Symbol들을 메모리 주소, 타입, 스코프와 매핑시키는 자료구조인) Symbol Table도 관리합니다.  
+
+</blockquote>
+</br>
+
+프론트엔드는 기본적으로 IR을 만드는 임무를 맡습니다. '원론적'으로는 그렇습니다. 하지만 (<a href="#improvements-in-k2">Improvements in K2</a>에서 다룰 Frontend IR에 한해) **v1.9** 까지의 Kotlin은 예외였지요. <strong style="background-color: rgba(138, 96, 254, 0.3)">Background 블록</strong> 에서는 프론트엔드가 IR을 생성하는 일이 마치 흔하지 않은 것처럼 서술해 두었지만, 사실은 IR을 생성하지 않는 경우가 더 희소합니다. 이런 예외적인 상황은 Kotlin과 떼려야 뗄 수 없는 특성인 Multi-Platform 지향성과 관련이 있습니다. (사실상 Multi-platform의 모든 짐을 떠안는) Kotlin 컴파일러 백엔드에 IR이 도입된 과정을 살펴보며, 초기의 Kotlin이 왜 IR을 포기하고 시작했는지 알아보고, 컴파일러가 나아가야만 했던 방향에 대한 힌트를 얻어 볼게요. 
+
+<hr />
+
+<table style="margin-bottom: -0.2rem; margin-top: 5px; box-shadow: none; border-radius: 0rem">
+    <tr>
+        <td valign= "top" style="background-color:white; border-radius: 0rem; width: 50%;" >
+            <p align="left" style="margin-top: 0rem">
+                <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/b66549c5-fd76-49ef-b763-f7288e5a5248" width="100%">
+            </p>
+        </td>
+        <td valign="center" style="border-radius: 0rem; padding-left: 25px;">
+            백엔드에 별도의 변환 및 최적화(optimization) 없이 PSI Tree와 BindingContext (일종의 Symbol Table)을 그대로 넘겨주는 모습입니다. 초기 Kotlin 생태계의 설계자들에게, 두 백엔드를 묶어볼 무언가를 고안해 내기란 시간이 촉박했을 겁니다. 단순하게 생각해 봐도, JVM (Java Virtual Machine)이 생성하는 바이트코드와 다르게, JavaScript는 거의 Kotlin과 비슷한 정도의 고수준(High-level) 언어이기 때문이죠. Kotlin은 빠르게 성장하기 위해 처음에는 쉬운 길을 택했습니다.
+            </br></br>
+        </td>
+    </tr>
+</table>
+
+<table style="margin-bottom: -0.2rem; box-shadow: none; border-radius: 0rem">
+    <tr>
+        <td valign= "top" style="background-color:white; border-radius: 0rem; width: 50%;" >
+            <p align="left" style="margin-top: 0rem">
+                <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/be630c45-d269-4644-b491-3b0ca3bbdbc7" width="100%">
+            </p>
+        </td>
+        <td valign="center" style="border-radius: 0rem; padding-left: 25px;">
+            Hello
+            </br></br>
+        </td>
+    </tr>
+</table>
+
+<table style="margin-bottom: -0.2rem; box-shadow: none; border-radius: 0rem">
+    <tr>
+        <td valign= "top" style="background-color:white; border-radius: 0rem; width: 50%;" >       
+        <p align="left">
+            <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/faccf0c6-7c69-4bd4-8cce-719399b82255" width="100%">
+        </p>
+        </td>
+        <td valign="center" style="border-radius: 0rem; padding-left: 25px;">
+            Hello
+            </br></br>
+        </td>
+    </tr>
+</table>
 
 
 
 #### Improvements in K2
 
 <p align="left">
-    <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/86064c22-7ec1-44e7-a684-879b1690c3ca" width="80%">
+    <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/361f0fcc-f7c8-481b-b1d4-c66c1c145402" width="80%">
+</p>
+</br>
+
+
+
+
+</br>
+<h5>Why Rewrite the Compiler</h5>
+
+<p align="left">
+    <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/e38f6bf5-dbe1-4418-9c98-788a23a9f446" width="80%">
 </p>
 
 </br>
-<h5>Old Frontend vs New Frontend</h5>
 
-<p align="left">
-    <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/5634f041-d569-4a3a-821f-03355ba63820" width="80%">
-</p>
+Kotlin 컴파일러의 1.0 버전은 빠른 속도를 첫 번째 목표로 두고 만들어지지 않았습니다. 그 대신, 빠르게 컴파일러의 모습을 갖추는 것이 최우선이었죠. 세상에 막 첫 발을 딛은 신생 언어에게, 성능의 향상은 부차적인 요소일 수 밖에 없습니다. 하루라도 빨리 안정화 버전(Stable Version)을 내보이는 게 더 중요하니까요. 하지만 생태계가 성장하면서 구성원의 요구사항은 점차 많아집니다. Kotlin과 같은 Multi-Target 언어에게 안정화 다음으로 가장 시급하게 해결해야 할 과제는 바로 **속도**였죠. 빠른 컴파일 이외에도 **메모리의 효율적인 사용**, **멀티 스레딩**, **컴파일러 구조의 단순화**, **멀티플랫폼으로의 원활한 지원**, 그리고 **새로운 문법적 설탕**을 도입하는 데 있어, 컴파일러를 다시 작성하는 건 선택이 아닌 필수였습니다. 특히 새로운 프론트엔드를 작성하는 일 말이죠.
 
 </br>
-<h5>Frontend IR</h5>
+<h5>Transparent Box : Raw FIR Builder</h5>
 
 <p align="left">
-    <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/61cf6386-040e-442d-a6cc-cbae97013591" width="80%">
+    <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/a5fed814-b092-4335-9bd8-cf899702a951" width="100%">
 </p>
 
++ **새로운 Frontend에 대한 전체적인 로드맵 가져오기**
++ **Raw FIR**에 대한 내용 가져오기
++ **Desugaring Phase**에 대한 내용 가져오기
+
+</br>
+
+<h5>Transparent Box : Analyzer</h5>
+
+<p align="left">
+    <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/85d5dc6d-6416-4da2-a27d-fe724877fd58" width="100%">
+</p>
+
++ **New Analyzer에 대한 내용 간추려 보기**
++ **Why K2 frontend is faster : 3가지 이유 알기 쉽게 정리해 보기**
 
 
 ---
-### The Second Version
+### New Features of 2.0
 
 사실상 컨퍼런스 키노트의 메인 챕터입니다. 앞으로의 Kotlin 코드베이스가 어떤 방향으로 돛을 돌릴 지 짐작할 수 있는 중요한 단서이기 때문이죠. 여기서는 조금 호흡을 길게 가져가도록 하겠습니다. 숨 깊게 들이쉬시고, `static` 키워드가 먼저 여러분을 찾아갑니다. 
 
@@ -2303,6 +2474,15 @@ Kotlin의 핵심 가치는 "실용주의"입니다. </br>
 그러므로, 우리의 많은 디자인 원칙은 Kotlin 사용자들에게 얼마나 도움을 줄 수 있는가를 기준으로 결정됩니다. 
 언제나 그랬듯이 말이죠. 
 </blockquote>
+
+</br>
+
+이 글은 (논문을 제외한 일반적인 형태의 기술적 텍스트보다는 조금 많이) 긴 여정을 통해 Kotlin의 과거, 현재 그리고 미래 모두를 아우르는 (글쓴이 나름대로) 방대한 시도였습니다. 하지만 우리 옆에 쌓인 모든 책이 그렇고, 우리가 지내는 방대한 계가 그렇듯이, Kotlin의 이야기도 하나로 압축됩니다. **"일상에 녹아드는 언어가 되는 것."** 딱딱하게 이야기하면 실용주의라고 할 수 있겠네요. 
+
+우리가 세상을 바꾸기 위해 궁극적으로 행해야 하는 일은, 어디엔가의 누군가를 수단으로 취급하는 과정이 들어간다면, 반드시 중지되어야 합니다. 프로그래머가 하는 일도 마찬가지입니다. 프로그래밍에서 우리가 사용하는 수많은 도구들과 함께 언어(Language)는 예외로 취급되어 왔지요. 하지만 이러한 생태계를 구축하기 위해 흘렸던 땀만큼은 우리의 빛나는 일에 수단으로 대우받지 않기를 바랐습니다. 
+
+그러니 이 글은 Kotlin에 대한 커다란 헌사라고 할 수 있겠네요. 수많은 개발자의 노력을 하나의 맥락으로 묶어내는 일, 그럼으로써 수단이 아닌 가치에 봉사하는 일. 
+이 공간에서의 작업은 온전히 여러분에게 그러한 의도가 전달될 수 있도록 최선을 다하겠습니다.
 
 ---
 

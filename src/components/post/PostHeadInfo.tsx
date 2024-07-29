@@ -56,6 +56,7 @@ const Title = styled.div`
   font-size: 28px;
   font-weight: 800;
   line-height: 1.2;
+  mix-blend-mode: lighten;
 
   @media (max-width: 768px) {
     font-size: 24px;
@@ -73,7 +74,7 @@ const Summary = styled.div`
   -webkit-box-orient: vertical;
   font-size: 17px;
   font-weight: 700;
-  color: rgba(184, 184, 184, 1);
+  mix-blend-mode: lighten;
 
   @media (max-width: 768px) {
     font-size: 14px;

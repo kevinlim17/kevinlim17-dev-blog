@@ -1,5 +1,5 @@
 ---
-date: '2024-02-01'
+date: '2024-06-17'
 title: "지금의 Kotlin 그리고 Kotlin Conf'2023"
 categories: ['Kotlin', 'Review']
 summary: '안드로이드 생초보의 첫 개발자 컨퍼런스'
@@ -108,7 +108,7 @@ ___
 </p>
 
 > **일단은 재밌어야 한다. 배우는 게 뭐든.** </br>
-> [Official Site](kotlinlang.org) 대문에서 가져온 인상깊은 문구. </br>
+> [Official Site](https://kotlinlang.org) 대문에서 가져온 인상깊은 문구. </br>
 > (Functional의 `fun`은 아니겠지요..?)
 
 #### Concise
@@ -1623,6 +1623,14 @@ AST는 문법적인 잡동사니(Clutter)를 보여주진 않지만, 조각난(p
 
 문자열(String)로 이루어진 코드(Code)를 Binary로 이끌어야 하는 험난한 여정에 Concrete한 나무, Parse Tree는 짊어지기 너무나 무겁습니다. 그래서 Parsing하는 문자열이 Grammar Rule을 준수한다고 판단되면, Concrete한 정보들은 버려집니다. 다시 정리하면, **CST**는 이 문자열이 해당 프로그래밍 언어의 문법에 어긋나지 않는지 파악하기 위해, 컴파일러가 가지는 일련의 사고 흐름을 시각화한 것입니다. 그리고 **AST**는 컴파일러가 CST를 만들며 열심히 문법적 오류를 검사한 결과, 최종적으로 판단한 코드의 **실체적인 구조**인 것입니다.  
 
+**이제 토큰들은 서로가 가진 끈을 묶어 나무가 되었습니다.**
+
+</br>
+
+대부분의 컴파일러에서, Parser는 **Abstract Syntax Tree를 생성**하고 이를 Semantic Analyzer로 전달합니다. 하지만 Kotlin은 **PSI(Program Structure Interface) Tree**를 만드는데요. 여기서 PSI는 JetBrains가 만든 추상화 도구입니다. JetBrains의 모든 IDE에서 작성되는 텍스트, 코드, 언어를 핸들링하기 위한, 일종의 무겁고도 Generic한 Syntax Tree이지요. PSI는 마냥 가볍지 않은, Concrete한 형태와 Abstract한 형태의 중간에 있습니다. CST에 가까운 점은 형식적인 요소(Formal Representation)까지 나무에 포함시킨다는 것입니다. (여기서 형식적인 요소라 하면, 세미콜론 (<code class="language-text" style="color: white">;</code>)소괄호(<code class="language-text" style="color: white">()</code>)와 같은 문법적 잡상(Clutter)이죠) 각각의 노드에 부가적인 정보가 첨가되며, nonterminal symbol이 적다는 면에서는 AST에 가까운 형태를 취합니다. 그렇다면 PSI Tree는 어떻게 AST로부터 파생되는 걸까요. 
+
+</br>
+
 <p align="left">
     <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/f9feeede-3da2-4840-b942-6887d08c253b"
     width="100%"/>
@@ -1630,15 +1638,60 @@ AST는 문법적인 잡동사니(Clutter)를 보여주진 않지만, 조각난(p
 
 </br>
 
-**이제 토큰들은 서로가 가진 끈을 묶어 나무가 되었습니다.**
+이미 Lexer에서 나온 Token은 Marker들이 감싸안아, 이미 그 타입이 결정된 ASTNode의 형태로 존재합니다. 그 노드들의 상하 관계를 나타낸 도식이 위 그림의 오른쪽 나무(Abstract Syntax Tree)입니다. 그리고 AST Node는 <a href="https://github.com/JetBrains/intellij-community/blob/idea/241.18034.62/platform/core-impl/src/com/intellij/extapi/psi/ASTWrapperPsiElement.java">Factory Class</a>(<code class="language-text" style="color: white">ASTWrpperPsiElement</code>)로 보내져 일종의 포장지(Wrapper)를 만드는 데 사용됩니다. 그것이 바로 PSI element인 것이죠. 여기서의 PSI element는 PSI Tree의 Composite Node로 기능합니다. 그리고 Composite Node (<a style="background-color: grey; color: white; padding: 0.25rem; text-decoration: none;">Element</a>) 아래에 Terminal Symbol (<a style="background-color: #0CA789; color: white; padding: 0.25rem; text-decoration: none;">Token</a>)이 자리하게 되면, **PSI Tree**가 됩니다.
+
+</br>
+
+<blockquote style="background-color: rgba(12, 167, 137, 0.03); margin-top: 1.5rem; padding: 1.5rem; border-top: 0.5px solid rgba(184, 184, 184, 0.5)">
+
+<h5 style="background-color:transparent; font-weight: 800;">PSI Tree represented as Concrete Syntax Tree</h5>
+
+<hr style="margin: 1.5rem 0"/>
+
+```kotlin
+
+fun hello(user: string) = println("Hello, $user")
+
+
+```
+
+PSI는 기본적으로 AST의 뼈대를 갖춘 상태로 출발합니다. 여기서 뼈대라 하면 AST Node로부터 변환된 PSI Element를 의미하죠. 즉 Composite Node입니다. 아래 다이어그램은 순수하게 AST Node만을 가지고 만들어낸 트리의 형상입니다. 
+
+</br>
 
 <p align="left">
-    <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/685631da-c43b-401d-b275-652e7a4b79fd" width="100%" />
+    <img src="https://github.com/user-attachments/assets/f3a72911-28af-4bb4-a0e7-3cab3c38e965" width="80%" />
 </p>
 
+<hr style="margin: 1.5rem 0"/>
 
-+ **PSI Tree에 대한 내용 추가하여 앞의 부분과 연결하기**
-+ **Expert Review에서 가져와야 할 내용(`fun hello()`) 가져오기**
+ASTNode를 Composite Node로 활용해 커다란 가지들을 뻗치게 된 PSI Tree는 확장을 시도합니다. AST는 기본적으로 Top-level Element들만을 가지고 있는 형태거든요. 순수하게 Object-Oriented로 작성된 Source를 가정했을 때, AST는 클래스(Class), 메서드(Method), 필드(Field) 등에 대한 접근 권한만을 가지고 있는 나무인 것이죠. PSI Layer는 AST Node에 특별한 힘을 부여합니다. PSI element를 생성하는 Factory Class는 일종의 토큰을 쥐어주는데요. 정확히는 이미 '정해진 타입'으로 둘러싸인 AST Node 안에 있던 -오래 전 Lexical Analysis에서 생성되었던- 토큰입니다. 이 토큰들을 활용해 온전히 AST의 형태이던 PSI Tree는 CST에 가까운 모습으로 변모합니다. WhiteSpace가 포함되는 건 물론입니다. 이해를 돕기 위해 아래 다이어그램을 만들어 보았습니다.
+
+</br>
+
+<code class="language-text"> /* Token -> Marker -> ASTNode -> PSI Element 도식 제작하기 **/ </code>
+
+</br>
+
+- <code class="language-text" style="background-color: rgba(138, 96, 254, 0.9); color: white">fun hello(user: string) = </code>
+    <p align="left">
+        <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/71627b4c-8679-4304-812a-19433b954bbb" width="80%" />
+    </p>
+
+</br>
+
+- <code class="language-text" style="background-color: rgba(249, 38, 114, 0.7); color: white">println("Hello, $user")</code>
+    <p align="left">
+        <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/f48b3292-2ec6-4af1-8573-fc93bf32fe3d" width="80%" />
+    </p>
+
+<hr style="margin: 1.5rem 0"/>
+
+모든 컴파일러 프론트엔드의 Parser는 AST를 생성합니다. 그리고 이를 Semantic Analyzer로 전달하는 역할을 수행하죠. 하지만 Jetbrains IDE에서 컴파일되는 모든 언어들은 -- Kotlin을 포함해 -- PSI (Programming Structure Interface)라는 독특한 구조를 생성하게끔 되어 있습니다. 컴파일러 백엔드의 단계에 이르러서는 모든 언어가 PSI라는 구조를 활용하는 것은 아니지만, (2.0 이전의) Kotlin 컴파일러는  <code class="language-text" style="color : white">BindingContext</code>라는 일종의 Map과 함께 PSI를 프론트엔드 전역에서 활용했습니다. 
+
+
+</blockquote>
+
 
 </br>
 
@@ -1734,7 +1787,7 @@ It also manages the symbol table, a data structure mapping each symbol in the so
 </blockquote>
 </br>
 
-프론트엔드는 기본적으로 IR을 만드는 임무를 맡습니다. '원론적'으로는 그렇습니다. 하지만 (<a href="#improvements-in-k2">Improvements in K2</a>에서 다룰 Frontend IR에 한해) **v1.9** 까지의 Kotlin은 예외였지요. <strong style="background-color: rgba(138, 96, 254, 0.3)">Background 블록</strong> 에서는 프론트엔드가 IR을 생성하는 일이 마치 흔하지 않은 것처럼 서술해 두었지만, 사실은 IR을 생성하지 않는 경우가 더 희소합니다. 이런 예외적인 상황은 Kotlin과 떼려야 뗄 수 없는 특성인 Multi-Platform 지향성과 관련이 있습니다. (사실상 Multi-platform의 모든 짐을 떠안는) Kotlin 컴파일러 백엔드에 IR이 도입된 과정을 살펴보며, 초기의 Kotlin이 왜 IR을 포기하고 시작했는지 알아보고, 컴파일러가 나아가야만 했던 방향에 대한 힌트를 얻어 볼게요. 
+프론트엔드는 기본적으로 IR을 만드는 임무를 맡습니다. '원론적'으로는 그렇습니다. 하지만 (<a href="#improvements-in-k2">Improvements in K2</a>에서 다룰 Frontend IR에 한해) **v1.9** 까지의 Kotlin은 예외였지요. <strong style="background-color: rgba(138, 96, 254, 0.3)">Background 블록</strong> 에서는 프론트엔드가 IR을 생성하는 일이 마치 흔하지 않은 것처럼 서술해 두었지만, 사실은 IR을 생성하지 않는 경우가 더 희소합니다. 이런 예외적인 상황은 Kotlin과 떼려야 뗄 수 없는 특성인 Multi-Platform 지향성과 관련이 있습니다. (사실상 Multi-platform의 모든 짐을 떠안게 된) Kotlin 컴파일러 백엔드에 IR이 도입된 과정을 살펴보며, 초기의 Kotlin이 왜 IR을 포기하고 시작했는지 알아보고, 컴파일러가 나아가야만 했던 방향에 대한 힌트를 얻어 볼게요. 
 
 <hr />
 
@@ -1760,7 +1813,7 @@ It also manages the symbol table, a data structure mapping each symbol in the so
             </p>
         </td>
         <td valign="center" style="border-radius: 0rem; padding-left: 25px;">
-            Hello
+            그런데 Native Backend가 등장합니다. Kotlin이라는 언어를 컴퓨터가 이해할 수 있는 형식으로 창출해내기 위해, 어떠한 경유지도 거치지 않을 수 있는 유일한 방법 말입니다. 
             </br></br>
         </td>
     </tr>

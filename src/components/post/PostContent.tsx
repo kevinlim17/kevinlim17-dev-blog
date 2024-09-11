@@ -202,8 +202,7 @@ const MarkdownRenderer = styled.div`
   }
 
   pre[class*='language-'] {
-    margin: 30px 0;
-    padding: 15px;
+    margin: 15px 0;
     font-size: 14px;
     font-family: "IBM Plex Mono", monospace;
     font-weight: 500;
@@ -219,8 +218,8 @@ const MarkdownRenderer = styled.div`
   code[class*='language-'],
   pre[class*='language-'] {
     tab-size: 5;
-    padding: 3px 20px;
-    font-size: 14px;
+    padding: 10px 25px;
+    font-size: 15px;
     font-family: "IBM Plex Mono", monospace;
     font-weight: 500;
     font-style: normal;

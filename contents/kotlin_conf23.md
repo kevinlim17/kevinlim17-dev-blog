@@ -1007,6 +1007,20 @@ JVM을 타겟으로 하는 경우, 우리가 작성한 Kotlin 코드는 Java 8 �
 
 타겟이 JavaScript인 경우, ES5.1 버전의 코드로 변환되며, 이는 CommonJS와 AMD(Asynchronous Module Definition) 모듈 시스템과의 호환을 지원합니다.<sup><a id="doc4" href="#ref4">[4]</a></sup> 또한 (아직 실험 단계이기는 하지만,) WebAssembly로의 컴파일도 가능합니다. 컴파일러가 이 두 타겟을 지원함으로써, 클라이언트 사이드의 웹 개발이 가능해지며, 명시적으로 Java와의 첫 번째 분기(分岐)가 일어납니다. 
 
+</br>
+
+<blockquote style="padding : 1.5rem">
+<h5 style="background-color : transparent"><strong><a href="https://kotlinlang.org/docs/native-overview.html#why-kotlin-native">Why Kotlin Native?</a></strong></h5>
+Kotlin/Native is primarily designed to allow compilation for platforms on which virtual machines are not desirable or possible, such as embedded devices or iOS. </br>
+It is ideal for situations when a developer needs to produce a self-contained program that does not require an additional runtime or virtual machine.
+<hr style="margin : 1rem 0"/>
+Kotlin/Native는 Virtual Machine의 구동이 불가능하거나 적절하지 않은 플랫폼 - 임베디드나 iOS 디바이스 - 위에서 Kotlin 코드를 컴파일할 수 있도록 처음 디자인되었습니다. </br>
+추가적인 런타임이나 Virtual Machine이 필요하지 않은 Self-Contained 프로그램을 개발하려 할 때, 이상적인 선택지입니다.
+
+</blockquote>
+
+</br>
+
 Native의 경우, 이름이 말해주듯, Kotlin 코드는 Virtual Machine을 거치지 않고 Binary로 컴파일됩니다. 
 모든 경우에서 **JVM이 만병통치약이 아니기 때문에**, (특히 임베디드나 macOS, iOS에서 Desirable한 해결책이 아니기 때문에,) 궁극적인 Multiplatform 지향성을 갖추기 위해서 (그리고 속도를 위해서,) Kotlin의 개발자들은 Native Complier가 필요하다고 판단한 것 같습니다. 두 번째 분기는 여기서 일어납니다. Java와는 달리 '운영체제 독립성'과 '의존성'을 모두 취한 것이죠.
 
@@ -1665,25 +1679,13 @@ PSI는 기본적으로 AST의 뼈대를 갖춘 상태로 출발합니다. 여기
 
 <hr style="margin: 1.5rem 0"/>
 
-ASTNode를 Composite Node로 활용해 커다란 가지들을 뻗치게 된 PSI Tree는 확장을 시도합니다. AST는 기본적으로 Top-level Element들만을 가지고 있는 형태거든요. 순수하게 Object-Oriented로 작성된 Source를 가정했을 때, AST는 클래스(Class), 메서드(Method), 필드(Field) 등에 대한 접근 권한만을 가지고 있는 나무인 것이죠. PSI Layer는 AST Node에 특별한 힘을 부여합니다. PSI element를 생성하는 Factory Class는 일종의 토큰을 쥐어주는데요. 정확히는 이미 '정해진 타입'으로 둘러싸인 AST Node 안에 있던 -오래 전 Lexical Analysis에서 생성되었던- 토큰입니다. 이 토큰들을 활용해 온전히 AST의 형태이던 PSI Tree는 CST에 가까운 모습으로 변모합니다. WhiteSpace가 포함되는 건 물론입니다. 이해를 돕기 위해 아래 다이어그램을 만들어 보았습니다.
+ASTNode를 Composite Node로 활용해 커다란 가지들을 뻗치게 된 PSI Tree는 확장을 시도합니다. AST는 기본적으로 Top-level Element들만을 가지고 있는 형태거든요. 순수하게 Object-Oriented로 작성된 Source를 가정했을 때, AST는 클래스(Class), 메서드(Method), 필드(Field) 등에 대한 접근 권한만을 가지고 있는 나무인 것이죠. PSI Layer는 AST Node에 특별한 힘을 부여합니다. PSI element를 생성하는 Factory Class는 일종의 토큰을 쥐어주는데요. 정확히는 이미 '정해진 타입'으로 둘러싸인 AST Node 안에 있던 -오래 전 Lexical Analysis에서 생성되었던- 토큰입니다. 이 토큰들을 활용해 온전히 AST의 형태이던 PSI Tree는 CST에 가까운 모습으로 변모합니다. ( WhiteSpace가 포함되는 건 물론입니다. ) 아래의 다이어그램이 이해를 도울 듯 합니다. 
 
 </br>
 
-<code class="language-text"> /* Token -> Marker -> ASTNode -> PSI Element 도식 제작하기 **/ </code>
-
-</br>
-
-- <code class="language-text" style="background-color: rgba(138, 96, 254, 0.9); color: white">fun hello(user: string) = </code>
-    <p align="left">
-        <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/71627b4c-8679-4304-812a-19433b954bbb" width="80%" />
-    </p>
-
-</br>
-
-- <code class="language-text" style="background-color: rgba(249, 38, 114, 0.7); color: white">println("Hello, $user")</code>
-    <p align="left">
-        <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/f48b3292-2ec6-4af1-8573-fc93bf32fe3d" width="80%" />
-    </p>
+<p align="left">
+    <img src="https://github.com/user-attachments/assets/58dbdbfd-b3b5-46df-95bb-b8673c838426" width="100%" />
+</p>
 
 <hr style="margin: 1.5rem 0"/>
 
@@ -1759,7 +1761,67 @@ ASTNode를 Composite Node로 활용해 커다란 가지들을 뻗치게 된 PSI 
 </p>
 </br>
 
-또 다른 Semantic Analyzer의 중요한 역할은 타입을 추론(Type Inference)하는 것입니다. Kotlin 뿐 아니라 Generic을 지원하는 모든 언어의 컴파일러가 가진 중대한 임무이지요. 
+또 다른 Semantic Analyzer의 중요한 역할은 타입을 추론(Type Inference)하는 것입니다. Kotlin에서 Type Inference가 필요한 순간은 크게 두 가지로 구분지을 수 있죠. 컴파일러는 이 모든 경우에 대비할 수 있어야 합니다. 물론, 빠른 속도로 말이지요. Kotlin의 Type Inference를 이해하기 위해서는 Smart Cast에 대한 이해가 우선합니다. 간단한 예시와 함께 살펴 보겠습니다.
+
+<blockquote style="background-color: rgba(138, 96, 254, 0.02); margin-top: 1.5rem; padding: 1.5rem; border-top: 0.5px solid rgba(184, 184, 184, 0.5)">
+
+<h5 style="background-color: transparent">Smart Cast in Kotlin</h5>
+
+</blockquote>
+
+</br>
+
+컴파일러가 Smart Cast의 산을 넘으면, 마주하는 추론의 갈림길은 두 갈래입니다. Local Type Inference와 Function Signature Type Inference가 그것이죠.
+
+</br>
+
+1. 변수를 **초기화**하는 경우 (**Initialize** a variable)
+    ```kotlin
+    
+    fun main() {
+        val num = 1 // Inferring the type 'Int'
+        val name = "Kevin" // Inferring the type 'String'
+    }
+
+
+    ```
+</br>
+
+타입 추론을 언급할 때 가장 흔히 인용되는 예시입니다. 어떤 그릇에 값(value)을 담을 것인지 코드에 명시적으로 작성하지 않은 경우 일어나는 추론이죠. Kotlin에서는 Primitive Type으로 보이는 값 - <code class="language-text" style="color: white">Int</code>, <code class="language-text" style="color: white">Char</code>, <code class="language-text" style="color: white">Boolean</code> 같은 - 이 모두 객체입니다. 그러니 이 값이, 어떤 클래스의 인스턴스에 담길 것인지, 컴파일 타임에 정해야 합니다. 
+
+</br>
+
+2. **제너릭 (Generics)**
+    ```kotlin
+
+    fun <T> makeSerializedSet(element: T) : List<T> = listOf(element)
+    val numberSet = makeSerializedSet(17) // Inferring the set of 'Int'
+
+
+    ```
+</br>
+
+제너릭(Generic)도 빠질 수 없죠. 
+
+</br>
+
+1. 함수의 **리턴 타입** (**Return Type** of a Function)
+   ```kotlin
+   
+   fun multiply(num1: Int, num2: Int) = num1 * num2 // Inferring the return type as 'Int'
+
+
+   ```
+
+</br>
+
+2. **람다** 식 (**Lambda** Expression)
+   ```kotlin
+
+   val divide = { num1: Int, num2: Int -> a + b } // Inferring the function type as '(Int, Int) -> Int'
+
+
+   ```
 
 
 </br>
@@ -1813,11 +1875,20 @@ It also manages the symbol table, a data structure mapping each symbol in the so
             </p>
         </td>
         <td valign="center" style="border-radius: 0rem; padding-left: 25px;">
-            그런데 Native Backend가 등장합니다. Kotlin이라는 언어를 컴퓨터가 이해할 수 있는 형식으로 창출해내기 위해, 어떠한 경유지도 거치지 않을 수 있는 유일한 방법 말입니다. 
+            그런데 Native Backend가 등장합니다. Kotlin이라는 언어를 컴퓨터가 이해할 수 있는 형식으로 창출해내기 위해, 어떠한 경유지도 거치지 않을 수 있는 유일한 방법 말입니다. 이 방법을 왜 고안해 내야만 했을까요. (ES라는 타겟이 있음에도 불구하고,) Kotlin은 오랜 시간 동안 Java와의 상호 운용성(Interoperability)으로만 주목받아 왔습니다. 물론 Java를 장기적으로 대체하는 언어가 되는 것도 중요하지만, 그에 앞서 모든 플랫폼에서 사용되는 범용 언어로 성장하는 게 우선이었죠. macOS, iOS, 임베디드 생태계에서 뿌리내리기 위해서는 (JIT를 장착했음에도) 느리고 무거운 JVM을 계속 어깨에 이고 갈 순 없었습니다. 그래서 <code class="language-text" style="background-color: white; color: rgba(42, 97, 123, 1); font-weight:800">LLVM</code>을 도입합니다. Instruction Set Architecture 너머 바이너리로 가장 빨리 도달할 수 있는 티켓, 그 비싼 티켓의 값을 Kotlin 생태계는 Backend IR을 구성하며 치러 내었습니다.
             </br></br>
         </td>
     </tr>
 </table>
+
+<blockquote style="background-color: rgba(42, 97, 123, 0.03); margin-top: 1.5rem; padding: 1.5rem; border-top: 0.5px solid rgba(184, 184, 184, 0.5)">
+
+<h5 style="background-color: rgba(42, 97, 123, 0.1); font-weight: 800;">Kotlin/Native is a frontend of LLVM Infrastructure</h5>
+
+
+</blockquote>
+
+<hr />
 
 <table style="margin-bottom: -0.2rem; box-shadow: none; border-radius: 0rem">
     <tr>

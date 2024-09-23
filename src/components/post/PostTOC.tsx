@@ -29,7 +29,9 @@ const PostTOCBlock = styled(Sticky)`
   overflow-wrap: break-word;
   border-radius: 8px;
   //background-color: rgba(2, 0, 36, 0.03);
-  border-left: 6px solid rgba(2, 0, 36, 0.1);
+  border-left: 3px solid rgba(2, 0, 36, 0.1);
+  box-shadow: rgba(0, 0, 0, 0.12) 0 1px 1px -2px,
+    rgba(0, 0, 0, 0.14) 0 1px 1px 0, rgba(0, 0, 0, 0.12) 0 1px 3px 0;
 `
 
 const PostTOCContent = styled.div<PostCurrentHeaderProps>`

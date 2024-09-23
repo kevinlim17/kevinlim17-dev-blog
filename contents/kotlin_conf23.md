@@ -1885,6 +1885,20 @@ It also manages the symbol table, a data structure mapping each symbol in the so
 
 <h5 style="background-color: rgba(42, 97, 123, 0.1); font-weight: 800;">Kotlin/Native is a frontend of LLVM Infrastructure</h5>
 
+<p align="left">
+    <b>Overview</b>
+    <img src="https://github.com/user-attachments/assets/ca08d5cb-e5f1-47ad-924a-858a871b8c91" width="100%"/>
+</p>
+
+<blockquote style="background-color: transparent; padding: 1.5rem">
+The <a href="https://llvm.org/"><strong>LLVM Project</strong></a> is a collection of modular and reusable compiler and toolchain technologies. </br>
+Despite its name, LLVM has little to do with traditional virtual machines.
+<hr/>
+LLVM 프로젝트는 모듈화되어 재사용 가능한 컴파일러와 툴체인 기슬의 집합입니다. </br>
+이름에서 보이는 것과 달리 LLVM은 고전적인 의미의 가상 머신과는 거의 관련이 없습니다.
+</blockquote>
+
+LLVM을 간단하게 이야기하면, 모듈화(Modularize)된 컴파일러입니다. 특히 프론트엔드를 탈부착하는 데 용이하며, 여기서도 그 의미만을 다루겠습니다. 
 
 </blockquote>
 

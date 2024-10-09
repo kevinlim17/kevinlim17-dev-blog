@@ -38,7 +38,7 @@ const PostTOCContent = styled.div<PostCurrentHeaderProps>`
   ul {
     margin: 3px 3px;
     padding: 3px 5px;
-    font-weight: 500;
+    font-family: 'NanumSquareNeoBold';
     font-size: 10px;
 
     border-left: 3px solid rgba(2, 0, 36, 0.1);
@@ -61,7 +61,7 @@ const PostTOCContent = styled.div<PostCurrentHeaderProps>`
         color: green;
         font-size: 12px;
         margin-bottom: 2px;
-        font-weight: 700;
+        font-family: 'NanumSquareNeoExtraBold';
       }
     }
 

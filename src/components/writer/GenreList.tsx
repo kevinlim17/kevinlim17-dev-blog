@@ -53,7 +53,7 @@ const GenreItem = styled(({ active, ...props }: GatsbyLinkProps) => (
   margin-right: 20px;
   padding: 8px 12px;
   font-size: 18px;
-  font-weight: ${({ active }) => (active ? '700' : '400')};
+  font-family: ${({ active }) => (active ? 'NanumSquareNeoExtraBold' : 'NanumSquareNeoBold')};
 
   &:last-of-type {
     margin-right: 0;

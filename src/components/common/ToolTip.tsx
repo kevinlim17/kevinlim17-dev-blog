@@ -13,8 +13,7 @@ const CustomToolTip = styled(({ className, ...props }: TooltipProps) => (
     color: theme.palette.common.white,
     boxShadow: theme.shadows[1],
     fontSize: 14,
-    fontFamily: 'NanumSquareNeo',
-    fontWeight: 800,
+    fontFamily: 'NanumSquareNeoExtraBold',
     padding: '7px 10px',
   },
 }))

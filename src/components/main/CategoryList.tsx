@@ -62,7 +62,7 @@ const CategoryItem = styled(({ active, ...props }: GatsbyLinkProps) => (
   margin: 10px 20px 0 0;
   padding: 8px 12px;
   font-size: 18px;
-  font-weight: ${({ active }) => (active ? '800' : '400')};
+  font-family: ${({ active }) => (active ? 'NanumSquareNeoExtraBold' : 'NanumSquareNeo')};
 
   &:last-of-type {
     margin-right: 0;

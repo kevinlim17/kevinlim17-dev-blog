@@ -127,7 +127,7 @@ const TextWrapper = styled.div`
 
 const SubTitle = styled.div`
   font-size: 1.7rem;
-  font-weight: 600;
+  font-family: 'NanumSquareNeoBold';
   line-height: 1.4;
   margin-bottom: 3vh;
 
@@ -142,7 +142,7 @@ const SubTitle = styled.div`
 const Title = styled.div`
   margin-top: 10px;
   font-size: 2rem;
-  font-weight: 900;
+  font-family: 'NanumSquareNeoHeavy';
   line-height: 1.4;
 
   padding-top: 3vh;

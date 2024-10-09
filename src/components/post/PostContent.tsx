@@ -35,7 +35,7 @@ const MarkdownRenderer = styled.div`
   // Markdown Style
   line-height: 2;
   font-size: 15px;
-  font-weight: 400;
+  font-family: 'NanumSquareNeoExtraBold';
 
   // Apply Padding Attribute to All Elements
   p {
@@ -48,23 +48,25 @@ const MarkdownRenderer = styled.div`
   }
 
   // Adjust Heading Element Style
-  h1 {rgba(0, 255, 109, 1)
-    font-weight: 900;
+  h1 {
+    font-family: 'NanumSquareNeoHeavy';
   }
+
   h2,
   h3 {
-    font-weight: 800;
+    font-family: 'NanumSquareNeoExtraBold';
     margin-bottom: 2rem;
     padding-bottom: 0.5rem;
     border-bottom: 2px solid rgba(2, 0, 36, 0.7);
   }
+
   h4 {
-    font-weight: 700;
+    font-family: 'NanumSquareNeoBold';
     margin-bottom: 10px;
   }
 
   h5 {
-    font-weight: 600;
+    font-family: 'NanumSquareNeoBold';
     margin-bottom: 1rem;
   }
 
@@ -111,7 +113,7 @@ const MarkdownRenderer = styled.div`
 
   // Adjust bold's font-weight
   strong {
-    font-weight: 800;
+    font-family: 'NanumSquareNeoExtraBold';
   }
 
   // Adjust Quotation Element Style
@@ -141,7 +143,7 @@ const MarkdownRenderer = styled.div`
   }
 
   li::marker {
-    font-weight: 800;
+    font-family: 'NanumSquareNeoExtraBold';
   }
 
   // Adjust Horizontal Rule style

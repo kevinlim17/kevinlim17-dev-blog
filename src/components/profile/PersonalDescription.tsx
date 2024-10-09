@@ -41,7 +41,7 @@ const PersonalDescriptionWrapper = styled.div`
 
 const Slogan = styled.div`
   font-size: 3vh;
-  font-weight: 800;
+  font-family: 'NanumSquareNeoExtraBold';
   line-height: 1.4;
   height: 8vh;
 
@@ -71,11 +71,11 @@ const SectionWrapper = styled.div`
 
 const SectionTitle = styled.div`
   font-size: 1.3rem;
-  font-weight: 800;
+  font-family: 'NanumSquareNeoExtraBold';
   line-height: 1.4;
 
   width: 12vw;
-  height: 100%
+  height: 40%;
   padding-right: 1vw;
 
   color: rgba(2, 0, 36, 0.8);
@@ -91,7 +91,7 @@ const SectionTitle = styled.div`
 
 const SectionDetail = styled.div`
   font-size: 2vh;
-  font-weight: 700;
+  font-family: 'NanumSquareNeoBold';
   line-height: 1.7;
 
   margin: 0.6rem 0;
@@ -101,10 +101,11 @@ const SectionDetail = styled.div`
   color: rgba(2, 0, 36, 0.7);
 
   a {
-    font-weight: 900;
+    font-family: 'NanumSquareNeoHeavy';
   }
+
   a:hover {
-    font-weight: 900;
+    font-family: 'NanumSquareNeoHeavy';
     text-decoration: underline;
     text-underline-offset: 5px;
   }

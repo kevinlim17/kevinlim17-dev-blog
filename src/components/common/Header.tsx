@@ -39,7 +39,7 @@ const Title = styled(Link)`
   flex: none;
   margin-right: auto;
   font-size: 3.5vh;
-  font-weight: 900;
+  font-family: "NanumSquareNeoHeavy";
   color: white;
 
   &:hover {

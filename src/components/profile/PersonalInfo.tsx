@@ -83,7 +83,7 @@ const PersonalInfoNameWrapper = styled.div`
 
 const PersonalInfoName = styled.div`
   font-size: 1.7rem;
-  font-weight: 900;
+  font-family: 'NanumSquareNeoHeavy';
   line-height: 1.4;
 
   color: rgba(2, 0, 36, 0.8);
@@ -102,7 +102,7 @@ const PersonalInfoName = styled.div`
 
 const PersonalInfoNickname = styled.div`
   font-size: 1.4rem;
-  font-weight: 600;
+  font-family: 'NanumSquareNeoBold';
   line-height: 1.4;
   margin-top: 0.1rem;
 
@@ -180,7 +180,7 @@ const PersonalInfoContactIcon = styled.div`
 
 const PersonalInfoContactText = styled.div`
   font-size: 2.25vh;
-  font-weight: 700;
+  font-family: 'NanumSquareNeoExtraBold';
   line-height: 1.2;
   margin: 0.6rem 0;
 

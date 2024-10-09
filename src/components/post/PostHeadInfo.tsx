@@ -54,7 +54,7 @@ const Title = styled.div`
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   font-size: 28px;
-  font-weight: 800;
+  font-family: 'NanumSquareNeoExtraBold';
   line-height: 1.2;
   mix-blend-mode: lighten;
 
@@ -73,7 +73,7 @@ const Summary = styled.div`
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
   font-size: 17px;
-  font-weight: 700;
+  font-family: 'NanumSquareNeoBold';
   mix-blend-mode: lighten;
 
   @media (max-width: 768px) {
@@ -116,6 +116,7 @@ const PostCategoryItem = styled.div`
   text-align: center;
   margin-right: 10px;
   padding: 8px 12px;
+  font-family: 'NanumSquareNeoBold';
 
   @media (max-width: 768px) {
     font-size: 14px;
@@ -135,6 +136,7 @@ const PostDateBox = styled.div`
     rgba(0, 0, 0, 0.14) 0 2px 2px 0, rgba(0, 0, 0, 0.12) 0 1px 5px 0;
   border-radius: 8px;
   color: white;
+  font-family: 'NanumSquareNeoBold';
 
   @media (max-width: 768px) {
     font-size: 14px;

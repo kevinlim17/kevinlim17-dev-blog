@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react'
 import { Global, css } from '@emotion/react'
 
 const defaultStyle = css`
-  @import url('https://webfontworld.github.io/NanumSquareNeo/NanumSquareNeo.css');
+  @import url('https://hangeul.pstatic.net/hangeul_static/css/nanum-square-neo.css');
 
   * {
     padding: 0;

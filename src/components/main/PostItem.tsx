@@ -43,13 +43,13 @@ const Title = styled.div`
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   font-size: 20px;
-  font-weight: 800;
+  font-family: 'NanumSquareNeoExtraBold';
   line-height: 1.3;
 `
 
 const Date = styled.div`
   font-size: 14px;
-  font-weight: 400;
+  font-family: 'NanumSquareNeo';
   opacity: 0.5; /** 이미지 투명도 */
 `
 
@@ -66,7 +66,7 @@ const CategoryItem = styled.div`
   border-radius: 3px;
   background: rgba(3, 0, 51, 0.8);
   font-size: 14px;
-  font-weight: 700;
+  font-family: 'NanumSquareNeoBold';
   color: white;
 `
 

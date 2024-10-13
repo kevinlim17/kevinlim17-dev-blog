@@ -63,7 +63,7 @@ Jetbrains 사에 의해 개발되었으며, Kotlin 프로젝트는 2010년에 <a
 기본적으로 클래스는 확장될 수 없고, 메서드는 다형적이지 않다. <br/>
 여러분은 명시적으로 다형성과 상속을 활성화해야 한다.
 <hr/>
-덩컨 맥그레거, 냇 프라이스, <i>자바에서 코틀린으로</i>, 오현석 역, (서울: 한빛미디어), 30p.
+덩컨 맥그레거, 냇 프라이스, 오현석 역,『자바에서 코틀린으로(Java to Kotlin: A Refactoring Guidebook)』(2021), 한빛미디어, 2022, p.30.
 </blockquote>
 
 </br>
@@ -339,7 +339,7 @@ data class Developer(
 코틀린 코드 기반(codebase)가 없음을 뜻하는 값을 일관성 있게 다룰 수 있다는 뜻이다, <br/>
 (그러나) 코틀린의 널 처리는 완벽하지는 않다.
 <hr/> 
-덩컨 맥그레거, 냇 프라이스, <i>자바에서 코틀린으로</i>, 오현석 역, (서울: 한빛미디어), 62p.
+덩컨 맥그레거, 냇 프라이스, 오현석 역,『자바에서 코틀린으로(Java to Kotlin: A Refactoring Guidebook)』(2021), 한빛미디어, 2022, p.62.
 </blockquote>
 
 </br>
@@ -545,6 +545,11 @@ It may suspend its execution in one thread and resume in another one. </br>
 
 말 그대로 <u>중단(suspend) 그리고 재개(resume)가 가능한</u> **Computation** (이 맥락에서 '계산'으로 직역하기 어려운 까닭에 앞으로도 그대로 옮겨 적겠습니다)을 의미합니다. 그리고 Suspendable Computation은 Kotlin에서 `suspend fun`으로 구현됩니다. 그렇다면 공식 문서에서 코루틴을 `suspend fun`의 인스턴스로 언급하는 이유는 뭘까요? 이는 코루틴을 생성하는 함수인 `CoroutineScope.launch`를 [깊게 들여다보면](https://github.com/Kotlin/kotlinx.coroutines/blob/master/kotlinx-coroutines-core/common/src/Builders.common.kt#L47) 조금이나마 힌트를 얻을 수 있습니다. 
 
+<blockquote style="background-color: rgba(5, 0, 56, 1); margin-top: 1.5rem; padding: 1.5rem; border-top: 0.5px solid rgba(184, 184, 184, 0.5)">
+
+<p align="left">
+    <img src="https://github.com/user-attachments/assets/fa7833f2-6818-4d67-84aa-2ead5da2349f" style="width: 1.5rem; height: 1.5rem; margin: 0 0"/> </br> <a href="https://github.com/Kotlin/kotlinx.coroutines/blob/master/kotlinx-coroutines-core/common/src/Builders.common.kt#L47" style="color: white">kotlinx-coroutines-core/common/src/Builders.common.kt</a>
+</p>
 
 ```kotlin
 
@@ -563,6 +568,8 @@ public fun CoroutineScope.launch(
 
 
 ```
+
+</blockquote>
 
 `CoroutineScope.launch`의 파라미터 중 `block`은 주어진 CoroutineScope에서 실행될 `Coroutine Code`를 의미합니다. 즉, `launch()`는 `suspend fun`인 코드의 **block** 으로부터 Coroutine을 생성하는 함수라는 것입니다.
 
@@ -605,7 +612,7 @@ public fun CoroutineScope.launch(
 &nbsp;&nbsp;&nbsp;&nbsp;<strong>=></strong> 이는 Scope가 Cancel되면, Scope 안에서 시작되었던 코루틴은 모두 Cancel된다는 것입니다. </br>
 &nbsp;&nbsp;&nbsp;&nbsp;<strong>=></strong> 특정 코루틴이 더 이상 불필요한 경우, 이는 리소스의 낭비를 막는 효과를 낳습니다. </br>
 
-2. **Coroutine Scope는 코루틴이 실행되는 Context를 정의하는 데 도움을 줍니다.**
+1. **Coroutine Scope는 코루틴이 실행되는 Context를 정의하는 데 도움을 줍니다.**
 
 <hr/>
 
@@ -693,7 +700,7 @@ fun doConcurrentJob
 함수는 타입 **위에** 정의되지 않고, 함수의 파라미터와 결과가 타입을 **소유**한다.
 
 <hr style="margin: 1rem 0" />
-덩컨 맥그레거, 냇 프라이스, 자바에서 코틀린으로, 오현석 역, (서울: 한빛미디어), 177-8p.
+덩컨 맥그레거, 냇 프라이스, 오현석 역,『자바에서 코틀린으로(Java to Kotlin: A Refactoring Guidebook)』(2021), 한빛미디어, 2022, pp.177-178.
 
 </blockquote>
 
@@ -732,9 +739,12 @@ public final static PrintStream out = null;
 
 그런데 Kotlin의 `println()`은 조금 다른 방식으로 정의되어 있습니다. (일부러) Java와의 접점을 없애기 위해, Native가 타겟인 경우의 Console Source를 가져와 보았습니다. 함께 보시죠.
 
-<blockquote style="padding: 1.2rem;">
-<strong>🗃️ Github Repo: JetBrains/kotlin - </strong> </br>
-<a href="https://github.com/JetBrains/kotlin/blob/7a7d392b3470b38d42f80c896b7270678d0f95c3/kotlin-native/runtime/src/main/kotlin/kotlin/io/Console.kt#L23" target="blank" rel="nofollow"> kotlin-native/runtime/src/main/kotlin/kotlin/io/Console.kt</a>
+
+<blockquote style="background-color: rgba(5, 0, 56, 1); margin-top: 1.5rem; padding: 1.5rem; border-top: 0.5px solid rgba(184, 184, 184, 0.5)">
+
+<p align="left">
+    <img src="https://github.com/user-attachments/assets/fa7833f2-6818-4d67-84aa-2ead5da2349f" style="width: 1.5rem; height: 1.5rem; margin: 0 0"/> </br> <a href="https://github.com/JetBrains/kotlin/blob/7a7d392b3470b38d42f80c896b7270678d0f95c3/kotlin-native/runtime/src/main/kotlin/kotlin/io/Console.kt#L23" style="color: white">kotlin-native/runtime/src/main/kotlin/kotlin/io/Console.kt</a>
+</p>
 
 ```Kotlin
 
@@ -1185,7 +1195,7 @@ Native의 경우, 이름이 말해주듯, Kotlin 코드는 Virtual Machine을 �
 '애플리케이션이 갑자기 종료되는 상황', '한 시간 동안 쇼핑하며 장바구니에 넣은 제품들이 결제가 되지 않는 상황'등을 직접 마주하지 않아도, 안정성이 왜 중요한지는 쉽게 이해할 수 있을 것입니다. </br>
 <strong>크래쉬(crash)가 적으면 사용자와 개발자 모두에게 좋고, 상당한 비즈니스 가치를 제공합니다. </strong>
 <hr style="margin: 1rem 0"/>
-마르친 모스칼라, <i>이펙티브 코틀린</i>, 윤인성 역, (서울: 도서출판인사이트), p.30.
+마르친 모스칼라, 윤인성 역, 『이펙티브 코틀린(Effective Kotlin: Best Practices)』(2019), 도서출판인사이트, 2022, p.30.
 </blockquote>
 
 </br>
@@ -1460,9 +1470,11 @@ public interface KtTokens {
 <h5 style="background-color:transparent; font-weight: 800;"><a href="https://plugins.jetbrains.com/docs/intellij/implementing-parser-and-psi.html#parser-implementation">Parser Implementation</a></h5>
 
 
-<blockquote style="background-color:white; padding: 1.5rem; border-left: 0px;">
-🗃️ Github Repo: JetBrains/kotlin -
-<a href="https://github.com/JetBrains/kotlin/blob/master/compiler/psi/src/org/jetbrains/kotlin/parsing/KotlinExpressionParsing.java#L1690">compiler/psi/src/org/jetbrains/kotlin/parsing/KotlinExpressionParsing.java</a>
+<blockquote style="background-color: rgba(5, 0, 56, 1); margin-top: 1.5rem; padding: 1.5rem; border-top: 0.5px solid rgba(184, 184, 184, 0.5)">
+
+<p align="left">
+    <img src="https://github.com/user-attachments/assets/fa7833f2-6818-4d67-84aa-2ead5da2349f" style="width: 1.5rem; height: 1.5rem; margin: 0 0"/> </br> <a href="https://github.com/JetBrains/kotlin/blob/master/compiler/psi/src/org/jetbrains/kotlin/parsing/KotlinExpressionParsing.java#L1690" style="color: white">compiler/psi/src/org/jetbrains/kotlin/parsing/KotlinExpressionParsing.java</a>
+</p>
 
 ```java 
 
@@ -1488,6 +1500,8 @@ private void parseReturn() {
 
 
 </blockquote>
+
+</br>
 
 JetBrains IDE에서 (<strong>Kotlin</strong>을 포함한) Language Plugin은 `PsiParser` 인터페이스의 구현체로서 <strong>Parser</strong>를 제공합니다. 그리고 이는 `ParserDefinition.createParser()` 메서드의 리턴값이죠. 그리고 Parser는 `PsiBuilder` Class의 인스턴스를 Input으로 받지요. `PSIBuilder`의 인스턴스는 [KotlinLexer](https://github.com/JetBrains/kotlin/blob/92d200e093c693b3c06e53a39e0b0973b84c7ec5/compiler/psi/src/org/jetbrains/kotlin/lexer/KotlinLexer.java) 객체가 생성한 KtToken의 Stream을 받아
 구축 중인 <strong style="color: #4263eb">AST</strong>의 중간 상태를 유지하는 데 사용됩니다.
@@ -1679,17 +1693,29 @@ PSI는 기본적으로 AST의 뼈대를 갖춘 상태로 출발합니다. 여기
 
 <hr style="margin: 1.5rem 0"/>
 
-ASTNode를 Composite Node로 활용해 커다란 가지들을 뻗치게 된 PSI Tree는 확장을 시도합니다. AST는 기본적으로 Top-level Element들만을 가지고 있는 형태거든요. 순수하게 Object-Oriented로 작성된 Source를 가정했을 때, AST는 클래스(Class), 메서드(Method), 필드(Field) 등에 대한 접근 권한만을 가지고 있는 나무인 것이죠. PSI Layer는 AST Node에 특별한 힘을 부여합니다. PSI element를 생성하는 Factory Class는 일종의 토큰을 쥐어주는데요. 정확히는 이미 '정해진 타입'으로 둘러싸인 AST Node 안에 있던 -오래 전 Lexical Analysis에서 생성되었던- 토큰입니다. 이 토큰들을 활용해 온전히 AST의 형태이던 PSI Tree는 CST에 가까운 모습으로 변모합니다. ( WhiteSpace가 포함되는 건 물론입니다. ) 아래의 다이어그램이 이해를 도울 듯 합니다. 
+ASTNode를 Composite Node로 활용해 커다란 가지들을 뻗치게 된 PSI Tree는 확장을 시도합니다. AST는 기본적으로 Top-level Element들만을 가지고 있는 형태거든요. 순수하게 Object-Oriented로 작성된 Source를 가정했을 때, AST는 클래스(Class), 메서드(Method), 필드(Field) 등에 대한 접근 권한만을 가지고 있는 나무인 것이죠. PSI Layer는 AST Node에 특별한 힘을 부여합니다. 
+
+PSI element를 생성하는 Factory Class는 일종의 토큰을 쥐어주는데요. 정확히는 이미 '정해진 타입'으로 둘러싸인 AST Node 안에 있던 -오래 전 Lexical Analysis에서 생성되었던- 토큰입니다. 이 토큰들을 활용해 온전히 AST의 형태이던 PSI Tree는 CST에 가까운 모습으로 변모합니다. (WhiteSpace가 포함되는 건 물론입니다.) 또한 이 과정에서 코드에 다양한 Semantic Information (타입 정보, 스코프 정보, 라이브러리 등)을 추가합니다. 원래 코드에 Lexing과 Tokenize, Abstraction을 진행하여 AST에 이르고, PSI로 변환되는 과정을 도식화한 아래의 그림이 이해를 도울 듯 합니다. 
 
 </br>
 
 <p align="left">
-    <img src="https://github.com/user-attachments/assets/58dbdbfd-b3b5-46df-95bb-b8673c838426" width="100%" />
+    <img src="https://github.com/user-attachments/assets/601660fa-9b2d-4bac-b0af-81cdc7a03724" width="80%" />
 </p>
 
 <hr style="margin: 1.5rem 0"/>
 
-모든 컴파일러 프론트엔드의 Parser는 AST를 생성합니다. 그리고 이를 Semantic Analyzer로 전달하는 역할을 수행하죠. 하지만 Jetbrains IDE에서 컴파일되는 모든 언어들은 -- Kotlin을 포함해 -- PSI (Programming Structure Interface)라는 독특한 구조를 생성하게끔 되어 있습니다. 컴파일러 백엔드의 단계에 이르러서는 모든 언어가 PSI라는 구조를 활용하는 것은 아니지만, (2.0 이전의) Kotlin 컴파일러는  <code class="language-text" style="color : white">BindingContext</code>라는 일종의 Map과 함께 PSI를 프론트엔드 전역에서 활용했습니다. 
+최종적으로 <code class="language-text" style="color: orange">hello</code> 함수의 PSI Tree는 다음과 같습니다.
+<p align="left">
+    <img src="https://github.com/user-attachments/assets/63bfaad2-ffdf-4d6d-aa67-10017dc7da07" width="80%"/>
+</p>
+<p align="left">
+    <img src="https://github.com/user-attachments/assets/4482938c-9fc6-4407-b25f-79305eeb1620" width="80%"/>
+</p>
+
+<hr style="margin: 1.5rem 0"/>
+
+모든 컴파일러 프론트엔드의 Parser는 AST를 생성합니다. 그리고 이를 Semantic Analyzer로 전달하는 역할을 수행하죠. 하지만 Jetbrains IDE에서 컴파일되는 모든 언어들은 -- Kotlin을 포함해 -- PSI (Programming Structure Interface)라는 독특한 구조를 생성하게끔 되어 있습니다. 그리고 (v2.0 이전의) Kotlin 컴파일러는 <code class="language-text" style="color : white">BindingContext</code>라는 일종의 Map과 함께 PSI를 프론트엔드 전역에서 활용했습니다. 이제 지도를 찾아 모험을 떠날 시간입니다. 이제 코드의 Structure를 모두 분석했으니 어떤 Semantic이 숨어 있는지 찾아나설 차례입니다. 
 
 
 </blockquote>
@@ -1829,9 +1855,123 @@ ASTNode를 Composite Node로 활용해 커다란 가지들을 뻗치게 된 PSI 
 
 </br>
 <p align="left">
-    <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/523fc735-7296-487a-8bbc-1c9beb94970b" width="80%" />
+    <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/523fc735-7296-487a-8bbc-1c9beb94970b" width="60%" />
 </p>
+
+
 </br>
+<strong style="background-color:rgba(168, 168, 168, 0.1)">4. Make a Map : <code class="language-text" style="background-color: white; color: #8a60fe"><strong>BindingContext</strong></code>라는 방대한 지도 생성하기</strong> 
+
+<blockquote style="background-color: rgba(138, 96, 254, 0.03); margin-top: 1.5rem; padding: 1.5rem; border-top: 0.5px solid rgba(184, 184, 184, 0.5)">
+<h5 style="font-weight: 800; background-color: transparent;"><a href="https://www.baeldung.com/kotlin/k2-compiler-guide#1-psi-vs-fir" style="color: #8a60fe;">Kotlin K2 Compiler Overview : Main Differences</a></h5>
+
+Another problem with the old compiler was the <code class="language-text" style="background-color: white; color: #8a60fe"><strong>BindingContext</strong></code>. </br>
+It is the huge collection of hash tables/maps that stores all the binging information. </br>
+So for instance, if we would want to look up the variable referenced in <strong><a href="https://kotlinlang.org/docs/java-to-kotlin-idioms-strings.html#concatenate-strings">string interpolation</a></strong>, the old compiler needs to do 2 map lookups. </br>
+The new K2 compiler does not do so, but rather, it relies on the tree data structure in FIR. </br> It is faster to access the node member value of the tree than to do 2 searches inside the huge hash table data structure.
+
+<hr style="margin: 1rem 0"/>
+
+기존 컴파일러가 가졌던 또다른 문제는 바로 BindingContext입니다. </br>
+이는 수많은 정보를 담은 HashTable과 Map의 거대한 집합입니다. </br> 
+예를 들어 String Interpolation에서 참조된 변수를 찾으려면, 기존 컴파일러는 두 번의 Map 탐색을 진행해야 합니다. </br>
+새로운 K2 컴파일러는, 그 대신, FIR의 트리 구조에 의존합니다. </br>
+규모가 큰 HashTable 자료구조에서 두 번 탐색을 진행하기보다, 트리 노드의 멤버 값에 바로 접근하는 게 (당연히) 훨씬 빠르죠.
+</blockquote>
+
+</br>
+
+Call Resolution과 Type Inference를 마쳤으며, 의미적(Semantic)으로 어떠한 오류도 보고되지 않은 나무(PSI Tree)가 우리 앞에 있습니다. 이제 Semantic Analyzer가 알아낸 모든 정보를 백엔드로 보낼 시간입니다. 여기서, 우리는 어떤 형태로 보내야 가장 효율적일지 생각해 보아야 하지요. 이에 대한 Kotlin 생태계의 첫 대답은 <code class="language-text" style="background-color: white; color: #8a60fe"><strong>BindingContext</strong></code> 이었습니다. 하지만, 첫 응답과 동시에, <code class="language-text" style="background-color: white; color: #8a60fe"><strong>BindingContext</strong></code> 는 Kotlin 컴파일러가 상환해야 할 첫 번째 기술적 부채가 됩니다. 그 이유를 살펴보기 위해, 조금 깊이 들어가, 이 Table이 어떻게 구현되었는지와 함께 그것의 치명적인 단점을 다루어 보겠습니다. </br>
+
+먼저 (구체적인 형태가 아직 드러나지 않은) Interface를 살펴보도록 하죠. 이번에도 JetBrains의 Kotlin Repo입니다.
+
+<blockquote style="background-color: rgba(5, 0, 56, 1); margin-top: 1.5rem; padding: 1.5rem; border-top: 0.5px solid rgba(184, 184, 184, 0.5); text-color: white;">
+
+<p align="left">
+    <a href="https://github.com/JetBrains/kotlin"><img src="https://github.com/user-attachments/assets/fa7833f2-6818-4d67-84aa-2ead5da2349f" style="width: 1.5rem; height: 1.5rem; margin: 0 0" /> </a></br> <a href="https://github.com/JetBrains/kotlin/blob/master/compiler/frontend/src/org/jetbrains/kotlin/resolve/BindingContext.java" style="color: white">compiler/frontend/src/org/jetbrains/kotlin/resolve/BindingContext.java</a>
+</p>
+
+```java
+
+public interface BindingContext {
+	BindingContext EMPTY = new BindingContext() {
+		...
+		@Override
+		public <K, V> V get(ReadOnlySlice<K,V> slice, K key) {
+			return null;
+		}
+        ...
+	};
+	...
+
+	WritableSlice<KtTypeReference, KotlinType> TYPE 
+                = Slices.createSimpleSlice();
+
+	WritableSlice<PsiElement, SimpleFunctionDescriptor> FUNCTION 
+                = Slices.createSimpleSlice();
+
+     WritableSlice<KtParameter, VariableDescriptor> VALUE_PARAMETER 
+                = Slices.createSimpleSlice();
+
+     WritableSlice<KtReferenceExpression, DeclarationDescriptor> REFERENCE_TARGET 
+                = new BasicWritableSlice<>(DO_NOTHING);
+
+    ...
+}
+
+```
+</br>
+<p style="color: white">
+    BindingContext는 굉장히 독특한 구조를 가지고 있습니다. 전체적인 형태는 Map이나, Key를 특이한 방식으로 관리합니다.
+    <code class="language-text" style="background-color: white; color: navy">Slice</code>라는 자료구조와 PSI Tree의 Element를 
+    2-Tuple(Kotlin에서는 <code class="language-text" style="background-color: white; color: navy;">Pair</code>로 구현됩니다)
+    로 묶어 관리하죠. BindingContext에서 사용되는 Slice는 모두 BindingContext 인터페이스 안에 선언되어 있습니다.
+    <code class="language-text" style="background-color: white; color: navy">TYPE</code>은 그 중 하나입니다.
+    <img src="https://github.com/user-attachments/assets/394db655-7ebb-4a43-8b33-11c3d465310c" width="90%"/>
+    <hr />
+    <img src="https://github.com/user-attachments/assets/82aeb94b-1ad3-4249-9459-9a1b2b460fc0" width="90%"/>
+</p>
+
+</blockquote>
+
+<blockquote style="background-color: rgba(5, 0, 56, 1); margin-top: 1.5rem; padding: 1.5rem; border-top: 0.5px solid rgba(184, 184, 184, 0.5)">
+
+<p align="left">
+    <a href="https://github.com/JetBrains/kotlin"><img src="https://github.com/user-attachments/assets/fa7833f2-6818-4d67-84aa-2ead5da2349f" style="width: 1.5rem; height: 1.5rem; margin: 0 0" /> </a> </br> <a href="https://github.com/JetBrains/kotlin/blob/master/compiler/frontend/src/org/jetbrains/kotlin/resolve/CompositeBindingContext.kt" style="color: white">compiler/frontend/src/org/jetbrains/kotlin/resolve/CompositeBindingContext.kt</a>
+</p>
+
+```kotlin
+
+class CompositeBindingContext private constructor(
+	private val delegates: LinkedHashSet<BindingContext>
+) : BindingContext {
+
+	override fun getType(expression: KtExpreesion): KotlinType? {
+		return delegates.asSequence().map{ it.getType(expression) }
+                                       .firstOrNull{ it != null }
+	}
+		
+	companion object {
+		fun create(delegates: List<BindingContext>): BindingContext {
+			if (delegates.isEmpty()) return BindingContext.EMPTY
+			val delegateSet = LinkedHashSet(delegates)
+			if (delegateSet.size == 1) return delegates.first()
+			return CompositeBindingContext(delegateSet)
+		}
+	}
+	...
+	override fun <K, V> get(slice: ReadOnlySlice<K,V>?, key: K?): V? {
+		return delegates.asSequence().map { it[slice, key] }
+                                       .firstOrNull { it != null }
+	}
+	...
+}
+
+
+```
+
+</blockquote>
+
 
 
 </br>
@@ -1849,7 +1989,7 @@ It also manages the symbol table, a data structure mapping each symbol in the so
 </blockquote>
 </br>
 
-프론트엔드는 기본적으로 IR을 만드는 임무를 맡습니다. '원론적'으로는 그렇습니다. 하지만 (<a href="#improvements-in-k2">Improvements in K2</a>에서 다룰 Frontend IR에 한해) **v1.9** 까지의 Kotlin은 예외였지요. <strong style="background-color: rgba(138, 96, 254, 0.3)">Background 블록</strong> 에서는 프론트엔드가 IR을 생성하는 일이 마치 흔하지 않은 것처럼 서술해 두었지만, 사실은 IR을 생성하지 않는 경우가 더 희소합니다. 이런 예외적인 상황은 Kotlin과 떼려야 뗄 수 없는 특성인 Multi-Platform 지향성과 관련이 있습니다. (사실상 Multi-platform의 모든 짐을 떠안게 된) Kotlin 컴파일러 백엔드에 IR이 도입된 과정을 살펴보며, 초기의 Kotlin이 왜 IR을 포기하고 시작했는지 알아보고, 컴파일러가 나아가야만 했던 방향에 대한 힌트를 얻어 볼게요. 
+프론트엔드는 기본적으로 IR을 만드는 임무를 맡습니다. '원론적'으로는 그렇습니다. 하지만 (<a href="#improvements-in-k2">Improvements in K2</a>에서 다룰 Frontend IR에 한해) **v2.0.0** 이전의 Kotlin은 예외였지요. <strong style="background-color: rgba(138, 96, 254, 0.3)">Background 블록</strong> 에서는 프론트엔드가 IR을 생성하는 일이 마치 흔하지 않은 것처럼 서술해 두었지만, 사실은 IR을 생성하지 않는 경우가 더 희소합니다. 이런 예외적인 상황은 Kotlin과 떼려야 뗄 수 없는 특성인 Multi-Platform 지향성과 관련이 있습니다. 분명 IR을 생성하는 것이 더 빠른 컴파일러를 위해 나은 선택임이 분명함에도, 그러한 특성을 생태계에 빠르게 입혀내기 위해 선택한 일종의 **기술 부채(Technical Debt)** 이죠. (사실상 Multi-platform의 모든 짐을 떠안게 된) Kotlin 컴파일러 백엔드에 IR이 도입된 과정을 살펴보며, 초기의 Kotlin이 왜 IR을 포기하고 시작했는지 알아보고, 컴파일러가 나아가야만 했던 방향에 대한 힌트를 얻어 볼게요. 
 
 <hr />
 
@@ -1875,7 +2015,7 @@ It also manages the symbol table, a data structure mapping each symbol in the so
             </p>
         </td>
         <td valign="center" style="border-radius: 0rem; padding-left: 25px;">
-            그런데 Native Backend가 등장합니다. Kotlin이라는 언어를 컴퓨터가 이해할 수 있는 형식으로 창출해내기 위해, 어떠한 경유지도 거치지 않을 수 있는 유일한 방법 말입니다. 이 방법을 왜 고안해 내야만 했을까요. (ES라는 타겟이 있음에도 불구하고,) Kotlin은 오랜 시간 동안 Java와의 상호 운용성(Interoperability)으로만 주목받아 왔습니다. 물론 Java를 장기적으로 대체하는 언어가 되는 것도 중요하지만, 그에 앞서 모든 플랫폼에서 사용되는 범용 언어로 성장하는 게 우선이었죠. macOS, iOS, 임베디드 생태계에서 뿌리내리기 위해서는 (JIT를 장착했음에도) 느리고 무거운 JVM을 계속 어깨에 이고 갈 순 없었습니다. 그래서 <code class="language-text" style="background-color: white; color: rgba(42, 97, 123, 1); font-weight:800">LLVM</code>을 도입합니다. Instruction Set Architecture 너머 바이너리로 가장 빨리 도달할 수 있는 티켓, 그 비싼 티켓의 값을 Kotlin 생태계는 Backend IR을 구성하며 치러 내었습니다.
+            그런데 Native Backend가 등장합니다. Kotlin이라는 언어를 컴퓨터가 이해할 수 있는 형식으로 창출해내기 위해, 어떠한 경유지도 거치지 않을 수 있는 유일한 방법 말입니다. 이 방법을 왜 고안해 내야만 했을까요. (ES라는 타겟이 있음에도 불구하고,) Kotlin은 오랜 시간 동안 Java와의 상호 운용성(Interoperability)으로만 주목받아 왔습니다. 물론 Java를 장기적으로 대체하는 언어가 되는 것도 중요하지만, 그에 앞서 모든 플랫폼에서 사용되는 범용 언어로 성장하는 게 우선이었죠. macOS, iOS, 임베디드 생태계에서 뿌리내리기 위해서는 (JIT를 장착했음에도) 느리고 무거운 JVM을 계속 어깨에 이고 갈 순 없었습니다. 그래서 <code class="language-text" style="background-color: white; color: rgba(42, 97, 123, 1); font-weight:800">LLVM</code>을 도입합니다. Instruction Set Architecture 너머 바이너리로 가장 빨리 도달할 수 있는 티켓, 그 비싼 티켓의 값을 Kotlin 생태계는 Backend IR을 구성하며 치러 내었습니다. 처음으로 Kotlin 컴파일러의 기술 부채를 상환한 셈이죠.
             </br></br>
         </td>
     </tr>
@@ -1895,14 +2035,32 @@ The <a href="https://llvm.org/"><strong>LLVM Project</strong></a> is a collectio
 Despite its name, LLVM has little to do with traditional virtual machines.
 <hr/>
 LLVM 프로젝트는 모듈화되어 재사용 가능한 컴파일러와 툴체인 기슬의 집합입니다. </br>
-이름에서 보이는 것과 달리 LLVM은 고전적인 의미의 가상 머신과는 거의 관련이 없습니다.
+이름에서 나타나는 것과 달리 LLVM은 고전적인 의미의 가상 머신과는 거의 관련이 없습니다.
 </blockquote>
 
-LLVM을 간단하게 이야기하면, 모듈화(Modularize)된 컴파일러입니다. 특히 프론트엔드를 탈부착하는 데 용이하며, 여기서도 그 의미만을 다루겠습니다. 
+LLVM을 간단하게 이야기하면, 모듈화(Modularize)된 컴파일러입니다. 특히 프론트엔드를 탈부착하는 데 용이하며, 다양한 프로그래밍 언어(C, C++, Fortran, Haskell, Java Bytecode, Julia, Objective C, Ruby, Rust, Scala, Swift 등등)의 컴파일러 백엔드 역할을 수행합니다. 
+
+
+</br>
+
+
+Overview에 그려진 LLVM의 구조에서, 가장 중요한 부분은 **IR (중간 표현)** 그리고 **Optimization (최적화)** 입니다. **IR**은 고급 언어의 추상적인 특성을 유지하면서도, ISA(Instruction Set Architecture) 코드로 이어지는 징검다리를 놓는 역할을 수행하죠. LLVM에서의 **최적화**는 1차적으로 코드에 대한 분석을 진행하고, 필요에 따라 연산 순서를 변경하며, 불필요한 코드를 제거하는 등의 작업을 일컫는 말입니다. 
+
+<code class="language-text" style="background-color: rgba(42, 97, 123, 1); color: white; font-weight:800">C</code>, <code class="language-text" style="background-color: rgba(42, 97, 123, 1); color: white; font-weight:800">C++</code>, <code class="language-text" style="background-color: rgba(42, 97, 123, 1); color: white; font-weight:800">Objective-C</code>의 경우에는, Clang이라는 프론트엔드를 사용하여 Raw한 형태의 IR를 생성하고, 이를 LLVM에서 Machine Code로 변환할 수 있습니다. (Kotlin과 함께) 비교적 신생 언어 축에 속하는 <code class="language-text" style="background-color: orange; color: white; font-weight:800">Swift</code>의 컴파일러 프론트엔드는 아예 LLVM이 인식할 수 있는 IR을 생성하는 데 주안을 두고 설계되었습니다. 하지만 이미 JVM과 JS Backend를 지니고 있던 Kotlin의 경우에는 조금 다른 접근이 필요했습니다.  
+
+</br>
+
+<p align="left">
+    <img src="https://github.com/user-attachments/assets/23f1d5d1-cca5-4421-adbc-7b62747c0d0e" width="70%"/>
+</p>
+
+</br>
+
+v2.0 이전의 Kotlin 컴파일러 프론트엔드는 PSI Tree를 생성하는 **Parser** 그리고 BindingContext를 덧붙이는 **Semantic Analyzer**로 이루어져 있습니다. 하지만 LLVM의 Backend를 활용하려면 Raw한 형태의 IR이라도 생성해야만 했죠. 앞에서 다루었던 <code class="language-text" style="background-color: rgba(42, 97, 123, 1); color: white; font-weight:800">C</code>, <code class="language-text" style="background-color: rgba(42, 97, 123, 1); color: white; font-weight:800">C++</code>, <code class="language-text" style="background-color: rgba(42, 97, 123, 1); color: white; font-weight:800">Objective-C</code>, 그리고 <code class="language-text" style="background-color: orange; color: white; font-weight:800">Swift</code>를 포함한 대부분의 언어는, 일반적으로 IR 생성을 프론트엔드에서 도맡아 합니다. </br>
+그러나 Kotlin 생태계는 (시간이 오래 소요될 게 뻔한) IR을 생산하는 프론트엔드를 개발하기보다, 먼저 네이티브 백엔드에서 Raw한 IR을 생성하는 역할을 부여하기로 선택합니다. 그렇게 조금은 이상하게도, Raw IR Generator는 Kotlin 컴파일러에서는 백엔드에 속하고 LLVM의 전체적인 구조에서는 프론트엔드에 속하게 됩니다. 
+
 
 </blockquote>
-
-<hr />
 
 <table style="margin-bottom: -0.2rem; box-shadow: none; border-radius: 0rem">
     <tr>
@@ -1912,7 +2070,9 @@ LLVM을 간단하게 이야기하면, 모듈화(Modularize)된 컴파일러입�
         </p>
         </td>
         <td valign="center" style="border-radius: 0rem; padding-left: 25px;">
-            Hello
+            세 백엔드의 IR 형태가 정말 다른 것인가?
+            그렇다면 이 다이어그램은 무엇을 표현하는 거지?
+            그저 IR을 생성했다는 것에 주안점을 둔 것인가?
             </br></br>
         </td>
     </tr>
@@ -1923,12 +2083,13 @@ LLVM을 간단하게 이야기하면, 모듈화(Modularize)된 컴파일러입�
 #### Improvements in K2
 
 <p align="left">
-    <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/361f0fcc-f7c8-481b-b1d4-c66c1c145402" width="80%">
+    <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/361f0fcc-f7c8-481b-b1d4-c66c1c145402" width="70%">
+    </br>
+    <strong>
+        Backend IR로는 부족하다. 더 빠른 컴파일을 위해서는 무엇이 필요할까? </br>
+        K2 등반만큼 어려운 길.
+    </strong>
 </p>
-</br>
-
-
-
 
 </br>
 <h5>Why Rewrite the Compiler</h5>
@@ -1945,8 +2106,10 @@ Kotlin 컴파일러의 1.0 버전은 빠른 속도를 첫 번째 목표로 두�
 <h5>Transparent Box : Raw FIR Builder</h5>
 
 <p align="left">
-    <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/a5fed814-b092-4335-9bd8-cf899702a951" width="100%">
+    <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/a5fed814-b092-4335-9bd8-cf899702a951" width="70%">
 </p>
+
+
 
 + **새로운 Frontend에 대한 전체적인 로드맵 가져오기**
 + **Raw FIR**에 대한 내용 가져오기
@@ -1957,11 +2120,19 @@ Kotlin 컴파일러의 1.0 버전은 빠른 속도를 첫 번째 목표로 두�
 <h5>Transparent Box : Analyzer</h5>
 
 <p align="left">
-    <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/85d5dc6d-6416-4da2-a27d-fe724877fd58" width="100%">
+    <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/85d5dc6d-6416-4da2-a27d-fe724877fd58" width="70%">
 </p>
 
 + **New Analyzer에 대한 내용 간추려 보기**
 + **Why K2 frontend is faster : 3가지 이유 알기 쉽게 정리해 보기**
+
+</br>
+
+<h5>Jump Reduction</h5>
+
+</br>
+
+<h5>Smart Cast</h5>
 
 
 ---
@@ -2332,7 +2503,7 @@ Varargs는 Array와 동일하게 작동합니다. varargs를 사용하면, Compi
 기본적으로 클래스는 확장될 수 없고, 메서드는 다형적이지 않다. <br/>
 여러분은 명시적으로 다형성과 상속을 활성화해야 한다.
 <hr/>
-덩컨 맥그레거, 냇 프라이스, <i>자바에서 코틀린으로</i>, 오현석 역, (서울: 한빛미디어), 30p.
+덩컨 맥그레거, 냇 프라이스, 오현석 역,『자바에서 코틀린으로(Java to Kotlin: A Refactoring Guidebook)』(2021), 한빛미디어, 2022, p.30.
 </blockquote>
 
 </br>
@@ -2542,7 +2713,7 @@ Backing Field는 다음과 같은 경우에 생성됩니다. </br>
 <blockquote style="padding:1.5rem">
 아마도 코틀린 설계자들은 이 책의 저자들처럼 앞에서 소개한 '공유된 컬렉션을 변경하지 말라'는 관습에 익숙해서가 아닐까 생각한다. 파라미터로 받거나, 결과로 반환되거나, 다른 방식으로 코드 사이에서 공유된 컬렉션을 항상 불변 컬렉션으로 취급한다면, 가변 컬렉션이 불변 컬렉션을 확장하도록 타입 시스템을 설계하는 것이 상당히 안전하다. 여기서 '<strong>상당히</strong>'라는 말은 '<strong>완전히</strong>'가 아니라 '<strong>대부분</strong>'이라는 뜻이다. 어쨌든 이 경우 얻을 수 있는 이익이 비용보다 훨씬 더 크다.
 <hr/>
-덩컨 맥그레거, 냇 프라이스, 자바에서 코틀린으로, 오현석 역, (서울: 한빛미디어), 105p. </br>
+덩컨 맥그레거, 냇 프라이스, 오현석 역,『자바에서 코틀린으로(Java to Kotlin: A Refactoring Guidebook)』(2021), 한빛미디어, 2022, p.105 </br>
 ㄴ 볼드체로 표기된 텍스트는 인용서의 저자가 강조한 부분입니다.
 </blockquote>
 

@@ -151,9 +151,9 @@ const PersonalDescription: FunctionComponent = function () {
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;In...
         </SectionTitle>
         <SectionDetail>
-          • Android / iOS Native <br />
+          • Android / Kotlin Multiplatform <br />
           • On-Device Deep Learning <br />
-          • Architecture Pattern <br />
+          • Compiler Architecture <br />
         </SectionDetail>
       </SectionWrapper>
       <Border />

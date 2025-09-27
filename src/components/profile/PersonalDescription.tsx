@@ -1,119 +1,128 @@
 import React, { FunctionComponent } from 'react'
 import styled from '@emotion/styled'
-import { keyframes } from '@emotion/react'
 import TypeWriter from 'typewriter-effect'
-
-const BoxAnimation = keyframes`
-  0% { opacity: 0; }
-  50% { opacity: 0;}
-  100% { opacity: 1; } 
-`
 
 const PersonalDescriptionWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
-  z-index: 4;
-
-  width: 56%;
-  height: 72vh;
-  margin-left: 2%;
-  padding: 3vw 2vw;
-
-  background: rgba(255, 255, 255, 0.6);
-  border-radius: 20px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-
-  animation-name: ${BoxAnimation};
-  animation-duration: 2.5s;
+  width: 120%;
+  height: 100%;
+  background: white;
+  padding: 10px;
+  margin-left: -20%;
 
   @media (max-width: 1200px) {
-    width: 95%;
+    width: 100%;
     height: auto;
-    padding: 3vw;
-  }
-
-  @media (max-width: 768px) {
-    padding: 4vw;
+    padding-top: 0;
+    padding-left: 20px;
+    margin-left: 0;
   }
 `
 
 const Slogan = styled.div`
-  font-size: 3vh;
-  font-family: 'NanumSquareNeoExtraBold';
-  line-height: 1.4;
-  height: 8vh;
-
-  color: rgba(2, 0, 36, 0.8);
-  margin-bottom: 2.5vh;
+  font-size: 1.4rem;
+  font-weight: 700;
+  line-height: 1.5;
+  color: #1f2937;
+  margin-bottom: 2rem;
+  min-height: 4rem;
 
   @media (max-width: 768px) {
-    font-size: 2.3vh;
-    margin: 1vh 0;
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+    min-height: 3.5rem;
   }
 `
 
-const Border = styled.h1`
-  font-size: 45px;
-  border-bottom: 3px solid rgba(2, 0, 36, 0.1);
+const SectionGroup = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
   width: 100%;
 
-  margin: 0.5vh 0;
+  @media (max-width: 768px) {
+    gap: 1rem;
+  }
 `
 
 const SectionWrapper = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
-  align-items: center;
-`
+  align-items: flex-start;
+  width: 100%;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid #e5e7eb;
 
-const SectionTitle = styled.div`
-  font-size: 1.3rem;
-  font-family: 'NanumSquareNeoExtraBold';
-  line-height: 1.4;
-
-  width: 12vw;
-  height: 40%;
-  padding-right: 1vw;
-
-  color: rgba(2, 0, 36, 0.8);
-
-  @media (max-width: 1200px) {
-    width: 17vw;
+  &:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
   }
 
   @media (max-width: 768px) {
-    display: none;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding-bottom: 1.5rem;
+  }
+`
+
+const SectionTitle = styled.div`
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #374151;
+  min-width: 9rem;
+  padding-right: 2rem;
+  flex-shrink: 0;
+
+  @media (max-width: 1200px) {
+    min-width: 8rem;
+    padding-right: 1.5rem;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 1rem;
+    font-weight: 700;
+    min-width: auto;
+    padding-right: 0;
+    padding-bottom: 0.5rem;
+    color: #1f2937;
   }
 `
 
 const SectionDetail = styled.div`
-  font-size: 2vh;
-  font-family: 'NanumSquareNeoBold';
-  line-height: 1.7;
-
-  margin: 0.6rem 0;
-  padding: 0 0.6vw;
-
-  border-left: 3px solid rgba(2, 0, 36, 0.2);
-  color: rgba(2, 0, 36, 0.7);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #4b5563;
+  flex: 1;
+  padding-left: 1rem;
+  border-left: 3px solid #e5e7eb;
 
   a {
-    font-family: 'NanumSquareNeoHeavy';
+    color: #4f46e5;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.2s ease;
   }
 
   a:hover {
-    font-family: 'NanumSquareNeoHeavy';
+    color: #3730a3;
     text-decoration: underline;
-    text-underline-offset: 5px;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 3px;
+  }
+
+  /* 불릿 포인트 스타일링 */
+  br + * {
+    display: inline-block;
   }
 
   @media (max-width: 768px) {
     font-size: 0.9rem;
-    border-left: 3px solid rgba(2, 0, 36, 0.2);
-    padding: 1vw 3vw;
+    padding-left: 0.8rem;
+    border-left: 2px solid #e5e7eb;
   }
 `
 
@@ -132,44 +141,42 @@ const PersonalDescription: FunctionComponent = function () {
           }}
         />
       </Slogan>
-      <Border />
 
-      <SectionWrapper>
-        <SectionTitle>💬 Language</SectionTitle>
-        <SectionDetail>
-          • Java / Kotlin <br />
-          • Swift <br />
-          • TypeScript <br />
-          • Python <br />
-        </SectionDetail>
-      </SectionWrapper>
-      <Border />
+      <SectionGroup>
+        <SectionWrapper>
+          <SectionTitle>💬 Language</SectionTitle>
+          <SectionDetail>
+            • Kotlin <br />
+            • C++ <br />
+            • Java <br />
+            • TypeScript <br />
+            • Scala <br />
+          </SectionDetail>
+        </SectionWrapper>
 
-      <SectionWrapper>
-        <SectionTitle>
-          🧭 Interested <br />
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;In...
-        </SectionTitle>
-        <SectionDetail>
-          • Android / Kotlin Multiplatform <br />
-          • On-Device Deep Learning <br />
-          • Compiler Architecture <br />
-        </SectionDetail>
-      </SectionWrapper>
-      <Border />
+        <SectionWrapper>
+          <SectionTitle>🧭 Interests</SectionTitle>
+          <SectionDetail>
+            • Android / Kotlin Multiplatform <br />
+            • On-Device Deep Learning <br />
+            • Compiler Architecture & Optimization <br />
+          </SectionDetail>
+        </SectionWrapper>
 
-      <SectionWrapper>
-        <SectionTitle> 👤 Services</SectionTitle>
-        <SectionDetail>
-          • Vice President of <a href="https://github.com/Dcom-KHU">D.Com</a>,{' '}
-          <br />
-          &nbsp;&nbsp;&nbsp;Academic Club of CSE, <br />
-          &nbsp;&nbsp;&nbsp;Kyung-Hee Univ. (2022) <br />• Android Director of
-          3rd KHU <a href="https://www.makeus.in/umc">UMC</a>.
-          <br />
-        </SectionDetail>
-      </SectionWrapper>
-      <Border />
+        <SectionWrapper>
+          <SectionTitle>👤 Services</SectionTitle>
+          <SectionDetail>
+            • Undergraduate Intern of{' '}
+            <a href="https://coslab.khu.ac.kr/">COSLab</a> (Compiler & System
+            Software Lab) <br />• Vice President of{' '}
+            <a href="https://github.com/Dcom-KHU">D.Com</a>, <br />
+            &nbsp;&nbsp;&nbsp;Academic Club of CSE, <br />
+            &nbsp;&nbsp;&nbsp;Kyung-Hee Univ. (2022) <br />• Android Director of
+            3rd KHU <a href="https://www.makeus.in/umc">UMC</a>.
+            <br />
+          </SectionDetail>
+        </SectionWrapper>
+      </SectionGroup>
     </PersonalDescriptionWrapper>
   )
 }

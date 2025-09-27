@@ -13,67 +13,217 @@ type TabletContainerProps = {
 
 const TabletShapedWrapper = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: flex-start;
-  align-items: center;
+  align-items: stretch;
 
   width: 70vw;
-  height: 80vh;
-  padding: 3vh 1.5vw;
+  min-height: 85vh;
+  padding: 0;
   z-index: 3;
-  margin-bottom: 6vh;
+  margin: 5rem 1vh 0;
 
-  background: rgba(255, 255, 255, 0.25);
-  border-radius: 25px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  background: white;
+  border: 2px solid rgba(2, 0, 36, 1);
+  border-right: 2px dashed;
+  border-bottom: 0;
+  // box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  position: relative;
 
   animation-name: ${ContainerShapedAnimation};
   animation-duration: 2.5s;
 
   @media (max-width: 1200px) {
-    flex-direction: column;
-
-    width: 70vw;
-    height: 80%;
-
-    margin-top: 12vh;
+    width: 85vw;
+    // min-height: 70vh;
+    margin-top: 8vh;
   }
 
   @media (max-width: 768px) {
     width: 90%;
+    min-height: 60vh;
+    margin-top: 12vh;
+  }
+`
+
+const ContainerHeader = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 30px;
+  background: white;
+  border-bottom: 2px solid #000;
+  position: relative;
+
+  @media (max-width: 768px) {
+    padding: 16px 20px;
+  }
+`
+
+const HeaderTitle = styled.h2`
+  font-size: 24px;
+  font-weight: 700;
+  color: #000;
+  margin: 0;
+
+  @media (max-width: 768px) {
+    font-size: 20px;
+  }
+`
+
+const StatusLabel = styled.div`
+  background: #000;
+  color: white;
+  padding: 6px 16px;
+  font-size: 14px;
+  font-weight: 600;
+
+  @media (max-width: 768px) {
+    padding: 4px 12px;
+    font-size: 12px;
   }
 `
 
 const PhoneShapeCameraIcon = styled.div`
-  flex: none;
-  align-self: center;
-  margin: 1vh;
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
 
-  font-size: 3vh;
-  color: rgba(255, 255, 255, 0.7);
-  box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+
+  font-size: 16px;
+  color: #6b7280;
+  background: #f3f4f6;
+  border: 1px solid #d1d5db;
   border-radius: 50%;
 
-  @media (max-width: 1200px) {
-    margin: 0vh 1vh 2vh 1vh;
-  }
-
   @media (max-width: 768px) {
-    margin: 0vh 1vh 4vh 1vh;
+    width: 20px;
+    height: 20px;
+    font-size: 14px;
   }
 `
+
+const ContainerContent = styled.div`
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+
+  @media (max-width: 1200px) {
+    flex-direction: column;
+  }
+`
+
+const ContentSection = styled.div`
+  padding: 20px 10px;
+  flex: 1;
+
+  @media (max-width: 768px) {
+    padding: 20px;
+  }
+`
+
+const MetaFooter = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 30px;
+  background: #f8f9fa;
+  border-top: 1px solid #e5e7eb;
+
+  @media (max-width: 768px) {
+    padding: 16px 20px;
+    flex-direction: column;
+    gap: 12px;
+    align-items: flex-start;
+  }
+`
+
+const AuthorInfo = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  span {
+    font-size: 14px;
+    color: #6b7280;
+
+    &:first-of-type {
+      font-weight: 600;
+      color: #1f2937;
+    }
+  }
+`
+
+const TagGroup = styled.div`
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+`
+
+const skillColors = [
+  '#00bcd4', // 청록색
+  '#607d8b', // 블루그레이
+  '#00796b', // 진한 청록색
+  '#e91e63', // 핑크
+  '#ff9800', // 오렌지
+  '#4caf50', // 녹색
+]
+
+const TagItem = styled.div<{ colorIndex: number }>`
+  padding: 4px 12px;
+  background: ${({ colorIndex }) =>
+    skillColors[colorIndex % skillColors.length]};
+  font-size: 12px;
+  font-weight: 600;
+  color: white;
+  border: 1px solid #000;
+`
+
+const skills = ['LLVM', 'Android', 'Web']
 
 const TabletShapeContainer: FunctionComponent<TabletContainerProps> =
   function ({ profileImage }) {
     return (
       <TabletShapedWrapper>
-        <PhoneShapeCameraIcon>
-          <FontAwesomeIcon icon={faCircleDot} />
-        </PhoneShapeCameraIcon>
+        <ContainerHeader>
+          <HeaderTitle>Profile</HeaderTitle>
+          <StatusLabel>프로필</StatusLabel>
+          <PhoneShapeCameraIcon>
+            <FontAwesomeIcon icon={faCircleDot} />
+          </PhoneShapeCameraIcon>
+        </ContainerHeader>
 
-        <PersonalInfo profileImage={profileImage} />
+        <ContainerContent>
+          <ContentSection>
+            <PersonalInfo profileImage={profileImage} />
+          </ContentSection>
 
-        <PersonalDescription></PersonalDescription>
+          <ContentSection>
+            <PersonalDescription></PersonalDescription>
+          </ContentSection>
+        </ContainerContent>
+
+        <MetaFooter>
+          <AuthorInfo>
+            <span>kevinlim17</span>
+            <span>Android Native Developer</span>
+          </AuthorInfo>
+
+          <TagGroup>
+            {skills.map((skill, index) => (
+              <TagItem key={skill} colorIndex={index}>
+                {skill}
+              </TagItem>
+            ))}
+          </TagGroup>
+        </MetaFooter>
       </TabletShapedWrapper>
     )
   }

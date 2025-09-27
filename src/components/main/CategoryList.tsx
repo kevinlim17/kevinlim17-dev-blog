@@ -30,48 +30,106 @@ export type CategoryListProps = {
   }
 }
 
-const CategoryListWrapper = styled.div`
+const CategoryListOutsideWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
-  width: 70vw;
-  margin: 50px auto 10px;
+  background-color: rgba(250, 249, 246, 1);
+  width: 100%;
+  padding: 30px 10vw 0;
+  gap: 8px;
+
+  @media (max-width: 768px) {
+    padding: 30px 5vw 0;
+    gap: 6px;
+  }
+`
+const CategoryListInsideWrapper = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  background-color: rgba(250, 249, 246, 1);
+  width: 80vw;
+  padding: 1rem;
+  gap: 8px;
+
+  border-top: 2px solid rgba(2, 0, 36, 1);
+  border-left: 2px solid rgba(2, 0, 36, 1);
 
   @media (max-width: 768px) {
     width: 90vw;
-    margin-top: 50px;
-    padding: 0 20px;
+    padding: 30px 5vw;
+    gap: 6px;
   }
 `
+const WrapperTitle = styled.div`
+  font-size: 20px;
+  font-weight: 700;
+  margin-right: 100%;
+  margin-bottom: 1rem;
+`
+
+// 다양한 색상 배열 정의
+const tagColors = [
+  '#e11d48', // 빨간색
+  '#dc2626', // 진한 빨간색
+  '#ea580c', // 주황색
+  '#d97706', // 황금색
+  '#65a30d', // 라임색
+  '#16a34a', // 녹색
+  '#059669', // 에메랄드색
+  '#0891b2', // 청록색
+  '#0284c7', // 하늘색
+  '#2563eb', // 파란색
+  '#4f46e5', // 인디고색
+  '#7c3aed', // 보라색
+  '#c026d3', // 자홍색
+  '#db2777', // 핑크색
+  '#374151', // 회색
+]
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const CategoryItem = styled(({ active, ...props }: GatsbyLinkProps) => (
   <Link {...props} />
 ))`
   /** Box Properties */
-  background-color: ${({ active }) =>
-    active ? 'rgba(0, 167, 71, 1)' : 'rgba(0, 255, 109, 0.5)'};
-  box-sizing: border-box;
-  box-shadow: rgba(0, 0, 0, 0.12) 0 3px 1px -2px,
-    rgba(0, 0, 0, 0.14) 0 2px 2px 0, rgba(0, 0, 0, 0.12) 0 1px 5px 0;
-  border-radius: 8px;
+  background-color: ${({ active, children }) => {
+    if (active) return 'rgba(2, 0, 36, 1)'
+    // children에서 카테고리 이름을 추출하여 색상 결정
+    const categoryName =
+      typeof children === 'string' ? children : children?.toString() || ''
+    const colorIndex = categoryName.length % tagColors.length
+    return tagColors[colorIndex]
+  }};
+  border-radius: 5px;
   cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  display: inline-block;
 
   /** Text Properties */
-  color: ${({ active }) => (active ? 'white' : 'black')};
-  text-align: center;
-  margin: 10px 20px 0 0;
-  padding: 8px 12px;
-  font-size: 18px;
-  font-family: ${({ active }) => (active ? 'NanumSquareNeoExtraBold' : 'NanumSquareNeo')};
+  color: rgba(250, 249, 246, 1);
+  font-family: ${({ active }) =>
+    active ? 'NanumSquareNeoHeavy' : 'NanumSquareNeo'};
+  font-size: 14px;
+  padding: 8px 16px;
+  line-height: 1.2;
+  box-shadow: ${({ active }) =>
+    active ? '2px 4px 0 0 rgba(2, 0, 36, 0.5);' : '0'};
 
-  &:last-of-type {
-    margin-right: 0;
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 3px 6px 0 0 rgba(196, 196, 196, 0.7);
+    color: rgba(196, 196, 196, 1);
+    font-family: 'NanumSquareNeoExtraBold';
+    margin-right: 5px;
+  }
+
+  &:active {
+    transform: translateY(0);
   }
 
   @media (max-width: 768px) {
-    font-size: 15px;
-    margin-top: 10px;
-    margin-right: 10px;
+    font-size: 13px;
+    padding: 6px 12px;
   }
 `
 
@@ -80,17 +138,20 @@ const CategoryList: FunctionComponent<CategoryListProps> = function ({
   categoryList,
 }) {
   return (
-    <CategoryListWrapper>
-      {Object.entries(categoryList).map(([name, count]) => (
-        <CategoryItem
-          to={`/?category=${name}`}
-          active={name === selectedCategory}
-          key={name}
-        >
-          #{name}({count})
-        </CategoryItem>
-      ))}
-    </CategoryListWrapper>
+    <CategoryListOutsideWrapper>
+      <CategoryListInsideWrapper>
+        <WrapperTitle> Categories </WrapperTitle>
+        {Object.entries(categoryList).map(([name, count]) => (
+          <CategoryItem
+            to={`/?category=${name}`}
+            active={name === selectedCategory}
+            key={name}
+          >
+            {name} ({count})
+          </CategoryItem>
+        ))}
+      </CategoryListInsideWrapper>
+    </CategoryListOutsideWrapper>
   )
 }
 

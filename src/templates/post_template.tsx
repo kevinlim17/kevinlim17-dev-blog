@@ -45,7 +45,7 @@ const PostTemplate: FunctionComponent<PostTemplateProps> = function ({
       description={summary}
       url={href}
       image={publicURL}
-      headerTitle="&nbsp; kevinlim17.dev"
+      headerTitle="&nbsp;Soople.dev"
     >
       <PostHead
         title={title}

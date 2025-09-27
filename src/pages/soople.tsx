@@ -50,7 +50,7 @@ const WriterSpace: FunctionComponent<WriterSpacePageProps> = function ({
   )
 
   return (
-    <Template headerTitle="🌲 Monthly, Soople">
+    <Template headerTitle="&nbsp;Monthly, Soople">
       <WriterGround>
         <GenreList
           selectedGenre={selectedGenre}

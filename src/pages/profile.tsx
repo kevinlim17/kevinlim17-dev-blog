@@ -26,12 +26,11 @@ const ProfilePageWrapper = styled.div`
   height: 100vh;
   width: 100%;
   background: linear-gradient(
-    135deg,
-    rgba(2, 0, 36, 1) 0%,
-    rgba(2, 131, 28, 1) 70%,
-    rgba(0, 255, 109, 1) 100%
+    180deg,
+    rgba(2, 0, 36, 0.3) 0%,
+    rgba(196, 196, 196, 1) 30%,
+    rgba(250, 249, 246, 1) 100%
   );
-
   animation: ${GradientAnimation} 15s ease-out infinite;
   background-size: 400%;
 
@@ -48,7 +47,7 @@ const ProfilePage: FunctionComponent<ProfileProps> = function ({
   },
 }) {
   return (
-    <Template headerTitle="&nbsp; kevinlim17.md">
+    <Template headerTitle="&nbsp;kevinlim17.md">
       <ProfilePageWrapper>
         <TabletShapedContainer profileImage={gatsbyImageData} />
       </ProfilePageWrapper>

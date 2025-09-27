@@ -90,7 +90,7 @@ const IndexPage: FunctionComponent<IndexPageProps> = function ({
       description={description}
       url={siteUrl}
       image={publicURL}
-      headerTitle="&nbsp; kevinlim17.dev"
+      headerTitle="&nbsp;Soople.dev"
     >
       <Introduction profileImage={gatsbyImageData} />
       <CategoryList
@@ -136,7 +136,7 @@ export const getPostList = graphql`
         }
       }
     }
-    file(name: { eq: "profile-image" }) {
+    file(name: { eq: "avatar" }) {
       childImageSharp {
         gatsbyImageData(width: 120, height: 120)
       }

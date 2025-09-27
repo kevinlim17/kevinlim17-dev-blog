@@ -1,8 +1,8 @@
 import React, { FunctionComponent, ReactNode } from 'react'
 import styled from '@emotion/styled'
-import { GradientAnimation } from 'components/lib/GradientAnimation'
 import TypeWriter from 'typewriter-effect'
-import { ContainerShapedAnimation } from 'components/lib/ContainerShapedAnimation'
+import { GradientAnimation } from 'components/lib/GradientAnimation'
+import { keyframes } from '@emotion/react'
 
 type WriterGroundProps = {
   children: ReactNode
@@ -12,18 +12,13 @@ const Background = styled.div`
   z-index: 2;
   width: 100%;
   background: linear-gradient(
-    164deg, 
-    rgba(2,34,0,1) 0%, 
-    rgba(224,213,144,1) 50%, 
-    rgba(255,247,196,1) 100%
+    180deg,
+    rgba(2, 0, 36, 0.3) 0%,
+    rgba(196, 196, 196, 1) 30%,
+    rgba(250, 249, 246, 1) 100%
   );
-  color: #ffffff;
   animation: ${GradientAnimation} 15s ease-out infinite;
   background-size: 400%;
-
-  border-radius: 0 0 1% 1%;
-  box-shadow: rgba(0, 0, 0, 0.12) 0 3px 1px -2px,
-    rgba(0, 0, 0, 0.14) 0 2px 2px 0, rgba(0, 0, 0, 0.12) 0 1px 5px 0;
 `
 
 const Wrapper = styled.div`
@@ -37,9 +32,14 @@ const Wrapper = styled.div`
 
   @media (max-width: 768px) {
     width: 90vw;
-    //height: 300px;
     padding: 0 20px;
   }
+`
+
+const PaperShapedAnimation = keyframes`
+  0% { margin-left: -10vh; opacity: 0; }
+  50% { margin-left: -7vh; opacity: 0;}
+  100% { margin-left: 0px; opacity: 1; }
 `
 
 const PaperShapedWrapper = styled.div`
@@ -49,49 +49,61 @@ const PaperShapedWrapper = styled.div`
   align-items: flex-start;
 
   width: 70vw;
-  height: 150%;
-  padding: 0 3vw 3vh 3vw;
+  height: auto;
+  padding: 3rem;
   z-index: 2;
-  margin-top: 15vh;
+  margin-top: 7.5rem;
 
-  background: rgba(255, 255, 255, 0.1);
-  border: 2px solid rgba(2, 0, 36, 0.4);
+  background: rgba(250, 249, 246, 1);
+  border: 2px solid rgba(2, 0, 36, 1);
+  border-right: 2px dashed;
   border-bottom: 0px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1);
 
-  animation-name: ${ContainerShapedAnimation};
+  position: relative;
+
+  animation-name: ${PaperShapedAnimation};
   animation-duration: 2.5s;
 
   @media (max-width: 1200px) {
-    width: 94vw;
+    width: 85vw;
+    padding: 2.5rem;
+  }
+
+  @media (max-width: 768px) {
+    width: 90vw;
+    padding: 2rem;
   }
 `
 
 const WriterMotto = styled.div`
-  font-size: 1.4rem;
-  font-weight: 800;
+  font-size: 1.8rem;
+  font-weight: 700;
   line-height: 1.4;
-  margin-top: 5vh;
+  color: #1f2937;
+  margin-bottom: 2rem;
 
   @media (max-width: 768px) {
-    padding-left: 2vw;
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
   }
 `
 
 const WriterInfo = styled.div`
-  font-size: 1.8rem;
-  font-weight: 300;
-  line-height: 1.4;
-  height: 15vh;
+  font-size: 1.6rem;
+  font-weight: 400;
+  line-height: 1.6;
+  min-height: 8rem;
   width: 100%;
-
-  margin-top: 3vh;
-  border-bottom: 3px solid rgba(255, 255, 255, 0.1);
+  color: rgba(2, 0, 36, 1);
+  padding-bottom: 1rem;
 
   @media (max-width: 768px) {
-    font-size: 1.1rem;
+    font-size: 1rem;
     line-height: 1.7;
-    padding-left: 2.5vw;
+    min-height: 6rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.5rem;
   }
 `
 

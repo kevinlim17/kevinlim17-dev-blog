@@ -13,7 +13,7 @@ const WritingListWrapper = styled.div`
   grid-template-columns: 1fr;
   grid-gap: 10px;
   width: 100%;
-  margin: 5vh auto;
+  margin: 3vh auto;
 
   @media (max-width: 768px) {
     margin-top: 2vh;

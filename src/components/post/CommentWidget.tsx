@@ -17,7 +17,8 @@ type UtterancesAttributesType = {
 const CommentWidgetWrapper = styled.div`
   margin-left: -10vw;
   padding-right: 50px;
-  margin-bottom: 50px;
+  padding-bottom: 50px;
+  background-color: rgba(250, 249, 246, 1);
 
   @media screen and (max-width: 1200px) {
     margin: 0;

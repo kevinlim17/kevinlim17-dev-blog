@@ -4,20 +4,23 @@ import PostContent from './PostContent'
 import PostTOC from './PostTOC'
 import { debounce } from 'lodash'
 
+type WindowWidthProps = {
+  windowWidth: string
+}
+
 type PostContainerProps = {
   html: string
   tableOfContents: string
 }
 
-const PostContainerWrapper = styled.div`
+const PostContainerWrapper = styled.div<WindowWidthProps>`
   display: flex;
   flex-wrap: wrap;
-  flex-direction: row;
-  justify-content: flex-start;
+  flex-direction: ${props => props.windowWidth};
+  justify-content: space-between;
   position: relative;
-  margin: 0 0 0 5vw;
-  padding-bottom: 10vw;
-  //border-bottom: 1px solid rgba(2, 0, 36, 0.1);
+  padding: 0 5vw 10vw 5vw;
+  background-color: rgba(250, 249, 246, 1);
 `
 
 const PostContainer: FunctionComponent<PostContainerProps> = function ({
@@ -42,12 +45,13 @@ const PostContainer: FunctionComponent<PostContainerProps> = function ({
 
   // width가 1200 이하면 TOC를 Rendering하지 않음.
   return windowWidth >= 1200 ? (
-    <PostContainerWrapper>
+    <PostContainerWrapper windowWidth={`row`}>
       <PostContent html={html} />
       <PostTOC tableOfContents={tableOfContents} />
     </PostContainerWrapper>
   ) : (
-    <PostContainerWrapper>
+    <PostContainerWrapper windowWidth={`column`}>
+      <PostTOC tableOfContents={tableOfContents} />
       <PostContent html={html} />
     </PostContainerWrapper>
   )

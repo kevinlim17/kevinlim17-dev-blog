@@ -1,7 +1,11 @@
 import React, { FunctionComponent, useCallback, useState } from 'react'
 import styled from '@emotion/styled'
 import { Link } from 'gatsby'
-import { faCode, faAddressCard, faTree } from '@fortawesome/free-solid-svg-icons'
+import {
+  faCode,
+  faAddressCard,
+  faTree,
+} from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useScrollEvent } from 'hooks/useScrollEvent'
 import { toFit } from 'hooks/toFit'
@@ -15,69 +19,97 @@ type HeaderTitleProps = {
 const Wrapper = styled.div<{ isScroll: boolean }>`
   display: flex;
   flex-direction: row;
-  justify-content: flex-end;
+  justify-content: space-between;
   align-items: center;
 
   width: 100%;
-  height: 7.5vh;
+  height: 70px;
   z-index: 4;
   position: fixed;
-  padding: 0 14vw;
+  padding: 0 5vw;
 
-  border-radius: 0 0 7px 7px;
-  box-shadow: rgba(0, 0, 0, 0.12) 0 3px 1px -2px,
-    rgba(0, 0, 0, 0.14) 0 2px 2px 0, rgba(0, 0, 0, 0.12) 0 1px 5px 0;
+  border-top: 3px solid rgba(2, 0, 36, 1);
+  border-bottom: ${({ isScroll }) => (isScroll ? '0' : '2px solid')};
+  border-radius: 0;
   background-color: ${({ isScroll }) =>
-    isScroll ? 'rgba(2, 0, 36, 1)' : 'rgba(2, 0, 36, 0.5)'};
+    isScroll ? 'rgba(196, 196, 196, 0.5)' : 'rgba(250, 249, 246, 1)'};
+  backdrop-filter: blur(20px);
+  box-shadow: ${({ isScroll }) =>
+    isScroll ? '3px 3px 4px 0 rgba(2, 0, 36, 0.2)' : '0'};
+
+  @media screen and (max-width: 1200px) and (min-width: 769px) {
+    padding: 0 5vw;
+  }
 
   @media (max-width: 768px) {
-    padding: 0 3vw;
+    padding: 0 20px;
+    height: 70px;
   }
+`
+
+const LeftSection = styled.div`
+  display: flex;
+  align-items: center;
+  max-height: max-content;
+  gap: 2px;
 `
 
 const Title = styled(Link)`
-  flex: none;
-  margin-right: auto;
-  font-size: 3.5vh;
-  font-family: "NanumSquareNeoHeavy";
-  color: white;
-
+  font-size: 30px;
+  font-weight: 700;
+  font-family: 'NanumSquareNeoLight';
+  color: rgba(2, 0, 36, 1);
+  text-decoration: none;
   &:hover {
-    color: white;
+    color: #374151;
   }
 
   @media (max-width: 768px) {
-    font-size: 2.5vh;
+    font-size: 25px;
   }
 `
 
-const SectionItem = styled(Link)<{ description: string; isScroll: boolean }>`
-  display: grid;
-  place-items: center;
-  width: 4.5vh;
-  height: 4.5vh;
-  border-radius: 50%;
-  margin: auto 1vw;
-  font-size: 2vh;
+const RightSection = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+`
 
-  background: ${({ isScroll }) =>
-    isScroll ? 'rgba(0, 255, 109, 1)' : 'rgba(2, 0, 36, 1)'};
-  color: ${({ isScroll }) => (isScroll ? 'rgba(2, 0, 36, 1)' : 'white')};
+const SectionItem = styled(Link)<{ description: string; isScroll: boolean }>`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 16px;
+  border: 1px solid rgba(2, 0, 36, 1);
+  border-radius: 0;
+  background: rgba(255, 255, 255, 1);
+  color: rgba(2, 0, 36, 1);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s ease;
 
   cursor: pointer;
-  box-shadow: rgba(0, 0, 0, 0.12) 0 3px 1px -2px,
-    rgba(0, 0, 0, 0.14) 0 2px 2px 0, rgba(0, 0, 0, 0.12) 0 1px 5px 0;
 
   &:hover {
-    box-shadow: 0 0 100px rgba(255, 255, 255, 0.7);
-    color: ${({ isScroll }) => (isScroll ? 'white' : 'rgba(0, 255, 109, 1)')};
+    background: #000;
+    color: white;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
   }
 
   @media (max-width: 768px) {
-    width: 2rem;
-    height: 2rem;
-    margin: 0.5rem;
-    font-size: 1rem;
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+`
+
+const IconWrapper = styled.span`
+  font-size: 14px;
+
+  @media (max-width: 768px) {
+    // margin-right: 4px;
+    font-size: 12px;
   }
 `
 
@@ -96,29 +128,40 @@ const Header: FunctionComponent<HeaderTitleProps> = function ({ titleText }) {
 
   return (
     <Wrapper isScroll={isScroll}>
-      <AvatarImage />
-      <Title to="/">{titleText}</Title>
-      <CustomToolTip title="Developer's Space">
-        <SectionItem to="/" description="Developer's Space" isScroll={isScroll}>
-          <FontAwesomeIcon icon={faCode} />
-        </SectionItem>
-      </CustomToolTip>
+      <LeftSection>
+        <AvatarImage />
+        <Title to="/">{titleText}</Title>
+      </LeftSection>
 
-      <CustomToolTip title="Monthly, Soople">
-        <SectionItem
-          to="/soople"
-          description="Soople"
-          isScroll={isScroll}
-        >
-          <FontAwesomeIcon icon={faTree} />
-        </SectionItem>
-      </CustomToolTip>
+      <RightSection>
+        <CustomToolTip title="Developer's Space">
+          <SectionItem
+            to="/"
+            description="Developer's Space"
+            isScroll={isScroll}
+          >
+            <IconWrapper>
+              <FontAwesomeIcon icon={faCode} />
+            </IconWrapper>
+          </SectionItem>
+        </CustomToolTip>
 
-      <CustomToolTip title="Profile">
-        <SectionItem to="/profile" description="Profile" isScroll={isScroll}>
-          <FontAwesomeIcon icon={faAddressCard} />
-        </SectionItem>
-      </CustomToolTip>
+        <CustomToolTip title="Monthly, Soople">
+          <SectionItem to="/soople" description="Soople" isScroll={isScroll}>
+            <IconWrapper>
+              <FontAwesomeIcon icon={faTree} />
+            </IconWrapper>
+          </SectionItem>
+        </CustomToolTip>
+
+        <CustomToolTip title="Profile">
+          <SectionItem to="/profile" description="Profile" isScroll={isScroll}>
+            <IconWrapper>
+              <FontAwesomeIcon icon={faAddressCard} />
+            </IconWrapper>
+          </SectionItem>
+        </CustomToolTip>
+      </RightSection>
     </Wrapper>
   )
 }

@@ -9,11 +9,11 @@ const CustomToolTip = styled(({ className, ...props }: TooltipProps) => (
     color: theme.palette.common.black,
   },
   [`& .${tooltipClasses.tooltip}`]: {
-    backgroundColor: 'rgba(2, 0, 36, 1)',
+    backgroundColor: '#000',
     color: theme.palette.common.white,
     boxShadow: theme.shadows[1],
     fontSize: 14,
-    fontFamily: 'NanumSquareNeoExtraBold',
+    fontFamily: 'NanumSquareNeo',
     padding: '7px 10px',
   },
 }))

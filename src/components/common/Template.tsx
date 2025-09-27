@@ -18,6 +18,7 @@ const Container = styled.main`
   display: flex;
   flex-direction: column;
   height: 100%;
+  background-color: (255, 251, 242, 0.5);
 `
 
 const Template: FunctionComponent<TemplateProps> = function ({

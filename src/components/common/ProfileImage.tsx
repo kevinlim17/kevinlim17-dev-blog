@@ -12,20 +12,19 @@ const PROFILE_IMAGE_LINK =
 */
 
 const ProfileImageWrapper = styled(GatsbyImage)`
-  width: 20vh;
-  height: 20vh;
+  width: 14vh;
+  height: 14vh;
   margin-bottom: 30px;
-  border-radius: 50%;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  //border-radius: 80%;
 
   @media (max-width: 1200px) {
-    width: 15vw;
-    height: 15vw;
+    width: 12vw;
+    height: 12vw;
   }
 
   @media (max-width: 768px) {
-    width: 50vw;
-    height: 75vw;
+    width: 30vw;
+    height: 30vw;
 
     margin-top: 1vh;
   }

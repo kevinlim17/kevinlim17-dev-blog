@@ -9,10 +9,10 @@
  */
 module.exports = {
   siteMetadata: {
-    title: `kevinlim17-blog`,
+    title: `Soople-Site`,
     description: `코드를 쓰고 이야기를 개발합니다.`,
     author: `Seung Hyeon Lim`,
-    siteUrl: `https://kevinlim17.com`,
+    siteUrl: `https://soople.site`,
   },
   plugins: [
     {
@@ -116,7 +116,7 @@ module.exports = {
     {
       resolve: `gatsby-plugin-canonical-urls`,
       options: {
-        siteUrl: 'https://kevinlim17.com/',
+        siteUrl: 'https://soople.site',
         stripQueryString: true,
       },
     },
@@ -124,8 +124,8 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-robots-txt',
       options: {
-        host: 'https://kevinlim17.com',
-        sitemap: 'https://kevinlim17.com/sitemap.xml',
+        host: 'https://soople.site',
+        sitemap: 'https://soople.site/sitemap.xml',
         policy: [{ userAgent: '*', allow: '/' }],
       },
     },

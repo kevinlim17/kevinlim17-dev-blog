@@ -241,29 +241,58 @@ const PostTOC: FunctionComponent<PostTOCProps> = function ({
   tableOfContents,
 }) {
   const [isExpanded, setIsExpanded] = useState(false)
-  const PostContent = document.getElementById('post-content')
-  const ToC = document.getElementById('table-of-contents')
-  const postHeaderElements = PostContent?.querySelectorAll('h2, h3, h4') ?? []
+  const [postHeaderElements, setPostHeaderElements] = useState<
+    NodeListOf<Element> | never[]
+  >([])
+  const [isClient, setIsClient] = useState(false)
+
+  // Initialize client-side state
+  useEffect(() => {
+    setIsClient(true)
+  }, [])
+
+  // Get DOM elements and set up header elements only on client side
+  useEffect(() => {
+    if (!isClient) return
+
+    const PostContent = document.getElementById('post-content')
+    const headerElements = PostContent?.querySelectorAll('h2, h3, h4') ?? []
+    setPostHeaderElements(headerElements)
+  }, [isClient])
 
   const { activeId } = useHeadsObserver(postHeaderElements)
 
   useEffect(() => {
+    if (!isClient || postHeaderElements.length === 0) return
+
+    const ToC = document.getElementById('table-of-contents')
+    const clickHandlers: Array<{
+      element: Element
+      handler: (e: Event) => void
+    }> = []
+
     postHeaderElements.forEach((headerElement, idx) => {
       const { top } = headerElement.getBoundingClientRect()
       const elementTop = top + getScrollTop() - 70
 
       const ToCLinkElement = ToC?.getElementsByTagName('a').item(idx)
 
-      ToCLinkElement?.addEventListener('click', e => {
-        e.preventDefault()
-        window.scroll({ top: elementTop, behavior: 'smooth' })
-        console.log(top)
-        console.log(elementTop)
-      })
+      if (ToCLinkElement) {
+        const handler = (e: Event) => {
+          e.preventDefault()
+          window.scroll({ top: elementTop, behavior: 'smooth' })
+        }
+        ToCLinkElement.addEventListener('click', handler)
+        clickHandlers.push({ element: ToCLinkElement, handler })
+      }
     })
-
-    // console.log(activeId + '1')
-  })
+    // Cleanup function to remove event listeners
+    return () => {
+      clickHandlers.forEach(({ element, handler }) => {
+        element.removeEventListener('click', handler)
+      })
+    }
+  }, [isClient, postHeaderElements])
 
   const toggleExpanded = () => {
     setIsExpanded(!isExpanded)

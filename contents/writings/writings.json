@@ -1,6 +1,6 @@
 [
   {
-    "title": "에세이 01: 아침의 향기",
+    "title": "아침의 향기",
     "description": "기억에 색을 입히는 수만 가지의 향.",
     "date": "2023-01-02",
     "thumbnail": "scent.jpg",
@@ -8,7 +8,7 @@
     "url": "https://brunch.co.kr/@kevinlim17/1"
   },
   {
-    "title": "동시대 예술 01: 히토 슈타이얼",
+    "title": "동시대 예술: 히토 슈타이얼",
     "description": "Between Atom and Bit, 경계를 가로지르는 통섭의 아티스트",
     "date": "2023-01-03",
     "thumbnail": "steyerl.jpg",
@@ -24,12 +24,91 @@
     "url": "https://brunch.co.kr/@kevinlim17/5"
   },
   {
-    "title": "OneWord 01 : 정치(1)",
+    "title": "OneWord: 정치",
     "description": "당신이 몸담는 공동체가 작동하는 방식",
     "date": "2023-08-20",
     "thumbnail": "politics.png",
     "genre": "1️⃣ OneWord",
     "url": "https://brunch.co.kr/@kevinlim17/2"
+  },
+  {
+    "title": "腊月: 활자의 세계",
+    "description": "나를 끌어안아 줄 활자를 찾아서. 활자의 세계로 당신을 안내합니다.",
+    "date": "2023-12-17",
+    "thumbnail": "2023-december.png",
+    "genre": "🔠 활자",
+    "url": "https://drive.google.com/file/d/1Ce-zVJek7rghZ3P4_ZI0_U1H-MLS0g3O/view?usp=drive_link"
+  },
+  {
+    "title": "年賀狀",
+    "description": "한 해의 끝을 붙잡고, 날카로운 삶의 항해에서, 둥그러운 세계를 향해, 분투하는 당신을 위해",
+    "date": "2023-12-31",
+    "thumbnail": "2023-farewell.png",
+    "genre": "📩 편지",
+    "url": "https://drive.google.com/file/d/1_1AsKB54Sq39CwGW0dST5kPGwivAub2E/view?usp=drive_link"
+  },
+  {
+    "title": "正月: 흘러가는 매체의 단상",
+    "description": "사랑하는 공간, 향유하는 매체, 흘러가는 시간, 그 속의 우리.",
+    "date": "2024-01-17",
+    "thumbnail": "2024-january.png",
+    "genre": "🔠 활자",
+    "url": "https://drive.google.com/file/d/1gaB1E4ASgvnKriLLGqOh5Bn474IHOwEY/view?usp=sharing"
+  },
+  {
+    "title": "二月: 활자의 종언",
+    "description": "선형의 세계에서 불연속의 세계로, 의미를 부여하기보다 목적을 찾아서.",
+    "date": "2024-02-17",
+    "thumbnail": "2024-february.png",
+    "genre": "🔠 활자",
+    "url": "https://drive.google.com/file/d/1MUwm1juIz5wsdwOz9LeZ7hM-RMZpPIph/view?usp=sharing"
+  },
+  {
+    "title": "三月: 우리가 다가갈 미술관",
+    "description": "다가서기에는 너무나 먼 당신. 숨가쁘게 닿기 위해 무엇을 해야 할까.",
+    "date": "2024-03-17",
+    "thumbnail": "2024-march.png",
+    "genre": "🏛️ 박물관",
+    "url": "https://drive.google.com/file/d/1FoIxX9_-kLK7UKTfE6nneOXCfx1zdSEE/view?usp=sharing"
+  },
+  {
+    "title": "四月: 우둔한 사회",
+    "description": "어리석은 사회, 둔해져 버린 인간. 학술의 세계에서 지녀야 하는 마음.",
+    "date": "2024-04-17",
+    "thumbnail": "2024-april.png",
+    "genre": "✒️ 에세이",
+    "url": "https://drive.google.com/file/d/1VDWLKlKRoEfqLTEuS2zsGdyzWGnsdDdb/view?usp=sharing"
+  },
+  {
+    "title": "五月: 우리, 셋이 추는 춤",
+    "description": "누군가 당신과 얽혀진 사람이, 어딘가 당신과 떨어진 공간에.",
+    "date": "2024-05-17",
+    "thumbnail": "2024-may.png",
+    "genre": "🤖 SF",
+    "url": "https://drive.google.com/file/d/1STKIZihZEWPUQFoOj4r5dlOtnIp5f8xd/view?usp=sharing"
+  },
+  {
+    "title": "六月: 진정 환대하는 문명",
+    "description": "우리가 먼저 발딛은 세상으로, 더욱이 슬기롭게 맞이하려면",
+    "date": "2024-06-17",
+    "thumbnail": "2024-june.png",
+    "genre": "📚 교육",
+    "url": "https://drive.google.com/file/d/1JYDOJUTsIxtQCz6U4d3hAVEfxiPYwW9S/view?usp=sharing"
+  },
+  {
+    "title": "七月: 쓸모 있는(없는) 인간",
+    "description": "우리 모두 다르게 살아내기에, 서로 다른 쓸모를 찾아서",
+    "date": "2024-07-17",
+    "thumbnail": "2024-july.png",
+    "genre": "🌈 다양성",
+    "url": "https://drive.google.com/file/d/1ONuLzt7RMjctRx-8tz07CkV7wB1ENbTC/view?usp=sharing"
+  },
+  {
+    "title": "八月: 불현듯, 영원의 가능성",
+    "description": "흩어지는 기억, 무력한 찰나, 그럼에도 사랑하는 이유",
+    "date": "2024-08-17",
+    "thumbnail": "2024-august.png",
+    "genre": "🤖 SF",
+    "url": "https://drive.google.com/file/d/1jVdMxktJ_NOo81ki5QS3pm3iQLpgLP2N/view?usp=sharing"
   }
-
 ]

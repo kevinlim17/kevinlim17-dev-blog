@@ -78,7 +78,6 @@ const PaperShapedWrapper = styled.div`
 
 const WriterMotto = styled.div`
   font-size: 1.8rem;
-  font-weight: 700;
   line-height: 1.4;
   color: #1f2937;
   margin-bottom: 2rem;

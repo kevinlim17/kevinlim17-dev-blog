@@ -56,7 +56,6 @@ const LeftSection = styled.div`
 
 const Title = styled(Link)`
   font-size: 30px;
-  font-weight: 700;
   font-family: 'NanumSquareNeoLight';
   color: rgba(2, 0, 36, 1);
   text-decoration: none;

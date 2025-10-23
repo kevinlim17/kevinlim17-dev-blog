@@ -53,6 +53,7 @@ const SiteTitle = styled.h3`
   font-size: 1.4rem;
   font-family: 'NanumSquareNeoBold';
   color: rgba(2, 0, 36, 1);
+  font-weight: 400;
 
   @media (max-width: 768px) {
     font-size: 16px;
@@ -106,7 +107,7 @@ const InfoSection = styled.div`
 const InfoTitle = styled.h4`
   margin: 0 0 15px 0;
   font-size: 1rem;
-  font-weight: 900;
+  font-weight: 400;
   color: rgba(2, 0, 36, 1);
 `
 

@@ -41,7 +41,7 @@ const PostHeader = styled.div`
 const Title = styled.h2`
   background-color: transparent;
   font-size: 24px;
-  font-weight: 700;
+  font-weight: 400;
   line-height: 1.3;
   color: #000;
   margin: 0 0 12px 0;

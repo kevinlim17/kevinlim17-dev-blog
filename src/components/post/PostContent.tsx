@@ -52,7 +52,7 @@ const MarkdownRenderer = styled.div`
   }
 
   h2 {
-    font-family: 'NanumSquareNeo';
+    font-weight: 400;
     margin-bottom: 2rem;
     padding-left: 1rem;
     padding-bottom: 0.5rem;

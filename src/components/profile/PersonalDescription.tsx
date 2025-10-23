@@ -24,7 +24,6 @@ const PersonalDescriptionWrapper = styled.div`
 
 const Slogan = styled.div`
   font-size: 1.4rem;
-  font-weight: 700;
   line-height: 1.5;
   color: #1f2937;
   margin-bottom: 2rem;
@@ -71,7 +70,6 @@ const SectionWrapper = styled.div`
 
 const SectionTitle = styled.div`
   font-size: 1.1rem;
-  font-weight: 600;
   color: #374151;
   min-width: 9rem;
   padding-right: 2rem;

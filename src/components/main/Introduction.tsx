@@ -83,7 +83,7 @@ const CardHeader = styled.div`
 
 const MainTitle = styled.h1`
   font-size: 32px;
-  font-weight: 700;
+  font-weight: 400;
   line-height: 1.3;
   color: rgba(2, 0, 36, 1);
   margin: 0;

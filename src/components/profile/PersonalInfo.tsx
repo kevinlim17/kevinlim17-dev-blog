@@ -82,7 +82,7 @@ const PersonalInfoNameWrapper = styled.div`
 
 const PersonalInfoName = styled.h2`
   font-size: 1.5rem;
-  font-weight: 700;
+  font-weight: 400;
   color: #1f2937;
   margin: 0 0 0.5rem 0;
   line-height: 1.2;

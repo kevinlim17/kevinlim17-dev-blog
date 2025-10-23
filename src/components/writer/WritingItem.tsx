@@ -79,7 +79,7 @@ const Title = styled.h3`
   -webkit-box-orient: vertical;
 
   font-size: 1.75rem;
-  font-weight: 700;
+  font-weight: 400;
   color: #1f2937;
   margin: 0 0 0.75rem 0;
   line-height: 1.4;

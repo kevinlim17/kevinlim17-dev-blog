@@ -63,7 +63,7 @@ const ContainerHeader = styled.div`
 
 const HeaderTitle = styled.h2`
   font-size: 24px;
-  font-weight: 700;
+  font-weight: 400;
   color: #000;
   margin: 0;
 

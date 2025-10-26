@@ -1,7 +1,7 @@
 ---
 date: '2024-06-17'
 title: "지금의 Kotlin 그리고 Kotlin Conf'2023"
-categories: ['Kotlin', 'Review']
+categories: ['Kotlin', 'PL']
 summary: '안드로이드 생초보의 첫 개발자 컨퍼런스'
 thumbnail: './kotlin_conf23.png'
 ---
@@ -10,7 +10,7 @@ thumbnail: './kotlin_conf23.png'
 
 안녕하세요, 케빈입니다. 
 
-블로그를 오픈한지 얼마 되지도 않았는데, 벌써 계획과 다른 방향으로 나아가는 게 아니냐([**블로그 소개 글 참고**](https://kevinlim17.com/blog_intro/)) 우려를 표명하실 수 있으리라 생각하실 수 있습니다. 계획에 포함되어 있지 않을 뿐이지, 이런 리뷰 포스트를 아예 쓰지 않겠다고 한 것은 전혀 아니었으니, 부디 양해해 주시길 바랍니다. (당연히 다른 글도 올릴 겁니다. 쓸 글이 산더미예요.) 수업을 듣거나, 온라인 강의를 수강하거나, 컨퍼런스에 참석하거나, 동아리에 참여한 경우에도, 조금씩 써내려갈 생각입니다. 물론 인트로 포스트에서 얘기한 시리즈들과는 다르게 '온전한 형태의 비정기' 연재가 될 것임은 자명합니다.
+블로그를 오픈한지 얼마 되지도 않았는데, 벌써 계획과 다른 방향으로 나아가는 게 아니냐([**블로그 소개 글 참고**](https://kevinlim17.com/blog_intro/)) 우려를 전하실 수 있으리라 생각합니다. 계획에 포함되어 있지 않을 뿐이지, 이런 리뷰 포스트를 아예 쓰지 않겠다고 한 것은 전혀 아니었으니, 부디 양해해 주시길 바랍니다. (당연히 다른 글도 올릴 겁니다. 쓸 글이 산더미예요.) 수업을 듣거나, 온라인 강의를 수강하거나, 컨퍼런스에 참석하거나, 동아리에 참여한 경우에도, 조금씩 써내려갈 생각입니다. 물론 인트로 포스트에서 얘기한 시리즈들과는 다르게 '온전한 형태의 비정기' 연재가 될 것임은 자명합니다.
 
 뜬 구름 잡는 이야기는 과감히 각설하고, 이 공간에서 다룰 내용은 '**컨퍼런스 리뷰**'입니다. 
 무려 글쓴이가 사회인이던 시절(그래봤자 고작 4달 전 이야기지만)에 다녀온 것이라, 매우 늦은 감이 없지 않아 있지만, 그래도 개인 노션에 후기를 Raw한 형태로라도 정리해 두었으니, 정돈된 형태로 다듬어 보자는 결심에서 공유해 봅니다. 
@@ -1228,7 +1228,7 @@ Google Home은 Google Nest를 포함한 IoT 가전제품을 조작하기 위한 
 </p>
 
 
-<strong>먼저, <code class="language-text" style="color: white">kotlin-parcelize</code> 플러그인과 <code class="language-text" style="color: rgba(255, 110, 162, 1)">data class</code>를 이용해 코드량을 획기적으로 줄인 사례(80% 감소)가 주목할 만합니다.</strong> Kotlin의 간결함을 나타내는 사례로 [앞](#concise)에서  <code class="language-text" style="color: rgba(255, 110, 162, 1)">data class</code>를 언급했으니, 여기서는 안드로이드에 의존성을 가진 인터페이스에 대해서 잠깐 다뤄보겠습니다. Kotlin 생태계 전체를 포괄하는 이야기가 아니므로, 아래 초록 배경의 블록은 독자 분들의 필요에 따라 흘겨 읽으셔도 좋습니다. 
+<strong>먼저, <code class="language-text">kotlin-parcelize</code> 플러그인과 <code class="language-text" style="color: rgba(255, 110, 162, 1)">data class</code>를 이용해 코드량을 획기적으로 줄인 사례(80% 감소)가 주목할 만합니다.</strong> Kotlin의 간결함을 나타내는 사례로 [앞](#concise)에서  <code class="language-text" style="color: rgba(255, 110, 162, 1)">data class</code>를 언급했으니, 여기서는 안드로이드에 의존성을 가진 인터페이스에 대해서 잠깐 다뤄보겠습니다. Kotlin 생태계 전체를 포괄하는 이야기가 아니므로, 아래 초록 배경의 블록은 독자 분들의 필요에 따라 흘겨 읽으셔도 좋습니다. 
 
 </br>
 
@@ -1243,33 +1243,33 @@ Google Home은 Google Nest를 포함한 IoT 가전제품을 조작하기 위한 
     Java 객체는 해당 클래스나 상위 클래스 중 하나가 <code class="language-text">java.io.Serializable</code> 인터페이스 또는 그 하위 인터페이스인 <code class="language-text">java.io.Externalizable</code>을 implement하는 경우 직렬화됩니다.
     </blockquote>
     </br>
-    직렬화(Serialize)는 하나의 프로세스에서 다른 프로세스로, Byte-Stream 형태로 객체를 내보내야 할 때 사용합니다. <strong style="color: rgba(52, 168, 82, 1)">Android</strong>에서도 화면 설계에서 프로세스 간 객체의 전달이 필요한 경우, 이에 따른 직렬화 메커니즘이 요구되며, 이러한 메커니즘을  <strong style="color: rgba(52, 168, 82, 1)">OS</strong> 의존적으로 구현한 것이 <code class="language-text" style="color: white">Parcelable</code> 객체입니다. 
+    직렬화(Serialize)는 하나의 프로세스에서 다른 프로세스로, Byte-Stream 형태로 객체를 내보내야 할 때 사용합니다. <strong style="color: rgba(52, 168, 82, 1)">Android</strong>에서도 화면 설계에서 프로세스 간 객체의 전달이 필요한 경우, 이에 따른 직렬화 메커니즘이 요구되며, 이러한 메커니즘을  <strong style="color: rgba(52, 168, 82, 1)">OS</strong> 의존적으로 구현한 것이 <code class="language-text">Parcelable</code> 객체입니다. 
     </br>
     <blockquote style="background-color: rgba(168, 168, 168, 0.06); padding: 1.5rem;">
     <h5 style="background-color:rgba(168, 168, 168, 0.06); font-weight: 800;"><a href="https://developer.android.com/guide/components/activities/parcelables-and-bundles#kotlin">Parcelable and bundles</a></h5>
-    <strong><code class="language-text" style="color: white">Parcelable</code> and <code class="language-text" style="color: white">Bundle</code></strong> objects are intended to be used across process boundaries such as with <u>IPC/Binder transactions</u>, between activities with intents, and to store transient state across configuration changes.
+    <strong><code class="language-text">Parcelable</code> and <code class="language-text">Bundle</code></strong> objects are intended to be used across process boundaries such as with <u>IPC/Binder transactions</u>, between activities with intents, and to store transient state across configuration changes.
     <hr style="margin: 1rem 0"/>
     <strong>Parcelable</strong>과 <strong>Bundle</strong> 객체는 IPC / Binder 트랜젝션과 같이 프로세스 경계를 넘나드는, Intent가 존재하는 여러 Activity 사이에서 사용되거나, Configuration 변경 중 일시적인 상태를 저장하기 위해 사용됩니다. 
     </blockquote>
     </br>
-    <code class="language-text" style="color: white">Bundle</code>이 간단한 값 데이터를 담아 Activity 사이를 오가는 것과는 다르게, Complex한 형태의 객체가 다른 프로세스로 전달되기 위해서는 해당 클래스에 <code class="language-text" style="color: white">Parcelable</code> Interface를 Implement해야 합니다. 그렇게 직렬화가 마무리되면, <strong style="color: rgba(52, 168, 82, 1)">OS</strong>는 <u>Binder 매커니즘</u>을 통해 프로세스 간 통신을 진행합니다. (그러한 통신이 애플리케이션 내에서 진행되든 밖으로 나아가게 되든 말이지요.)
+    <code class="language-text">Bundle</code>이 간단한 값 데이터를 담아 Activity 사이를 오가는 것과는 다르게, Complex한 형태의 객체가 다른 프로세스로 전달되기 위해서는 해당 클래스에 <code class="language-text">Parcelable</code> Interface를 Implement해야 합니다. 그렇게 직렬화가 마무리되면, <strong style="color: rgba(52, 168, 82, 1)">OS</strong>는 <u>Binder 매커니즘</u>을 통해 프로세스 간 통신을 진행합니다. (그러한 통신이 애플리케이션 내에서 진행되든 밖으로 나아가게 되든 말이지요.)
     </br></br>
     <p align="left">
         <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/a154124d-19a6-471f-8d5d-e4dee4d7e7ad" width="80%">
     </p>
     </br>
-    Activity 사이의 데이터 전달 뿐 아니라, IoT 기능을 지원하는 Google Home 애플리케이션의 특성상, (추측하건대) 외부의 서비스 서버(시스템 프로세스)를 활용해야 하는 경우가 많을 것입니다. (<code class="language-text" style="color: white">Serializable</code> Interface을 Implement해 명시적인 모든 작업을 Compiler에 떠넘기는 대신에, 수많은 <a href="https://developer.android.com/reference/android/os/Parcel">Parcel</a> 객체를 생성해야만 하지요.) </br>
-    여러 프로세스를 오가는 속도와 안정성을 위해, Android의 <code class="language-text" style="color: white">Parcelable</code> 인터페이스는 역직렬화(Deserialization)을 진행할 때의 Reflection을 없앤 대가로, 수많은 Bolierplate를 생성해 냈습니다. </br>
+    Activity 사이의 데이터 전달 뿐 아니라, IoT 기능을 지원하는 Google Home 애플리케이션의 특성상, (추측하건대) 외부의 서비스 서버(시스템 프로세스)를 활용해야 하는 경우가 많을 것입니다. (<code class="language-text" >Serializable</code> Interface을 Implement해 명시적인 모든 작업을 Compiler에 떠넘기는 대신에, 수많은 <a href="https://developer.android.com/reference/android/os/Parcel">Parcel</a> 객체를 생성해야만 하지요.) </br>
+    여러 프로세스를 오가는 속도와 안정성을 위해, Android의 <code class="language-text" >Parcelable</code> 인터페이스는 역직렬화(Deserialization)을 진행할 때의 Reflection을 없앤 대가로, 수많은 Bolierplate를 생성해 냈습니다. </br>
     </br>
     <blockquote style="background-color: rgba(168, 168, 168, 0.06); padding: 1.5rem;">
-    In such cases, the custom class should implement Parcelable, and provide the appropriate <code class="language-text" style="color: white">writeToParcel(android.os.Parcel, int)</code> method. </br>
-    It must also provide a non-null field called <code class="language-text" style="color: white">CREATOR</code> that implements the <code class="language-text" style="color: white">Parcelable.Creator</code> interface, whose <code class="language-text" style="color: white">createFromParcel()</code> method is used for converting the Parcel back to the current object.
+    In such cases, the custom class should implement Parcelable, and provide the appropriate <code class="language-text">writeToParcel(android.os.Parcel, int)</code> method. </br>
+    It must also provide a non-null field called <code class="language-text">CREATOR</code> that implements the <code class="language-text">Parcelable.Creator</code> interface, whose <code class="language-text">createFromParcel()</code> method is used for converting the Parcel back to the current object.
     <hr style="margin: 1.25rem 0"/>
     (Complex한 형태의 객체가 프로세스를 오가는) 이러한 경우에는, 우리의 Custom Class는 <strong>Parcelable</strong> Interface를 implement해야 하며, 적절한 <strong>writeToParcel</strong> 메서드를 구현해야만 합니다.
     또한 <strong>Parcelable.Creator</strong> Interface를 implement하는 null이 아닌 <strong>CREATOR</strong> 필드를 생성해야 하고, 여기에 존재해야 하는 <strong>createFromParcel</strong> 메서드는 Parcel 객체를 기존 객체로 변환하는 데 사용합니다. 
     </blockquote>
     </br>
-    <code class="language-text" style="color: white">@Parcelize</code> Annotation은 이러한 Bolierplate를 제거하는 데 기여했습니다. 그리고 간결한 문법을 제공하는 <code class="language-text" style="color: rgba(255, 110, 162, 1)">data class</code>와 결합하며 생산성도 덩달아 크게 증가했지요. 위와 같은 예시는, 직렬화가 필요하다면 <strong> Parcelable</strong> 인터페이스를 구현하도록, 그리고 간결함을 제공하는 플러그인을 사용하도록 유도하는, 결국은 Android 개발자들을 Kotlin 생태계로 끌어당기려는 노력의 일환이라고 할 수 있겠습니다.
+    <code class="language-text">@Parcelize</code> Annotation은 이러한 Bolierplate를 제거하는 데 기여했습니다. 그리고 간결한 문법을 제공하는 <code class="language-text" style="color: rgba(255, 110, 162, 1)">data class</code>와 결합하며 생산성도 덩달아 크게 증가했지요. 위와 같은 예시는, 직렬화가 필요하다면 <strong> Parcelable</strong> 인터페이스를 구현하도록, 그리고 간결함을 제공하는 플러그인을 사용하도록 유도하는, 결국은 Android 개발자들을 Kotlin 생태계로 끌어당기려는 노력의 일환이라고 할 수 있겠습니다.
     </br>
 </blockquote>
 
@@ -1307,7 +1307,7 @@ Kotlin Compiler의 필터가 덧씌워지지 않은, 원래의 JVM에서는 어�
     <p align="left">
         <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/b050b249-3cb8-4be2-b8b7-5a9d812027fe" width="80%">
     </p>
-    References는 Primitives와 다르게, 초기화하지 않아도 특정한 값을 가집니다. 문제의 <code class="language-text">null</code>은 여기서 발생하는데요. Java 컴파일러는 할당이 이루어지지 않은 Reference에 자동으로 <code class="language-text">null</code>을 부여합니다. <strong>null</strong>은 기본적으로 변수가 어떤 메모리 주소도 가리키고 있지 않음을 의미합니다. 특정한 객체의 메모리 주소가 할당되지 않은 References를 <strong>Dereferencing</strong>할 때, 발생하는 Runtime Error가 바로 <code class="language-text" style="color: white">NullPointerException</code>인 것입니다. 
+    References는 Primitives와 다르게, 초기화하지 않아도 특정한 값을 가집니다. 문제의 <code class="language-text">null</code>은 여기서 발생하는데요. Java 컴파일러는 할당이 이루어지지 않은 Reference에 자동으로 <code class="language-text">null</code>을 부여합니다. <strong>null</strong>은 기본적으로 변수가 어떤 메모리 주소도 가리키고 있지 않음을 의미합니다. 특정한 객체의 메모리 주소가 할당되지 않은 References를 <strong>Dereferencing</strong>할 때, 발생하는 Runtime Error가 바로 <code class="language-text">NullPointerException</code>인 것입니다. 
 
 </blockquote>
 
@@ -1327,7 +1327,7 @@ Kotlin은 null에 대한 접근을 Runtime 대신 Compile Time에 수행하게 �
         <p align="left">
             <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/38388c5c-8874-4007-b333-349a8bb831d4" width="75%"/>
         </p>
-        <code class="language-text">String?</code>과 같은 Nullable 객체에는 오직 <code class="language-text" style="color: white">?.</code>를 이용한 <strong>Safe Call</strong>이나 <code class="language-text" style="color: white">!!.</code>를 통한 <strong>Non-Null Assertion Call</strong>을 사용해서만 접근할 수 있습니다. 
+        <code class="language-text">String?</code>과 같은 Nullable 객체에는 오직 <code class="language-text">?.</code>를 이용한 <strong>Safe Call</strong>이나 <code class="language-text">!!.</code>를 통한 <strong>Non-Null Assertion Call</strong>을 사용해서만 접근할 수 있습니다. 
     </blockquote>
     </br>
     컴파일 에러는 말 그대로 코드를 컴파일할 수 없을 때 발생합니다. 즉, 문법적으로 올바르지 않은 코드를 작성해 생기는 참사지요. Null Safety를 위해 Kotlin은 엄격한 문법적 규칙(Syntatic Rule)을 적용합니다. 변수가 <code class="language-text">null</code>의 가능성을 가질 때 (정확히는 변수가 <strong>아무런 객체의 메모리 주소도 가리키고 있지 않을 가능성이 있을 때</strong>(When referencing nothing)), 접근 자체를 거부함으로써 "문법적 사고"를 미연에 방지합니다. </br>
@@ -1417,7 +1417,7 @@ Kotlin 2.0의 릴리즈(Release)는 곧 새로운 컴파일러, 코드네임 "K2
 <code class="language-text" style="background-color: black; color: white;">IR</code>을 최적화하는 단계를 <strong>미들엔드(Middle-end)</strong>로 분리할 수 있습니다. Kotlin 컴파일러가 어떻게 일하는지 다루는 이 글에서는 <a href="https://blog.jetbrains.com/kotlin/2021/10/the-road-to-the-k2-compiler/">The Road to K2 Compiler | Kotlin Blog</a>의 내용을 준용하여 해당 과정(Optimizing IR)을 백엔드에 포함시킵니다. 참고해 주세요. 
 
 <hr style="margin: 1.5rem 0"/>
-<b style="background-color: rgba(184, 184, 184, 0.5)">*</b> Symbol Table : 컴파일러 또는 인터프리터와 같은 Language Translator에서 사용하는 자료구조입니다. 각각의 Identifier, Constant, Procedure, Function이 코드 내에서 어떻게 선언하였고 사용되었는지 연결하는 역할을 맡고 있지요.
+<b style="background-color: rgba(184, 184, 184, 0.5)">*</b> Symbol Table : 컴파일러 또는 인터프리터와 같은 Language Translator에서 사용하는 자료구조입니다. 각각의 Identifier, Constant, Procedure, Function이 코드 내에서 어떤 Context를 지니고 있는지 정리해 놓은 Dictionary와 유사한 형태입니다.
 
 
 </blockquote>
@@ -1447,7 +1447,7 @@ Kotlin 2.0의 릴리즈(Release)는 곧 새로운 컴파일러, 코드네임 "K2
 
 **Lexical**의 사전적 의미는 **"relating to words or vocabulary"**, 즉 단어나 어휘에 관련되어 있다는 뜻입니다. 이를 준용해서 Lexical Process의 역할을 설명해 보면, 아직 아무런 의미도 가지지 못하는 문자의 집합을 Kotlin의 어휘에 맞게 재구성하는 것입니다. 
 
-이를 위해 Kotlin 컴파일러의 Parser는 [KotlinLexer](https://github.com/JetBrains/kotlin/blob/92d200e093c693b3c06e53a39e0b0973b84c7ec5/compiler/psi/src/org/jetbrains/kotlin/lexer/KotlinLexer.java) 객체를 생성합니다. 이 Lexer는 우리가 작성한 코드를 Token의 집합으로 치환합니다. 이 Token들은 <a href="https://github.com/JetBrains/kotlin/blob/master/compiler/psi/src/org/jetbrains/kotlin/lexer/KtTokens.java"><code class="language-text" style="color: white">KtTokens</code></a> interface에 정리되어 있는데요. 여기에서 <code class="language-text" style="color: orange">return</code>이라는 키워드는 이렇게 정의되어 있습니다.
+이를 위해 Kotlin 컴파일러의 Parser는 [KotlinLexer](https://github.com/JetBrains/kotlin/blob/92d200e093c693b3c06e53a39e0b0973b84c7ec5/compiler/psi/src/org/jetbrains/kotlin/lexer/KotlinLexer.java) 객체를 생성합니다. 이 Lexer는 우리가 작성한 코드를 Token의 집합으로 치환합니다. 이 Token들은 <a href="https://github.com/JetBrains/kotlin/blob/master/compiler/psi/src/org/jetbrains/kotlin/lexer/KtTokens.java"><code class="language-text">KtTokens</code></a> interface에 정리되어 있는데요. 여기에서 <code class="language-text" style="color: orange">return</code>이라는 키워드는 이렇게 정의되어 있습니다.
 
 ```java
 
@@ -1462,7 +1462,7 @@ public interface KtTokens {
 ```
 </br>
 
-따끈따끈하게 막 생성된 토큰들은 <a href="https://github.com/gigliovale/kotlin/blob/master/compiler/frontend/src/org/jetbrains/kotlin/parsing/KotlinExpressionParsing.java"><code class="language-text" style="color: white">KotlinExpressionParsing</code></a> 객체가 Expression Node의 `set`으로 변환합니다. 이러한 집합을 한데 모아 <code><a href="https://github.com/JetBrains/intellij-community/blob/master/platform/core-api/src/com/intellij/lang/ASTNode.java"><strong>AST</strong>Node</a></code> 객체를 통해 <a href="https://plugins.jetbrains.com/docs/intellij/implementing-parser-and-psi.html?from=jetbrains.org"><strong>PSI</strong></a> Tree를 구성합니다. (<strong>AST</strong>와 <strong>PSI</strong>가 무엇인지는 아래의 '트리 만들기' 부분에서 좀 더 다뤄보도록 할게요.) 그에 앞서 
+따끈따끈하게 막 생성된 토큰들은 <a href="https://github.com/gigliovale/kotlin/blob/master/compiler/frontend/src/org/jetbrains/kotlin/parsing/KotlinExpressionParsing.java"><code class="language-text">KotlinExpressionParsing</code></a> 객체가 Expression Node의 `set`으로 변환합니다. 이러한 집합을 한데 모아 <code><a href="https://github.com/JetBrains/intellij-community/blob/master/platform/core-api/src/com/intellij/lang/ASTNode.java"><strong>AST</strong>Node</a></code> 객체를 통해 <a href="https://plugins.jetbrains.com/docs/intellij/implementing-parser-and-psi.html?from=jetbrains.org"><strong>PSI</strong></a> Tree를 구성합니다. (<strong>AST</strong>와 <strong>PSI</strong>가 무엇인지는 아래의 '트리 만들기' 부분에서 좀 더 다뤄보도록 할게요.) 그에 앞서 
 <strong>IntelliJ Platform Plugin의 Document</strong>를 보며 <code class="language-text" style="color: #f8c555">RETURN_KEYWORD</code></a>가 어떻게 PSI Tree의 일부가 되는지 살펴봅시다.
 
 <blockquote style="background-color: rgba(248, 197, 85, 0.04); margin-top: 1.5rem; padding: 1.5rem; border-top: 0.5px solid rgba(184, 184, 184, 0.5)">
@@ -1507,7 +1507,7 @@ JetBrains IDE에서 (<strong>Kotlin</strong>을 포함한) Language Plugin은 `P
 구축 중인 <strong style="color: #4263eb">AST</strong>의 중간 상태를 유지하는 데 사용됩니다.
 
 
-(당연하게도) Parser는 Lexing Process에서 생성된 모든 Token을 처리해야만 합니다. (Stream이 끝에 닿을 때, 즉 <a href="https://github.com/JetBrains/intellij-community/tree/idea/233.14808.21/platform/core-api/src/com/intellij/lang/PsiBuilder.java"><code class="language-text" style="color:white">PsiBuilder.getTokenType()</code></a>이 <code class="language-text" style="color:white">null</code>을 반환할 때까지를 의미합니다.) 설사 생성된 Token이 문법에 어긋나더라도 말이지요. 
+(당연하게도) Parser는 Lexing Process에서 생성된 모든 Token을 처리해야만 합니다. (Stream이 끝에 닿을 때, 즉 <a href="https://github.com/JetBrains/intellij-community/tree/idea/233.14808.21/platform/core-api/src/com/intellij/lang/PsiBuilder.java"><code class="language-text">PsiBuilder.getTokenType()</code></a>이 <code class="language-text">null</code>을 반환할 때까지를 의미합니다.) 설사 생성된 Token이 문법에 어긋나더라도 말이지요. 
 
 </br>
 
@@ -1520,7 +1520,7 @@ Marker의 Pair, AST 노드의 <strong>타입(Type)</strong>은 <strong>End </str
 
 </br>
 
-(<a href="https://plugins.jetbrains.com/docs/intellij/images/PsiBuilder.gif">Document의 이미지를 준용해</a>) 아래 도식은 <code class="language-text" style="color: white;">return 2 + 3</code> 이라는 (굉장히 단순한) 코드가 Tokenize되어 Marker의 Pair가 맞춰지기까지의 과정을 나타낸 것입니다. Token의 Type은 Kotlin에 맞추어 변경했으니 참고해 주세요.
+(<a href="https://plugins.jetbrains.com/docs/intellij/images/PsiBuilder.gif">Document의 이미지를 준용해</a>) 아래 도식은 <code class="language-text">return 2 + 3</code> 이라는 (굉장히 단순한) 코드가 Tokenize되어 Marker의 Pair가 맞춰지기까지의 과정을 나타낸 것입니다. Token의 Type은 Kotlin에 맞추어 변경했으니 참고해 주세요.
 
 <p align="left">
     <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/3135a229-5cf2-4a22-aa55-4b2003dab961" width="100%" />
@@ -1600,7 +1600,7 @@ jumpExpression
 </p>
 
 </br>
-정리해 보지요. 하나의 문장이 게임에서 <code class="language-text" style="color: white">movement</code>라고 인식되려면, <code class="language-text" style="color: white">player</code>와 <code class="language-text" style="color: white">action</code>으로 구성되어야 합니다. 그리고 <code class="language-text" style="color: white">player</code>는 <code class="language-text" style="color: white">name</code>과 <code class="language-text" style="color: white">surname</code>으로 구성되어야 하지요. 또한 <code class="language-text" style="color: white">action</code>은 <code class="language-text" style="color: #cc99cd">'passes'</code>, <code class="language-text" style="color: #cc99cd">'crosses'</code>, <code class="language-text" style="color: #cc99cd">'shots'</code> 중 하나여야만 합니다. 하지만 <code class="language-text" style="color: #cc99cd">'passes'</code>에서 가지가 더 뻗어나가지는 않지요. <code class="language-text" style="color: #cc99cd">'passes'</code>와 마찬가지로, 실제로 우리가 작성하는 코드, 이 예시에서는 통틀어 <strong>"Lionel Messi passes"</strong>라는 텍스트는 나무가 가진 수많은 가지들의 종단점(terminal point)에 위치합니다. 아래는 나무의 예시입니다. 
+정리해 보지요. 하나의 문장이 게임에서 <code class="language-text">movement</code>라고 인식되려면, <code class="language-text">player</code>와 <code class="language-text">action</code>으로 구성되어야 합니다. 그리고 <code class="language-text">player</code>는 <code class="language-text">name</code>과 <code class="language-text">surname</code>으로 구성되어야 하지요. 또한 <code class="language-text">action</code>은 <code class="language-text" style="color: #cc99cd">'passes'</code>, <code class="language-text" style="color: #cc99cd">'crosses'</code>, <code class="language-text" style="color: #cc99cd">'shots'</code> 중 하나여야만 합니다. 하지만 <code class="language-text" style="color: #cc99cd">'passes'</code>에서 가지가 더 뻗어나가지는 않지요. <code class="language-text" style="color: #cc99cd">'passes'</code>와 마찬가지로, 실제로 우리가 작성하는 코드, 이 예시에서는 통틀어 <strong>"Lionel Messi passes"</strong>라는 텍스트는 나무가 가진 수많은 가지들의 종단점(terminal point)에 위치합니다. 아래는 나무의 예시입니다. 
 
 <p align="left">
     <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/802105f0-965a-4cb7-9db2-687f36f17504" width="50%" />
@@ -1609,7 +1609,7 @@ jumpExpression
 </br>
 <strong>Non-Terminal Symbol은 구문의 생성에는 관여하나, 구문의 구성 요소는 아니다.</strong></br>
 이를 풀어서 이야기하면, Non-Terminal Symbol은 컴파일러가 우리가 작성한 코드를 해석하는 데 필요한 일종의 표지인 것입니다. 그와 달리 Terminal Symbol은 Grammar Rule에 맞게 쪼개진 Token일 뿐이지요. <a href="https://kotlinlang.org/docs/reference/grammar.html">Kotlin Grammar Rule</a>에 맞추어,
-<code class="language-text" style="color: white">return a + 2</code>로 Concrete한 나무를 만든다면, 
+<code class="language-text">return a + 2</code>로 Concrete한 나무를 만든다면, 
 
 <p align="left">
     <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/f6f5640a-476f-47aa-97fe-0165d685cffe" width="90%" />
@@ -1617,7 +1617,7 @@ jumpExpression
 
 </br>
 위의 그림과 같습니다. </br>
-나무에서 <code class="language-text" style="color: white;">return</code>, <code class="language-text" style="color: white;">a</code>, <code class="language-text" style="color: white;">+</code>, <code class="language-text" style="color: white;">2</code>를 제외한 모든 Element는 non-terminal symbol인 것이지요. Sentence에서 가장 처음 등장하는 non-terminal symbol이 Start Symbol이니, 여기서는 <code class="language-text">jumpExpression</code>이겠네요. 결국 AST, Parse Tree는 Start Symbol이 어떻게 Terminal Point(우리가 작성한 String)까지 도달하는지를 산출한 결과입니다. </br>
+나무에서 <code class="language-text">return</code>, <code class="language-text">a</code>, <code class="language-text">+</code>, <code class="language-text">2</code>를 제외한 모든 Element는 non-terminal symbol인 것이지요. Sentence에서 가장 처음 등장하는 non-terminal symbol이 Start Symbol이니, 여기서는 <code class="language-text">jumpExpression</code>이겠네요. 결국 AST, Parse Tree는 Start Symbol이 어떻게 Terminal Point(우리가 작성한 String)까지 도달하는지를 산출한 결과입니다. </br>
 
 </br>
 
@@ -1637,7 +1637,7 @@ return a + 2;
 
 ```
 
-Kotlin 코드와는 <code class="language-text" style="color: white">;</code> 정도의 차이만 보이는 위의 C99 코드는 <a href="https://github.com/eliben/pycparser"><strong>pycparser</strong></a>를 사용하면 다음과 같은 도식으로 치환됩니다.
+Kotlin 코드와는 <code class="language-text">;</code> 정도의 차이만 보이는 위의 C99 코드는 <a href="https://github.com/eliben/pycparser"><strong>pycparser</strong></a>를 사용하면 다음과 같은 도식으로 치환됩니다.
 
 <p align="left" style="padding: 2rem;">
     <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/419500af-356a-4e8c-89cd-86c9a1431f5a" width="70%" />
@@ -1655,7 +1655,7 @@ AST는 문법적인 잡동사니(Clutter)를 보여주진 않지만, 조각난(p
 
 </br>
 
-대부분의 컴파일러에서, Parser는 **Abstract Syntax Tree를 생성**하고 이를 Semantic Analyzer로 전달합니다. 하지만 Kotlin은 **PSI(Program Structure Interface) Tree**를 만드는데요. 여기서 PSI는 JetBrains가 만든 추상화 도구입니다. JetBrains의 모든 IDE에서 작성되는 텍스트, 코드, 언어를 핸들링하기 위한, 일종의 무겁고도 Generic한 Syntax Tree이지요. PSI는 마냥 가볍지 않은, Concrete한 형태와 Abstract한 형태의 중간에 있습니다. CST에 가까운 점은 형식적인 요소(Formal Representation)까지 나무에 포함시킨다는 것입니다. (여기서 형식적인 요소라 하면, 세미콜론 (<code class="language-text" style="color: white">;</code>)소괄호(<code class="language-text" style="color: white">()</code>)와 같은 문법적 잡상(Clutter)이죠) 각각의 노드에 부가적인 정보가 첨가되며, nonterminal symbol이 적다는 면에서는 AST에 가까운 형태를 취합니다. 그렇다면 PSI Tree는 어떻게 AST로부터 파생되는 걸까요. 
+대부분의 컴파일러에서, Parser는 **Abstract Syntax Tree를 생성**하고 이를 Semantic Analyzer로 전달합니다. 하지만 Kotlin은 **PSI(Program Structure Interface) Tree**를 만드는데요. 여기서 PSI는 JetBrains가 만든 추상화 도구입니다. JetBrains의 모든 IDE에서 작성되는 텍스트, 코드, 언어를 핸들링하기 위한, 일종의 무겁고도 Generic한 Syntax Tree이지요. PSI는 마냥 가볍지 않은, Concrete한 형태와 Abstract한 형태의 중간에 있습니다. CST에 가까운 점은 형식적인 요소(Formal Representation)까지 나무에 포함시킨다는 것입니다. (여기서 형식적인 요소라 하면, 세미콜론 (<code class="language-text">;</code>)소괄호(<code class="language-text">()</code>)와 같은 문법적 잡상(Clutter)이죠) 각각의 노드에 부가적인 정보가 첨가되며, nonterminal symbol이 적다는 면에서는 AST에 가까운 형태를 취합니다. 그렇다면 PSI Tree는 어떻게 AST로부터 파생되는 걸까요. 
 
 </br>
 
@@ -1666,7 +1666,7 @@ AST는 문법적인 잡동사니(Clutter)를 보여주진 않지만, 조각난(p
 
 </br>
 
-이미 Lexer에서 나온 Token은 Marker들이 감싸안아, 이미 그 타입이 결정된 ASTNode의 형태로 존재합니다. 그 노드들의 상하 관계를 나타낸 도식이 위 그림의 오른쪽 나무(Abstract Syntax Tree)입니다. 그리고 AST Node는 <a href="https://github.com/JetBrains/intellij-community/blob/idea/241.18034.62/platform/core-impl/src/com/intellij/extapi/psi/ASTWrapperPsiElement.java">Factory Class</a>(<code class="language-text" style="color: white">ASTWrpperPsiElement</code>)로 보내져 일종의 포장지(Wrapper)를 만드는 데 사용됩니다. 그것이 바로 PSI element인 것이죠. 여기서의 PSI element는 PSI Tree의 Composite Node로 기능합니다. 그리고 Composite Node (<a style="background-color: grey; color: white; padding: 0.25rem; text-decoration: none;">Element</a>) 아래에 Terminal Symbol (<a style="background-color: #0CA789; color: white; padding: 0.25rem; text-decoration: none;">Token</a>)이 자리하게 되면, **PSI Tree**가 됩니다.
+이미 Lexer에서 나온 Token은 Marker들이 감싸안아, 이미 그 타입이 결정된 ASTNode의 형태로 존재합니다. 그 노드들의 상하 관계를 나타낸 도식이 위 그림의 오른쪽 나무(Abstract Syntax Tree)입니다. 그리고 AST Node는 <a href="https://github.com/JetBrains/intellij-community/blob/idea/241.18034.62/platform/core-impl/src/com/intellij/extapi/psi/ASTWrapperPsiElement.java">Factory Class</a>(<code class="language-text">ASTWrpperPsiElement</code>)로 보내져 일종의 포장지(Wrapper)를 만드는 데 사용됩니다. 그것이 바로 PSI element인 것이죠. 여기서의 PSI element는 PSI Tree의 Composite Node로 기능합니다. 그리고 Composite Node (<a style="background-color: grey; color: white; padding: 0.25rem; text-decoration: none;">Element</a>) 아래에 Terminal Symbol (<a style="background-color: #0CA789; color: white; padding: 0.25rem; text-decoration: none;">Token</a>)이 자리하게 되면, **PSI Tree**가 됩니다.
 
 </br>
 
@@ -1715,7 +1715,7 @@ PSI element를 생성하는 Factory Class는 일종의 토큰을 쥐어주는데
 
 <hr style="margin: 1.5rem 0"/>
 
-모든 컴파일러 프론트엔드의 Parser는 AST를 생성합니다. 그리고 이를 Semantic Analyzer로 전달하는 역할을 수행하죠. 하지만 Jetbrains IDE에서 컴파일되는 모든 언어들은 -- Kotlin을 포함해 -- PSI (Programming Structure Interface)라는 독특한 구조를 생성하게끔 되어 있습니다. 그리고 (v2.0 이전의) Kotlin 컴파일러는 <code class="language-text" style="color : white">BindingContext</code>라는 일종의 Map과 함께 PSI를 프론트엔드 전역에서 활용했습니다. 이제 지도를 찾아 모험을 떠날 시간입니다. 이제 코드의 Structure를 모두 분석했으니 어떤 Semantic이 숨어 있는지 찾아나설 차례입니다. 
+모든 컴파일러 프론트엔드의 Parser는 AST를 생성합니다. 그리고 이를 Semantic Analyzer로 전달하는 역할을 수행하죠. 하지만 Jetbrains IDE에서 컴파일되는 모든 언어들은 -- Kotlin을 포함해 -- PSI (Programming Structure Interface)라는 독특한 구조를 생성하게끔 되어 있습니다. 그리고 (v2.0 이전의) Kotlin 컴파일러는 <code class="language-text">BindingContext</code>라는 일종의 Map과 함께 PSI를 프론트엔드 전역에서 활용했습니다. 이제 지도를 찾아 모험을 떠날 시간입니다. 이제 코드의 Structure를 모두 분석했으니 어떤 Semantic이 숨어 있는지 찾아나설 차례입니다. 
 
 
 </blockquote>
@@ -1746,7 +1746,7 @@ PSI element를 생성하는 Factory Class는 일종의 토큰을 쥐어주는데
             </p>
         </td>
         <td valign="center" style="border-radius: 0rem; padding-left: 25px;">
-            옆의 코드에서 세 차례 등장하는 <code class="language-text" style="color: white">kevin</code>은 아직 연결되어 있지 않습니다. Syntax Tree에서 독립적으로 존재하는 하나의 노드(Node)일 뿐, 그저 문자열일 뿐이지요. Semantic Analyzer는 먼저 동일한 메모리 주소를 가리키는 Variable 그리고 Parameter를 찾아내야 합니다. 즉, 두 번째와 세 번째 <code class="language-text" style="color: white">kevin</code>이 함수에서 처음으로 등장하는 <code class="language-text" style="color: white">kevin</code>과 동일함을 파악해야 한다는 것이죠. </br></br>
+            옆의 코드에서 세 차례 등장하는 <code class="language-text">kevin</code>은 아직 연결되어 있지 않습니다. Syntax Tree에서 독립적으로 존재하는 하나의 노드(Node)일 뿐, 그저 문자열일 뿐이지요. Semantic Analyzer는 먼저 동일한 메모리 주소를 가리키는 Variable 그리고 Parameter를 찾아내야 합니다. 즉, 두 번째와 세 번째 <code class="language-text">kevin</code>이 함수에서 처음으로 등장하는 <code class="language-text">kevin</code>과 동일함을 파악해야 한다는 것이죠. </br></br>
         </td>
     </tr>
 </table>
@@ -1759,7 +1759,7 @@ PSI element를 생성하는 Factory Class는 일종의 토큰을 쥐어주는데
             </p>
         </td>
         <td valign="center" style="border-radius: 0rem; padding-left: 25px;">
-            그렇다면 타입(<strong>Class</strong> 혹은 <strong>Interface</strong>)을 의미하는 String의 경우에는 어떨까요. 이 친구들도 Syntax Tree에 존재하는 Node일 뿐입니다. 아무런 의미도 지니지 않고 있죠. 프론트엔드가 만들어야 할 <strong>Table</strong>에는 타입에 대한 정보가 필수로 포함됩니다. 여기서 <code class="language-text" style="color: white">Life</code>는 같은 .kt 파일에 존재하는 빈 인터페이스를 가리키며, <code class="language-text" style="color: white">Human</code>은 Life를 상속(inherit)받은 클래스를 의미합니다. <strong>Type Argument</strong> (예를 들어 <code class="language-text" style="color: white"> val num : Int</code>에서의 <code class="language-text" style="color: white">Int</code>)도 이와 같은 방식으로 Resolution을 진행합니다. </br> </br>
+            그렇다면 타입(<strong>Class</strong> 혹은 <strong>Interface</strong>)을 의미하는 String의 경우에는 어떨까요. 이 친구들도 Syntax Tree에 존재하는 Node일 뿐입니다. 아무런 의미도 지니지 않고 있죠. 프론트엔드가 만들어야 할 <strong>Table</strong>에는 타입에 대한 정보가 필수로 포함됩니다. 여기서 <code class="language-text">Life</code>는 같은 .kt 파일에 존재하는 빈 인터페이스를 가리키며, <code class="language-text">Human</code>은 Life를 상속(inherit)받은 클래스를 의미합니다. <strong>Type Argument</strong> (예를 들어 <code class="language-text"> val num : Int</code>에서의 <code class="language-text">Int</code>)도 이와 같은 방식으로 Resolution을 진행합니다. </br> </br>
         </td>
     </tr>
 </table>
@@ -1772,7 +1772,7 @@ PSI element를 생성하는 Factory Class는 일종의 토큰을 쥐어주는데
             </p>
         </td>
         <td valign="center" style="border-radius: 0rem; padding-left: 25px;">
-            이제 함수를 찾을 차례입니다. 코드를 쓰고 읽는 우리는 <code class="language-text" style="color: white">kevin</code>이 <code class="language-text" style="color: white">Human</code>이라는 클래스의 인스턴스임을 알고 있습니다. 그리고 <code class="language-text" style="background-color: rgba(2, 0, 36, 1); color: rgba(12, 167, 136, 1)">hello()</code>가  <code class="language-text" style="color: white">Human</code>이라는 클래스의 메서드임을 인지하고 있지요. 하지만, 이 단계에서의 컴파일러는 'hello'라는 문자열만을 손에 들고 있을 뿐, 아무런 맥락을 지니고 있지 못합니다. 컴파일러는 <code class="language-text" style="background-color: rgba(2, 0, 36, 1); color: rgba(12, 167, 136, 1)">hello()</code>가 멤버 함수(member)인지, 확장 함수(extension)인지, 함수 타입의 프로퍼티(property of function type)인지 모릅니다. 또한 같은 모듈에 존재하는지, 다른 모듈에 존재하는지, 특정 라이브러리에 존재하는지 알지 못하죠. 그러니 Semantic Analyzer는, 단 하나도 빠짐없이, 주어진 이름(<code class="language-text" style="background-color: rgba(2, 0, 36, 1); color: rgba(12, 167, 136, 1)">hello</code>)에 해당하는 모든 함수를 찾아내야 합니다. 그리고 수많은 함수 중 가정 적절한 것을 골라내어야 합니다. 이것이 바로 Semantic Analyzer에서 가장 핵심적인 부분이며, 가장 많은 시간이 소요되는 작업이 바로 적절한 함수를 찾아내는 일인 이유입니다.
+            이제 함수를 찾을 차례입니다. 코드를 쓰고 읽는 우리는 <code class="language-text">kevin</code>이 <code class="language-text">Human</code>이라는 클래스의 인스턴스임을 알고 있습니다. 그리고 <code class="language-text" style="background-color: rgba(2, 0, 36, 1); color: rgba(12, 167, 136, 1)">hello()</code>가  <code class="language-text" >Human</code>이라는 클래스의 메서드임을 인지하고 있지요. 하지만, 이 단계에서의 컴파일러는 'hello'라는 문자열만을 손에 들고 있을 뿐, 아무런 맥락을 지니고 있지 못합니다. 컴파일러는 <code class="language-text" style="background-color: rgba(2, 0, 36, 1); color: rgba(12, 167, 136, 1)">hello()</code>가 멤버 함수(member)인지, 확장 함수(extension)인지, 함수 타입의 프로퍼티(property of function type)인지 모릅니다. 또한 같은 모듈에 존재하는지, 다른 모듈에 존재하는지, 특정 라이브러리에 존재하는지 알지 못하죠. 그러니 Semantic Analyzer는, 단 하나도 빠짐없이, 주어진 이름(<code class="language-text" style="background-color: rgba(2, 0, 36, 1); color: rgba(12, 167, 136, 1)">hello</code>)에 해당하는 모든 함수를 찾아내야 합니다. 그리고 수많은 함수 중 가정 적절한 것을 골라내어야 합니다. 이것이 바로 Semantic Analyzer에서 가장 핵심적인 부분이며, 가장 많은 시간이 소요되는 작업이 바로 적절한 함수를 찾아내는 일인 이유입니다.
             </br></br>
         </td>
     </tr>
@@ -1813,7 +1813,7 @@ PSI element를 생성하는 Factory Class는 일종의 토큰을 쥐어주는데
     ```
 </br>
 
-타입 추론을 언급할 때 가장 흔히 인용되는 예시입니다. 어떤 그릇에 값(value)을 담을 것인지 코드에 명시적으로 작성하지 않은 경우 일어나는 추론이죠. Kotlin에서는 Primitive Type으로 보이는 값 - <code class="language-text" style="color: white">Int</code>, <code class="language-text" style="color: white">Char</code>, <code class="language-text" style="color: white">Boolean</code> 같은 - 이 모두 객체입니다. 그러니 이 값이, 어떤 클래스의 인스턴스에 담길 것인지, 컴파일 타임에 정해야 합니다. 
+타입 추론을 언급할 때 가장 흔히 인용되는 예시입니다. 어떤 그릇에 값(value)을 담을 것인지 코드에 명시적으로 작성하지 않은 경우 일어나는 추론이죠. Kotlin에서는 Primitive Type으로 보이는 값 - <code class="language-text" >Int</code>, <code class="language-text">Char</code>, <code class="language-text" >Boolean</code> 같은 - 이 모두 객체입니다. 그러니 이 값이, 어떤 클래스의 인스턴스에 담길 것인지, 컴파일 타임에 정해야 합니다. 
 
 </br>
 
@@ -2044,7 +2044,7 @@ LLVM을 간단하게 이야기하면, 모듈화(Modularize)된 컴파일러입�
 </br>
 
 
-Overview에 그려진 LLVM의 구조에서, 가장 중요한 부분은 **IR (중간 표현)** 그리고 **Optimization (최적화)** 입니다. **IR**은 고급 언어의 추상적인 특성을 유지하면서도, ISA(Instruction Set Architecture) 코드로 이어지는 징검다리를 놓는 역할을 수행하죠. LLVM에서의 **최적화**는 1차적으로 코드에 대한 분석을 진행하고, 필요에 따라 연산 순서를 변경하며, 불필요한 코드를 제거하는 등의 작업을 일컫는 말입니다. 
+Overview에 그려진 LLVM의 구조에서, 가장 중요한 부분은 **IR (중간 표현)** 그리고 **Optimization (최적화)** 입니다. **IR**은 고급 언어의 추상적인 특성을 유지하면서도, ISA(Instruction Set Architecture) 코드로 이어지는 징검다리를 놓는 역할을 수행하죠. LLVM에서의 **최적화**는 1차적으로 코드에 대한 분석을 진행하고, 필요에 따라 연산 순서를 변경하며, 불필요한 코드를 제거하는 등의 작업을 일컫는 말입니다.
 
 <code class="language-text" style="background-color: rgba(42, 97, 123, 1); color: white; font-weight:800">C</code>, <code class="language-text" style="background-color: rgba(42, 97, 123, 1); color: white; font-weight:800">C++</code>, <code class="language-text" style="background-color: rgba(42, 97, 123, 1); color: white; font-weight:800">Objective-C</code>의 경우에는, Clang이라는 프론트엔드를 사용하여 Raw한 형태의 IR를 생성하고, 이를 LLVM에서 Machine Code로 변환할 수 있습니다. (Kotlin과 함께) 비교적 신생 언어 축에 속하는 <code class="language-text" style="background-color: orange; color: white; font-weight:800">Swift</code>의 컴파일러 프론트엔드는 아예 LLVM이 인식할 수 있는 IR을 생성하는 데 주안을 두고 설계되었습니다. 하지만 이미 JVM과 JS Backend를 지니고 있던 Kotlin의 경우에는 조금 다른 접근이 필요했습니다.  
 
@@ -2462,15 +2462,15 @@ varargs는 기본적으로 메서드입니다. 동일한 타입을 가진 여러
 
  Kotlin의 `vararg` Modifier는 Java의 <strong style="background-color: rgba(254, 244, 69, 0.5)">Varargs</strong>로 치환됩니다. 또한 `ACC_VARARGS` 플래그는 `sum1()` 함수에 가변 개수의 파라미터를 전달됨을 확인합니다. 하지만 이 부분들만 체크해서는 Varargs가 문법적 설탕임을 단정짓기 어렵습니다. 결정적인 증거는 바로 <strong style="background-color: rgba(69, 199, 254, 0.5)">descriptor</strong>라는 부분에 존재합니다. 
 
-Java ByteCode를 이루는 Instruction 중, <strong style="background-color: rgba(69, 199, 254, 0.5)">descriptor</strong>는 메서드의 인자(Argument)와 Return Type을 나타냅니다. 소괄호 안쪽을 보면 인자의 타입과 수를 알 수 있는데요. 여기서는 <code class="language-text" style="color: white;">[I</code>가 이에 해당됩니다. 
+Java ByteCode를 이루는 Instruction 중, <strong style="background-color: rgba(69, 199, 254, 0.5)">descriptor</strong>는 메서드의 인자(Argument)와 Return Type을 나타냅니다. 소괄호 안쪽을 보면 인자의 타입과 수를 알 수 있는데요. 여기서는 <code class="language-text">[I</code>가 이에 해당됩니다. 
 
 <blockquote style="padding: 1.5rem;">
 <p align="left">
     <img src="https://github.com/kevinlim17/kevinlim17-dev-blog/assets/86971052/c4130b62-73a7-4cf6-bedb-30eea0a7744a" width="60%">
 </p>
 <hr style="margin: 1rem 0"/>
-Type Descriptor가 <code class="language-text" style="color: white;">[</code>로 시작하면, 이는 배열(Array)을 의미하는 것입니다. </br> 
-    그러니 <code class="language-text" style="color: white;">[I</code>는 Integer 타입의 요소를 가진 Array라는 의미입니다. </br>
+Type Descriptor가 <code class="language-text">[</code>로 시작하면, 이는 배열(Array)을 의미하는 것입니다. </br> 
+    그러니 <code class="language-text">[I</code>는 Integer 타입의 요소를 가진 Array라는 의미입니다. </br>
     결국, Kotlin에서의 <code class="language-text">vararg ns: Int</code>는 Java에서의 <code class="language-text">int...</code>와 동일하게 취급되고, JVM에서는 이를 <code class="language-text">int[]</code>와 동일하게 취급한다는 결론에 이르게 됩니다.
 </blockquote>
 

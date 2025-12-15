@@ -1,5 +1,5 @@
 ---
-date: '2025-09-01'
+date: '2025-10-25'
 title: 'AI 윤리 북클럽 회고: 아마추어 CSP가 되자'
 categories: ['BookClub', 'AI']
 summary: 'AI라는 숲에서 사이버네틱스라는 나무를 만났을 때'

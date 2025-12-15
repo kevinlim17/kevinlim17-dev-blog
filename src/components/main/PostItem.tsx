@@ -1,8 +1,10 @@
 import React, { FunctionComponent } from 'react'
 import styled from '@emotion/styled'
+import { keyframes } from '@emotion/react'
 import { Link } from 'gatsby'
 import { GatsbyImage } from 'gatsby-plugin-image'
 import { PostFrontmatterType } from 'types/PostItem.types'
+import { categoryColors } from 'utils/categoryColors'
 
 type PostItemProps = PostFrontmatterType & { link: string }
 
@@ -95,26 +97,38 @@ const Category = styled.div`
   gap: 8px;
 `
 
-// 카테고리별 색상 정의
-const categoryColors = [
-  '#00bcd4',
-  '#607d8b',
-  '#00796b',
-  '#e91e63',
-  '#ff9800',
-  '#4caf50',
-  '#ff5722',
-]
+// 색상 회전 애니메이션 생성 함수
+const createColorRotationAnimation = (categoryName: string) => {
+  const startIndex = categoryName.length % categoryColors.length
+  const rotatedColors = [
+    ...categoryColors.slice(startIndex),
+    ...categoryColors.slice(0, startIndex),
+  ]
 
-const CategoryItem = styled.div<{ colorIndex: number }>`
+  const percentagePerColor = 100 / categoryColors.length
+  const keyframeSteps = rotatedColors.reduce(
+    (acc, color, index) => ({
+      ...acc,
+      [`${(index * percentagePerColor).toFixed(2)}%`]: {
+        backgroundColor: color,
+      },
+    }),
+    {},
+  )
+
+  return keyframes(keyframeSteps)
+}
+
+const CategoryItem = styled.div<{ categoryName: string }>`
   padding: 6px 14px;
-  border-radius: 0;
-  background: ${({ colorIndex }) =>
-    categoryColors[colorIndex % categoryColors.length]};
+  border-radius: 5px;
+  background: ${({ categoryName }) =>
+    categoryColors[categoryName.length % categoryColors.length]};
   font-size: 14px;
   font-weight: 800;
   color: white;
-  border-radius: 5px;
+  animation: ${({ categoryName }) => createColorRotationAnimation(categoryName)}
+    ${categoryColors.length}s linear infinite;
 `
 
 const ThumbnailImage = styled(GatsbyImage)`
@@ -147,8 +161,8 @@ const PostItem: FunctionComponent<PostItemProps> = function ({
           </AuthorDate>
 
           <Category>
-            {categories.map((category, index) => (
-              <CategoryItem key={category} colorIndex={index}>
+            {categories.map(category => (
+              <CategoryItem key={category} categoryName={category}>
                 {category}
               </CategoryItem>
             ))}

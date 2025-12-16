@@ -1,8 +1,10 @@
 import React, { FunctionComponent } from 'react'
 import styled from '@emotion/styled'
+import { keyframes } from '@emotion/react'
 import { Link } from 'gatsby'
 import { GatsbyImage } from 'gatsby-plugin-image'
 import { BrunchPostItemType } from 'types/PostItem.types'
+import { categoryColors } from 'utils/categoryColors'
 
 const WritingItemWrapper = styled(Link)`
   display: flex;
@@ -116,23 +118,39 @@ const MetaInfo = styled.div`
     gap: 0.5rem;
   }
 `
-const genreColors = [
-  '#00bcd4', // 청록색
-  '#607d8b', // 블루그레이
-  '#00796b', // 진한 청록색
-  '#e91e63', // 핑크
-  '#ff9800', // 오렌지
-  '#4caf50', // 녹색
-]
 
-const Genre = styled.span<{ colorIndex: number }>`
+// 색상 회전 애니메이션 생성 함수
+const createColorRotationAnimation = (genreName: string) => {
+  const startIndex = genreName.length % categoryColors.length
+  const rotatedColors = [
+    ...categoryColors.slice(startIndex),
+    ...categoryColors.slice(0, startIndex),
+  ]
+
+  const percentagePerColor = 100 / categoryColors.length
+  const keyframeSteps = rotatedColors.reduce(
+    (acc, color, index) => ({
+      ...acc,
+      [`${(index * percentagePerColor).toFixed(2)}%`]: {
+        backgroundColor: color,
+      },
+    }),
+    {},
+  )
+
+  return keyframes(keyframeSteps)
+}
+
+const Genre = styled.span<{ genreName: string }>`
   padding: 0.25rem 0.75rem;
-  background: ${({ colorIndex }) =>
-    genreColors[colorIndex % genreColors.length]};
+  background: ${({ genreName }) =>
+    categoryColors[genreName.length % categoryColors.length]};
   border-radius: 5px;
   font-size: 0.8rem;
   font-weight: 600;
   color: white;
+  animation: ${({ genreName }) => createColorRotationAnimation(genreName)}
+    ${categoryColors.length}s linear infinite;
 `
 
 const Date = styled.span`
@@ -156,10 +174,6 @@ const WritingItem: FunctionComponent<BrunchPostItemType> = function ({
     url,
   },
 }) {
-  const getColorIndex = (genreStr: string) => {
-    return genreStr.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0)
-  }
-
   return (
     <WritingItemWrapper to={url}>
       <WritingItemContent>
@@ -170,7 +184,7 @@ const WritingItem: FunctionComponent<BrunchPostItemType> = function ({
 
         <ContentBottom>
           <MetaInfo>
-            <Genre colorIndex={getColorIndex(genre)}>{genre}</Genre>
+            <Genre genreName={genre}>{genre}</Genre>
             <Date>🗓️ {date}</Date>
           </MetaInfo>
         </ContentBottom>

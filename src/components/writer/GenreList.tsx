@@ -1,6 +1,8 @@
 import React, { FunctionComponent, ReactNode } from 'react'
 import styled from '@emotion/styled'
+import { keyframes } from '@emotion/react'
 import { Link } from 'gatsby'
+import { categoryColors } from 'utils/categoryColors'
 
 type GenreItemProps = {
   active: boolean
@@ -44,36 +46,45 @@ const WrapperTitle = styled.div`
   color: rgba(2, 0, 36, 1);
 `
 
-// TableShapeContainer와 동일한 색상 배열 사용
-const tagColors = [
-  '#00bcd4', // 청록색
-  '#607d8b', // 블루그레이
-  '#00796b', // 진한 청록색
-  '#e91e63', // 핑크
-  '#ff9800', // 오렌지
-  '#4caf50', // 녹색
-]
+// 색상 회전 애니메이션 생성 함수
+const createColorRotationAnimation = (genreName: string) => {
+  const startIndex = genreName.length % categoryColors.length
+  const rotatedColors = [
+    ...categoryColors.slice(startIndex),
+    ...categoryColors.slice(0, startIndex),
+  ]
+
+  const percentagePerColor = 100 / categoryColors.length
+  const keyframeSteps = rotatedColors.reduce(
+    (acc, color, index) => ({
+      ...acc,
+      [`${(index * percentagePerColor).toFixed(2)}%`]: {
+        backgroundColor: color,
+      },
+    }),
+    {},
+  )
+
+  return keyframes(keyframeSteps)
+}
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const GenreItem = styled(({ active, ...props }: GatsbyLinkProps) => (
   <Link {...props} />
-))`
+))<{ genreName: string }>`
   /** Box Properties */
-  background-color: ${({ active, children }) => {
+  background-color: ${({ active, genreName }) => {
     if (active) return 'rgba(2, 0, 36, 1)'
-    // children에서 장르 이름을 추출하여 색상 결정
-    const genreName =
-      typeof children === 'string' ? children : children?.toString() || ''
-    const colorIndex =
-      genreName.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0) %
-      tagColors.length
-    return tagColors[colorIndex]
+    return categoryColors[genreName.length % categoryColors.length]
   }};
   border-radius: 5px;
   cursor: pointer;
   transition: all 0.2s ease;
   text-decoration: none;
   display: inline-block;
+  animation: ${({ active, genreName }) =>
+      active ? 'none' : createColorRotationAnimation(genreName)}
+    ${categoryColors.length}s linear infinite;
 
   /** Text Properties */
   color: rgba(250, 249, 246, 1);
@@ -111,8 +122,9 @@ const GenreList: FunctionComponent<GenreListProps> = function ({
       <WrapperTitle>Categories</WrapperTitle>
       {Object.entries(genreList).map(([name, count]) => (
         <GenreItem
-          to={`/brunch_stories/?category=${name}`}
+          to={`/soople/?category=${name}`}
           active={name === selectedGenre}
+          genreName={name}
           key={name}
         >
           {name}&nbsp;({count})

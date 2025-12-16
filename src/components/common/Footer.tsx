@@ -20,6 +20,7 @@ interface FooterExpandedProps {
 }
 
 const FooterWrapper = styled.footer`
+  position: relative;
   width: 90%;
   margin-left: 5%;
   background-color: #f8f8f8;
@@ -76,10 +77,17 @@ const ExpandButton = styled.button<FooterExpandedProps>`
 `
 
 const FooterContent = styled.div<FooterExpandedProps>`
+  position: absolute;
+  bottom: 100%;
+  left: 0;
+  right: 0;
   max-height: ${props => (props.isExpanded ? '500px' : '0')};
   overflow: hidden;
   transition: max-height 0.3s ease-in-out;
-  background-color: rgba(250, 249, 246, 0.7);
+  background-color: rgba(250, 249, 246, 0.9);
+  z-index: 1000;
+  // border-left: 2px solid rgba(2, 0, 36, 1);
+  // border-right: 1.5px dashed rgba(2, 0, 36, 1);
 `
 
 const FooterInner = styled.div`

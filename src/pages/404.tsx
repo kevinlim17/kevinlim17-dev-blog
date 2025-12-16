@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react'
 import styled from '@emotion/styled'
 import { Link } from 'gatsby'
-import GlobalStyle from 'components/common/GlobalStyle'
+import Template from 'components/common/Template'
 import {
   faHouse,
   faAddressCard,
@@ -9,112 +9,153 @@ import {
   faPen,
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import Footer from 'components/common/Footer'
 import CustomToolTip from 'components/common/ToolTip'
-
-const NotFoundPageContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin-bottom: -100px;
-`
 
 const NotFoundPageWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  min-height: calc(100vh - 80px);
   width: 100%;
-  background: linear-gradient(
-    135deg,
-    rgba(2, 0, 36, 1) 0%,
-    rgba(2, 131, 28, 1) 70%,
-    rgba(0, 255, 109, 1) 100%
-  );
+  padding: 4rem 5vw;
+  background-color: rgba(250, 249, 246, 1);
+
+  @media (max-width: 768px) {
+    padding: 2rem 5vw;
+  }
 `
 
-const NotFoundDescriptionWrapper = styled.div`
+const NotFoundCard = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
   align-items: center;
-  height: 80%;
-  width: 42vh;
-  background: rgba(253, 253, 253, 0.5);
-  border: 10px solid rgba(2, 0, 36, 0.8);
-  border-radius: 30px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  max-width: 600px;
+  width: 100%;
+  padding: 4rem 3rem;
+  background: rgba(250, 249, 246, 1);
+  border-top: 2px solid rgba(2, 0, 36, 1);
+  border-left: 2px solid rgba(2, 0, 36, 1);
+  box-shadow: 8px 16px 0 0 rgba(2, 0, 36, 0.15);
+
+  @media (max-width: 768px) {
+    padding: 3rem 2rem;
+  }
 `
 
-const NotFoundDescriptionCameraIcon = styled.div`
-  flex: none;
-  align-self: center;
-  margin-top: 1.5vh;
-  color: rgba(2, 0, 36, 0.8);
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+const IconWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  margin-bottom: 2rem;
   border-radius: 50%;
+  background: rgba(2, 0, 36, 1);
+  color: rgba(250, 249, 246, 1);
+  font-size: 2rem;
 `
 
-const NotFoundDescriptionText = styled.div`
-  font-size: 12vh;
+const ErrorCode = styled.h1`
+  font-size: 6rem;
   font-weight: 800;
+  font-family: 'NanumSquareNeoExtraBold';
+  color: rgba(2, 0, 36, 1);
+  margin: 0 0 1rem 0;
   text-align: center;
-  margin-top: 20vh;
-  color: rgba(2, 0, 36, 0.8);
-  text-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+
+  @media (max-width: 768px) {
+    font-size: 4rem;
+  }
 `
 
-const NotFoundDescriptionInfo = styled.div`
-  margin-top: 3vh;
-  font-size: 2.5vh;
+const ErrorMessage = styled.p`
+  font-size: 1.25rem;
   font-weight: 600;
+  color: rgba(2, 0, 36, 0.7);
   text-align: center;
-  line-height: 1.4;
-  color: rgba(2, 0, 36, 0.8);
+  line-height: 1.6;
+  margin: 0 0 3rem 0;
+
+  @media (max-width: 768px) {
+    font-size: 1rem;
+  }
+`
+
+const Divider = styled.div`
+  width: 100%;
+  height: 2px;
+  background: rgba(2, 0, 36, 0.1);
+  margin: 2rem 0;
+`
+
+const NavigationTitle = styled.h2`
+  font-size: 1rem;
+  font-weight: 700;
+  font-family: 'NanumSquareNeoBold';
+  color: rgba(2, 0, 36, 0.6);
+  text-align: center;
+  margin: 0 0 2rem 0;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
 `
 
 const LinkButtonWrapper = styled.div`
   display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  align-items: center;
-  width: 90%;
-  padding: 30px 0;
-  margin: 14vh;
-  border-top: 1px solid rgba(2, 0, 36, 0.8);
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem;
+  width: 100%;
 `
 
 const LinkIconButton = styled(Link)`
-  display: grid;
-  place-items: center;
-  width: 7vh;
-  height: 7vh;
-  border-radius: 50%;
-  margin: auto 15px;
-  background: rgba(0, 255, 109, 1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  width: 120px;
+  height: 120px;
+  padding: 1rem;
+  background: rgba(250, 249, 246, 1);
+  border-top: 2px solid rgba(2, 0, 36, 1);
+  border-left: 2px solid rgba(2, 0, 36, 1);
   color: rgba(2, 0, 36, 1);
-  font-size: 3vh;
+  font-size: 2rem;
+  text-decoration: none;
   cursor: pointer;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
 
   &:hover {
-    box-shadow: 0 0 40px rgba(0, 0, 0, 0.3);
+    transform: translateY(-5px);
+    box-shadow: 8px 16px 0 0 rgba(2, 0, 36, 0.3);
+    background-color: rgba(2, 0, 36, 1);
+    color: rgba(250, 249, 246, 1);
+  }
+
+  @media (max-width: 768px) {
+    width: 100px;
+    height: 100px;
+    font-size: 1.5rem;
   }
 `
 
 const NonFoundPage: FunctionComponent = function () {
   return (
-    <NotFoundPageContainer>
+    <Template headerTitle="&nbsp;404 Not Found">
       <NotFoundPageWrapper>
-        <GlobalStyle />
-        <NotFoundDescriptionWrapper>
-          <NotFoundDescriptionCameraIcon>
+        <NotFoundCard>
+          <IconWrapper>
             <FontAwesomeIcon icon={faCircleDot} />
-          </NotFoundDescriptionCameraIcon>
-          <NotFoundDescriptionText>404</NotFoundDescriptionText>
-          <NotFoundDescriptionInfo>
-            찾을 수 없는 페이지입니다. <br /> 다른 콘텐츠를 보시려면 👇
-          </NotFoundDescriptionInfo>
+          </IconWrapper>
+          <ErrorCode>404</ErrorCode>
+          <ErrorMessage>
+            페이지를 찾을 수 없습니다.
+            <br />
+            아래 링크를 통해 다른 페이지로 이동하세요.
+          </ErrorMessage>
+          <Divider />
+          <NavigationTitle>Go to</NavigationTitle>
           <LinkButtonWrapper>
             <CustomToolTip title="Developer's Space" placement="top">
               <LinkIconButton to="/">
@@ -123,7 +164,7 @@ const NonFoundPage: FunctionComponent = function () {
             </CustomToolTip>
 
             <CustomToolTip title="Writer's Space" placement="top">
-              <LinkIconButton to="/brunch_stories">
+              <LinkIconButton to="/soople">
                 <FontAwesomeIcon icon={faPen} />
               </LinkIconButton>
             </CustomToolTip>
@@ -134,10 +175,9 @@ const NonFoundPage: FunctionComponent = function () {
               </LinkIconButton>
             </CustomToolTip>
           </LinkButtonWrapper>
-        </NotFoundDescriptionWrapper>
+        </NotFoundCard>
       </NotFoundPageWrapper>
-      <Footer />
-    </NotFoundPageContainer>
+    </Template>
   )
 }
 

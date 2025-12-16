@@ -15,14 +15,31 @@ type UtterancesAttributesType = {
 }
 
 const CommentWidgetWrapper = styled.div`
-  margin-left: -10vw;
-  padding-right: 50px;
-  padding-bottom: 50px;
+  width: 100%;
+  padding: 1rem 0;
+  border-top: 2px solid rgba(2, 0, 36, 1);
+  border-right: 2px dashed rgba(2, 0, 36, 0.3);
   background-color: rgba(250, 249, 246, 1);
+`
 
-  @media screen and (max-width: 1200px) {
-    margin: 0;
-    padding: 0 50px;
+const SectionTitle = styled.h2`
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: rgba(2, 0, 36, 1);
+  margin-bottom: 2rem;
+  font-family: 'NanumSquareNeoBold';
+`
+
+const CommentContainer = styled.div`
+  width: 100%;
+
+  .utterances {
+    position: relative;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 760px;
+    margin-left: 0;
+    margin-right: auto;
   }
 `
 
@@ -51,7 +68,12 @@ const CommentWidget: FunctionComponent = function () {
     element.current.appendChild(utterances)
   }, [])
 
-  return <CommentWidgetWrapper ref={element} />
+  return (
+    <CommentWidgetWrapper>
+      <SectionTitle>Comments</SectionTitle>
+      <CommentContainer ref={element} />
+    </CommentWidgetWrapper>
+  )
 }
 
 export default CommentWidget

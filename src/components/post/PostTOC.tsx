@@ -41,6 +41,7 @@ const PostTOCBlock = styled(Sticky)`
   width: calc(20vw);
   overflow-wrap: break-word;
   overflow-y: auto;
+  z-index: 1000;
   // background-color: rgba(196, 196, 196, 0.8);
   border-top: 2px dashed rgba(2, 0, 36, 0.3);
   border-right: 2px dashed rgba(2, 0, 36, 0.3);

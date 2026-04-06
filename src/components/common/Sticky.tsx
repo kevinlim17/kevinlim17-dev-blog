@@ -7,6 +7,7 @@ import React, {
   ReactNode,
 } from 'react'
 import styled from '@emotion/styled'
+import { debounce } from 'lodash'
 import { getScrollTop } from 'components/utils/GetScrollTop'
 
 export interface StickyProps {
@@ -83,15 +84,27 @@ const Sticky: FunctionComponent<StickyProps> = ({
     }
   }, [onScroll])
 
-  // 브라우저 창 크기 변경 시 위치 재계산
+  // Ctrl+/- 등 연속 resize 시 rAF 적체를 막기 위해 재계산은 debounce 처리.
+  // fixed 해제는 즉시 수행해 stale한 fixed 좌표가 화면에 남지 않도록 함.
+  const recalcAfterResize = useRef(
+    debounce(() => {
+      calculateGeometry()
+      calculateElementTop()
+    }, 150),
+  ).current
+
+  const onResize = useCallback(() => {
+    setFixed(false)
+    recalcAfterResize()
+  }, [recalcAfterResize])
+
   useEffect(() => {
-    window.addEventListener('resize', calculateGeometry)
-    window.addEventListener('resize', calculateElementTop)
+    window.addEventListener('resize', onResize)
     return () => {
-      window.removeEventListener('resize', calculateGeometry)
-      window.removeEventListener('resize', calculateElementTop)
+      window.removeEventListener('resize', onResize)
+      recalcAfterResize.cancel()
     }
-  }, [calculateGeometry, calculateElementTop])
+  }, [onResize, recalcAfterResize])
 
   // fixed 상태일 때 적용할 스타일
   const fixedStyle: React.CSSProperties = fixed

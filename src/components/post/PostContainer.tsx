@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useState, useEffect } from 'react'
+import React, { FunctionComponent, useState, useEffect, useRef } from 'react'
 import styled from '@emotion/styled'
 import PostContent from './PostContent'
 import PostTOC from './PostTOC'
@@ -54,19 +54,23 @@ const PostContainer: FunctionComponent<PostContainerProps> = function ({
 }) {
   const [windowWidth, setWindowWidth] = useState<number>(0)
 
-  //handleResize 함수를 debounce로 감싸고, 시간(1000ms = 1sec)을 설정
-  const handleResizeWidth = debounce(() => {
-    setWindowWidth(window.innerWidth)
-  }, 500)
+  // useRef로 debounce 인스턴스를 마운트 시 1회만 생성
+  const handleResizeWidth = useRef(
+    debounce(() => {
+      setWindowWidth(window.innerWidth)
+    }, 150),
+  ).current
 
+  // 의존성 배열 []로 마운트/언마운트 시에만 리스너 등록·해제
   useEffect(() => {
     setWindowWidth(window.innerWidth)
     window.addEventListener('resize', handleResizeWidth)
 
     return () => {
       window.removeEventListener('resize', handleResizeWidth)
+      handleResizeWidth.cancel()
     }
-  })
+  }, [])
 
   // width가 1200 이하면 TOC를 Rendering하지 않음.
   return windowWidth >= 1200 ? (

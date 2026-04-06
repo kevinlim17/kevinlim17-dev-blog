@@ -28,7 +28,7 @@ const Wrapper = styled.div<{ isScroll: boolean }>`
   position: fixed;
   padding: 0 5vw;
 
-  border-top: 3px solid rgba(2, 0, 36, 1);
+  // border-top: 3px solid rgba(2, 0, 36, 1);
   border-bottom: ${({ isScroll }) => (isScroll ? '0' : '2px solid')};
   border-radius: 0;
   background-color: ${({ isScroll }) =>

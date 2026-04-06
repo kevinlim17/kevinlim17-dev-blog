@@ -115,7 +115,8 @@ const TypeWriterSection = styled.div`
 
 const SubTitle = styled.div`
   font-size: 18px;
-  font-family: 'NanumSquareNeoLight';
+  font-family: 'NanumSquareNeo', sans-serif;
+  font-weight: 300;
   line-height: 1.5;
   color: rgba(2, 0, 36, 1);
   min-height: 60px;
@@ -182,11 +183,12 @@ const TagItem = styled.div<{ colorIndex: number }>`
 
   a {
     font-weight: 900;
-    font-family: 'NanumSquareNeo';
+    font-family: 'NanumSquareNeo', sans-serif;
     transition: all 0.2s ease;
 
     &:hover {
-      font-family: 'NanumSquareNeoHeavy';
+      font-family: 'NanumSquareNeo', sans-serif;
+      font-weight: 900;
       transition: all 0.2s ease;
     }
   }

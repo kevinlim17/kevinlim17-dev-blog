@@ -9,6 +9,8 @@ const defaultStyle = css`
     margin: 0;
     box-sizing: border-box;
     font-family: 'NanumSquareNeo', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   html,

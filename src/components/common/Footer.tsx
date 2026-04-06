@@ -19,11 +19,16 @@ interface FooterExpandedProps {
   isExpanded: boolean
 }
 
+const Wrapper = styled.div`
+  width: 100%;
+  background-color: rgba(250, 249, 246, 1);
+`
+
 const FooterWrapper = styled.footer`
   position: relative;
   width: 90%;
   margin-left: 5%;
-  background-color: #f8f8f8;
+  background-color: rgba(250, 249, 246, 1);
   border-top: 2px solid rgba(2, 0, 36, 1);
   border-left: 2px solid rgba(2, 0, 36, 1);
   border-right: 1.5px dashed rgba(2, 0, 36, 1);
@@ -83,7 +88,7 @@ const FooterContent = styled.div<FooterExpandedProps>`
   right: 0;
   max-height: ${props => (props.isExpanded ? '500px' : '0')};
   overflow: hidden;
-  transition: max-height 0.3s ease-in-out;
+  transition: max-height 0.5s ease-in-out;
   background-color: rgba(250, 249, 246, 0.9);
   z-index: 1000;
   // border-left: 2px solid rgba(2, 0, 36, 1);
@@ -179,50 +184,52 @@ const Footer: FunctionComponent<FooterProps> = function ({
   }
 
   return (
-    <FooterWrapper>
-      <FooterContent isExpanded={isExpanded}>
-        <FooterInner>
-          <InfoSection>
-            <InfoTitle>About This Site</InfoTitle>
-            <InfoList>
-              <InfoItem>
-                <strong>Repository :</strong>
-                <a href={repository}>{repository}</a>
-              </InfoItem>
-              <InfoItem>
-                <strong>Last Edited :</strong>
-                {year}
-              </InfoItem>
-              <InfoItem>
-                <strong>Version :</strong>
-                {version}
-              </InfoItem>
-            </InfoList>
-          </InfoSection>
+    <Wrapper>
+      <FooterWrapper>
+        <FooterContent isExpanded={isExpanded}>
+          <FooterInner>
+            <InfoSection>
+              <InfoTitle>About This Site</InfoTitle>
+              <InfoList>
+                <InfoItem>
+                  <strong>Repository :</strong>
+                  <a href={repository}>{repository}</a>
+                </InfoItem>
+                <InfoItem>
+                  <strong>Last Edited :</strong>
+                  {year}
+                </InfoItem>
+                <InfoItem>
+                  <strong>Version :</strong>
+                  {version}
+                </InfoItem>
+              </InfoList>
+            </InfoSection>
 
-          <CopyrightSection>
-            <InfoTitle>Copyrights and Licences</InfoTitle>
-            <CopyrightText>
-              © 2023-2025 Seung Hyeon Lim. All rights reserved.
-              <br />
-              Designed by Seung Hyeon Lim, Powered by Gatsby.
-            </CopyrightText>
+            <CopyrightSection>
+              <InfoTitle>Copyrights and Licences</InfoTitle>
+              <CopyrightText>
+                © 2023-2025 Seung Hyeon Lim. All rights reserved.
+                <br />
+                Designed by Seung Hyeon Lim, Powered by Gatsby.
+              </CopyrightText>
 
-            <CopyrightText>
-              이 사이트의 모든 콘텐츠는 저작권법의 보호를 받으며, 무단 복제 및
-              배포를 금지합니다. <br />
-              사용된 오픈소스 라이브러리는 각각의 라이선스를 따릅니다.
-            </CopyrightText>
+              <CopyrightText>
+                이 사이트의 모든 콘텐츠는 저작권법의 보호를 받으며, 무단 복제 및
+                배포를 금지합니다. <br />
+                사용된 오픈소스 라이브러리는 각각의 라이선스를 따릅니다.
+              </CopyrightText>
 
-            <FontUsageLink href={fontUsageUrl}>{fontUsageText}</FontUsageLink>
-          </CopyrightSection>
-        </FooterInner>
-      </FooterContent>
-      <FooterHeader onClick={toggleExpanded}>
-        <SiteTitle>{siteTitle}</SiteTitle>
-        <ExpandButton isExpanded={isExpanded}>+</ExpandButton>
-      </FooterHeader>
-    </FooterWrapper>
+              <FontUsageLink href={fontUsageUrl}>{fontUsageText}</FontUsageLink>
+            </CopyrightSection>
+          </FooterInner>
+        </FooterContent>
+        <FooterHeader onClick={toggleExpanded}>
+          <SiteTitle>{siteTitle}</SiteTitle>
+          <ExpandButton isExpanded={isExpanded}>+</ExpandButton>
+        </FooterHeader>
+      </FooterWrapper>
+    </Wrapper>
   )
 }
 

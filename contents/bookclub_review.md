@@ -1,7 +1,7 @@
 ---
 date: '2025-10-25'
 title: 'AI 윤리 북클럽 회고: 아마추어 CSP가 되자'
-categories: ['BookClub', 'AI']
+categories: ['AI', 'BookClub']
 summary: 'AI라는 숲에서 사이버네틱스라는 나무를 만났을 때'
 thumbnail: './images/knowledge_sweatshop.png'
 ---
@@ -343,4 +343,4 @@ thumbnail: './images/knowledge_sweatshop.png'
 <br/>
 
 우리에게 남은 건, 그리고 남아야 할 건, 우연을 알아채는 감수성이다. <br/>
-그리고 이 미약한 컴퓨터-과학 철학자에게 주어진 과업이란 그 감수성을 비트의 세계에 이식하는 일이다.
+그리고 이 미약한 컴퓨터 과학-철학자에게 주어진 과업이란 그 감수성을 비트의 세계에 이식하는 일이다.

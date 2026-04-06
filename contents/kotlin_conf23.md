@@ -1,6 +1,6 @@
 ---
 date: '2024-06-17'
-title: "지금의 Kotlin 그리고 Kotlin Conf'2023"
+title: '지금의 Kotlin 그리고 Kotlin Conf 2023'
 categories: ['Kotlin', 'PL']
 summary: '안드로이드 생초보의 첫 개발자 컨퍼런스'
 thumbnail: './kotlin_conf23.png'

@@ -144,33 +144,34 @@ const PersonalDescription: FunctionComponent = function () {
         <SectionWrapper>
           <SectionTitle>💬 Language</SectionTitle>
           <SectionDetail>
-            • Kotlin <br />
-            • C++ <br />
-            • Java <br />
-            • TypeScript <br />
-            • Scala <br />
+            • Kotlin · Java <br />
+            • C/C++ · LLVM IR <br />
+            • TypeScript · Dart <br />
           </SectionDetail>
         </SectionWrapper>
 
         <SectionWrapper>
           <SectionTitle>🧭 Interests</SectionTitle>
           <SectionDetail>
-            • Android / Kotlin Multiplatform <br />
-            • On-Device Deep Learning <br />
-            • Compiler Architecture & Optimization <br />
+            • Compiler Optimization & Program Analysis <br />
+            • FPGA High-Level Synthesis (HLS) <br />
+            • Android Native / Kotlin Multiplatform <br />
           </SectionDetail>
         </SectionWrapper>
 
         <SectionWrapper>
-          <SectionTitle>👤 Services</SectionTitle>
+          <SectionTitle>👤 Activities</SectionTitle>
           <SectionDetail>
-            • Undergraduate Intern of{' '}
-            <a href="https://coslab.khu.ac.kr/">COSLab</a> (Compiler & System
-            Software Lab) <br />• Vice President of{' '}
-            <a href="https://github.com/Dcom-KHU">D.Com</a>, <br />
-            &nbsp;&nbsp;&nbsp;Academic Club of CSE, <br />
-            &nbsp;&nbsp;&nbsp;Kyung-Hee Univ. (2022) <br />• Android Director of
-            3rd KHU <a href="https://www.makeus.in/umc">UMC</a>.
+            • Undergraduate Researcher for{' '}
+            <a href="https://coslab.khu.ac.kr/">
+              Compiler & System Software Lab
+            </a>{' '}
+            <br />• Vice President,{' '}
+            <a href="https://github.com/Dcom-KHU">D.Com</a> · CSE Academic Club,
+            KHU (2022) <br />• KHU Android Track Lead,{' '}
+            <a href="https://www.makeus.in/umc">
+              Uni MakeUs Challenge 3rd Cohort (2022)
+            </a>
             <br />
           </SectionDetail>
         </SectionWrapper>

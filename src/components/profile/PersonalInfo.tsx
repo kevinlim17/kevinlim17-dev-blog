@@ -4,7 +4,7 @@ import {
   faEnvelope,
   faHashtag,
   faBuildingColumns,
-  faPen,
+  faPaperPlane,
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { IGatsbyImageData } from 'gatsby-plugin-image'
@@ -241,8 +241,30 @@ const PersonalInfo: FunctionComponent<PersonalInfoProps> = function ({
       </ProfileSection>
 
       <ContactSection>
-        <SectionTitle>Contact</SectionTitle>
+        <SectionTitle>Information</SectionTitle>
         <PersonalInfoContact>
+          <ContactItem>
+            <PersonalInfoContactIcon>
+              <FontAwesomeIcon icon={faPaperPlane} />
+            </PersonalInfoContactIcon>
+            <PersonalInfoContactText>
+              <a
+                href="/resumes/resume.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <strong>Curriculum Vitae</strong>
+              </a>
+            </PersonalInfoContactText>
+          </ContactItem>
+          <ContactItem>
+            <PersonalInfoContactIcon>
+              <FontAwesomeIcon icon={faEnvelope} />
+            </PersonalInfoContactIcon>
+            <PersonalInfoContactText>
+              <a href="mailto:kevinlsh17@khu.ac.kr">kevinlsh17@khu.ac.kr</a>
+            </PersonalInfoContactText>
+          </ContactItem>
           <ContactItem>
             <PersonalInfoContactIcon>
               <FontAwesomeIcon icon={faBuildingColumns} />
@@ -254,28 +276,10 @@ const PersonalInfo: FunctionComponent<PersonalInfoProps> = function ({
 
           <ContactItem>
             <PersonalInfoContactIcon>
-              <FontAwesomeIcon icon={faEnvelope} />
-            </PersonalInfoContactIcon>
-            <PersonalInfoContactText>
-              <a href="mailto:kevinlsh17@khu.ac.kr">kevinlsh17@khu.ac.kr</a>
-            </PersonalInfoContactText>
-          </ContactItem>
-
-          <ContactItem>
-            <PersonalInfoContactIcon>
               <FontAwesomeIcon icon={faHashtag} />
             </PersonalInfoContactIcon>
             <PersonalInfoContactText>
               <a href="https://instagram.com/kevin_lsh17">Instagram</a>
-            </PersonalInfoContactText>
-          </ContactItem>
-
-          <ContactItem>
-            <PersonalInfoContactIcon>
-              <FontAwesomeIcon icon={faPen} />
-            </PersonalInfoContactIcon>
-            <PersonalInfoContactText>
-              <a href="https://brunch.co.kr/@kevinlim17">Brunch Story</a>
             </PersonalInfoContactText>
           </ContactItem>
         </PersonalInfoContact>

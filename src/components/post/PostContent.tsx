@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react'
+import React, { FunctionComponent, useEffect, useRef } from 'react'
 import styled from '@emotion/styled'
 
 interface PostContentProps {
@@ -233,14 +233,14 @@ const MarkdownRenderer = styled.div`
     font-family: 'IBM Plex Mono', monospace;
     font-weight: 500;
     font-style: normal;
-    background-color: rgba(248, 247, 243, 1);
-    border-left: 2px solid rgba(2, 0, 36, 1);
-    border-bottom: 1px solid rgba(2, 0, 36, 0.2);
-    box-shadow: -6px 6px 1px 0px rgba(2, 0, 36, 0.1);
+    background-color: rgba(2, 0, 36, 1);
+    border-left: 2px solid rgba(250, 249, 246, 0.3);
+    border-bottom: 1px solid rgba(250, 249, 246, 0.15);
+    box-shadow: -6px 6px 1px 0px rgba(2, 0, 36, 0.3);
     transition: all 0.2s ease;
 
     ::-webkit-scrollbar-thumb {
-      background: rgba(2, 0, 36, 0.3);
+      background: rgba(250, 249, 246, 0.3);
       border-radius: 3px;
     }
   }
@@ -255,17 +255,17 @@ const MarkdownRenderer = styled.div`
     font-weight: 500;
     font-style: normal;
     line-height: 1.4;
-    color: rgba(2, 0, 36, 1);
+    color: rgba(250, 249, 246, 1);
     margin-right: 2px;
     border-radius: 0;
   }
 
-  // Prism token colors — tuned for light (cream) background
+  // Prism token colors — tuned for dark (primary) background
   .token.comment,
   .token.prolog,
   .token.doctype,
   .token.cdata {
-    color: rgba(2, 0, 36, 0.38);
+    color: rgba(250, 249, 246, 0.38);
     font-style: italic;
   }
 
@@ -273,7 +273,7 @@ const MarkdownRenderer = styled.div`
   .token.selector,
   .token.important,
   .token.atrule {
-    color: rgba(100, 0, 160, 1);
+    color: rgba(200, 150, 255, 1);
     font-weight: 700;
   }
 
@@ -281,24 +281,24 @@ const MarkdownRenderer = styled.div`
   .token.attr-value,
   .token.char,
   .token.regex {
-    color: rgba(0, 110, 30, 1);
+    color: rgba(130, 220, 150, 1);
   }
 
   .token.number,
   .token.boolean,
   .token.constant {
-    color: rgba(160, 40, 0, 1);
+    color: rgba(255, 160, 100, 1);
   }
 
   .token.function,
   .token.function-variable {
-    color: rgba(0, 70, 160, 1);
+    color: rgba(100, 180, 255, 1);
   }
 
   .token.class-name,
   .token.maybe-class-name,
   .token.builtin {
-    color: rgba(0, 100, 130, 1);
+    color: rgba(100, 220, 230, 1);
     font-weight: 600;
   }
 
@@ -306,26 +306,26 @@ const MarkdownRenderer = styled.div`
   .token.tag,
   .token.symbol,
   .token.deleted {
-    color: rgba(170, 30, 30, 1);
+    color: rgba(255, 130, 130, 1);
   }
 
   .token.attr-name,
   .token.variable {
-    color: rgba(0, 80, 150, 1);
+    color: rgba(130, 180, 255, 1);
   }
 
   .token.operator,
   .token.entity,
   .token.url {
-    color: rgba(2, 0, 36, 0.65);
+    color: rgba(250, 249, 246, 0.65);
   }
 
   .token.punctuation {
-    color: rgba(2, 0, 36, 0.5);
+    color: rgba(250, 249, 246, 0.5);
   }
 
   .token.inserted {
-    color: rgba(0, 120, 40, 1);
+    color: rgba(100, 220, 140, 1);
   }
 
   .token.namespace {
@@ -341,11 +341,11 @@ const MarkdownRenderer = styled.div`
     font-family: 'IBM Plex Mono', monospace;
     font-weight: 500;
     font-style: normal;
-    background-color: rgba(248, 247, 243, 1);
-    color: rgba(2, 0, 36, 1);
+    background-color: rgba(2, 0, 36, 1);
+    color: rgba(250, 249, 246, 1);
     margin-right: 2px;
     border-radius: 0.5rem;
-    box-shadow: -2px 2px 0 0 rgba(2, 0, 36, 0.12);
+    box-shadow: -2px 2px 0 0 rgba(2, 0, 36, 0.3);
   }
 
   // Plain fenced block (no language specified) — reset inline styles, inherit from pre
@@ -356,6 +356,25 @@ const MarkdownRenderer = styled.div`
     border-radius: 0;
     font-size: 1rem;
     margin-right: 0;
+  }
+
+  // Mermaid diagram container
+  .mermaid-wrapper {
+    margin: 15px 0;
+    padding: 24px 20px;
+    background-color: rgba(250, 249, 246, 1);
+    border-left: 2px solid rgba(2, 0, 36, 1);
+    border-bottom: 1px solid rgba(2, 0, 36, 0.2);
+    box-shadow: -6px 6px 1px 0px rgba(2, 0, 36, 0.1);
+    overflow-x: auto;
+    display: flex;
+    justify-content: center;
+
+    svg {
+      max-width: 100%;
+      height: auto;
+      font-family: 'IBM Plex Mono', monospace;
+    }
   }
 
   @media screen and (max-width: 768px) {
@@ -401,8 +420,96 @@ const MarkdownRenderer = styled.div`
 `
 
 const PostContent: FunctionComponent<PostContentProps> = function ({ html }) {
+  const containerRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    if (typeof window === 'undefined' || !containerRef.current) return
+
+    const renderMermaid = async () => {
+      const mermaid = (await import('mermaid')).default
+
+      mermaid.initialize({
+        startOnLoad: false,
+        theme: 'base',
+        themeVariables: {
+          // Color palette from DESIGN.md
+          background: '#FAF9F6',
+          mainBkg: '#FAF9F6',
+          primaryColor: 'rgba(2, 0, 36, 0.07)',
+          primaryTextColor: '#020024',
+          primaryBorderColor: '#020024',
+          secondaryColor: 'rgba(2, 0, 36, 0.04)',
+          secondaryTextColor: '#020024',
+          secondaryBorderColor: 'rgba(2, 0, 36, 0.4)',
+          tertiaryColor: 'rgba(2, 0, 36, 0.02)',
+          tertiaryTextColor: '#020024',
+          tertiaryBorderColor: 'rgba(2, 0, 36, 0.2)',
+          // Edges & lines
+          lineColor: 'rgba(2, 0, 36, 0.7)',
+          edgeLabelBackground: '#FAF9F6',
+          // Cluster / subgraph
+          clusterBkg: 'rgba(2, 0, 36, 0.03)',
+          clusterBorder: 'rgba(2, 0, 36, 0.4)',
+          // Text
+          titleColor: '#020024',
+          textColor: '#020024',
+          nodeBorder: '#020024',
+          // Sequence diagram specifics
+          actorBkg: 'rgba(2, 0, 36, 0.07)',
+          actorBorder: '#020024',
+          actorTextColor: '#020024',
+          actorLineColor: 'rgba(2, 0, 36, 0.3)',
+          signalColor: '#020024',
+          signalTextColor: '#020024',
+          activationBkgColor: 'rgba(2, 0, 36, 0.1)',
+          activationBorderColor: '#020024',
+          labelBoxBkgColor: '#FAF9F6',
+          labelBoxBorderColor: 'rgba(2, 0, 36, 0.4)',
+          labelTextColor: '#020024',
+          loopTextColor: '#020024',
+          noteBkgColor: 'rgba(2, 0, 36, 0.06)',
+          noteBorderColor: 'rgba(2, 0, 36, 0.4)',
+          noteTextColor: '#020024',
+          // Font
+          fontFamily: '"IBM Plex Mono", monospace',
+          fontSize: '14px',
+        },
+      })
+
+      // gatsby-remark-prismjs wraps: div.gatsby-highlight > pre.language-mermaid > code.language-mermaid
+      const mermaidBlocks = containerRef.current?.querySelectorAll(
+        'code.language-mermaid',
+      )
+
+      if (!mermaidBlocks || mermaidBlocks.length === 0) return
+
+      for (let i = 0; i < mermaidBlocks.length; i++) {
+        const codeEl = mermaidBlocks[i] as HTMLElement
+        const preEl = codeEl.parentElement
+        const wrapperEl = preEl?.parentElement // div.gatsby-highlight
+
+        const graphDefinition = codeEl.textContent || ''
+        const id = `mermaid-${i}-${Date.now()}`
+
+        try {
+          const { svg } = await mermaid.render(id, graphDefinition)
+          const container = document.createElement('div')
+          container.className = 'mermaid-wrapper'
+          container.innerHTML = svg
+          const target = wrapperEl ?? preEl
+          target?.replaceWith(container)
+        } catch (e) {
+          console.error('Mermaid render error:', e)
+        }
+      }
+    }
+
+    void renderMermaid()
+  }, [html])
+
   return (
     <MarkdownRenderer
+      ref={containerRef}
       id="post-content"
       dangerouslySetInnerHTML={{ __html: html }}
     />

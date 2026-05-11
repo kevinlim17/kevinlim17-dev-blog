@@ -8,7 +8,8 @@ interface FootnoteWidgetProps {
 
 const Wrapper = styled.div`
   max-width: 67vw;
-  margin-top: 2rem;
+  // margin-top: 2rem;
+  padding-top: 2rem;
   padding-left: 40px;
   border-left: 2px solid rgba(2, 0, 36, 1);
 
@@ -118,7 +119,9 @@ const BackLink = styled.a`
   }
 `
 
-const FootnoteWidget: FunctionComponent<FootnoteWidgetProps> = ({ footnotes }) => {
+const FootnoteWidget: FunctionComponent<FootnoteWidgetProps> = ({
+  footnotes,
+}) => {
   const [open, setOpen] = useState(true)
 
   return (
@@ -132,8 +135,13 @@ const FootnoteWidget: FunctionComponent<FootnoteWidgetProps> = ({ footnotes }) =
           {footnotes.map(fn => (
             <FootnoteEntry key={fn.id} id={`footnote-${fn.id}`} type={fn.type}>
               <FootnoteNumber>[{fn.id}]</FootnoteNumber>
-              <FootnoteContent dangerouslySetInnerHTML={{ __html: fn.content }} />
-              <BackLink href={`#footnote-ref-${fn.id}`} aria-label="본문으로 돌아가기">
+              <FootnoteContent
+                dangerouslySetInnerHTML={{ __html: fn.content }}
+              />
+              <BackLink
+                href={`#footnote-ref-${fn.id}`}
+                aria-label="본문으로 돌아가기"
+              >
                 ↩
               </BackLink>
             </FootnoteEntry>

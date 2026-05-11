@@ -2,6 +2,7 @@ import React, { FunctionComponent, useState, useEffect, useRef } from 'react'
 import styled from '@emotion/styled'
 import PostContent from './PostContent'
 import PostTOC from './PostTOC'
+import FootnotePanel, { FootnoteItem } from './FootnotePanel'
 import RelatedArticles from './RelatedArticles'
 import CommentWidget from './CommentWidget'
 import { debounce } from 'lodash'
@@ -53,6 +54,7 @@ const PostContainer: FunctionComponent<PostContainerProps> = function ({
   relatedPosts = [],
 }) {
   const [windowWidth, setWindowWidth] = useState<number>(0)
+  const [openFootnote, setOpenFootnote] = useState<FootnoteItem | null>(null)
 
   // useRef로 debounce 인스턴스를 마운트 시 1회만 생성
   const handleResizeWidth = useRef(
@@ -72,12 +74,23 @@ const PostContainer: FunctionComponent<PostContainerProps> = function ({
     }
   }, [])
 
-  // width가 1200 이하면 TOC를 Rendering하지 않음.
+  const rightColumn =
+    windowWidth >= 1200 ? (
+      openFootnote ? (
+        <FootnotePanel
+          footnote={openFootnote}
+          onClose={() => setOpenFootnote(null)}
+        />
+      ) : (
+        <PostTOC tableOfContents={tableOfContents} />
+      )
+    ) : null
+
   return windowWidth >= 1200 ? (
     <>
       <PostContainerWrapper windowWidth={`row`}>
-        <PostContent html={html} />
-        <PostTOC tableOfContents={tableOfContents} />
+        <PostContent html={html} onFootnoteOpen={setOpenFootnote} />
+        {rightColumn}
       </PostContainerWrapper>
       <PostContainerWrapper windowWidth={`row`}>
         <RelatedArticles posts={relatedPosts} />
@@ -90,7 +103,7 @@ const PostContainer: FunctionComponent<PostContainerProps> = function ({
     <>
       <PostContainerWrapper windowWidth={`column`}>
         <PostTOC tableOfContents={tableOfContents} />
-        <PostContent html={html} />
+        <PostContent html={html} onFootnoteOpen={setOpenFootnote} />
       </PostContainerWrapper>
       <PostContainerWrapper windowWidth={`column`}>
         <RelatedArticles posts={relatedPosts} />

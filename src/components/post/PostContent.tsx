@@ -1,9 +1,46 @@
-import React, { FunctionComponent, useEffect, useRef } from 'react'
+import React, { FunctionComponent, useEffect, useMemo, useRef } from 'react'
 import styled from '@emotion/styled'
+import { FootnoteItem } from './FootnotePanel'
+import FootnoteWidget from './FootnoteWidget'
 
 interface PostContentProps {
   html: string
+  onFootnoteOpen?: (footnote: FootnoteItem) => void
 }
+
+const detectFormat = (content: string): 'apa' | 'numbered' =>
+  /\(\d{4}[^)]*\)/.test(content) ? 'apa' : 'numbered'
+
+const processFootnotes = (
+  html: string,
+): { processedHtml: string; footnotes: FootnoteItem[] } => {
+  const footnotes: FootnoteItem[] = []
+  const processedHtml = html.replace(
+    /<h6[^>]*>([\s\S]*?)<\/h6>/g,
+    (_: string, content: string) => {
+      const id = footnotes.length + 1
+      footnotes.push({
+        id,
+        content: content.trim(),
+        type: detectFormat(content),
+      })
+      return `<span class="footnote-inline" id="footnote-ref-${id}" data-footnote-id="${id}"><span class="footnote-marker">${id}</span></span>`
+    },
+  )
+  return { processedHtml, footnotes }
+}
+
+const PostContentWrapper = styled.div`
+  width: 67vw;
+
+  @media screen and (max-width: 1200px) and (min-width: 769px) {
+    width: 100%;
+  }
+
+  @media screen and (max-width: 768px) {
+    width: 100%;
+  }
+`
 
 const MarkdownRenderer = styled.div`
   //Renderer style
@@ -186,6 +223,35 @@ const MarkdownRenderer = styled.div`
     text-decoration: none;
   }
 
+  .footnote-inline {
+    display: inline;
+    cursor: pointer;
+  }
+
+  .footnote-marker {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.5em;
+    height: 1.5em;
+    background: rgba(2, 0, 36, 0.82);
+    color: rgba(250, 249, 246, 1);
+    font-size: 0.62em;
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 700;
+    // border-radius: 50%;
+    vertical-align: middle;
+    position: relative;
+    top: -0.2em;
+    line-height: 1;
+    transition: background 0.2s ease, transform 0.2s ease;
+  }
+
+  .footnote-inline:hover .footnote-marker {
+    background: rgba(2, 0, 36, 1);
+    transform: scale(1.15);
+  }
+
   // Adjust Table Style
   table {
     border-collapse: collapse;
@@ -358,6 +424,11 @@ const MarkdownRenderer = styled.div`
     margin-right: 0;
   }
 
+  code[class*='language-text'] > a {
+    color: rgba(250, 249, 246, 1);
+    text-decoration: none;
+  }
+
   // Mermaid diagram container
   .mermaid-wrapper {
     margin: 15px 0;
@@ -419,8 +490,17 @@ const MarkdownRenderer = styled.div`
   }
 `
 
-const PostContent: FunctionComponent<PostContentProps> = function ({ html }) {
+const PostContent: FunctionComponent<PostContentProps> = function ({
+  html,
+  onFootnoteOpen,
+}) {
   const containerRef = useRef<HTMLDivElement>(null)
+  const { processedHtml, footnotes } = useMemo(
+    () => processFootnotes(html),
+    [html],
+  )
+  const onFootnoteOpenRef = useRef(onFootnoteOpen)
+  onFootnoteOpenRef.current = onFootnoteOpen
 
   useEffect(() => {
     if (typeof window === 'undefined' || !containerRef.current) return
@@ -507,12 +587,35 @@ const PostContent: FunctionComponent<PostContentProps> = function ({ html }) {
     void renderMermaid()
   }, [html])
 
+  useEffect(() => {
+    if (!containerRef.current) return
+
+    const markers =
+      containerRef.current.querySelectorAll<HTMLElement>('.footnote-inline')
+    const cleanups: Array<() => void> = []
+
+    markers.forEach(marker => {
+      const fnId = parseInt(marker.getAttribute('data-footnote-id') ?? '0', 10)
+      const handler = () => {
+        const note = footnotes.find(f => f.id === fnId)
+        if (note) onFootnoteOpenRef.current?.(note)
+      }
+      marker.addEventListener('click', handler)
+      cleanups.push(() => marker.removeEventListener('click', handler))
+    })
+
+    return () => cleanups.forEach(fn => fn())
+  }, [processedHtml, footnotes])
+
   return (
-    <MarkdownRenderer
-      ref={containerRef}
-      id="post-content"
-      dangerouslySetInnerHTML={{ __html: html }}
-    />
+    <PostContentWrapper>
+      <MarkdownRenderer
+        ref={containerRef}
+        id="post-content"
+        dangerouslySetInnerHTML={{ __html: processedHtml }}
+      />
+      {footnotes.length > 0 && <FootnoteWidget footnotes={footnotes} />}
+    </PostContentWrapper>
   )
 }
 

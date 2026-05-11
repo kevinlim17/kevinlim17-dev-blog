@@ -76,6 +76,17 @@ const Sticky: FunctionComponent<StickyProps> = ({
     calculateGeometry()
   }, [calculateElementTop, calculateGeometry])
 
+  // elementTop이 확정된 뒤 현재 스크롤 위치 기반으로 fixed 상태를 즉시 보정.
+  // 페이지가 스크롤된 상태에서 컴포넌트가 마운트/재마운트되는 경우(각주 패널 열기/닫기 등)에
+  // 스크롤 이벤트 없이도 올바른 위치에 배치되도록 한다.
+  useEffect(() => {
+    if (elementTop === 0) return
+    const scrollTop = getScrollTop()
+    const shouldBeFixed = scrollTop + top > elementTop
+    if (shouldBeFixed) calculateGeometry()
+    setFixed(shouldBeFixed)
+  }, [elementTop, top, calculateGeometry])
+
   // 스크롤 이벤트 등록 및 해제
   useEffect(() => {
     window.addEventListener('scroll', onScroll)

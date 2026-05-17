@@ -82,7 +82,7 @@ thumbnail: './images/a-corner-of-the-history.png'
     이 문장을 네트워크 명령어로 변환하는 컴파일러가 있다. 위의 구문은 다음과 같은 동작을 수행해야 한다.
     <blockquote style="padding: 1.5rem; background: transparent">
         <code class="language-text"><strong> 나(Client) -- 사랑(Request) --> 당신(Server) </strong></code> <br />
-        <code class="language-text" style="color: rgba(148, 82, 0, 1)"><strong> 나(행위자) -- 사랑(행위) --> 당신(행위의 대상) </strong></code>
+        <code class="language-text" style="color: orange"><strong> 나(행위자) -- 사랑(행위) --> 당신(행위의 대상) </strong></code>
     </blockquote>
     CS를 전공한 사람이라면 언제든 되새기는 사실이지만, 컴퓨터는 멍청하다. <br />
     컴퓨터에게 누가 행위자인지(Client), 누가 행위의 대상인지(Server)인지, 행위자가 어떤 행위를 수행하는지(Request) 알려주려면, 해석 규칙을 꼼꼼하게 작성해야 한다. 먼저 철자를 확인하기 위한 방식부터 마련해 보자. <br/>

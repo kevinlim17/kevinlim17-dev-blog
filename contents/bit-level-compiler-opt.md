@@ -75,14 +75,16 @@ HLS가 생성해야 할 하드웨어: 16비트 연산자 3개  → 50% 절감
 
 <br />
 
-Zhang et al. [[2]](#ref2)은 이미 2010년에 이 문제를 지적했다. RTL 합성 단계에서 뒤늦게 최적화를 시도하면, HLS가 Pipeline Register를 삽입한 이후라 최적화 범위가 크게 제한된다고. 따라서 C-to-RTL 변환의 초기 단계, 즉 IR 수준에서 비트 레벨 분석과 최적화를 수행하는 것이 효과적일 수 있다는 생각에서 본 연구는 출발했다.
+Zhang et al. <h6>J. Zhang, Z. Zhang, S. Zhou, M. Tan, X. Liu, X. Cheng, and J. Cong, "Bit-level optimization for high-level synthesis and FPGA-based acceleration," in <em>Proc. ACM/SIGDA FPGA</em>, 2010.</h6>은 이미 2010년에 이 문제를 지적했다. RTL 합성 단계에서 뒤늦게 최적화를 시도하면, HLS가 Pipeline Register를 삽입한 이후라 최적화 범위가 크게 제한된다고. 따라서 C-to-RTL 변환의 초기 단계, 즉 IR 수준에서 비트 레벨 분석과 최적화를 수행하는 것이 효과적일 수 있다는 생각에서 본 연구는 출발했다.
 
 ### Goals
 
 해당 연구의 목표는 세 가지로 정리된다.
 
 1. <strong>LLVM IR 수준의 정적 비트 사용량 분석</strong> : 각 명령어가 실제로 어떤 비트를 사용하는지 Compile-Time에 추적하는 알고리즘을 설계한다. Non-Constant Value에 대해서는 LLVM Known-Bits API를 활용해 정밀도를 높인다. <br /><br/>
+
 2. <strong>Data Width 최적화를 통한 IR Transformation</strong> : 분석 결과를 바탕으로 각 Instruction에서 사용하는 데이터의 폭을 최적화하고, 변환 후 IR의 Type 일관성과 의미론적 동등성을 보장한다.  <br/><br/>
+
 3. <strong>Vitis HLS Compilation Pipeline에 통합 및 FPGA Resource 절감 실증</strong> : Analysis / Transformation Pass를 HLS Workflow에 통합하고, CHStone Benchmark에서 실제 LUT / FF 절감을 확인한다.
 
 ---
@@ -223,7 +225,9 @@ Type* BitLevelOpt::getOptimizedPrimitiveType(Instruction &I, uint64_t bitUsage) 
 
 ## First Approach
 
-초기 구현은 기존 JSA 논문 [[1]](#ref1)의 접근을 HLS 환경으로 이식하는 것에서 시작했다. 해당 연구는 AVR 마이크로컨트롤러를 타겟으로 하는 임베디드 시스템용 비트 수준 최적화로, MiBench 벤치마크에서 최대 19.8%의 명령어 수 감소를 달성했다.
+초기 구현은 기존 JSA 논문 <h6>S. Heo, J. Kim, W. Im, J. Moon, D. Jang, "Bit-level compiler optimization
+for ultra low-power embedded systems," <em>Journal of Systems Architecture</em>,
+vol. 168, 2025, 103546. doi:10.1016/j.sysarc.2025.103546</h6>의 접근을 HLS 환경으로 이식하는 것에서 시작했다. 해당 연구는 AVR 마이크로컨트롤러를 타겟으로 하는 임베디드 시스템용 비트 수준 최적화로, MiBench 벤치마크에서 최대 19.8%의 명령어 수 감소를 달성했다.
 
 이 알고리즘의 핵심은 **상수 피연산자에 대한 비트마스크 전파**다. AND 연산에서 한쪽 피연산자가 상수인 경우, 그 마스크 패턴을 그대로 비트 사용량으로 기록할 수 있다. Shift 연산에서는 shift amount만큼 비트 사용량을 이동시킨다. 초기에는 이 로직만으로 MiBench의 bitcount(17.95%), crc32(15.41%) 등에서 의미있는 비트폭 감소를 확인했다.
 
@@ -437,7 +441,7 @@ Algorithm 2에 Store/Load 명령어에 대한 특수 처리 분기를 추가했�
 
 가장 인상적인 결과는 **SHA**다. 최적화 전 SHA는 Arty A7-100T의 LUT를 259% 사용 — 즉, **하드웨어에 구현 자체가 불가능한** 수준이었다. 최적화 후 66%로 줄어 처음으로 타겟 보드에서 동작 가능한 구현이 됐다. 단순한 성능 향상이 아니라 **구현 가능성 자체를 열어준 enabler** 역할이다.
 
-이 효과는 비트 연산 밀도와 강한 상관관계를 보인다. SHA는 전체 연산의 51.6%[[3]](#ref3)가 shift/logic 연산으로, CHStone 중 가장 높은 비트 연산 밀도를 가진다. 반면 AES는 shift 연산이 많지만 logic 연산과의 결합이 낮아(20.9%, [[3]](#ref3)) 상대적으로 제한적인 최적화 효과를 보였다. 
+이 효과는 비트 연산 밀도와 강한 상관관계를 보인다. SHA는 전체 연산의 51.6%가 shift/logic 연산으로, CHStone 중 가장 높은 비트 연산 밀도를 가진다. 반면 AES는 shift 연산이 많지만 logic 연산과의 결합이 낮아(20.9%) <h6>Y. Hara, H. Tomiyama, S. Honda, H. Takada, and K. Ishii, "CHStone: A benchmark program suite for practical C-based high-level synthesis," in <em>Proc. IEEE ISCAS</em>, 2008.</h6>, 상대적으로 제한적인 최적화 효과를 보였다. 
 
 **ADPCM 벤치마크**에서는 오히려 비트폭이 소폭 증가했다. 데이터 정렬을 위한 `zext` 삽입과 Opaque Pointer 미지원으로 인한 `bitcast` 추가가 원인이다. 긍정적 결과만큼이나 이런 부정적 결과도 정직하게 보고했다. 
 
@@ -446,34 +450,34 @@ Algorithm 2에 Store/Load 명령어에 대한 특수 처리 분기를 추가했�
 ## Rewind
 
 #### "틀린 최적화보다 놓친 최적화가 낫다"
- 
+
 컴파일러 최적화에서 가장 중요한 불변조건은 **의미론적 동등성(semantic equivalence)** 이다. 최적화된 프로그램은 원본 프로그램과 동일한 결과를 모든 입력에 대해 생성해야 한다. 이 조건이 깨지면 최적화가 아니라 컴파일러 버그다.
- 
+
 우리 알고리즘이 보수적으로(conservative) 동작하도록 설계한 이유가 여기 있다. 비트 사용량 분석이 불확실한 경우 — GEP 인덱스, 함수 호출 경계, struct 포인터 — 알고리즘은 선언된 전체 비트폭을 사용한다고 가정한다. 최적화 기회를 놓치더라도 잘못된 변환을 수행하지 않는다.
- 
+
 이 원칙은 흥미롭게도 Liskov Substitution Principle과 유사하다. "서브타입은 슈퍼타입의 동작을 보존해야 한다." 최적화된 IR은 원본 IR의 "서브타입"이다.
 
 <br />
- 
+
 #### "분석의 완전성이 보장된 후에 변환하라"
- 
+
 On-time Transformation에서 겪은 실패가 이 원칙을 가르쳐줬다. 분석과 변환을 동시에 수행하면, 부분적으로 분석된 정보를 기반으로 변환이 이루어진다. 결국 잘못된 타입 가정으로 이어진다.
- 
+
 Two-Pass 구조로 재설계하면서 깨달은 것은, 이 원칙이 컴파일러의 여러 곳에서 이미 구현되어 있다는 사실이다. SSA(Static Single Assignment) 형식도 마찬가지다. 모든 정의(def)가 사용(use) 이전에 지배(dominate)해야 한다는 SSA의 불변조건은, "분석 완료 → 사용"의 구조적 구현이다.
 
 <br />
- 
+
 #### "추상화 경계는 명확해야 한다"
- 
+
 Typed/Opaque Pointer 문제는 두 다른 버전의 LLVM이 서로 다른 포인터 의미론(semantics)을 사용한다는 사실에서 비롯됐다. 현대 LLVM에서 `ptr`은 "어떤 타입이든 가리킬 수 있는 포인터"라는 추상화다. LLVM 7.0에서 `i32*`는 타입 정보가 포인터 자체에 인코딩된 구체화다. 두 추상화가 만나는 지점에서 계약 위반이 발생한다.
- 
+
 컴파일러 설계에서 두 IR 단계 사이의 추상화 경계가 명확하지 않으면 이런 충돌이 필연적으로 발생한다. `verifyStoreInstructions`가 별도의 후처리 단계로 분리된 이유도 여기 있다. 추상화 경계를 넘나드는 처리는 명확히 격리해야 한다.
 
 <br />
 
 #### "결과는 셋업에 종속된다 -- 그러므로 셋업을 의심하라"
 
-Mytkowicz et al.의 "Producing Wrong Data Without Doing Anything Obviously Wrong!" [[5]](#ref5)은 충격적인 사실을 보고한다. UNIX 환경 변수 크기나 링크 순서처럼 무관해 보이는 설정 변경이 O3 최적화의 효과를 0.92배(오히려 느려짐)에서 1.10배(명확한 향상)까지 뒤집어 놓을 수 있다. ASPLOS, PACT, PLDI, CGO의 133편 논문 중 이를 충분히 고려한 논문은 단 한 편도 없었다.
+Mytkowicz et al.의 "Producing Wrong Data Without Doing Anything Obviously Wrong!" <h6>T. Mytkowicz, A. Diwan, M. Hauswirth, and P. F. Sweeney, "Producing wrong data without doing anything obviously wrong!" in <em>Proc. 14th Int. Conf. on Architectural Support for Programming Languages and Operating Systems (ASPLOS XIV)</em>, Washington, DC, USA, 2009, pp. 265–276. doi:10.1145/1508244.1508275</h6>은 충격적인 사실을 보고한다. UNIX 환경 변수 크기나 링크 순서처럼 무관해 보이는 설정 변경이 O3 최적화의 효과를 0.92배(오히려 느려짐)에서 1.10배(명확한 향상)까지 뒤집어 놓을 수 있다. ASPLOS, PACT, PLDI, CGO의 133편 논문 중 이를 충분히 고려한 논문은 단 한 편도 없었다.
 
 우리 실험에 대입해보면 불편한 질문이 생긴다. SHA 74.4% LUT 절감이라는 수치는 단일 합성 설정(Xilinx Arty A7-100T, 100MHz, -O3)에서 측정된 것이다. 링크 순서가 다르면, synthesis seed가 다르면, clock constraint가 달라지면 결과가 어떻게 변할까? 이 수치가 우리 알고리즘의 실제 효과인지, 아니면 특정 설정에서 발생한 행운인지를 완전히 구분하기는 어렵다.
 
@@ -481,32 +485,8 @@ Mytkowicz et al.의 "Producing Wrong Data Without Doing Anything Obviously Wrong
 
 <br/>
 
- 
 #### "부정적 결과도 정보다"
- 
+
 ADPCM의 비트폭 증가, AES의 제한적 효과 — 처음에는 실망스러웠다. 하지만 이것들이 알고리즘의 **동작 범위(operating domain)** 를 정의해준다. 비트 연산 밀도가 낮은 애플리케이션에서는 효과가 제한적이다. 이 사실을 아는 것이, 모른 채로 모든 곳에 최적화를 적용하는 것보다 훨씬 가치있다. 컴파일러 최적화는 어떤 경우에 유효하고 어떤 경우에 유효하지 않은지를 명확히 이해하는 일이기도 하다.
 
 <br />
-
-## References
-
-
-<blockquote style="padding: 1.5rem; background:transparent">
-<p id="ref1">
-    <strong>[1]</strong>&nbsp; S. Heo, J. Kim, W. Im, J. Moon, D. Jang, "Bit-level compiler optimization
-for ultra low-power embedded systems," <em>Journal of Systems Architecture</em>,
-vol. 168, 2025, 103546. doi:10.1016/j.sysarc.2025.103546
-</p>
-<p id="ref2">
-    <strong>[2]</strong>&nbsp; J. Zhang, Z. Zhang, S. Zhou, M. Tan, X. Liu, X. Cheng, and J. Cong, "Bit-level optimization for high-level synthesis and FPGA-based acceleration," in <em>Proc. ACM/SIGDA FPGA</em>, 2010.
-</p>
-<p id="ref3">
-    <strong>[3]</strong>&nbsp; Y. Hara, H. Tomiyama, S. Honda, H. Takada, and K. Ishii, "CHStone: A benchmark program suite for practical C-based high-level synthesis," in <em>Proc. IEEE ISCAS</em>, 2008.
-</p>
-<p id="ref4">
-    <strong>[4]</strong>&nbsp; D. Lee, A. A. Gaffar, R. C. C. Cheung, O. Mencer, W. Luk, and G. A. Constantinides, "Accuracy-Guaranteed Bit-Width Optimization," <em>IEEE Trans. on CAD of Integrated Circuits and Systems</em>, vol. 25, no. 10, 2006.
-</p>
-<p id="ref5">
-    <strong>[5]</strong>&nbsp; T. Mytkowicz, A. Diwan, M. Hauswirth, and P. F. Sweeney, "Producing wrong data without doing anything obviously wrong!" in <em>Proc. 14th Int. Conf. on Architectural Support for Programming Languages and Operating Systems (ASPLOS XIV)</em>, Washington, DC, USA, 2009, pp. 265–276. doi:10.1145/1508244.1508275
-</p>
-</blockquote>

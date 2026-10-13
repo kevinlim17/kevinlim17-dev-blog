@@ -64,21 +64,13 @@ OpenClaw의 전체 실행 흐름은 7개의 레이어로 구성된다. 각 레�
 ```
 
 | 레이어 | 명칭 | 핵심 책임 | 주요 경로 |
-
 |--------|------|-----------|-----------|
-
 | L1 | External Messaging | 채널 API 수신 및 플러그인 인터페이스 | `src/discord/`, `extensions/*` |
-
 | L2 | Ingress Middleware | 메시지 정규화, 1차 필터링 | `src/channels/plugins/normalize/` |
-
 | L3 | Routing | 에이전트·세션 매핑, session key 생성 | `src/routing/resolve-route.ts` |
-
 | L4 | Gateway RPC | 신뢰 경계 형성, RPC 프로토콜 처리 | `src/gateway/` |
-
 | L5 | Agent Execution | AI 런타임 선택 및 에이전트 턴 실행 | `src/commands/agent.ts` |
-
 | L6 | Tool Execution | 도구 빌드, 정책 필터링, 실행, 승인 | `src/agents/pi-tools.ts` |
-
 | L7 | Outbound Delivery | 응답 전달, 채널 포맷팅, send 라우팅 | `src/infra/outbound/` |
 
 ---
@@ -100,13 +92,9 @@ OpenClaw의 전체 실행 흐름은 7개의 레이어로 구성된다. 각 레�
 **모듈 재사용성 분석:**
 
 | 모듈 / 함수 | 파일 위치 | 사용 범위 | 재사용성 |
-
 |-------------|-----------|-----------|----------|
-
 | `ChannelPlugin` (interface) | `extensions/*/src/index.ts` | 모든 채널 | **높음** — 동일 인터페이스 구현으로 완전 교체 가능 |
-
 | `loadChannelPlugins(runtime)` | `src/channels/plugins/*.ts` | 모든 채널 | **높음** — 런타임 등록 패턴, 채널 추가 시 재사용 |
-
 | Channel Adapter (inbound/outbound) | 각 채널 디렉토리 | 채널별 | **중간** — 인터페이스는 공유, 구현은 채널 특화 |
 
 > **설계 노트:** 채널별 구현(Discord 봇 API, WhatsApp Web 등)은 L2 이상에서 완전히 추상화된다. 채널 추가 = 플러그인 구현만으로 완결된다.
@@ -132,13 +120,9 @@ OpenClaw의 전체 실행 흐름은 7개의 레이어로 구성된다. 각 레�
 **모듈 재사용성 분석:**
 
 | 모듈 / 함수 | 파일 위치 | 사용 범위 | 재사용성 |
-
 |-------------|-----------|-----------|----------|
-
 | `normalizeMessage()` | `src/channels/plugins/normalize/*.ts` | 채널 공통 | **높음** — 표준 변환 파이프라인 |
-
 | `AllowlistMatcher` | `src/channels/allowlist.ts` | 채널 공통 | **높음** — 전체 채널에서 재사용 |
-
 | `InboundDebouncer` | `src/channels/plugins/inbound/debounce.ts` | 채널 공통 | **높음** — 동일 로직 공유 |
 
 > **설계 노트:** L2는 L1 채널 종속성을 완전히 격리한다. L3 이상은 메시지 출처(채널 종류)를 알 필요가 없다.
@@ -174,15 +158,10 @@ agent:default:discord:GUILD_ID:ROLE_ID        # 역할 기반 라우팅
 **모듈 재사용성 분석:**
 
 | 모듈 / 함수 | 파일 위치 | 사용 범위 | 재사용성 |
-
 |-------------|-----------|-----------|----------|
-
 | `resolveRoute()` | `src/routing/resolve-route.ts` | 전체 채널 | **높음** — 모든 채널이 동일 라우팅 로직 사용 |
-
 | `buildAgentSessionKey()` | `src/routing/session-key.ts` | 전체 채널 | **높음** — 세션 식별자 생성 표준화 |
-
 | `BindingStore` | `src/routing/bindings.ts` | 전체 채널 | **높음** — 라우팅 규칙 영속화 |
-
 | `resolveSubagentDepth()` | `src/agents/subagent-depth.ts` | 에이전트 스폰 | **높음** — 재귀 방지 깊이 계산 |
 
 ---
@@ -208,17 +187,11 @@ agent:default:discord:GUILD_ID:ROLE_ID        # 역할 기반 라우팅
 **모듈 재사용성 분석:**
 
 | 모듈 / 함수 | 파일 위치 | 사용 범위 | 재사용성 |
-
 |-------------|-----------|-----------|----------|
-
 | `GatewayServer` | `src/gateway/server.ts` | 전체 진입점 | **높음** — 단일 게이트웨이 인스턴스 |
-
 | `callGateway()` | `src/commands/agent-via-gateway.ts` | CLI → Gateway | **높음** — 모든 CLI 에이전트 호출 |
-
 | `device-auth.ts` | `src/infra/device-auth.ts` | 디바이스 인증 | **높음** — 단일 인증 흐름 |
-
 | `method-scopes.ts` | `src/gateway/method-scopes.ts` | 권한 관리 | **높음** — 메서드별 권한 선언 |
-
 | `agentCommandFromIngress()` | `src/commands/agent.ts` | Gateway → Agent | **높음** — 네트워크 진입 단일 핸들러 |
 
 > **설계 노트:** `senderIsOwner` 선언이 이 레이어에서 이루어진다. 이후 레이어는 이를 암묵적으로 신뢰한다. 이는 경계 우회 시 보안 위험으로 이어진다 (3.2절 참조).
@@ -263,19 +236,12 @@ acpResolution?.kind === "ready"?
 **모듈 재사용성 분석:**
 
 | 모듈 / 함수 | 파일 위치 | 사용 범위 | 재사용성 |
-
 |-------------|-----------|-----------|----------|
-
 | `agentCommand()` | `src/commands/agent.ts` | **전체 실행 경로** | **높음** — 단일 진입점, 경로 분기 포함 |
-
 | `prepareAgentCommandExecution()` | `src/commands/agent.ts` | **전체 실행 경로** | **높음** — 완전 공유, 중복 없음 |
-
 | `runEmbeddedPiAgent()` | `src/agents/pi-embedded-runner/run.ts` | Embedded 경로만 | **중간** — Embedded 전용 |
-
 | `runCliAgent()` | `src/agents/cli-runner.ts` | CLI 경로만 | **중간** — CLI 백엔드 전용 |
-
 | `AcpSessionManager` | `src/acp/control-plane/manager.ts` | ACP 경로만 | **낮음** — ACP 세션 전용 |
-
 | `SessionManager` (pi-coding-agent) | `@mariozechner/pi-coding-agent` | Embedded + CLI | **높음** — 트랜스크립트 표준 |
 
 **pi-coding-agent 결합 구조:**
@@ -340,29 +306,17 @@ tools[] (전체 24개 코어 도구)
 **코어 도구 카탈로그 (24개):**
 
 | 그룹 | 도구 |
-
 |------|------|
-
 | Files | `read`, `write`, `edit`, `apply_patch` |
-
 | Runtime | `exec`, `process` |
-
 | Web | `web_search`, `web_fetch` |
-
 | Memory | `memory_search`, `memory_get` |
-
 | Sessions | `sessions_list`, `sessions_history`, `sessions_send`, `sessions_spawn`, `sessions_yield`, `subagents`, `session_status` |
-
 | UI | `browser`, `canvas` |
-
 | Messaging | `message` |
-
 | Automation | `cron`, `gateway` |
-
 | Nodes | `nodes` |
-
 | Agents | `agents_list` |
-
 | Media | `image`, `tts` |
 
 **서브에이전트 깊이별 권한 제한:**
@@ -404,21 +358,13 @@ exec-approvals.ts
 **모듈 재사용성 분석:**
 
 | 모듈 / 함수 | 파일 위치 | 사용 범위 | 재사용성 |
-
 |-------------|-----------|-----------|----------|
-
 | `createOpenClawCodingTools()` | `src/agents/pi-tools.ts` | Embedded 경로 | **높음** — 도구 조합 중앙화 |
-
 | `applyToolPolicyPipeline()` | `src/agents/tool-policy-pipeline.ts` | Embedded 경로 | **높음** — 7단계 필터 재사용 |
-
 | `resolveEffectiveToolPolicy()` | `src/agents/tool-policy.ts` | Embedded 경로 | **높음** — 정책 합성 단일 함수 |
-
 | `ToolCatalog` (24 core tools) | `src/agents/tool-catalog.ts` | 정책 참조 | **높음** — 전체 도구 정의 표준 |
-
 | `resolveSubagentCapabilities()` | `src/agents/subagent-capabilities.ts` | 스폰 제어 | **높음** — `canSpawn` 런타임 검사 |
-
 | `exec-approvals.ts` | `src/infra/exec-approvals.ts` | exec 도구 | **높음** — 실행 승인 단일 구현 |
-
 | `nodes-tool.ts` | `src/agents/tools/nodes-tool.ts` | 기기 제어 | **중간** — 18개 서브액션 디스패처 |
 
 > **설계 노트:** CLI 실행 경로(L5 CLI branch)에서는 이 레이어가 완전히 비활성화된다. 도구 정책은 Embedded 경로 전용이다.
@@ -446,15 +392,10 @@ exec-approvals.ts
 **모듈 재사용성 분석:**
 
 | 모듈 / 함수 | 파일 위치 | 사용 범위 | 재사용성 |
-
 |-------------|-----------|-----------|----------|
-
 | `deliverAgentCommandResult()` | `src/commands/agent.ts` | **전체 실행 경로** | **높음** — 단일 전달 추상화 |
-
 | `CliDeps` / `createDefaultDeps()` | `src/cli/deps.ts` | **전체 실행 경로** | **높음** — 채널 send 함수 DI |
-
 | `BoundDeliveryRouter` | `src/infra/outbound/bound-delivery-router.ts` | 서브에이전트 결과 | **높음** — 자식→부모 announce |
-
 | `SessionBindingService` | `src/infra/outbound/session-binding-service.ts` | 스레드 바인딩 | **높음** — 세션-스레드 매핑 |
 
 > **설계 노트:** L7은 L2의 대칭 구조다. L2가 채널 종속성을 ingress에서 격리하듯, L7은 egress에서 격리한다.
@@ -466,29 +407,17 @@ exec-approvals.ts
 `✓` = 사용, `○` = 선택적 사용, `—` = 미사용
 
 | 모듈 | L1 | L2 | L3 | L4 | L5 | L6 | L7 |
-
 |------|----|----|----|----|----|----|-----|
-
 | `agentCommand()` | — | — | — | ✓ | ✓ | — | — |
-
 | `prepareAgentCommandExecution()` | — | — | — | — | ✓ | — | — |
-
 | `SessionManager` (pi-coding-agent) | — | — | — | — | ✓ | — | — |
-
 | `resolveRoute()` | — | — | ✓ | — | — | — | — |
-
 | `ChannelPlugin` interface | ✓ | ✓ | — | — | — | — | ✓ |
-
 | `applyToolPolicyPipeline()` | — | — | — | — | — | ✓ | — |
-
 | `exec-approvals.ts` | — | — | — | — | — | ✓ | — |
-
 | `deliverAgentCommandResult()` | — | — | — | — | ✓ | — | ✓ |
-
 | `createDefaultDeps()` / CliDeps | — | — | — | — | ✓ | — | ✓ |
-
 | `BoundDeliveryRouter` | — | — | — | — | — | — | ✓ |
-
 | `callGateway()` | — | — | — | ✓ | ○ | — | — |
 
 > **핵심 관찰:** L5(실행)와 L7(전달) 레이어가 가장 많은 공유 모듈을 소비한다. 이는 두 레이어가 OpenClaw의 "비즈니스 로직 중심부"임을 의미한다.
@@ -564,17 +493,11 @@ prepareAgentCommandExecution()  ← 공통 준비
 ```
 
 | 분기 조건 | 결과 경로 | 시나리오 |
-
 |-----------|-----------|----------|
-
 | `sessionEntry.acp` 필드 존재 | ACP 경로 | C |
-
 | `isCliProvider() === true` | CLI 서브프로세스 | B |
-
 | 기본 (embedded provider) | Embedded Pi Agent | A |
-
 | 에이전트가 `sessions_spawn` 호출 | 재귀 `agentCommand()` | D |
-
 | 외부 채널 메시지 수신 | 채널 → Gateway → Agent | E |
 
 ---
@@ -584,27 +507,16 @@ prepareAgentCommandExecution()  ← 공통 준비
 **진입 명령어:** `openclaw agent --message "..." --to +821012345678`
 
 | 단계 | 레이어 | 동작 | 핵심 모듈 |
-
 |------|--------|------|-----------|
-
 | 1 | L4 | CLI → `callGateway({ method: "agent", ... })` 호출 | `agent-via-gateway.ts` |
-
 | 2 | L4 | Gateway: `agentCommandFromIngress()` 진입, `senderIsOwner` 선언 | `gateway/server-methods/agent.ts` |
-
 | 3 | L5 | `prepareAgentCommandExecution()`: 세션/모델/워크스페이스 준비 | `commands/agent.ts` |
-
 | 4 | L5 | `acpResolution === null` → `runAgentAttempt()` 진입 | `commands/agent.ts` |
-
 | 5 | L5 | `isCliProvider() === false` → `runEmbeddedPiAgent()` 호출 | `pi-embedded-runner/run.ts` |
-
 | 6 | L6 | `createOpenClawCodingTools()` → `applyToolPolicyPipeline()` → 도구 배열 생성 | `agents/pi-tools.ts` |
-
 | 7 | L5 | pi-coding-agent 런타임에 필터링된 도구 전달, 에이전트 턴 실행 | `@mariozechner/pi-coding-agent` |
-
 | 8 | L6 | 에이전트가 도구 호출 → 정책 검사 → (필요 시) 승인 요청 → 실행 | `exec-approvals.ts` |
-
 | 9 | L5 | `SessionManager`로 트랜스크립트 저장, `visibleTextAccumulator`로 응답 누적 | `SessionManager` |
-
 | 10 | L7 | `deliverAgentCommandResult()` → `CliDeps` → 채널별 `send()` 호출 | `cli/deps.ts` |
 
 ---
@@ -616,19 +528,12 @@ prepareAgentCommandExecution()  ← 공통 준비
 `--local`은 provider를 `"claude-cli"` 등 CLI 백엔드로 강제한다. 실제 분기는 `isCliProvider()`가 결정한다.
 
 | 단계 | 동작 | 시나리오 A와의 차이점 |
-
 |------|------|----------------------|
-
 | 1–4 | 시나리오 A와 동일 (L4, `prepareAgentCommandExecution`) | 동일 |
-
 | 5 | `isCliProvider() === true` → `runCliAgent()` 호출 | **분기 발생** |
-
 | 6 | 외부 CLI 백엔드 서브프로세스 스폰 (`ProcessSupervisor`) | 도구 파이프라인 없음 |
-
 | 7 | CLI 백엔드 내부에서 자체 도구 루프 실행 (OpenClaw 제어 밖) | **L6 레이어 비활성화** |
-
 | 8 | CLI 백엔드 종료 시 `EmbeddedPiRunResult` 반환 (공유 결과 포맷) | 결과 포맷은 동일 |
-
 | 9–10 | `SessionManager` 저장, `deliverAgentCommandResult()` → 시나리오 A와 동일 | 동일 |
 
 > ⚠️ **보안 함의:** CLI 경로에서는 OpenClaw의 `tool-policy-pipeline`과 `exec-approvals`가 작동하지 않는다. 외부 CLI 백엔드의 자체 보안 정책에 의존한다.
@@ -640,23 +545,14 @@ prepareAgentCommandExecution()  ← 공통 준비
 세션 메타데이터에 `acp` 필드가 존재하는 경우, ACP 경로로 분기된다.
 
 | 단계 | 동작 | 주요 특징 |
-
 |------|------|-----------|
-
 | 1–3 | 시나리오 A 1–3단계와 동일 | 공통 준비 단계 |
-
 | 4 | `acpResolution?.kind === "ready"` 확인 → ACP 경로 진입 | 분기 결정 |
-
 | 5 | ACP Policy Check: `cfg.acp?.enabled` && agents 허용 목록 확인 | 정책 게이트 |
-
 | 6 | ACP Session Identity Reconcile: 런타임 세션 ↔ 저장 메타데이터 일치 검증 | 세션 무결성 검증 |
-
 | 7 | `acpManager.runTurn({ text, mode: "prompt", ... })` 호출 | 외부 런타임 위임 |
-
 | 8 | 텍스트 델타 스트림 수신, `visibleTextAccumulator` 누적 | **도구 실행 없음** |
-
 | 9 | `persistAcpTurnTranscript()` → `SessionManager` 저장 (`model: "acp-runtime"`) | 트랜스크립트 영속화 |
-
 | 10 | L7 전달 (시나리오 A와 동일) | 공통 전달 단계 |
 
 > 🔒 **ACP 격리 특성:** ACP 경로에서는 `createOpenClawCodingTools()`와 `tool-policy-pipeline`이 호출되지 않는다. 도구 실행 공격 면적이 구조적으로 0이다.
@@ -668,43 +564,26 @@ prepareAgentCommandExecution()  ← 공통 준비
 실행 중인 에이전트가 `sessions_spawn` 도구를 호출하면 자식 에이전트가 생성된다.
 
 | 단계 | 레이어 | 동작 |
-
 |------|--------|------|
-
 | 1 | L6 | 부모 에이전트: `sessions_spawn({ task, runtime, agentId, ... })` 도구 호출 |
-
 | 2 | L6 | `resolveSubagentCapabilities()`: `depth < maxSpawnDepth` 검사 (기본 `maxSpawnDepth=1`) |
-
 | 3 | L5 | `runtime="subagent"` → `spawnSubagentDirect()` 호출 |
-
 | 4 | L5 | 새 `SessionEntry` 생성: `{ spawnedBy: parent, spawnDepth: parent.depth+1, subagentRole }` |
-
 | 5 | L5 | `agentCommand()` 재귀 호출 (자식 컨텍스트: 격리된 `sessionKey`, 공유 `workspaceDir`) |
-
 | 6 | L6 | 자식 에이전트: 도구 정책 적용 (깊이 제한 반영 → 리프 노드는 `sessions_spawn` 차단) |
-
 | 7 | L5 | 자식 에이전트 실행 완료 → `subagent-announce` 시스템 트리거 |
-
 | 8 | L7 | `BoundDeliveryRouter`: 자식 결과를 부모 세션 큐에 삽입 (announce 채널, 90초 타임아웃) |
-
 | 9 | L5 | 부모 에이전트: 다음 턴에서 자식 결과를 user message로 수신 (`sessions_yield` 이후) |
 
 **컨텍스트 상속/격리 규칙:**
 
 | 속성 | 부모 → 자식 | 이유 |
-
 |------|-------------|------|
-
 | `workspaceDir` | ✅ 상속 | 파일 공유 필요 |
-
 | message channel | ✅ 상속 | 출력 라우팅 일관성 |
-
 | `sessionKey` / `sessionId` | ❌ 격리 (신규 생성) | 독립 대화 컨텍스트 |
-
 | `agentId` | ❌ 격리 (오버라이드 가능) | 다른 에이전트 역할 부여 가능 |
-
 | model / thinking level | ❌ 격리 (오버라이드 가능) | 태스크별 최적 모델 선택 |
-
 | tool policy (depth 반영) | ❌ 격리 (깊이 재계산) | 리프 노드 권한 자동 축소 |
 
 **`sessions_yield`의 역할:**
@@ -727,21 +606,13 @@ prepareAgentCommandExecution()  ← 공통 준비
 **예시:** WhatsApp에서 메시지 수신
 
 | 단계 | 레이어 | 동작 |
-
 |------|--------|------|
-
 | 1 | L1 | WhatsApp API webhook 수신 (채널 플러그인 활성화) |
-
 | 2 | L2 | `normalizeMessage()`: mention 제거, DM scope 결정, allowlist 매칭 |
-
 | 3 | L3 | `resolveRoute()`: peer `"+821012345678"` → `agentId`, `sessionKey` 결정 |
-
 | 4 | L4 | Gateway RPC: `sessions.message({ key, body, channel: "whatsapp" })` 디스패치 |
-
 | 5 | L4 | `agentCommandFromIngress()` 호출 (senderIsOwner는 채널 인증 결과에 따라 결정) |
-
 | 6 | L5–L6 | 시나리오 A/B/C 중 하나로 분기 (세션 메타데이터에 따라) |
-
 | 7 | L7 | `deliverAgentCommandResult()` → `CliDeps["whatsapp"].send()` → WhatsApp API |
 
 ---
@@ -759,19 +630,12 @@ Prompt Injection은 외부 입력(메시지, 파일 내용, 웹 응답 등)에 �
 **레이어별 Prompt Injection 위험도:**
 
 | 레이어 | 주입 벡터 | 위험도 | 완화 수단 | 잔존 위험 |
-
 |--------|-----------|--------|-----------|-----------|
-
 | L1/L2 (채널 수신) | 외부 메시지 본문, 사용자 닉네임, 파일 첨부 | 🔴 높음 | allowlist로 신뢰 발신자 제한 | 허용된 발신자의 악의적 메시지는 차단 불가 |
-
 | L3 (라우팅) | sessionKey 구성 요소 (채널 ID, peer) | 🟡 중간 | `normalizeAgentId()`로 입력 정제 | peer 값 포맷 조작 시 잘못된 세션 라우팅 가능 |
-
 | L5 (시스템 프롬프트) | 에이전트 시스템 프롬프트 설정 파일 | 🔴 높음 | 프롬프트는 설정 파일에서만 로드 | 설정 파일 쓰기 권한 탈취 시 시스템 프롬프트 변조 가능 |
-
 | **L6 (도구 결과)** | 웹 검색/파일 읽기 결과가 컨텍스트에 삽입 | 🔴 매우 높음 | **없음 (구조적 취약점)** | `"Ignore previous instructions"` 류 웹 콘텐츠가 에이전트 조종 가능 |
-
 | L5 (서브에이전트) | 부모가 자식에게 전달하는 task 문자열 | 🟡 중간 | 자식 도구 권한 축소 (depth 제한) | 부모 에이전트가 이미 감염된 경우 악성 태스크 전달 가능 |
-
 | L6 (nodes 도구) | 외부 기기로부터의 이벤트/알림 텍스트 | 🔴 높음 | 없음 | 기기 알림 내용이 에이전트 컨텍스트에 직접 삽입됨 |
 
 **핵심 취약 시나리오: 도구 결과 기반 Prompt Injection**
@@ -802,23 +666,14 @@ Prompt Injection은 외부 입력(메시지, 파일 내용, 웹 응답 등)에 �
 **침입점 분류 및 위험도:**
 
 | 침입점 | 위치 | 위험도 | 현재 방어 | 취약점 |
-
 |--------|------|--------|-----------|--------|
-
 | Gateway HTTP/WS 엔드포인트 | `src/gateway/server.ts` | 🔴 매우 높음 | 디바이스 페어링 + 세션 토큰 | 토큰 유출 시 전체 에이전트 제어 가능 |
-
 | 채널 Webhook 수신 | `src/channels/` 각 플러그인 | 🔴 높음 | allowlist + 채널별 서명 검증 | 서명 검증 미구현 채널의 경우 스푸핑 가능 |
-
 | `exec` 도구 (쉘 실행) | `src/infra/exec-approvals.ts` | 🔴 매우 높음 | 승인 모드 + allowlist | `security="full"` 설정 시 무제한 쉘 실행 가능 |
-
 | `exec-approvals.json` (로컬) | `~/.openclaw/exec-approvals.json` | 🔴 높음 | 없음 (파일시스템 권한에 의존) | 파일 변조로 임의 명령 pre-approve 가능 |
-
 | `sessions.json` (로컬) | `~/.openclaw/sessions.json` | 🟡 중간 | 없음 (파일시스템 권한) | `acp` 필드 삽입으로 ACP 경로 강제 진입 가능 |
-
 | `credentials/` (로컬) | `~/.openclaw/credentials/` | 🔴 매우 높음 | 없음 (파일시스템 권한) | API 키 평문 저장, 로컬 권한 탈취 시 즉시 노출 |
-
 | mDNS/Bonjour 서비스 | `src/infra/bonjour*.ts` | 🟡 중간 | 로컬 네트워크 한정 | 동일 네트워크 내 악의적 클라이언트의 서비스 발견 가능 |
-
 | Unix 소켓 (승인 데몬) | `src/infra/exec-approvals.ts:559` | 🟡 중간 | 파일시스템 권한 | 소켓 파일 권한 미흡 시 승인 요청 가로채기 가능 |
 
 **ACP 신뢰 체인의 구조적 취약점:**
@@ -826,15 +681,10 @@ Prompt Injection은 외부 입력(메시지, 파일 내용, 웹 응답 등)에 �
 `senderIsOwner` 선언은 L4(Gateway)에서만 이루어지며, 이후 레이어는 이를 재검증하지 않는다:
 
 | 위험 시나리오 | 가능 여부 | 조건 |
-
 |---------------|-----------|------|
-
 | `sessions.json` 직접 편집으로 ACP 세션 강제 진입 | 🔴 가능 | 로컬 파일시스템 쓰기 권한 |
-
 | ACP 외부 런타임 백엔드 응답 변조 (MitM) | 🟡 조건부 | TLS 적용 여부에 따라 다름 |
-
 | Gateway 없이 CLI 직접 호출 → `senderIsOwner=true` 강제 | 🔴 가능 | `agentCommand()` 직접 호출 권한 |
-
 | ACP 전용 Rate Limiting 부재로 무제한 턴 실행 | 🟡 가능 | Gateway를 거치지 않는 경우 |
 
 > **핵심 설계 취약점:** 신뢰는 경계에서 선언되지만 내부에서 재확인되지 않는다. `agentCommand()`를 직접 호출하는 경로(CLI, 테스트, 서드파티 통합)는 Gateway의 인증을 우회한다.
@@ -846,19 +696,12 @@ Prompt Injection은 외부 입력(메시지, 파일 내용, 웹 응답 등)에 �
 #### 저장 데이터 (Data at Rest)
 
 | 데이터 | 저장 위치 | 암호화 여부 | 형식 | 위험도 |
-
 |--------|-----------|-------------|------|--------|
-
 | API 키 (Anthropic, OpenAI 등) | `~/.openclaw/credentials/` | ❌ 평문 | JSON/YAML | 🔴 매우 높음 |
-
 | 세션 트랜스크립트 | `~/.openclaw/sessions/*.jsonl` | ❌ 평문 | JSONL | 🔴 높음 |
-
 | 세션 메타데이터 | `~/.openclaw/sessions.json` | ❌ 평문 | JSON | 🟡 중간 |
-
 | 실행 승인 목록 | `~/.openclaw/exec-approvals.json` | ❌ 평문 | JSON | 🔴 높음 |
-
 | OpenClaw 설정 | `~/.openclaw/config.yml` | ❌ 평문 | YAML | 🟡 중간 |
-
 | 디바이스 인증 토큰 | `~/.openclaw/device*.json` | ❓ 미확인 | JSON | 🔴 높음 |
 
 > 🔴 **핵심 취약점:** API 키를 포함한 모든 민감 데이터가 홈 디렉토리에 평문으로 저장된다. macOS Keychain 또는 OS 수준 시크릿 스토어 통합이 없다. 로컬 파일시스템 접근 권한을 획득한 공격자는 즉시 모든 AI 프로바이더 자격증명을 획득한다.
@@ -866,39 +709,24 @@ Prompt Injection은 외부 입력(메시지, 파일 내용, 웹 응답 등)에 �
 #### 전송 데이터 (Data in Transit)
 
 | 통신 구간 | 프로토콜 | 암호화 | 인증 | 취약점 |
-
 |-----------|----------|--------|------|--------|
-
 | OpenClaw CLI → Gateway | HTTP/WebSocket | ○ 로컬 시 평문 가능 | 디바이스 토큰 | 로컬호스트 통신은 TLS 미적용 가능성 |
-
 | Gateway → AI Provider API | HTTPS | ✅ TLS | API Key | 키 자체가 평문 저장됨 |
-
 | Gateway → 채널 API (Telegram 등) | HTTPS | ✅ TLS | 채널 봇 토큰 | 봇 토큰 평문 저장 |
-
 | ACP → 외부 런타임 백엔드 | 미확인 | ❓ 미확인 | AcpRuntimeSessionOptions | MitM 가능성 — TLS 적용 여부 코드에서 불명확 |
-
 | 승인 데몬 Unix 소켓 | Unix Socket | ❌ 없음 | 파일 권한 | 동일 호스트 내 프로세스 간 — 소켓 권한 설정에 의존 |
-
 | mDNS 서비스 디스커버리 | mDNS/UDP | ❌ 없음 | 없음 | 로컬 네트워크 내 서비스 노출, 암호화 없음 |
 
 #### 암호화 관련 종합 권고사항
 
 | 우선순위 | 권고사항 | 적용 대상 | 예상 효과 |
-
 |----------|----------|-----------|-----------|
-
 | **P1 (긴급)** | API 키 저장을 OS 시크릿 스토어로 이전 (macOS Keychain, Linux Secret Service) | `~/.openclaw/credentials/` | 평문 노출 위험 제거 |
-
 | **P1 (긴급)** | `sessions.json` / `exec-approvals.json`에 파일 권한(600) 강제 적용 | 모든 `~/.openclaw/*.json` | 무단 메타데이터 변조 방지 |
-
 | **P2 (높음)** | 트랜스크립트 파일 암호화 (at-rest encryption) 적용 | `~/.openclaw/sessions/*.jsonl` | 대화 내용 기밀성 확보 |
-
 | **P2 (높음)** | ACP 백엔드 통신에 TLS 인증서 검증 강제 확인 | `src/acp/control-plane/` | MitM 공격 차단 |
-
 | **P3 (중간)** | 로컬 Gateway 통신에도 TLS 적용 또는 UNIX 소켓 사용 | `src/gateway/server.ts` | 로컬 네트워크 도청 방지 |
-
 | **P3 (중간)** | Prompt Injection 방어용 도구 결과 격리 레이어 추가 | `src/agents/pi-tools.ts` | 악성 웹 콘텐츠 기반 공격 완화 |
-
 | **P3 (중간)** | `senderIsOwner` 재검증 레이어를 `agentCommandFromIngress()` 이후에 추가 | `src/commands/agent.ts` | Gateway 우회 경로 차단 |
 
 ---

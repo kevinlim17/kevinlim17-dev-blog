@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>실천 보드 · 인공지능은 교육자의 꿈을 꾸는가</title>
+    <link rel="stylesheet" href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square-neo.css" />
+    <link rel="stylesheet" href="assets/style.css" />
+  </head>
+  <body>
+    <header class="bar">
+      <div class="wrap">
+        <a href="./">인공지능은 교육자의 꿈을 꾸는가</a>
+        <nav aria-label="페이지 이동"><a href="share.html">카드 쓰기</a></nav>
+      </div>
+    </header>
+
+    <main class="page">
+      <div class="wrap">
+        <div class="board-head">
+          <h1>실천 보드</h1>
+          <p class="live" id="live" role="status">연결하는 중</p>
+        </div>
+
+        <div class="summary" id="summary" hidden>
+          <div>
+            <h3>AI 사용 수준</h3>
+            <ul id="sum-level"></ul>
+          </div>
+          <div>
+            <h3>닿는 기능</h3>
+            <ul id="sum-fn"></ul>
+          </div>
+          <div>
+            <h3>마찰을 지키려면</h3>
+            <ul id="sum-sustain"></ul>
+          </div>
+        </div>
+
+        <div class="filters" id="filters" role="group" aria-label="AI 사용 수준으로 거르기" hidden>
+          <button type="button" data-level="" aria-pressed="true">전체</button>
+          <button type="button" data-level="red" aria-pressed="false">빨강 · AI 없이</button>
+          <button type="button" data-level="yellow" aria-pressed="false">노랑 · 교사의 지도 아래</button>
+          <button type="button" data-level="green" aria-pressed="false">초록 · 탐색 감독</button>
+        </div>
+
+        <div class="grid" id="grid"></div>
+        <p class="empty" id="empty" hidden>
+          아직 올라온 카드가 없습니다. 운영진이 카드를 확인하면 이곳에 나타납니다.
+        </p>
+      </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+    <script src="assets/config.js"></script>
+    <script src="assets/labels.js"></script>
+    <script src="assets/board.js"></script>
+  </body>
+</html>

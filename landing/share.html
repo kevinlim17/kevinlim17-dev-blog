@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>실천 카드 쓰기 · 인공지능은 교육자의 꿈을 꾸는가</title>
+    <meta name="robots" content="noindex" />
+    <link rel="stylesheet" href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square-neo.css" />
+    <link rel="stylesheet" href="assets/style.css" />
+  </head>
+  <body>
+    <header class="bar">
+      <div class="wrap">
+        <a href="./">인공지능은 교육자의 꿈을 꾸는가</a>
+        <nav aria-label="페이지 이동"><a href="board.html">실천 보드</a></nav>
+      </div>
+    </header>
+
+    <main class="page">
+      <div class="wrap">
+        <h1>실천 카드 쓰기</h1>
+        <p>
+          교실에서 지키고 싶은 마찰과 그 실천을 카드 한 장에 남겨 주세요. 카드는 한 사람이 여러 장 쓸 수 있습니다.
+        </p>
+        <p class="notice">
+          이름, 학교 이름, 학생이 특정되는 내용은 적지 마세요. 카드는 익명으로 저장되고, 운영진이 확인한 뒤 보드에 올라갑니다.
+        </p>
+
+        <div class="status" id="closed" hidden role="status"></div>
+
+        <form class="form" id="card-form" novalidate>
+          <fieldset aria-describedby="ctx-hint">
+            <legend>맥락</legend>
+            <p class="hint" id="ctx-hint">지역은 묻지 않습니다. 학교급과 과목만 선택해 주세요.</p>
+            <div class="choices row" role="radiogroup" aria-label="학교급">
+              <label class="choice"><input type="radio" name="school_level" value="예비교사" required /><strong>예비교사</strong></label>
+              <label class="choice"><input type="radio" name="school_level" value="초등" /><strong>초등</strong></label>
+              <label class="choice"><input type="radio" name="school_level" value="중등" /><strong>중등</strong></label>
+              <label class="choice"><input type="radio" name="school_level" value="고등" /><strong>고등</strong></label>
+              <label class="choice"><input type="radio" name="school_level" value="대학" /><strong>대학</strong></label>
+              <label class="choice"><input type="radio" name="school_level" value="기타" /><strong>기타</strong></label>
+            </div>
+            <p class="field-error" data-error-for="school_level" hidden></p>
+            <div style="margin-top: 1rem">
+              <label for="subject" style="font-family: var(--f-bold)">과목</label>
+              <select id="subject" name="subject" required>
+                <option value="">선택해 주세요</option>
+                <option>국어</option>
+                <option>수학</option>
+                <option>영어</option>
+                <option>사회</option>
+                <option>과학</option>
+                <option>예체능</option>
+                <option>정보</option>
+                <option>융합·기타</option>
+              </select>
+              <p class="field-error" data-error-for="subject" hidden></p>
+            </div>
+          </fieldset>
+
+          <div class="field">
+            <label for="friction">지키려는 마찰</label>
+            <p class="hint" id="friction-hint">AI에게 넘기지 않고 교실에서 지키고 싶은 어려움이나 느림입니다. 예: “초안은 손으로 먼저”</p>
+            <textarea id="friction" name="friction" maxlength="300" data-max="300" aria-describedby="friction-hint" required></textarea>
+            <div class="count" aria-hidden="true"><span>0</span> / 300</div>
+            <p class="field-error" data-error-for="friction" hidden></p>
+          </div>
+
+          <div class="field">
+            <label for="practice">실천</label>
+            <p class="hint" id="practice-hint">그 마찰을 지키려고 무엇을 했나요?</p>
+            <textarea id="practice" name="practice" maxlength="500" data-max="500" aria-describedby="practice-hint" required></textarea>
+            <div class="count" aria-hidden="true"><span>0</span> / 500</div>
+            <p class="field-error" data-error-for="practice" hidden></p>
+          </div>
+
+          <div class="field">
+            <label for="failure">실패와 한계<span class="opt">선택</span></label>
+            <p class="hint" id="failure-hint">무엇이 안 됐나요?</p>
+            <textarea id="failure" name="failure" maxlength="500" data-max="500" aria-describedby="failure-hint"></textarea>
+            <div class="count" aria-hidden="true"><span>0</span> / 500</div>
+          </div>
+
+          <fieldset aria-describedby="sustain-hint">
+            <legend>이 마찰을 지키려면 무엇이 있어야 하나요?</legend>
+            <p class="hint" id="sustain-hint">한 가지를 골라 주세요.</p>
+            <div class="choices">
+              <label class="choice">
+                <input type="radio" name="sustain_by" value="private" required />
+                <div>
+                  <strong>사적 자원으로 충분합니다</strong>
+                  <span class="d">내 시간, 재량, 교실 안의 약속으로 지킬 수 있습니다.</span>
+                </div>
+              </label>
+              <label class="choice">
+                <input type="radio" name="sustain_by" value="public" />
+                <div>
+                  <strong>공적 차원의 뒷받침이 있어야 합니다</strong>
+                  <span class="d">학교, 교육청, 제도의 변화가 필요합니다.</span>
+                </div>
+              </label>
+              <label class="choice">
+                <input type="radio" name="sustain_by" value="both" />
+                <div>
+                  <strong>사적 자원과 공적 차원이 모두 필요합니다</strong>
+                </div>
+              </label>
+            </div>
+            <p class="field-error" data-error-for="sustain_by" hidden></p>
+          </fieldset>
+
+          <fieldset aria-describedby="ai-level-hint">
+            <legend>AI 사용 수준</legend>
+            <p class="hint">이 실천에서 학생이 AI를 어느 정도로 쓰나요?</p>
+            <div class="choices">
+              <label class="choice">
+                <input type="radio" name="ai_level" value="red" required />
+                <strong><span class="dot" data-level="red"></span>빨강 · AI 없이</strong>
+              </label>
+              <label class="choice">
+                <input type="radio" name="ai_level" value="yellow" />
+                <strong><span class="dot" data-level="yellow"></span>노랑 · 교사의 지도 아래</strong>
+              </label>
+              <label class="choice">
+                <input type="radio" name="ai_level" value="green" />
+                <strong><span class="dot" data-level="green"></span>초록 · 탐색 감독</strong>
+              </label>
+            </div>
+            <p class="field-error" data-error-for="ai_level" hidden></p>
+            <div class="info" id="ai-level-hint" style="margin-top: 0.9rem">
+              <dl>
+                <div>
+                  <dt><span class="dot" data-level="red"></span>빨강 : AI 없이</dt>
+                  <dd>
+                    <p>학생이 AI를 쓰지 않고 스스로 해내는 활동입니다. 초안 쓰기, 첫 생각 적기, 토론처럼 마찰 자체가 배움의 목적인 장면에 해당합니다.</p>
+                    <p class="eg">e.g., “초안은 손으로 먼저”</p>
+                  </dd>
+                </div>
+                <div>
+                  <dt><span class="dot" data-level="yellow"></span>노랑 : 교사의 지도 아래</dt>
+                  <dd>
+                    <p>교사가 사용 시점과 방식을 정해 두고 AI를 들이는 활동입니다.</p>
+                    <p>학생이 먼저 자기 답을 낸 뒤 AI의 답과 비교하는 것처럼, AI가 사고를 대신하지 않고 비교 대상이나 질문 상대로 쓰이는 장면입니다.</p>
+                    <p class="eg">e.g., “내 초안을 쓴 뒤, AI 첨삭과 나란히 놓고 차이 설명하기”</p>
+                  </dd>
+                </div>
+                <div>
+                  <dt><span class="dot" data-level="green"></span>초록 : 탐색 감독</dt>
+                  <dd>
+                    <p>학생이 비교적 자유롭게 AI를 쓰되, 교사가 과정을 지켜보고 결과를 함께 돌아보는 활동입니다.</p>
+                    <p>자료 탐색이나 아이디어 확장처럼, AI의 효율이 숙의를 해치지 않는 장면에 해당합니다.</p>
+                    <p class="eg">e.g., “AI로 반대 논거를 찾아본 뒤, 그 중 무엇을 반영할지 모둠에서 판단하기”</p>
+                  </dd>
+                </div>
+              </dl>
+            </div>
+          </fieldset>
+
+          <fieldset aria-describedby="fn-hint">
+            <legend>닿는 기능</legend>
+            <p class="hint" id="fn-hint">이 실천이 닿는 교육의 기능을 모두 골라 주세요. 하나 이상 선택합니다.</p>
+            <div class="choices">
+              <label class="choice">
+                <input type="checkbox" name="functions" value="qualification" />
+                <div>
+                  <strong>자격화 (Qualification)</strong>
+                  <span class="d">지식, 기술, 문제 해결 능력을 갖추게 하는 기능입니다. 이 실천이 학생이 무엇을 “알게” 하거나 “할 수 있게” 하는가에 해당합니다.</span>
+                </div>
+              </label>
+              <label class="choice">
+                <input type="checkbox" name="functions" value="socialization" />
+                <div>
+                  <strong>사회화 (Socialization)</strong>
+                  <span class="d">공동체의 관습과 가치 안에서 자기 자리를 찾게 하는 기능입니다. 다른 사람과 함께 말하고, 듣고, 협력하는 법을 익히는 실천이 여기에 닿습니다.</span>
+                </div>
+              </label>
+              <label class="choice">
+                <input type="checkbox" name="functions" value="subjectification" />
+                <div>
+                  <strong>주체화 (Subjectification)</strong>
+                  <span class="d">스스로 생각하고 판단하며 그 결과에 책임지는 존재가 되게 하는 기능입니다. 정답이 주어지지 않은 상황에서 자기 입장을 세우고, 나와 다른 생각을 견디는 실천이 여기에 닿습니다.</span>
+                </div>
+              </label>
+            </div>
+            <p class="field-error" data-error-for="functions" hidden></p>
+          </fieldset>
+
+          <!-- 봇이 채우는 숨김 칸. 사람은 볼 수 없다. -->
+          <div class="hp" aria-hidden="true">
+            <label>이 칸은 비워 두세요<input type="text" name="website" tabindex="-1" autocomplete="off" /></label>
+          </div>
+
+          <div>
+            <button class="btn" type="submit" id="submit">카드 제출하기</button>
+          </div>
+        </form>
+
+        <div class="status error" id="error" hidden role="alert" tabindex="-1"></div>
+
+        <div class="status" id="done" hidden role="status" tabindex="-1">
+          <h2>카드를 받았습니다</h2>
+          <p>운영진이 확인하면 실천 보드에 올라갑니다.</p>
+          <div class="actions">
+            <button class="btn" type="button" id="again">카드 한 장 더 쓰기</button>
+            <a class="btn ghost" href="board.html">실천 보드 보기</a>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <script src="assets/config.js"></script>
+    <script src="assets/share.js"></script>
+  </body>
+</html>

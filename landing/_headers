@@ -1,0 +1,11 @@
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  X-Frame-Options: DENY
+
+/assets/*
+  Cache-Control: public, max-age=300
+
+# 행사 당일 값(OPENS_AT 등)을 바꿔도 바로 반영되도록
+/assets/config.js
+  Cache-Control: no-cache

@@ -1,8 +1,9 @@
 // 행사 전에 이 파일의 값만 채우면 된다. (anon key는 공개되어도 안전하게 설계된 키다.
 // 대신 RLS가 꺼지면 안 된다. 절대 service_role 키를 여기에 넣지 말 것.)
 window.ACTIVITY = {
-  // Supabase 프로젝트 → Settings → API
-  SUPABASE_URL: 'https://klsxedybxtzffpqffxya.supabase.co/rest/v1/',
+  // Supabase 프로젝트 → Settings → API 의 Project URL. 예: https://abcdefgh.supabase.co
+  // (끝에 /rest/v1 을 붙이지 않는다. 붙어 있어도 코드가 걷어 내지만, 처음부터 루트 주소로 적는다.)
+  SUPABASE_URL: 'https://klsxedybxtzffpqffxya.supabase.co',
   SUPABASE_ANON_KEY: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imtsc3hlZHlieHR6ZmZwcWZmeHlhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTE4MzQ0NjQsImV4cCI6MjEwNzQxMDQ2NH0.UlqVzagvZgyTLNpHREgNIqIBSg3aEx8c6NokcLC9VAY',
 
   // Tally 폼 주소 tally.so/r/XXXXXX 에서 XXXXXX 부분

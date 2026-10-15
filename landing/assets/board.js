@@ -1,5 +1,9 @@
 (function () {
   var cfg = window.ACTIVITY || {};
+  // Supabase 프로젝트 루트 주소로 정리한다. 대시보드에서 복사한 값 끝에 /rest/v1 이 붙어 있어도 동작하도록.
+  function projectUrl(u) {
+    return String(u || '').trim().replace(/\/+$/, '').replace(/\/rest\/v1$/, '');
+  }
   var L = window.LABELS;
 
   var gridEl = document.getElementById('grid');
@@ -139,7 +143,7 @@
 
   function load() {
     return fetch(
-      cfg.SUPABASE_URL.replace(/\/$/, '') + '/rest/v1/practices?select=*&approved=eq.true&order=created_at.desc',
+      projectUrl(cfg.SUPABASE_URL) + '/rest/v1/practices?select=*&approved=eq.true&order=created_at.desc',
       { headers: { apikey: cfg.SUPABASE_ANON_KEY, Authorization: 'Bearer ' + cfg.SUPABASE_ANON_KEY } }
     )
       .then(function (res) {
@@ -179,7 +183,7 @@
   // 운영자가 approved를 켜면 Realtime이 알려 준다. 알림을 놓쳐도 되도록 주기적으로도 다시 읽는다.
   if (window.supabase && window.supabase.createClient) {
     try {
-      var client = window.supabase.createClient(cfg.SUPABASE_URL, cfg.SUPABASE_ANON_KEY);
+      var client = window.supabase.createClient(projectUrl(cfg.SUPABASE_URL), cfg.SUPABASE_ANON_KEY);
       client
         .channel('practices-board')
         .on('postgres_changes', { event: '*', schema: 'public', table: 'practices' }, load)

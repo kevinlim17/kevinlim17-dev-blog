@@ -1,5 +1,9 @@
 (function () {
   var cfg = window.ACTIVITY || {};
+  // Supabase 프로젝트 루트 주소로 정리한다. 대시보드에서 복사한 값 끝에 /rest/v1 이 붙어 있어도 동작하도록.
+  function projectUrl(u) {
+    return String(u || '').trim().replace(/\/+$/, '').replace(/\/rest\/v1$/, '');
+  }
   var form = document.getElementById('card-form');
   var submitBtn = document.getElementById('submit');
   var errorBox = document.getElementById('error');
@@ -147,7 +151,7 @@
     submitBtn.disabled = true;
     submitBtn.textContent = '제출하는 중';
 
-    fetch(cfg.SUPABASE_URL.replace(/\/$/, '') + '/rest/v1/practices', {
+    fetch(projectUrl(cfg.SUPABASE_URL) + '/rest/v1/practices', {
       method: 'POST',
       headers: {
         apikey: cfg.SUPABASE_ANON_KEY,

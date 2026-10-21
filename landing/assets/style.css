@@ -572,10 +572,12 @@ textarea {
   box-shadow: var(--shadow);
   padding: 0.5rem;
   max-width: 70rem;
-  background: var(--paper);
+  background: #fff; /* 다크 모드에서도 폼은 밝게 */
+  color-scheme: light;
 }
 .tally-box iframe {
   display: block;
+  color-scheme: light;
   width: 100%;
   border: 0;
   min-height: 24rem;

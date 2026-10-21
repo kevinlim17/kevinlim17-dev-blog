@@ -190,6 +190,7 @@ section > .wrap > h2 {
   margin-top: 2rem;
 }
 .hero-meta {
+  white-space: pre-line;
   margin-top: 1.5rem;
   font-size: 0.95rem;
 }
@@ -570,7 +571,7 @@ textarea {
   border: 2px solid var(--ink);
   box-shadow: var(--shadow);
   padding: 0.5rem;
-  max-width: 40rem;
+  max-width: 70rem;
   background: var(--paper);
 }
 .tally-box iframe {
@@ -744,6 +745,62 @@ footer p {
 }
 @media (max-width: 52rem) {
   .doors {
+    grid-template-columns: 1fr;
+  }
+}
+
+.seoul-map {
+  display: block;
+  width: 18rem;
+  max-width: 100%;
+  margin-top: 1rem;
+  color: var(--ink);
+}
+.seoul-map .gu { fill: var(--fill); stroke: currentColor; stroke-width: 0.6; }
+.seoul-map .gu.mapo { fill: currentColor; }
+.where {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem 3rem;
+  align-items: flex-start;
+}
+.where .hero-meta { margin: 0; font-size: 1.05rem; line-height: 1.8; max-width: 40rem; }
+.where .seoul-map { margin-top: 0; }
+
+/* ── 당일 일정 ─────────────────────────────── */
+.schedule {
+  list-style: none;
+  margin: 1.5rem 0 0;
+  padding: 0;
+  max-width: 60rem;
+  border-top: 2px solid var(--ink);
+}
+.schedule li {
+  display: grid;
+  grid-template-columns: 8.5rem minmax(0, 1fr);
+  gap: 0.25rem 1.25rem;
+  padding: 0.9rem 0;
+  border-bottom: 1.5px dashed var(--ink-55);
+  line-height: 1.6;
+}
+.schedule time {
+  font-family: var(--f-bold);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.schedule strong {
+  display: block;
+  font-family: var(--f-bold);
+  font-weight: normal;
+}
+.schedule span {
+  display: block;
+  margin-top: 0.15rem;
+  font-size: 0.95rem;
+  color: var(--ink-70);
+}
+@media (max-width: 40rem) {
+  .schedule li {
     grid-template-columns: 1fr;
   }
 }

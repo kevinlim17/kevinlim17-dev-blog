@@ -17,6 +17,16 @@ jobs:
     steps:
       - name: 🧑🏻‍💻 Checkout Source Code
         uses: actions/checkout@v3
+        with:
+          persist-credentials: false
+
+      # 러너 이미지의 curl 업데이트(8.5.0-2ubuntu10.16) 이후 URL에 넣은 토큰이 redirect 과정에서 떨어져 push가 실패한다.
+      # 토큰을 Authorization 헤더로 전달해 URL 자격증명에 의존하지 않게 한다.
+      - name: 🔑 Git Auth Header
+        run: |
+          git config --global http.https://github.com/.extraheader "AUTHORIZATION: basic $(printf 'x-access-token:%s' "$TOKEN" | base64 -w0)"
+        env:
+          TOKEN: ${{ secrets.GATSBY_DEPLOY_API_KEY }}
 
       - name: 🌐 Gatsby GH Pages Action
         uses: enriikke/gatsby-gh-pages-action@v2

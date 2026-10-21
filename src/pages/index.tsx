@@ -5,6 +5,7 @@ import { PostListItemType } from 'types/PostItem.types'
 import queryString, { ParsedQuery } from 'query-string'
 import Introduction from '../components/main/Introduction'
 import CategoryList, { CategoryListProps } from 'components/main/CategoryList'
+import LandingBanner from 'components/main/LandingBanner'
 import PostList from 'components/main/PostList'
 import Template from 'components/common/Template'
 
@@ -97,6 +98,7 @@ const IndexPage: FunctionComponent<IndexPageProps> = function ({
         selectedCategory={selectedCategory}
         categoryList={categoryList}
       />
+      <LandingBanner />
       <PostList selectedCategory={selectedCategory} posts={edges} />
     </Template>
   )

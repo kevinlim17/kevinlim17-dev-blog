@@ -22,7 +22,7 @@
     g.features.forEach(function (f) {
       var p = document.createElementNS(NS, 'path');
       p.setAttribute('d', rings(f.geometry).map(function (r) { return 'M' + r.map(xy).join('L') + 'Z'; }).join(''));
-      p.setAttribute('class', f.properties.name === '마포구' ? 'gu mapo' : 'gu');
+      p.setAttribute('class', f.properties.name === '용산구' ? 'gu yongsan' : 'gu');
       svg.appendChild(p);
     });
   });

@@ -10,8 +10,8 @@ window.ACTIVITY = {
   TALLY_FORM_ID: 'BzOlZ4',
 
   // 비워 두면 "일정은 확정되는 대로 공지합니다"로 표시된다.
-  EVENT_DATE_TEXT: '',
-  EVENT_PLACE_TEXT: '',
+  EVENT_DATE_TEXT: '2026년 12월 12일 오후 2:00 - 5:00',
+  EVENT_PLACE_TEXT: '용산구 후암동 서울특별시교육청 3층 3A-01 회의실',
 
   // 카드 접수 시간 (ISO 8601, 한국 시간). 화면 안내용이며 실제 차단은 DB의 event_window가 한다.
   // 예: '2026-11-07T13:00:00+09:00'

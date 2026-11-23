@@ -759,7 +759,7 @@ footer p {
   color: var(--ink);
 }
 .seoul-map .gu { fill: var(--fill); stroke: currentColor; stroke-width: 0.6; }
-.seoul-map .gu.mapo { fill: currentColor; }
+.seoul-map .gu.yongsan { fill: currentColor; }
 .where {
   display: flex;
   flex-wrap: wrap;
